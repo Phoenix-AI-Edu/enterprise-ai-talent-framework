@@ -1,0 +1,42 @@
+# ==========================================
+# Phoenix AI - Git Ignore Configuration
+# Optimized for Google Drive Sync Folder
+# ==========================================
+
+# OS-specific files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Google Drive temporary sync files
+Icon?
+*.gdoc
+*.gsheet
+*.gslides
+*~
+~$*
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local user/IDE configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# VitePress compile directories
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+node_modules/
+dist/
