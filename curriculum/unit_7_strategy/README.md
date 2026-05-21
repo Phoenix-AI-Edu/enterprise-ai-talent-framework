@@ -17,6 +17,7 @@
 本單元的完整核心教材、變革管理指南、自研與採購決策矩陣、5大整合規劃畫布以及課後實戰案例，已編譯生成於以下檔案中：
 
 * 👉 **[單元七：完整教材與實務長文 (curriculum_v2026.md)](./curriculum_v2026.md)**
+* 👉 **[單元七：4+1 戰略畫布 Notion 互動模板規格指南 (notion_template_guide.md)](./notion_template_guide.md)**
 
 ---
 
