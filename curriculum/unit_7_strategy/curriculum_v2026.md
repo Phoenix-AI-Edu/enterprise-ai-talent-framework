@@ -118,7 +118,7 @@ AI 落地不是單純的技術升級，而是**「權利與習慣的重新分配
 > ### 🎁 企業 AI 一頁式總體戰略畫布工具包（含 ROI 自動計算試算表與 Notion 關聯資料庫模板）
 > * **A3 列印版空白畫布 (PDF 直接下載)**：適合工作坊現場列印張貼，引導跨部門共創戰略藍圖。👉 **[📥 點此直接免留資料下載 A3 空白 PDF 畫布](./phoenix_ai_canvas_A3_print.html)** (請在瀏覽器開啟後另存)。
 > * **Google 試算表互動版（含 ROI 自動計算） & Notion 協作模板**：
->   👉 **[📥 立即登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfB2B_example_google_form_id/viewform?usp=sf_link)**
+>   👉 **[📥 立即登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/【請在此處替換為您真正的_工具包索取_Google表單ID】/viewform?usp=sf_link)**
 >   *(本登記表單蒐集之個人資料僅用於工具包發送與服務推廣。填寫代表您同意依中華民國個人資料保護法第 8 條規定蒐集、處理及利用您的個人資料。)*
 
 ### 📋 主表一：企業 AI 場景盤點畫布 (Scenario Discovery Canvas)
@@ -237,7 +237,7 @@ $$\text{Priority Score} = w_{\text{value}} \cdot \text{Business Value} + w_{\tex
 
 若您的企業需要首席顧問 **孟淑慧** 與策略長 **陳文家** 的深度輔導，或希望引入 **4+1 戰略畫布實戰工作坊**，請遵循以下數據導向的預約機制，以確保每次對話都能為您的組織帶來實質價值：
 
-1. **填寫診斷問卷**：請點選下方連結，填寫 8~12 題的 **[📊 企業 AI 導入與成熟度診斷問卷 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfB2B_example_google_form_id/viewform?usp=sf_link)**，留下您的企業背景、轉型主管職稱與目前遇到的核心轉型痛點。
+1. **填寫診斷問卷**：請點選下方連結，填寫 8~12 題的 **[📊 企業 AI 導入與成熟度診斷問卷 (Google 表單)](https://docs.google.com/forms/d/e/【請在此處替換為您真正的_成熟度問卷_Google表單ID】/viewform?usp=sf_link)**，留下您的企業背景、轉型主管職稱與目前遇到的核心轉型痛點。
 2. **A 級客戶收費快診**：經問卷評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘付費「AI 戰略快診診斷案」（收費 NTD 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
 3. **專業商務聯絡**：任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**service@phoenix-ai.com.tw**
 

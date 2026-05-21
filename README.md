@@ -36,7 +36,7 @@
 > * **Google 試算表互動版（含 ROI 與優先級自動計算公式）**：填入評分後自動產出優先級星等，協助您在跨部門會議中快速篩選 Quick-Win 試點專案。
 > * **Notion 跨部門資料庫協作模板**：內含場景盤點、資料安全、試點變革、營運治理等四張關聯主表。
 >
-> 👉 **[📥 立即登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfB2B_example_google_form_id/viewform?usp=sf_link)**
+> 👉 **[📥 立即登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/【請在此處替換為您真正的_工具包索取_Google表單ID】/viewform?usp=sf_link)**
 > *(本登記表單蒐集之個人資料僅用於工具包發送、案例寄送與服務行銷。填寫表單代表您同意我們依中華民國個人資料保護法第 8 條規定蒐集、處理及利用您的個人資料。)*
 
 ---
@@ -125,7 +125,7 @@
 > 2. **A 級客戶收費快診**：經問卷評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘「AI 導入戰略快診案」（收費 NT$ 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
 > 3. **B/C 級客戶自動賦能**：未達快診標準之名單，系統將自動寄送 Phoenix AI 轉型成功案例包，或發送開源教材以利團隊自行研習。
 >
-> 👉 **[📊 點此填寫「企業 AI 導入與成熟度診斷問卷 (Google 表單)」](https://docs.google.com/forms/d/e/1FAIpQLSfB2B_example_google_form_id/viewform?usp=sf_link)**
+> 👉 **[📊 點此填寫「企業 AI 導入與成熟度診斷問卷 (Google 表單)」](https://docs.google.com/forms/d/e/【請在此處替換為您真正的_成熟度問卷_Google表單ID】/viewform?usp=sf_link)**
 >
 > ✉️ 任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**service@phoenix-ai.com.tw**
 
