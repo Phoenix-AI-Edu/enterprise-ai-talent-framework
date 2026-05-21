@@ -103,12 +103,35 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right
 * **公式拆解**：
   1. $Q K^T$：計算當前詞與文章中所有其他詞的「關聯度分數」（矩陣內積）。
   2. $\sqrt{d_k}$：除以縮放因子，防止分數過大導致梯度消失。
-  3. $\text{softmax}$：將關聯度分數轉化為加總為 100% 的「權重權重」。
+  3. $\text{softmax}$：將關聯度分數轉化為加總為 100% 的「注意權重」。
   4. 乘以 $V$：將語意內容依據權重加權加總，得到帶有**上下文含義**的全新特徵表示。
+
+##### B. 2026 企業級推理成本救星：集群查詢注意力 (Grouped-Query Attention, GQA)
+隨著企業導入長文本 RAG（如一次輸入 10 萬字合約或全系統程式碼），服務端面臨嚴重的 **KV Cache（鍵值快取）** 瓶頸。在傳統的 **MHA（多頭注意力，Multi-Head Attention）** 中，每個 Query 頭都對應獨立的 Key 頭和 Value 頭，這導致推論過程中顯示卡顯示記憶體（VRAM）被 KV Cache 瞬間塞滿，造成高昂的硬體部署成本與推論延遲。
+
+為了突破此物理極限，2026 年的主流模型（如 Llama 3、Gemini、Mistral 等）全面採用了 **GQA（集群查詢注意力）**。
+
+```text
+[MHA 多頭注意力]                [MQA 單頭注意力]                [GQA 集群注意力]
+(1對1，頻寬消耗極大)           (多對1，性能有所損耗)           (分組共享，完美平衡)
+
+  Q   Q   Q   Q                 Q   Q   Q   Q                 Q   Q   Q   Q
+  │   │   │   │                 └───┼───┼───┘                 └──┬──┘   └──┬──┘
+  ▼   ▼   ▼   ▼                     ▼                             ▼          ▼
+  K   K   K   K                     K                             K          K
+  V   V   V   V                     V                             V          V
+```
+
+* **MHA (Multi-Head Attention)**：每個 Query 頭都有一個對應的 Key 和 Value 頭。雖然精度最高，但當上下文變長時，儲存 $K$ 與 $V$ 矩陣所需的 KV Cache VRAM 會以 $O(N)$ 線性暴增，造成極高的顯示記憶體頻寬（Memory Bandwidth）瓶頸。
+* **MQA (Multi-Query Attention)**：所有 Query 頭共享同一個 Key 和 Value 頭。雖然極大地節省了記憶體，但會導致模型容量下降，對於複雜長上下文的意圖理解與關聯性檢索，精度會顯著受損。
+* **GQA (Grouped-Query Attention)**：折衷方案。將 Query 頭分組，每一組內共享一個 Key 和 Value 頭。
+  * **商業效益**：以 Llama 3 - 70B 為例，GQA 將推論時的 KV Cache 頻寬消耗**降低了近 8 倍**，且推理精度幾乎與原始 MHA 持平！
+  * **決策價值**：企業在採購或微調自研模型時，應優先確認該模型底層是否內建 **GQA** 技術。如果沒有 GQA，在大併發、長文本的企業問答場景中，硬體硬裝（GPU 租用/採購）成本將會高出 3 到 5 倍。
 
 > [!TIP]
 > **企業實例**：
 > 在句子「*這家銀行的**行**長正在路上步行*」中，當模型處理第二個「行」字（Query）時，自注意力機制會將極高的權重（Attention Weight）分配給「銀行」（Key），從而正確判斷這個「行」是「金融機構的職稱」，而非「走路」或「排列」。
+
 
 ---
 
@@ -139,8 +162,28 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right
 4. 使用強化學習演算法（如 PPO），訓練大模型去極大化獎勵分數。
 
 ##### B. DPO (直接偏好最佳化 - 2026 技術主流)
-由於 RLHF 必須同時維持大模型、獎勵模型多個網絡，架構極其沉重且難以收斂。
-2026 年企業實戰更傾向於採用 **DPO (Direct Preference Optimization)**。它省去了訓練獨立獎勵模型的步驟，直接將大模型的輸出機率與「人類偏好對照組（選中答案 $y_w$ vs 拒絕答案 $y_l$）」進行數學公式擬合，直接微調模型權重。
+由於 RLHF 必須同時維持大模型（Policy Model）、獎勵模型（Reward Model）及參考模型等多個神經網路，運算資源消耗極大，且強化學習（PPO）的策略梯度訓練極度不穩定、難以收斂。
+
+2026 年的企業對齊實務中，業界已全面轉向採用 **DPO (Direct Preference Optimization)**。DPO 的核心突破在於：**透過數學變換，證明了「語言模型本身就可以隱式作為自己的獎勵模型」**。它省去了訓練獨立獎勵模型的步驟，直接將大模型的輸出機率與「人類偏好對照組」進行數學損失函數擬合，使模型微調一步到位。
+
+其損失函數（Loss Function）公式為：
+
+$$\mathcal{L}_{\text{DPO}}(\pi_\theta; \pi_{\text{ref}}) = - \mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(y_w | x)}{\pi_{\text{ref}}(y_w | x)} - \beta \log \frac{\pi_\theta(y_l | x)}{\pi_{\text{ref}}(y_l | x)} \right) \right]$$
+
+* **變數拆解**：
+  * $\pi_\theta$：正在被訓練微調的目標模型。
+  * $\pi_{\text{ref}}$：未微調的原始參考模型（Frozen Baseline）。
+  * $x$：輸入提示（Prompt）。
+  * $y_w$：選中（較佳）的答覆（Winning/Preferred response）。
+  * $y_l$：拒絕（較差）的答覆（Losing/Dispreferred response）。
+  * $\sigma$：Sigmoid 函數，將差值轉化為 $0 \sim 1$ 的概率分數。
+  * $\beta$：控制偏離 $\pi_{\text{ref}}$ 程度的超參數（KL 散度懲罰係數）。
+
+ DPO 的商業優勢在於：**它將一個複雜的強化學習問題簡化為一個標準的二元交叉熵分類（Binary Cross-Entropy）問題**，這使訓練速度提升了數倍，且收斂結果極為穩定。
+
+> [!NOTE]
+> **DPO 的微調限制與對齊限制提示**：
+> 雖然 DPO 免除了 Reward Model 的訓練複雜度，但它依然存在局限性。DPO 極度依賴偏好數據集 $\mathcal{D}$ 的品質。如果企業微調數據中存在大量偏離模型原始預訓練分佈的 **OOD（分佈外, Out-of-Distribution）** 數據，DPO 模型非常容易出現過擬合（Overfitting），甚至導致基礎推理能力（如邏輯、數學）出現崩塌。因此，企業在微調時必須對 Baseline 數據質量進行嚴格審查與清洗。
 
 > [!IMPORTANT]
 > **變革治理啟示**：

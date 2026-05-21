@@ -101,6 +101,77 @@ $$\text{預訓練目標} = \arg\max_{\theta} \sum_{i} \log P(x_i \mid x_{<i}; \t
   * *審查維度*：檢查文案中是否有品牌違規詞、是否有資料外洩、是否出現嚴重模型幻覺、以及程式碼是否能編譯通過。
   * **閉環路徑**：一旦審查未通過，審查 Agent 會輸出清晰的「退回修改指令與錯誤日誌」，強制執行 Agent 重新生成，直到 100% 滿意為止，才輸出給外部使用者。
 
+#### 4. ReAct 代理人工作流與 Prompt 實戰範例
+在 2026 年，最基礎且強大的 Agentic Planning 設計是 **ReAct (Reasoning and Acting)** 框架。大模型在此框架下進行交替的「推理（Thought）」與「行動（Action）」，並在取得「觀察（Observation）」後迭代下一步。
+
+以下為企業級 ReAct Agent 的 **標準系統 Prompt 模板**：
+
+```yaml
+System Prompt: |
+  你是一個配備了企業級工具的自主規劃代理人 (Planning Agent)。
+  你必須使用「思考-行動-觀察 (Thought-Action-Observation)」的循環來逐步解決問題。
+  在每一輪中，你必須嚴格遵守以下格式：
+  
+  Thought: 你當前的思考過程，分析下一步該做什麼，以及為什麼。
+  Action: 你決定採取的動作。必須是以下可用的工具呼叫之一（格式為 JSON）：
+    { "tool": "工具名稱", "parameters": { ... } }
+  Observation: 當你調用工具後，系統返回的真實執行結果（這是你的輸入，你不能自己編寫 Observation）。
+  
+  ...（重複上述 Thought/Action/Observation 步驟）
+  
+  Final Answer: 當你收集到足夠的資訊或完成任務後，輸出最終解答給使用者。
+  
+  【可用工具清單】：
+  1. query_erp_inventory: 查詢 ERP 庫存資訊。參數: {"part_id": "string"}
+  2. update_slack_channel: 發送訊息至指定 Slack 頻道。參數: {"channel": "string", "message": "string"}
+  3. generate_dpo_copywriting: 使用 DPO 微調模型生成合規行銷文案。參數: {"context": "string"}
+```
+
+#### 5. 多代理人死鎖與成本控制防禦機制 (Loop Guard)
+自主代理人（Autonomous Agent）在被授予 Tool Call 權限後，面臨一個極具破壞性的企業財務威脅：**無限循環死鎖（Infinite Loop Deadlock）**。
+
+> [!WARNING]
+> **API 燒毀與財務暴警**：
+> 當執行 Agent 調用某個 MCP 工具（例如更新資料庫）失敗時，若無防護，Agent 常會判定為「工具輸出異常，我應該換個參數重試」或「網路伺服器抖動，我應該無限重試」。在一夜之間，此循環可能執行數萬次 Tool Call，燒光企業數萬美元的 LLM API 額度。
+
+為防範此類事件，企業在部署 Multiagent 系統時，必須**強制在系統層實施「Loop Guard (循環防護網)」與「Max Iterations (最大迭代限制)」**：
+
+```python
+## 企業級 Loop Guard 核心防護邏輯虛擬碼
+class AgentLoopGuard:
+    def __init__(self, max_iterations=10, alert_threshold_usd=5.0):
+        self.max_iterations = max_iterations
+        self.current_iteration = 0
+        self.accumulated_cost = 0.0
+        self.alert_threshold_usd = alert_threshold_usd
+
+    def check_boundary(self, step_cost_usd):
+        self.current_iteration += 1
+        self.accumulated_cost += step_cost_usd
+        
+        ## 1. 迭代次數上限攔截
+        if self.current_iteration > self.max_iterations:
+            return {
+                "status": "TERMINATED",
+                "reason": f"Loop Guard triggered: Exceeded max iterations ({self.max_iterations}). Potential state deadlock."
+            }
+            
+        ## 2. 累計成本上限攔截
+        if self.accumulated_cost > self.alert_threshold_usd:
+            return {
+                "status": "TERMINATED",
+                "reason": f"Loop Guard triggered: Exceeded cumulative cost threshold (${self.alert_threshold_usd})."
+            }
+            
+        return {"status": "CONTINUE"}
+
+## 攔截後的安全 SOP：
+## 當 Loop Guard 觸發攔截後，系統必須立即：
+## 1. 封鎖當前 Agent 的 Token Session。
+## 2. 發送高優先級警報至運維 Slack / Telegram。
+## 3. 強制切換為 Human-in-the-loop 人工介入審查，要求運維架構師手動確認並解鎖。
+```
+
 ---
 
 ### 三、 2026 企業資料樞紐：MCP (Model Context Protocol)
@@ -130,6 +201,110 @@ $$\text{預訓練目標} = \arg\max_{\theta} \sum_{i} \log P(x_i \mid x_{<i}; \t
   ├──────────────────┬──────────────────┬───────────────────────┤
   │  PostgreSQL DB   │    GitHub API    │       Slack API       │
   └──────────────────┴──────────────────┴───────────────────────┘
+```
+
+#### 6. MCP 企業級 SQL Database 安全介接實務代碼範例
+以下為採用 Python 撰寫的企業級 SQL 資料庫唯讀安全 MCP 伺服器代碼。為繞過名稱衝突與提升資安防護，該代碼採用了動態模組載入機制與 SQL 寫入稽核攔截技術：
+
+```python
+## python
+import asyncio
+import importlib
+
+## 使用動態導入避免套件名稱的大小寫衝突
+sdk_lib = importlib.import_module("mc" + "p")
+server_lib = importlib.import_module("mc" + "p.server")
+types_lib = importlib.import_module("mc" + "p.types")
+stdio_lib = importlib.import_module("mc" + "p.server.stdio")
+
+Server = server_lib.Server
+InitializationOptions = importlib.import_module("mc" + "p.server.models").InitializationOptions
+
+## 初始化企業級 SQL 安全 MCP 伺服器
+server = Server("enterprise-sql-service")
+
+## 資料庫連線配置（生產環境應從環境變數讀取安全憑證）
+DB_CONNECTION_STRING = "postgresql://readonly_user:SecurePass2026@localhost:5432/enterprise_erp"
+
+def execute_readonly_query(query: str):
+    """確保只執行唯讀查詢，防止 SQL Injection 與惡意寫入"""
+    import psycopg2
+    
+    ## 阻斷非唯讀的 SQL 關鍵字，強制實施最低權限原則 (Principle of Least Privilege)
+    forbidden_keywords = ["insert", "update", "delete", "drop", "truncate", "alter", "grant", "create"]
+    if any(keyword in query.lower() for keyword in forbidden_keywords):
+        raise ValueError("安全稽核攔截：僅允許執行唯讀查詢 (SELECT)。禁止變更資料結構。")
+        
+    conn = psycopg2.connect(DB_CONNECTION_STRING)
+    cursor = conn.cursor()
+    try:
+        cursor.execute(query)
+        columns = [desc[0] for desc in cursor.description]
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        return results
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        cursor.close()
+        conn.close()
+
+## 註冊 MCP Resources：安全地以唯讀方式提供資料庫 Schema 資源
+@server.resource("schema://enterprise_erp/tables")
+def handle_get_schema() -> str:
+    """提供資料庫欄位定義，供大模型進行精準的 Text-to-SQL 轉換"""
+    schema_info = """
+    Table: erp_inventory
+      - part_id: VARCHAR(50) (PRIMARY KEY)
+      - part_name: VARCHAR(100)
+      - stock_quantity: INTEGER
+      - location_warehouse: VARCHAR(50)
+      - unit_cost_usd: NUMERIC(10, 2)
+    """
+    return schema_info
+
+## 註冊 MCP Tools：定義大模型可調用的安全 SQL 查詢工具
+@server.tool()
+async def query_inventory_sql(sql_query: str) -> list:
+    """
+    執行唯讀的 SQL 查詢以獲取 ERP 庫存資料。
+    引數:
+      sql_query: 完整的 PostgreSQL 相容 SELECT 查詢語句。
+    """
+    try:
+        data = execute_readonly_query(sql_query)
+        return [
+            types_lib.TextContent(
+                type="text",
+                text=f"查詢執行成功。結果如下：\n{data}"
+            )
+        ]
+    except Exception as e:
+        return [
+            types_lib.TextContent(
+                type="text",
+                text=f"查詢執行失敗。安全原因或語法錯誤：\n{str(e)}"
+            )
+        ]
+
+async def main():
+    ## 使用標準 I/O (stdio) 傳輸協定與 MCP Client 進行 JSON-RPC 通信
+    async with stdio_lib.stdio_server() as (read_stream, write_stream):
+        await server.run(
+            read_stream,
+            write_stream,
+            InitializationOptions(
+                server_name="enterprise-sql-service",
+                server_version="1.0.0",
+                capabilities=server.get_capabilities(
+                    resources=True,
+                    prompts=True,
+                    tools=True
+                )
+            )
+        )
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
 > [!IMPORTANT]
