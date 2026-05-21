@@ -1,4 +1,10 @@
+---
+layout: default
+title: "單元六：生成式 AI 與多代理人系統 (Multiagent Systems)"
+---
+
 # 📌 單元六：生成式 AI 與多代理人系統 (Multiagent Systems)
+
 
 在「鳳凰AI」的 2026 企業轉型框架中，我們強調**「生成式 AI 不僅是聊天工具，更是企業自主營運代理流（Agentic Workflows）的核心大腦」**。過去，企業將 Generative AI 視為單純的 Copilot（如員工手動提問的副駕駛）；而在 2026 年，我們全面升級至 **Multiagent Systems（多代理人系統）** 的自主架構，讓多個具備專屬技能的 AI Agent 協同作戰，自主完成複雜的跨系統業務閉環。
 
