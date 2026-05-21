@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鳳凰 AI｜企業 AI 一頁式總體戰略畫布 (v2026)</title>
+  <style>
+    /* ─── Google Fonts ─── */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;900&display=swap');
+
+    /* ─── 色彩系統 ─── */
+    :root {
+      --phoenix-dark:    #1A1A2E;
+      --phoenix-mid:     #16213E;
+      --phoenix-accent:  #E94560;
+      --phoenix-gold:    #F5A623;
+      --blue-deep:       #1B4F72;
+      --blue-light:      #D6EAF8;
+      --green-deep:      #145A32;
+      --green-light:     #D5F5E3;
+      --purple-deep:     #6E2F8A;
+      --purple-light:    #E8DAEF;
+      --orange-deep:     #7D3C14;
+      --orange-light:    #FAE5D3;
+      --gray-text:       #2C3E50;
+      --light-gray:      #F8F9FA;
+      --border-color:    #BDC3C7;
+      --white:           #FFFFFF;
+    }
+
+    /* ─── 全域重置 ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Inter', sans-serif;
+      background: var(--light-gray);
+      color: var(--gray-text);
+    }
+
+    /* ─── A3 列印區域 ─── */
+    .canvas-page {
+      width: 420mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: var(--white);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── 頂部主標題 ─── */
+    .canvas-header {
+      background: var(--phoenix-dark);
+      padding: 18px 28px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .canvas-header-left { flex: 1; }
+    .canvas-header-logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: var(--phoenix-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .canvas-header-title {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--white);
+      line-height: 1.3;
+    }
+    .canvas-header-subtitle {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+    .canvas-header-badge {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-end;
+    }
+    .badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.8);
+      white-space: nowrap;
+    }
+    .badge.accent { background: var(--phoenix-accent); border-color: var(--phoenix-accent); color: var(--white); }
+
+    /* ─── 填寫資訊列 ─── */
+    .canvas-meta {
+      background: var(--phoenix-mid);
+      padding: 7px 28px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .meta-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: rgba(255,255,255,0.7);
+    }
+    .meta-label { color: var(--phoenix-gold); font-weight: 600; white-space: nowrap; }
+    .meta-line {
+      border-bottom: 1px solid rgba(255,255,255,0.35);
+      width: 100px;
+      display: inline-block;
+    }
+
+    /* ─── 主體六格區 ─── */
+    .canvas-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* ─── 單一格子 ─── */
+    .block {
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100px;
+    }
+    .block-header {
+      padding: 9px 14px 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .block-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.2);
+    }
+    .block-title {
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--white);
+      line-height: 1.3;
+    }
+    .block-subtitle {
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 1px;
+    }
+    .block-content {
+      flex: 1;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .field-label {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.65;
+    }
+    .field-line {
+      border-bottom: 1px solid var(--border-color);
+      min-height: 16px;
+      width: 100%;
+    }
+    .field-line.tall {
+      min-height: 28px;
+    }
+    .field-hint {
+      font-size: 7.5px;
+      font-style: italic;
+      opacity: 0.5;
+      margin-top: 1px;
+    }
+
+    /* ─── 各格顏色 ─── */
+    .block-1 .block-header { background: var(--blue-deep); }
+    .block-1 .block-content { background: var(--blue-light); }
+    .block-1 .field-label { color: var(--blue-deep); }
+
+    .block-2 .block-header { background: var(--green-deep); }
+    .block-2 .block-content { background: var(--green-light); }
+    .block-2 .field-label { color: var(--green-deep); }
+
+    .block-3 .block-header { background: var(--purple-deep); }
+    .block-3 .block-content { background: var(--purple-light); }
+    .block-3 .field-label { color: var(--purple-deep); }
+
+    .block-4 .block-header { background: var(--blue-deep); }
+    .block-4 .block-content { background: var(--blue-light); }
+    .block-4 .field-label { color: var(--blue-deep); }
+
+    .block-5 .block-header { background: var(--purple-deep); }
+    .block-5 .block-content { background: var(--purple-light); }
+    .block-5 .field-label { color: var(--purple-deep); }
+
+    .block-6 .block-header { background: var(--orange-deep); }
+    .block-6 .block-content { background: var(--orange-light); }
+    .block-6 .field-label { color: var(--orange-deep); }
+
+    /* ─── 底部橫幅 ─── */
+    .canvas-footer-goal {
+      background: var(--phoenix-accent);
+      padding: 11px 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .canvas-footer-goal-icon { font-size: 18px; }
+    .canvas-footer-goal-text {
+      font-weight: 700;
+      font-size: 11.5px;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .canvas-footer-goal-sub {
+      font-size: 9px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 400;
+    }
+
+    .canvas-copyright {
+      background: var(--phoenix-dark);
+      padding: 6px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .copyright-text {
+      font-size: 7.5px;
+      color: rgba(255,255,255,0.4);
+    }
+    .copyright-link {
+      font-size: 7.5px;
+      color: var(--phoenix-gold);
+      text-decoration: none;
+    }
+
+    /* ─── 列印設定 ─── */
+    @media print {
+      body { background: white; }
+      .canvas-page {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        page-break-after: avoid;
+      }
+      .print-btn { display: none !important; }
+    }
+
+    /* ─── 列印按鈕 ─── */
+    .print-btn-wrap {
+      text-align: center;
+      padding: 16px;
+    }
+    .print-btn {
+      background: var(--phoenix-dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(26,26,46,0.3);
+      transition: all 0.2s;
+    }
+    .print-btn:hover {
+      background: var(--phoenix-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(233,69,96,0.4);
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-btn-wrap">
+  <button class="print-btn" onclick="window.print()">
+    🖨️ 列印為 PDF（建議 A3 橫向）
+  </button>
+</div>
+
+<div class="canvas-page">
+
+  <!-- ── 主標題 ── -->
+  <div class="canvas-header">
+    <div class="canvas-header-left">
+      <div class="canvas-header-logo">🔥 Phoenix AI Edu &nbsp;|&nbsp; 鳳凰 AI 顧問</div>
+      <div class="canvas-header-title">企業 AI 一頁式總體戰略畫布</div>
+      <div class="canvas-header-subtitle">One-Page AI Strategy Canvas &nbsp;·&nbsp; v2026 &nbsp;·&nbsp; 對齊 NIST AI RMF &nbsp;·&nbsp; ISO/IEC 42001</div>
+    </div>
+    <div class="canvas-header-badge">
+      <span class="badge accent">🎯 適用對象：CEO / CDO / 事業部主管</span>
+      <span class="badge">📋 依據：經濟部 115 年度 AI 人才培育框架</span>
+      <span class="badge">🔗 enterprise-ai-talent-framework</span>
+    </div>
+  </div>
+
+  <!-- ── 填寫資訊列 ── -->
+  <div class="canvas-meta">
+    <div class="meta-field">
+      <span class="meta-label">企業名稱：</span>
+      <span class="meta-line"></span>
+    </div>
+    <div class="meta-field">
+      <span class="meta-label">填寫日期：</span>
+      <span class="meta-line" style="width:70px"></span>
+    </div>
+    <div class="meta-field">
+      <span class="meta-label">主責 CDO / 主管：</span>
+      <span class="meta-line"></span>
+    </div>
+    <div class="meta-field">
+      <span class="meta-label">版本：</span>
+      <span class="meta-line" style="width:50px"></span>
+    </div>
+  </div>
+
+  <!-- ── 六格主體 ── -->
+  <div class="canvas-body">
+
+    <!-- 格 1：業務痛點與商業價值 -->
+    <div class="block block-1">
+      <div class="block-header">
+        <div class="block-icon">①</div>
+        <div>
+          <div class="block-title">核心業務痛點與商業價值</div>
+          <div class="block-subtitle">對應主表一：場景盤點畫布</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">最優先的業務痛點（Top 1~3）</div>
+          <div class="field-line tall"></div>
+          <div class="field-hint">例：售後客服查手冊慢、合約審查耗工、產線瑕疵誤判率高</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">目標使用者 / 受益部門</div>
+          <div class="field-line"></div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">預期年度 ROI（請量化）</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：年省 1,200 工時 ≈ NT$240萬人力成本</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">首波試點場景名稱</div>
+          <div class="field-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 格 2：技術架構與 Buy vs. Build -->
+    <div class="block block-2">
+      <div class="block-header">
+        <div class="block-icon">②</div>
+        <div>
+          <div class="block-title">技術架構與 Buy vs. Build</div>
+          <div class="block-subtitle">對應主表二：資料基礎與方案架構</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">技術路徑決策</div>
+          <div class="field-line"></div>
+          <div class="field-hint">SaaS採購 / API客製 / 私有化部署 / 混合架構</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">採用核心大模型</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：Gemini 1.5 Flash / Claude 3.5 / Llama-3</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Buy vs Build 決策理由（最關鍵的 1 點）</div>
+          <div class="field-line tall"></div>
+          <div class="field-hint">例：具備核心競爭力 + 高隱私合規需求 → 選擇自建</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">預計系統上線時程</div>
+          <div class="field-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 格 3：資料資產與資安三道防線 -->
+    <div class="block block-3">
+      <div class="block-header">
+        <div class="block-icon">③</div>
+        <div>
+          <div class="block-title">資料資產與資安三道防線</div>
+          <div class="block-subtitle">對應主表二：ISO/IEC 42001 合規</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">核心資料來源與格式</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：20本技術PDF + CRM客戶資料庫 API</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">🛡️ 第一道防線：個資遮罩 / DLP</div>
+          <div class="field-line"></div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">🛡️ 第二道防線：Guardrails / 防注入</div>
+          <div class="field-line"></div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">🛡️ 第三道防線：審計日誌維度</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：記錄使用者ID / Token數 / 對話內容 / 存放90天</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 格 4：試點計畫與擴展時程 -->
+    <div class="block block-4">
+      <div class="block-header">
+        <div class="block-icon">④</div>
+        <div>
+          <div class="block-title">試點計畫與擴展時程</div>
+          <div class="block-subtitle">對應主表三：試點驗證畫布</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">試點部門與人數</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：高雄二廠售後組（10名客服人員）</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">試點週期</div>
+          <div class="field-line"></div>
+          <div class="field-hint">建議：30天深度驗證 或 14天快速迭代</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Quick-Win 量化 KPI（必須可數字衡量）</div>
+          <div class="field-line tall"></div>
+          <div class="field-hint">例：客戶問題即時解決率從60%提升至90%</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">擴展複製路徑</div>
+          <div class="field-line"></div>
+          <div class="field-hint">試點成功後，下一步複製到哪個部門/廠區？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 格 5：變革管理與人機協作 -->
+    <div class="block block-5">
+      <div class="block-header">
+        <div class="block-icon">⑤</div>
+        <div>
+          <div class="block-title">變革管理與人機協作比例</div>
+          <div class="block-subtitle">對應主表三：阻力評估 &amp; 主表四：HITL設計</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">一線員工核心阻力（誠實填寫）</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：擔心失業 / 不習慣打字操作 / 不信任模型輸出</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">變革管理化解行動（最關鍵的 2~3 點）</div>
+          <div class="field-line tall"></div>
+          <div class="field-hint">例：語音介面 + 效率競賽 + 管理層承諾不裁員</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">人機協作角色（HITL）</div>
+          <div class="field-line"></div>
+          <div class="field-hint">Autonomous（全自動）/ Copilot（副駕駛）/ Validator（人工裁決）</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">技能培訓計畫（天數+內容）</div>
+          <div class="field-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 格 6：治理、合規與持續維運 -->
+    <div class="block block-6">
+      <div class="block-header">
+        <div class="block-icon">⑥</div>
+        <div>
+          <div class="block-title">治理、合規與持續維運</div>
+          <div class="block-subtitle">對應主表四：LLMOps &amp; ISO/IEC 42001</div>
+        </div>
+      </div>
+      <div class="block-content">
+        <div class="field-row">
+          <div class="field-label">單月 API 財務告警閾值</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：超過 NT$5,000 / 月自動告警 IT 主管並熔斷</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">LLMOps 持續維運責任分工</div>
+          <div class="field-line tall"></div>
+          <div class="field-hint">例：IT部負責向量庫更新，業務部負責知識勘誤</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">年度績效 KPI 設計</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：「使用AI縮短結案時間」納入年終考核加分</div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">ISO/IEC 42001 稽核計畫</div>
+          <div class="field-line"></div>
+          <div class="field-hint">例：每季人工抽樣5%對話記錄進行合規審查</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.canvas-body -->
+
+  <!-- ── 終極目標橫幅 ── -->
+  <div class="canvas-footer-goal">
+    <div class="canvas-footer-goal-icon">🏆</div>
+    <div>
+      <div class="canvas-footer-goal-text">終極戰略目標：建立企業獨一無二的「AI-Native 營運護城河」</div>
+      <div class="canvas-footer-goal-sub">從 POC 死亡谷突破，達成可量化、可持續擴展的 AI 落地 ROI — 不只是導入 AI，而是讓 AI 真正為企業創造複利。</div>
+    </div>
+  </div>
+
+  <!-- ── 版權 ── -->
+  <div class="canvas-copyright">
+    <span class="copyright-text">© 2026 鳳凰 AI 顧問｜陳文家｜MIT License — 本畫布可自由使用、列印與複製</span>
+    <a class="copyright-link" href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank">
+      🔗 enterprise-ai-talent-framework
+    </a>
+  </div>
+
+</div><!-- /.canvas-page -->
+
+</body>
+</html>
