@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鳳凰 AI｜企業級 AI 營運落地與人才培育開源框架 (v2026)</title>
+  <meta name="description" content="專為企業高階主管、數位轉型長（CDO）打造的 AI 營運落地與變革管理開源生態系。對接經濟部 115 年度 AI 人才培育標準，憑藉 10 餘年跨國與本土龍頭企業輔導經驗，構築可量化、安全合規且具實質 ROI 的企業 AI 護城河。">
+  
+  <!-- ─── Google Fonts ─── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ─── 設計系統變數 ─── */
+    :root {
+      --phoenix-dark:    #0B0B16;
+      --phoenix-mid:     #121226;
+      --phoenix-light:   #1A1A3A;
+      --phoenix-accent:  #E94560; /* 活力玫瑰紅 */
+      --phoenix-accent-rgb: 233, 69, 96;
+      --phoenix-gold:    #F5A623;   /* 頂級金色 */
+      --phoenix-teal:    #00F2FE;   /* 科技湖水綠 */
+      --white:           #FFFFFF;
+      --gray-100:        #F8F9FA;
+      --gray-300:        #DDE2E5;
+      --gray-400:        #A5B1B8;
+      --gray-600:        #5A6A75;
+      --gray-800:        #1E2229;
+      --glass-bg:        rgba(18, 18, 38, 0.65);
+      --glass-border:    rgba(255, 255, 255, 0.08);
+      --glass-hover:     rgba(255, 255, 255, 0.12);
+      
+      --font-display:    'Outfit', 'Noto Sans TC', sans-serif;
+      --font-body:       'Inter', 'Noto Sans TC', sans-serif;
+    }
+
+    /* ─── 全域重置與基礎樣式 ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--phoenix-dark);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% -20%, #201a35 0%, #0b0b16 60%);
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    img, svg {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── 現代漸變字體 & 徽章 ─── */
+    .text-gradient {
+      background: linear-gradient(135deg, #FFF 30%, var(--phoenix-accent) 70%, var(--phoenix-teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #FFF 40%, var(--phoenix-gold) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      margin-bottom: 24px;
+    }
+
+    .badge-accent {
+      border-color: rgba(var(--phoenix-accent-rgb), 0.3);
+      background: rgba(var(--phoenix-accent-rgb), 0.1);
+      color: var(--phoenix-accent);
+      box-shadow: 0 0 15px rgba(var(--phoenix-accent-rgb), 0.15);
+    }
+
+    /* ─── 頂部導覽列 (Floating Navbar) ─── */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 11, 22, 0.7);
+      backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .logo-symbol {
+      color: var(--phoenix-accent);
+      text-shadow: 0 0 15px rgba(var(--phoenix-accent-rgb), 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-300);
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--phoenix-accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--white);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(var(--phoenix-accent-rgb), 0.35);
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(var(--phoenix-accent-rgb), 0.5);
+    }
+
+    /* ─── 響應式漢堡選單 (Mobile Menu) ─── */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 2.5px;
+      background-color: var(--white);
+      transition: all 0.25s ease;
+    }
+
+    /* ─── 英雄展區 (Hero Section) ─── */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-glow-1 {
+      position: absolute;
+      top: -20%;
+      left: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.12) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -10%;
+      right: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: var(--gray-400);
+      margin-bottom: 40px;
+      line-height: 1.8;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 64px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      box-shadow: 0 8px 30px rgba(var(--phoenix-accent-rgb), 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -50%; width: 200%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg);
+      transition: 0.75s;
+      opacity: 0;
+    }
+    
+    .btn-primary:hover::after {
+      left: 125%;
+      opacity: 1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(var(--phoenix-accent-rgb), 0.45);
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+    }
+
+    /* ─── 數據指標區 (Stats Section) ─── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      background: var(--glass-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--phoenix-accent);
+      margin-bottom: 8px;
+      text-shadow: 0 0 15px rgba(var(--phoenix-accent-rgb), 0.2);
+    }
+
+    .stat-card:nth-child(2) .stat-number {
+      color: var(--phoenix-teal);
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .stat-card:nth-child(3) .stat-number {
+      color: var(--phoenix-gold);
+      text-shadow: 0 0 15px rgba(245, 166, 35, 0.2);
+    }
+
+    .stat-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .stat-desc {
+      font-size: 13.5px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ─── 區段標題 ─── */
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ─── ⚡ 互動式診斷器 (Interactive Diagnostic Widget) ─── */
+    .diagnostic-section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .diagnostic-box {
+      background: linear-gradient(135deg, rgba(20,20,45,0.85) 0%, rgba(10,10,25,0.95) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diagnostic-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(to right, var(--phoenix-accent), var(--phoenix-teal), var(--phoenix-gold));
+    }
+
+    .quiz-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      margin: 0 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(to right, var(--phoenix-accent), var(--phoenix-teal));
+      border-radius: 10px;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quiz-card {
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .quiz-card.active {
+      display: block;
+    }
+
+    .question-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .question-num {
+      background: rgba(var(--phoenix-accent-rgb), 0.15);
+      color: var(--phoenix-accent);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 4px;
+      font-family: var(--font-display);
+    }
+
+    .question-dim {
+      font-size: 13px;
+      color: var(--phoenix-teal);
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
+    }
+
+    .option-btn.selected {
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      border-color: var(--phoenix-accent);
+      box-shadow: 0 0 15px rgba(var(--phoenix-accent-rgb), 0.15);
+    }
+
+    .option-marker {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      font-family: var(--font-display);
+    }
+
+    .option-btn.selected .option-marker {
+      background: var(--phoenix-accent);
+      border-color: var(--phoenix-accent);
+      color: var(--white);
+    }
+
+    .option-text {
+      font-size: 15px;
+      color: var(--gray-100);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+    }
+
+    .quiz-nav-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: transparent;
+      color: var(--gray-400);
+      border: 1px solid transparent;
+    }
+
+    .quiz-nav-btn:hover:not(:disabled) {
+      color: var(--white);
+    }
+
+    .quiz-nav-btn-next {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(var(--phoenix-accent-rgb), 0.25);
+    }
+
+    .quiz-nav-btn-next:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(var(--phoenix-accent-rgb), 0.35);
+    }
+
+    .quiz-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* ─── 診斷結果區 (Diagnostic Result) ─── */
+    .result-card {
+      display: none;
+      animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      text-align: center;
+    }
+
+    .result-score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.15) 0%, rgba(var(--phoenix-accent-rgb), 0.03) 70%);
+      border: 2px dashed var(--phoenix-accent);
+      margin: 0 auto 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 25px rgba(var(--phoenix-accent-rgb), 0.15);
+    }
+
+    .result-score-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--phoenix-accent);
+      line-height: 1;
+    }
+
+    .result-score-total {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    .result-badge {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--phoenix-gold);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .result-level-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .result-level-desc {
+      font-size: 15px;
+      color: var(--gray-300);
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto 32px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .result-suggestion {
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      margin-top: 16px;
+      padding-top: 16px;
+      font-weight: 600;
+      color: var(--phoenix-teal);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .result-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .result-cta-lead {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%);
+      color: var(--white);
+      padding: 16px 40px;
+      font-weight: 700;
+      border-radius: 8px;
+      font-size: 16px;
+      box-shadow: 0 8px 30px rgba(245, 166, 35, 0.25);
+    }
+
+    .result-cta-lead:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(245, 166, 35, 0.35);
+    }
+
+    .result-compliance {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 12px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* ─── 全景課程展區 (Curriculum Section) ─── */
+    .curriculum-section {
+      padding: 100px 0;
+      background: rgba(11, 11, 22, 0.4);
+    }
+
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .unit-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .unit-card:hover {
+      border-color: rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(18, 18, 38, 0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .unit-header {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .unit-header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .unit-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--phoenix-accent);
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .unit-card:hover .unit-number {
+      background: var(--phoenix-accent);
+      color: var(--white);
+      border-color: var(--phoenix-accent);
+      box-shadow: 0 0 15px rgba(var(--phoenix-accent-rgb), 0.3);
+    }
+
+    .unit-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .unit-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      transition: color 0.2s ease;
+    }
+
+    .unit-card:hover .unit-title {
+      color: var(--phoenix-accent);
+    }
+
+    .unit-subtitle {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    .unit-toggle-icon {
+      font-size: 20px;
+      color: var(--gray-400);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .unit-card.expanded .unit-toggle-icon {
+      transform: rotate(180deg);
+      color: var(--phoenix-accent);
+    }
+
+    .unit-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: rgba(0, 0, 0, 0.15);
+      border-top: 0px solid rgba(255,255,255,0.04);
+    }
+
+    .unit-card.expanded .unit-content {
+      border-top-width: 1px;
+    }
+
+    .unit-body {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+
+    .unit-focus {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .unit-focus-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--phoenix-teal);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .unit-focus-text {
+      font-size: 15px;
+      color: var(--gray-300);
+      line-height: 1.8;
+    }
+
+    .unit-meta-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .unit-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .unit-meta-label {
+      font-size: 11px;
+      color: var(--gray-600);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .unit-meta-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .unit-read-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .unit-read-btn:hover {
+      background: var(--phoenix-accent);
+      border-color: var(--phoenix-accent);
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(var(--phoenix-accent-rgb), 0.3);
+    }
+
+    /* ─── 雙認證專家顧問名片 (Team Section) ─── */
+    .team-section {
+      padding: 100px 0;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .team-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .team-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.05) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .team-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+
+    .team-card-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .team-avatar-box {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-teal) 100%);
+      padding: 2px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .team-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--phoenix-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .team-info-top {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .team-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--phoenix-accent);
+      letter-spacing: 0.5px;
+    }
+
+    .team-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .team-badge-tag {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+
+    .team-card:hover .team-badge-tag {
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--gray-100);
+    }
+
+    .team-desc {
+      font-size: 14.5px;
+      color: var(--gray-300);
+      line-height: 1.7;
+    }
+
+    .team-table {
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
+    .team-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .team-row:last-child {
+      border-bottom: none;
+    }
+
+    .team-row-label {
+      background: rgba(255,255,255,0.01);
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--phoenix-teal);
+      border-right: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+    }
+
+    .team-row-value {
+      padding: 10px 16px;
+      font-size: 12.5px;
+      color: var(--gray-300);
+      line-height: 1.5;
+    }
+
+    /* ─── B2B 定價方案區 (Pricing Section) ─── */
+    .pricing-section {
+      padding: 100px 0;
+      background: rgba(11, 11, 22, 0.3);
+      position: relative;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 36px 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: rgba(var(--phoenix-accent-rgb), 0.45);
+      background: rgba(18, 18, 38, 0.75);
+      box-shadow: 0 15px 40px rgba(var(--phoenix-accent-rgb), 0.15);
+    }
+
+    .price-card.featured::before {
+      content: 'B2B 優先起手式';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%);
+      color: var(--white);
+      padding: 4px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .price-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .price-target {
+      font-size: 12.5px;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+      min-height: 38px;
+    }
+
+    .price-value-box {
+      margin-bottom: 28px;
+    }
+
+    .price-currency {
+      font-size: 14px;
+      color: var(--gray-400);
+      font-weight: 600;
+    }
+
+    .price-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .price-unit {
+      font-size: 13px;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .price-card.featured .price-num {
+      color: var(--phoenix-accent);
+    }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      font-size: 13.5px;
+      color: var(--gray-300);
+      flex: 1;
+    }
+
+    .price-feature-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .price-feature-icon {
+      color: var(--phoenix-accent);
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+
+    .price-card:nth-child(2) .price-feature-icon { color: var(--phoenix-teal); }
+    .price-card:nth-child(3) .price-feature-icon { color: var(--phoenix-gold); }
+    .price-card:nth-child(4) .price-feature-icon { color: var(--phoenix-accent); }
+
+    .price-btn {
+      width: 100%;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .price-btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+    }
+
+    .price-btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .price-btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      border: none;
+      box-shadow: 0 4px 15px rgba(var(--phoenix-accent-rgb), 0.2);
+    }
+
+    .price-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(var(--phoenix-accent-rgb), 0.35);
+    }
+
+    .price-btn-gold {
+      background: linear-gradient(135deg, var(--phoenix-gold) 0%, #c58210 100%);
+      color: var(--white);
+      border: none;
+      box-shadow: 0 4px 15px rgba(245, 166, 35, 0.2);
+    }
+
+    .price-btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(245, 166, 35, 0.3);
+    }
+
+    /* ─── 底部聲明與聯絡 ─── */
+    .pricing-footer {
+      text-align: center;
+      margin-top: 48px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--glass-border);
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .pricing-footer-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--phoenix-gold);
+      margin-bottom: 8px;
+    }
+
+    .pricing-footer-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ─── 頁尾 (Footer) ─── */
+    .footer {
+      border-top: 1px solid var(--glass-border);
+      background: #06060c;
+      padding: 60px 0 30px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand-desc {
+      margin-top: 16px;
+      line-height: 1.7;
+      max-width: 480px;
+      font-size: 13.5px;
+    }
+
+    .footer-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link-item a:hover {
+      color: var(--phoenix-accent);
+      transform: translateX(2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .footer-copy {
+      line-height: 1.5;
+    }
+
+    .footer-meta-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-meta-link:hover {
+      color: var(--gray-400);
+    }
+
+    /* ─── 簡單動畫效果 ─── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ─── 響應式排版 (RWD) ─── */
+    @media (max-width: 1024px) {
+      .hero-title { font-size: 42px; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .team-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; } /* 本地實作可進一步支援行動端側邊欄 */
+      .menu-toggle { display: flex; }
+      .hero { padding-top: 140px; padding-bottom: 60px; }
+      .hero-title { font-size: 34px; }
+      .hero-description { font-size: 15px; }
+      .hero-ctas { flex-direction: column; gap: 12px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .diagnostic-box { padding: 24px; }
+      .question-title { font-size: 18px; }
+      .option-text { font-size: 14px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .unit-body { grid-template-columns: 1fr; gap: 20px; }
+      .unit-header { padding: 20px; }
+      .unit-body { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── 頂部導覽列 (Floating Navbar) ─── -->
+  <header class="header-nav" id="home">
+    <div class="container nav-container">
+      <a href="#home" class="logo">
+        <span class="logo-symbol">🔥</span>
+        <span>鳳凰 AI 顧問</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#home" class="nav-link">首頁</a>
+        <a href="#diagnostic" class="nav-link">成熟度快測</a>
+        <a href="#curriculum" class="nav-link">全景課程</a>
+        <a href="#team" class="nav-link">顧問團隊</a>
+        <a href="#pricing" class="nav-link">服務方案</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="nav-cta">索取 Notion 工具包</a>
+      </nav>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="切換選單">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ─── 英雄展區 (Hero Section) ─── -->
+  <section class="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container hero-content">
+      <div class="badge badge-accent">
+        <span>⭐ 對接經濟部 115 年度 AI 人才培育公版標準</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="text-gradient">突破 POC 死亡谷</span><br>
+        <span>構築企業專屬的 AI 營運護城河</span>
+      </h1>
+      <p class="hero-description">
+        我們不只導入技術，更憑藉 <strong>10 餘年跨國與本土龍頭企業輔導經驗</strong>，深度整合國際 <strong>ISO/IEC 42001</strong> 安全防線與組織變革管理（Change Management），協助高階決策層達成真實 ROI 躍升。
+      </p>
+      
+      <div class="hero-ctas">
+        <a href="#diagnostic" class="btn btn-primary">
+          <span>📊 立即進行 AI 成熟度快測</span>
+          <span style="font-size: 13px;">(5 題/ 2 分鐘)</span>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary">
+          <span>📥 索取 Notion + Excel 工具包</span>
+        </a>
+      </div>
+
+      <!-- 數據指標 -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">70% - 80%</div>
+          <div class="stat-label">企業 AI 專案難以跨越 POC</div>
+          <div class="stat-desc">通常並非由於技術不足，而是忽略了 API 長期成本控制、變革管理阻力與國際資安合規。</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10 餘年</div>
+          <div class="stat-label">深厚產業實務輔導經驗</div>
+          <div class="stat-desc">孟淑慧顧問與陳文家策略長親自領軍，橫跨產、官、學界，曾輔導工研院與多所大學。</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3 大防線</div>
+          <div class="stat-label">NIST & ISO 42001 安全框架</div>
+          <div class="stat-desc">在部署中內建隱私資料遮罩、惡意提示過濾 Guardrails 防禦，提供最穩固的合規護城河。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ⚡ 互動式診斷器 (Interactive Diagnostic Widget) ─── -->
+  <section class="diagnostic-section" id="diagnostic">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-teal); border-color: rgba(0, 242, 254, 0.2); background: rgba(0, 242, 254, 0.05);">DASHBOARD WIDGET</span>
+        <h2 class="section-title">企業 AI 成熟度快速診斷器</h2>
+        <p class="section-subtitle">我們從精準過濾 A 級潛在客戶的「企業 20 題診斷框架」中，精選了 5 大維度的黃金指標。請依貴司現況勾選，系統將立即在線上為您產出定位評估與行動建議。</p>
+      </div>
+
+      <div class="diagnostic-box" id="quiz-widget">
+        <!-- 進度條 -->
+        <div class="quiz-progress">
+          <span id="quiz-step-indicator">第 1 題 / 共 5 題</span>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="quiz-progress-bar"></div>
+          </div>
+          <span id="quiz-percentage">20%</span>
+        </div>
+
+        <!-- 題卡 1 -->
+        <div class="quiz-card active" data-step="1" data-dimension="商業驅動與戰略對齊">
+          <div class="question-dim">維度一：商業驅動與戰略對齊 (Business Alignment)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q1</span>
+            <span>貴司目前導入 AI 的主要商業驅動因素與 ROI 評估機制為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">內部無明確規劃與評估，主要是高層主管提及或看業界風向跟風嘗試。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">為解決單點痛點（如客服、行政流程），僅有質性的預期而缺乏量化財務指標。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">旨在優化核心業務指標（如良率、加速研發、降低成本），有初步量化財務估算但無持續追蹤。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">重塑商業模式，具備嚴謹的 ROI 計算模型（含 TCO 與人力釋放價值），並有動態追蹤機制。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 題卡 2 -->
+        <div class="quiz-card" data-step="2" data-dimension="數據基礎與技術可行性">
+          <div class="question-dim">維度二：數據基礎與技術可行性 (Data & Tech)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q2</span>
+            <span>貴司核心業務數據的數位化、集中化與內部知識文檔的結構化整理程度為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">大量依賴紙本或個人 Excel，數據與規格文檔雜亂且零散分佈在各電腦或社群軟體。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">已數位化但存在系統孤島（ERP/CRM無法連通），知識庫缺乏單一事實來源且以 PDF 掃描檔為主。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">已建立集中資料庫且知識有初步分類（Wiki/Notion），但尚未進行 RAG（檢索增強生成）優化。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">現代化資料湖 API 化且治理嚴謹，文檔高度結構化，可隨時轉化為向量庫或微調語料。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 題卡 3 -->
+        <div class="quiz-card" data-step="3" data-dimension="變革管理與變更適應">
+          <div class="question-dim">維度三：組織與變革管理 (Organization & Change)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q3</span>
+            <span>貴司目前推動 AI 專責組織的配置、以及員工對於變革適應的準備度程度為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">無任何專責推動小組，員工普遍排斥或有被取代的恐懼，無任何培訓或支持資源。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">主要由 IT 部門兼任推動，缺乏業務部門深度參與，員工自發嘗試但無系統化學習路徑。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">已成立跨部門虛擬專案小組（Task Force），有部分部門自發形成 AI 使用社群與局部適應。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">設立正式的 AI 卓越中心（CoE），有跨部門共同考核指標與變革績效激勵政策，變更文化成熟。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 題卡 4 -->
+        <div class="quiz-card" data-step="4" data-dimension="風險治理與合規安全">
+          <div class="question-dim">維度四：風險安全與合規防線 (Governance & Risk)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q4</span>
+            <span>貴司針對員工使用 AI、防範模型幻覺與國際安全標準（如 ISO/IEC 42001）的準備程度為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">完全無規範，員工直接將 AI 用於商用產品，不清楚智慧財產權與數據洩漏風險。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">僅有口頭宣導「請勿輸入機密」，對合規標準與模型幻覺缺乏標準化驗證機制。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">制定書面生成式 AI 使用守則，建立人機協作（HITL）審查機制，開始對齊國際安全防線。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">API Gateway 自動過濾機敏資料，建置自動化幻覺檢測與 IP 治理流程，對接 ISO 42001 審計流程。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 題卡 5 -->
+        <div class="quiz-card" data-step="5" data-dimension="決策時程與顧問預算">
+          <div class="question-dim">維度五：專案執行力與預算決策 (Execution & Budget)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q5</span>
+            <span>貴司預計啟動核心專案的時間表與已編列的年度顧問/培訓預算規模為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">尚無具體時程計畫（僅前期觀望），年度預算編列為 0 或要求 100% 成功案例才願意專案追加。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">預計在 6~12 個月內啟動 POC，已編列小於 `NT$ 10 萬` 預算（僅支持單次短課或極簡諮詢）。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">預計在 3~6 個月內正式啟動，已編列 `NT$ 10 萬 ~ 50 萬` 預算（可支持 4+1 工作坊與現況盤點）。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">專案具備高度緊迫性（1~3個月內必須落地），已編列 `NT$ 50 萬以上` 年度諮詢與導入陪跑預算。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 結果卡片 -->
+        <div class="result-card" id="quiz-result">
+          <div class="result-score-circle">
+            <span class="result-score-num" id="quiz-score-val">0</span>
+            <span class="result-score-total">總得分 / 滿分 20</span>
+          </div>
+          <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
+          <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
+          
+          <div class="result-level-desc">
+            <p id="quiz-level-text">詳細評估分析載入中...</p>
+            <div class="result-suggestion" id="quiz-suggestion-box">
+              <span style="font-size: 16px;">💡</span>
+              <span id="quiz-suggestion-text">建議行動指引載入中...</span>
+            </div>
+          </div>
+
+          <div class="result-ctas">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="btn result-cta-lead" id="result-form-btn">
+              🎯 搶先登記預約「90 分鐘企業 AI 成熟度專家快診」(NT$ 29,800，可全額折抵後續工作坊費)
+            </a>
+            <span class="result-compliance">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
+          </div>
+        </div>
+
+        <!-- 控制欄 -->
+        <div class="quiz-navigation" id="quiz-controls">
+          <button class="quiz-nav-btn" id="quiz-btn-prev" disabled>← 上一題</button>
+          <button class="quiz-nav-btn quiz-nav-btn-next" id="quiz-btn-next" disabled>請先選擇答案</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 全景課程展區 (Curriculum Section) ─── -->
+  <section class="curriculum-section" id="curriculum">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-accent); border-color: rgba(var(--phoenix-accent-rgb), 0.2); background: rgba(var(--phoenix-accent-rgb), 0.05);">CURRICULUM ECOSYSTEM</span>
+        <h2 class="section-title">全景課程體系架構</h2>
+        <p class="section-subtitle">本專案教材全面開源，嚴格對齊國家級人才培育框架標準，共包含七大核心知識模組。點擊卡片可深入檢索授課重點與核心教材。</p>
+      </div>
+
+      <div class="curriculum-grid">
+        <!-- 單元一 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">01</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元一：AI 基礎理論與 2026 技術演進</h3>
+                <span class="unit-subtitle">理論與底層原理解構 — 從 Rule-based 到 Transformer 範式移轉</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">解構機器學習本質與 2026 技術分水嶺。深入 Transformer 核心架構（自注意力機制數學原理）、Tokenizer 運作原理與高維向量空間（Embedding），並剖析大語言模型預訓練（Pre-training）與直接偏好對齊（DPO）之技術本質，打破盲目調用 API 的黑盒迷思。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">3 小時 (對接標準框架)</span>
+                </div>
+                <a href="./curriculum/unit_1_theory/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元二 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">02</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元二：產業常見 10 大 AI 應用功能與企業級模組</h3>
+                <span class="unit-subtitle">直擊核心場景盤點 — 數據 RAG 查找與多模態素材生成架構</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">拒絕空洞概念，全面拆解企業落地模組。深度研習企業級知識庫（RAG）架構與查找算法、多模態行銷素材自動化工作流、高精度合規審核、以及多模態智能客服分流助理。特別解構各場景之「開發痛點」、「ROI 量化決策模型」與 2x2 決策矩陣。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">4 小時 (實務應用篇)</span>
+                </div>
+                <a href="./curriculum/unit_2_industries/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元三 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">03</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元三：負責任的 AI 應用 (Responsible AI)</h3>
+                <span class="unit-subtitle">接軌國際合規防線 — 對齊 NIST AI RMF 與 ISO/IEC 42001 標準</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">建立企業級安全壁壘與稽核流程。實作敏感個資自動遮罩（Data Masking）與 DLP 防護、防 Prompt Injection 安全防禦 Guardrails 連接器配置，以及部署合規的安全審計軌跡（Audit Trails），將國際風險管理標準無縫配置到系統架構中。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">2 小時 (資安與合規)</span>
+                </div>
+                <a href="./curriculum/unit_3_responsible_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元四 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">04</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元四：機器學習技術理論與實務案例</h3>
+                <span class="unit-subtitle">數據特徵工程實戰 — 半導體預測性維護與智慧電力調度</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">實戰工業級特徵工程與算法決策。深度對接半導體精密機台的「預測性維護系統（Dry Pump 振動訊號頻域幅值分析與故障預警）」與工廠級「智慧電力負載預測」，協助技術團隊理解特徵清洗、XGBoost 理論，並在跨部門會議中量化呈現算法 ROI。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">3 小時 (工業級實戰)</span>
+                </div>
+                <a href="./curriculum/unit_4_machine_learning/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元五 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">05</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元五：鑑別式 AI 的原理與應用控制層</h3>
+                <span class="unit-subtitle">決策的安全防火牆 — 混淆矩陣與模型可解釋性 (SHAP/LIME)</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">將鑑別式 AI 定位為「核心控制的安全守護者」。深入理解混淆矩陣（精準度與召回率）、交併比（IoU），並將可解釋性 AI 技術（SHAP / LIME 值）導入金融信貸審查等自動核貸控制層，建置經得起法規審查與內部風控稽核的智能決策系統。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">2 小時 (算法控制層)</span>
+                </div>
+                <a href="./curriculum/unit_5_discriminative_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元六 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">06</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元六：生成式 AI 與多代理人系統 (Multiagent Systems)</h3>
+                <span class="unit-subtitle">工作流升級與跨系統對接 — 自主代理人協作與 MCP 標準實踐</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">從單點聊天工具躍升至跨系統代理自主協同。剖析「規劃代理、執行代理、審查代理」組成之 Multiagent 架構，引導學員配置開源 MLOps/LLMOps 系統，並實踐由 Google 與 Anthropic 主導的 Model Context Protocol (MCP) 標準，建構真正能對接複雜 API 的自主運營網絡。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">3 小時 (前沿代理篇)</span>
+                </div>
+                <a href="./curriculum/unit_6_generative_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元七 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">07</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元七：企業 AI 導入、治理與營運策略</h3>
+                <span class="unit-subtitle">C-Level 頂層運作框架 — 變革管理阻力阻斷、採購自研矩陣與 A3 戰略畫布</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">這是整個框架的<strong>旗艦精華單元</strong>，專為企業領袖打造的 AI Operating Model 落地指南。包含：如何量化計算 TCO 與開發 ROI、Buy vs. Build 技術與財務決策模型、人機協作比例（HITL）決策，以及對抗一線員工排斥的「變革管理五部曲」。內附 A3 列印版總體戰略畫布與 4 張關聯主表。</p>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">5 小時 (旗艦戰略篇)</span>
+                </div>
+                <a href="./curriculum/unit_7_strategy/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 雙認證專家顧問名片 (Team Section) ─── -->
+  <section class="team-section" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.2); background: rgba(245, 166, 35, 0.05);">LEADERSHIP & EXPERTISE</span>
+        <h2 class="section-title">頂尖顧問團隊</h2>
+        <p class="section-subtitle">我們具備 <strong>10 餘年的輔導與教學經驗</strong>，是台灣中南部極稀缺的「國家認證 × 學術正統 × 法人實戰」三位一體之 AI 落地推動者，拒絕紙上談兵，只提供具備實質商業 ROI 的落地合約。</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- 孟淑慧 首席顧問 -->
+        <div class="team-card">
+          <div class="team-card-header">
+            <div class="team-avatar-box">
+              <div class="team-avatar-inner">👩‍🏫</div>
+            </div>
+            <div class="team-info-top">
+              <h3 class="team-name">孟淑慧 (Shu-Hui Meng)</h3>
+              <span class="team-title">首席顧問 Chief Advisor</span>
+              <div class="team-badges">
+                <span class="team-badge-tag">經濟部 AI 產業講師</span>
+                <span class="team-badge-tag">工研院特聘講師</span>
+                <span class="team-badge-tag">10+ 年教學經驗</span>
+              </div>
+            </div>
+          </div>
+          <p class="team-desc">
+            國家級認證企業 AI 講師，現任<strong>工業技術研究院（工研院）</strong>、<strong>精密機械研究發展中心（PMC）</strong>、<strong>台中電腦公會</strong> 企業級 AI 落地專案特聘講師。擅長將繁瑣的技術標準轉化為企業內部的「可落地 SOP」，並在製造業、精密機械業等高難度實業中設計人機協作阻力阻斷流程。
+          </p>
+          <div class="team-table">
+            <div class="team-row">
+              <div class="team-row-label">法人經歷</div>
+              <div class="team-row-value">工研院、精密機械研發中心 (PMC) 企業 AI 系列班講師</div>
+            </div>
+            <div class="team-row">
+              <div class="team-row-label">大學教學</div>
+              <div class="team-row-value">台南大學、高雄科技大學、嘉南藥理大學、美和科技大學</div>
+            </div>
+            <div class="team-row">
+              <div class="team-row-label">專長維度</div>
+              <div class="team-row-value">組織變革管理、ISO/IEC 42001 與 NIST AI RMF 標準實務對齊</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 陳文家 策略長 -->
+        <div class="team-card">
+          <div class="team-card-header">
+            <div class="team-avatar-box">
+              <div class="team-avatar-inner">👨‍💻</div>
+            </div>
+            <div class="team-info-top">
+              <h3 class="team-name">陳文家 (Phoenix Chen)</h3>
+              <span class="team-title">策略長 Chief Strategy Officer</span>
+              <div class="team-badges">
+                <span class="team-badge-tag">教育部助理教授</span>
+                <span class="team-badge-tag">前數位科技中心主任</span>
+                <span class="team-badge-tag">15+ 年架構經驗</span>
+              </div>
+            </div>
+          </div>
+          <p class="team-desc">
+            教育部認證助理教授。曾任南榮科技大學助理教授兼<strong>數位科技中心主任</strong>，現任<strong>高雄科技大學兼任助理教授</strong>。精通大型多代理人系統（Multiagent Systems）架構工程、SaaS 混合雲架構設計，以及 Buy vs. Build 定量財務建模，以嚴謹的學術高度與豐富的系統整合開發實務為企業構建安全防火牆。
+          </p>
+          <div class="team-table">
+            <div class="team-row">
+              <div class="team-row-label">學術資歷</div>
+              <div class="team-row-value">助理教授證書持有人、高科大兼任助理教授</div>
+            </div>
+            <div class="team-row">
+              <div class="team-row-label">研發專長</div>
+              <div class="team-row-value">Buy vs. Build 量化決策模型、Model Context Protocol 標準對接</div>
+            </div>
+            <div class="team-row">
+              <div class="team-row-label">核心理念</div>
+              <div class="team-row-value">推動「教材即程式碼」工程範式，杜絕 POC 虛耗，實質建立核心競爭力</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── B2B 定價方案區 (Pricing Section) ─── -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-accent); border-color: rgba(var(--phoenix-accent-rgb), 0.2); background: rgba(var(--phoenix-accent-rgb), 0.05);">TRANSPARENT VALUE</span>
+        <h2 class="section-title">企業專屬方案與透明定價</h2>
+        <p class="section-subtitle">鳳凰 AI 顧問團隊為您提供高毛利、低時耗且能創造強大複利回報的頂級諮詢服務。所有方案皆由兩位雙認證顧問親自執行，拒絕外包與低標交付。</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- 方案 1 -->
+        <div class="price-card featured">
+          <h3 class="price-name">企業 AI 落地一頁式診斷報告</h3>
+          <p class="price-target">專為希望快速評估、打通決策瓶頸的 C-Level 主管設計</p>
+          <div class="price-value-box">
+            <span class="price-currency">NT$</span>
+            <span class="price-num">6,800</span>
+            <span class="price-unit">/ 單次特惠</span>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>5 個工作天內交付 <strong>8–12 頁客製化 PDF 診斷報告</strong></span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>「4+1 戰略畫布」現況全維評分雷達圖</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>3 個最具 ROI 潛力的 AI 試點場景優先級象限</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>30 分鐘顧問線上視訊深度問答與下一步行動指引</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span style="color: var(--phoenix-gold); font-weight: 600;">※ 報告費用可後續 100% 全額折抵方案 B/C 服務費用</span>
+            </li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-primary">
+            立即申請診斷報告
+          </a>
+        </div>
+
+        <!-- 方案 A -->
+        <div class="price-card">
+          <h3 class="price-name">方案 A：15 小時企業 AI 菁英培訓專班</h3>
+          <p class="price-target">適合希望提升全員 AI 技術素養、取得培育補助的中小企業與 HR 主管</p>
+          <div class="price-value-box">
+            <span class="price-num">對接補助</span>
+            <span class="price-unit">/ 專案報價</span>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>對齊中企署/產發署「115 年度企業專區 AI 人才培育標準」</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>15 小時客製化實體或線上專班，協助取得完訓證書</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>輔導建置與上架 1 門企業專屬自製教材，沉澱知識資產</span>
+            </li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-secondary">
+            洽詢培訓規劃
+          </a>
+        </div>
+
+        <!-- 方案 B -->
+        <div class="price-card">
+          <h3 class="price-name">方案 B：一頁式戰略畫布實戰工作坊</h3>
+          <p class="price-target">適合數位轉型長（CDO）領軍、亟需凝聚跨部門決策共識的關鍵戰略會商</p>
+          <div class="price-value-box">
+            <span class="price-currency">NT$</span>
+            <span class="price-num">48,000</span>
+            <span class="price-unit">起 / 年度限定特惠</span>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span><strong>限定特惠價 NT$ 48,000 起</strong>（年度旗艦加速計畫，名額極為有限）</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>帶領高階團隊盤點 10-20 個真實場景，產出量化 ROI/技術可行性決策矩陣</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>產出 90 天 Quick-Win 落地路線圖與 A3 總體戰略藍圖</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>交付 10~15 頁面向董事會之專業決策簡報，含會後追蹤諮詢</span>
+            </li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-secondary">
+            預約實戰工作坊
+          </a>
+        </div>
+
+        <!-- 方案 C -->
+        <div class="price-card">
+          <h3 class="price-name">方案 C：AI 治理研習與政策設計工作坊</h3>
+          <p class="price-target">專為金融、製造、上市櫃公司等對數據隱私與合規安全有極致要求的企業</p>
+          <div class="price-value-box">
+            <span class="price-currency">NT$</span>
+            <span class="price-num">29,800</span>
+            <span class="price-unit">起 / 標準套件</span>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span><strong>AI 內部政策治理自助套件 NT$ 29,800 起</strong>，高毛利自助範本快速配置</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span><strong>顧問現況盤點與深度研習 NT$ 180,000 起</strong>，由兩位專家親自駐點</span>
+            </li>
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span>配置員工使用規範、資料外洩遮罩SOP、對齊 ISO/IEC 42001 內部框架</span>
+            </li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-gold">
+            洽詢合規導入
+          </a>
+        </div>
+      </div>
+
+      <!-- 聲明與個資法 -->
+      <div class="pricing-footer">
+        <h4 class="pricing-footer-title">⚖️ 中華民國個人資料保護法第 8 條之告知聲明</h4>
+        <p class="pricing-footer-desc">
+          本網站及所有關聯 Google 表單之個人與企業資料蒐集，皆由鳳凰 AI 顧問團隊（陳文家策略長與孟淑慧顧問）負責。蒐集之目的僅限於發送 Notion + Excel 工具包、提供一頁式評估診斷、預約前置諮詢與後續方案推廣之行銷目的。我們將在上述目的存續期間內，於中華民國境內以電子郵件、電話等安全方式處理並利用您的資料。您可隨時來信要求查詢、閱覽、製給複製本、補充、更正、停止蒐集處理利用或刪除您的個人與企業資料。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 頁尾 (Footer) ─── -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#home" class="logo">
+          <span class="logo-symbol">🔥</span>
+          <span>鳳凰 AI 顧問</span>
+        </a>
+        <p class="footer-brand-desc">
+          專為現代企業高階主管、數位轉型長（CDO）及跨部門領導者打造的「AI 營運落地與變革管理開源生態系」。我們以實質 ROI 為唯一衡量指標，為您構築最安全的智能營運護城河。
+        </p>
+      </div>
+      
+      <div>
+        <h4 class="footer-title">快速連結</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="#home">首頁頂部</a></li>
+          <li class="footer-link-item"><a href="#diagnostic">線上成熟度快測</a></li>
+          <li class="footer-link-item"><a href="#curriculum">全景開源教材</a></li>
+          <li class="footer-link-item"><a href="#team">專家顧問介紹</a></li>
+          <li class="footer-link-item"><a href="#pricing">企業導入方案</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">商務聯絡與開源</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item">📧 B2B 聯絡信箱：<br><a href="mailto:allmyway2007@gmail.com" style="color: var(--phoenix-accent); font-weight: 600;">allmyway2007@gmail.com</a></li>
+          <li class="footer-link-item">💻 GitHub 倉庫庫：<br><a href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank" style="text-decoration: underline;">enterprise-ai-talent-framework</a></li>
+          <li class="footer-link-item">📄 開源許可協定：<br>MIT License (可自由列印、使用、複製)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div class="footer-copy">
+        © 2026 鳳凰 AI 顧問團隊｜陳文家｜孟淑慧。著作權所有，教材程式碼部分基於 MIT 開源協定發布。<br>
+        政府培訓專班教材內容對齊中企署/產發署標準，工作坊內容不構成 ISO/IEC 42001 正式第三方認證審計服務。
+      </div>
+      <div class="footer-meta-links">
+        <a href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank" class="footer-meta-link">GitHub</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="footer-meta-link">工具包索取</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="footer-meta-link">診斷預約</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── ⚡ 互動式診斷器 JS 邏輯 ─── -->
+  <script>
+    // 題庫與計分狀態
+    let currentStep = 1;
+    const totalSteps = 5;
+    const scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    
+    const dimensions = {
+      1: "商業驅動與戰略對齊",
+      2: "數據基礎與技術可行性",
+      3: "變革管理與變更適應",
+      4: "風險治理與合規安全",
+      5: "執行決策與年度預算"
+    };
+
+    // DOM 元素快取
+    const quizCards = document.querySelectorAll('.quiz-card');
+    const progressBarFill = document.getElementById('quiz-progress-bar');
+    const stepIndicator = document.getElementById('quiz-step-indicator');
+    const percentageIndicator = document.getElementById('quiz-percentage');
+    const btnPrev = document.getElementById('quiz-btn-prev');
+    const btnNext = document.getElementById('quiz-btn-next');
+    const quizControls = document.getElementById('quiz-controls');
+    const resultCard = document.getElementById('quiz-result');
+
+    // 點擊選項事件
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.quiz-card');
+        const step = parseInt(card.getAttribute('data-step'));
+        const score = parseInt(this.getAttribute('data-score'));
+        
+        // 清除該題其他選項的選取狀態
+        card.querySelectorAll('.option-btn').forEach(o => o.classList.remove('selected'));
+        // 選取當前選項
+        this.classList.add('selected');
+        
+        // 紀錄分數
+        scores[step] = score;
+        
+        // 啟用「下一題」按鈕，並更新文字
+        btnNext.disabled = false;
+        if (step === totalSteps) {
+          btnNext.textContent = '生成診斷結果 →';
+        } else {
+          btnNext.textContent = '下一題 →';
+        }
+      });
+    });
+
+    // 點擊「下一題」
+    btnNext.addEventListener('click', function() {
+      if (currentStep < totalSteps) {
+        // 隱藏目前題卡，顯示下一張
+        quizCards[currentStep - 1].classList.remove('active');
+        currentStep++;
+        quizCards[currentStep - 1].classList.add('active');
+        
+        // 更新進度條與控制按鈕
+        updateQuizUI();
+      } else {
+        // 已到最後一題，點選生成結果
+        showDiagnosticResult();
+      }
+    });
+
+    // 點擊「上一題」
+    btnPrev.addEventListener('click', function() {
+      if (currentStep > 1) {
+        quizCards[currentStep - 1].classList.remove('active');
+        currentStep--;
+        quizCards[currentStep - 1].classList.add('active');
+        
+        updateQuizUI();
+      }
+    });
+
+    // 更新診斷器 UI 狀態
+    function updateQuizUI() {
+      // 1. 更新進度條與比例標註
+      const progressPercent = (currentStep / totalSteps) * 100;
+      progressBarFill.style.width = `${progressPercent}%`;
+      stepIndicator.textContent = `第 ${currentStep} 題 / 共 ${totalSteps} 題`;
+      percentageIndicator.textContent = `${progressPercent}%`;
+      
+      // 2. 上一題按鈕狀態
+      btnPrev.disabled = currentStep === 1;
+      
+      // 3. 下一題按鈕狀態 (如果目前題型已選取過答案，則啟用)
+      if (scores[currentStep] > 0) {
+        btnNext.disabled = false;
+        if (currentStep === totalSteps) {
+          btnNext.textContent = '生成診斷結果 →';
+        } else {
+          btnNext.textContent = '下一題 →';
+        }
+      } else {
+        btnNext.disabled = true;
+        btnNext.textContent = '請先選擇答案';
+      }
+    }
+
+    // 計算分數並展示診斷結果
+    function showDiagnosticResult() {
+      // 隱藏所有題卡與控制按鈕
+      quizCards.forEach(c => c.classList.remove('active'));
+      quizControls.style.display = 'none';
+      document.querySelector('.quiz-progress').style.display = 'none';
+      
+      // 計算總得分
+      let totalScore = 0;
+      let minScore = 5;
+      let lowestDimension = "";
+      
+      for (let s = 1; s <= totalSteps; s++) {
+        totalScore += scores[s];
+        if (scores[s] < minScore) {
+          minScore = scores[s];
+          lowestDimension = dimensions[s];
+        }
+      }
+
+      // 對應 B2B 評級、定位與點評
+      let levelBadge = "";
+      let levelTitle = "";
+      let levelText = "";
+      let suggestionText = "";
+      let formBtnText = "";
+
+      if (totalScore >= 5 && totalScore <= 9) {
+        levelBadge = "C 級名單 (成熟度 25% ~ 45%)";
+        levelTitle = "階段一：AI 萌芽期 (Ad-hoc) — 缺乏明確 ROI 與數據基底";
+        levelText = `貴司目前在「${lowestDimension}」維度上得分較低。這意味著企業內部尚未建立成熟的數位化流程，部門數據孤島嚴重，且缺乏高層實質預算編列。此時盲目採購外部高價 AI 系統或進行模型自研（Build）將面臨極高的 POC 死亡風險。`;
+        suggestionText = "強烈建議先不要花大錢！請先下載我們的「一頁式戰略畫布」與 Notion 管理模板，帶領跨部門主管釐清業務痛點（Quick-Win），利用 Excel 精算首期 ROI 成本。";
+        formBtnText = "📥 點此免費登記索取「Notion 協作模板與 Excel 互動試算表工具包」";
+      } 
+      else if (totalScore >= 10 && totalScore <= 13) {
+        levelBadge = "B 級名單 (成熟度 50% ~ 65%)";
+        levelTitle = "階段二：特定場景探索期 (Exploring) — 單點痛點有感，但缺乏系統化中台";
+        levelText = `貴司在「${lowestDimension}」維度上存在明顯缺口。雖然內部已有數位化基礎，且有特定部門（如行銷或IT）自發探索 AI 工具，但尚未形成跨部門的 CoE 專責組織，也缺乏嚴謹的安全合規與 DLP 資料遮罩防線。`;
+        suggestionText = "建議您的團隊進行一次系統化的現況盤點。由孟淑慧顧問與陳文家策略長為您設計一場 15 小時的「企業 AI 菁英培訓專班」，或導入方案 B 工作坊，在 90 天內快速鎖定 3 個高 ROI 試點專案。";
+        formBtnText = "📊 預約 30 分鐘免費顧問線上初診，獲取 90 天 Quick-Win 落地指南";
+      } 
+      else if (totalScore >= 14 && totalScore <= 17) {
+        levelBadge = "A 級黃金名單 (成熟度 70% ~ 85%)";
+        levelTitle = "階段三：系統化導入期 (Systematic) — 主管高度支持，正在尋找最佳落地架構";
+        levelText = `貴司具備非常優異的轉型潛力！但在「${lowestDimension}」上仍有精進空間。高階主管對 AI 轉型有強烈共識且已編列相關預算。目前最緊迫的任務是接軌國際 <strong>ISO/IEC 42001</strong> 安全稽核規範，避免因資料外洩、Prompt Injection 或模型幻覺出錯導致轉型功虧一簣。`;
+        suggestionText = "這是一個非常關鍵的黃金窗口！建議立即預約我們專屬的「NT$ 29,800 企業 AI 導入戰略快診案」（費用可全額折抵後續工作坊），由陳策略長與孟顧問在 5 個工作天內為您產出 8–12 頁的頂級 PDF 診斷報告，為董事會決策提供量化決策依據。";
+        formBtnText = "🎯 搶先申請「企業 AI 導入戰略快診」 (NT$ 29,800，可全額折抵後續服務費)";
+      } 
+      else {
+        levelBadge = "S 級超級名單 (成熟度 90% 以上)";
+        levelTitle = "階段四：AI 驅動變革期 (Optimized) — 預算充足、技術領先，追求全面變革複利";
+        levelText = `貴司是極為罕見且傑出的 AI 先行者！在各維度表現均衡且優異。您目前的核心痛點是將 AI 與全員績效指標（KPI）深度綁定，並建立可持續維運的 MLOps/LLMOps 系統架構，對接國際 Model Context Protocol (MCP) 標準，構築同業無法超越的智能運營護城河。`;
+        suggestionText = "對於 S 級企業，我們將由陳策略長與孟顧問親自出馬，直接提供客製化 B2B 合約與 NDA，推動高客單價的「90天/180天 數位轉型實質導入陪跑案」，提供頂級的專家陪跑支援。";
+        formBtnText = "🔥 直接聯絡策略長與首席顧問，預約專屬 NDA 集團陪跑案洽談";
+      }
+
+      // 渲染結果卡片
+      document.getElementById('quiz-score-val').textContent = totalScore;
+      document.getElementById('quiz-level-badge').textContent = levelBadge;
+      document.getElementById('quiz-level-title').textContent = levelTitle;
+      document.getElementById('quiz-level-text').innerHTML = levelText;
+      document.getElementById('quiz-suggestion-text').textContent = suggestionText;
+      
+      const formBtn = document.getElementById('result-form-btn');
+      formBtn.textContent = formBtnText;
+      
+      // 如果是 C 級名單，按鈕直接導向工具包索取表單；如果是 B/A/S 級，導向診斷前置諮詢表單
+      if (totalScore <= 9) {
+        formBtn.href = "https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform";
+        formBtn.style.background = "linear-gradient(135deg, var(--phoenix-teal) 0%, #009eb4 100%)";
+        formBtn.style.boxShadow = "0 8px 30px rgba(0, 242, 254, 0.25)";
+      } else {
+        formBtn.href = "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform";
+        formBtn.style.background = "linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%)";
+        formBtn.style.boxShadow = "0 8px 30px rgba(245, 166, 35, 0.25)";
+      }
+
+      // 展示結果卡片
+      resultCard.style.display = 'block';
+    }
+  </script>
+
+  <!-- ─── 課程卡片摺疊收合 JS 邏輯 ─── -->
+  <script>
+    function toggleUnit(header) {
+      const card = header.closest('.unit-card');
+      const content = card.querySelector('.unit-content');
+      const isExpanded = card.classList.contains('expanded');
+
+      // 關閉所有其他已展開的卡片
+      document.querySelectorAll('.unit-card').forEach(c => {
+        if (c !== card && c.classList.contains('expanded')) {
+          c.classList.remove('expanded');
+          c.querySelector('.unit-content').style.maxHeight = '0px';
+        }
+      });
+
+      if (isExpanded) {
+        card.classList.remove('expanded');
+        content.style.maxHeight = '0px';
+      } else {
+        card.classList.add('expanded');
+        // 動態計算子內容的真實高度並設定，以觸發流暢的 CSS 過渡動畫
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+
+    // 行動端選單切換
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      if (navLinks.classList.contains('active')) {
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '80px';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'rgba(11, 11, 22, 0.95)';
+        navLinks.style.padding = '24px';
+        navLinks.style.borderBottom = '1px solid var(--glass-border)';
+      } else {
+        navLinks.style.display = 'none';
+      }
+    });
+
+    // 監聽窗口大小調整，防止在拉大視窗時選單消失
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'row';
+        navLinks.style.position = 'static';
+        navLinks.style.width = 'auto';
+        navLinks.style.background = 'none';
+        navLinks.style.padding = '0';
+        navLinks.style.borderBottom = 'none';
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      } else if (!navLinks.classList.contains('active')) {
+        navLinks.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
