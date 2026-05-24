@@ -1364,14 +1364,14 @@
     <div class="hero-glow-2"></div>
     <div class="container hero-content">
       <div class="badge badge-accent">
-        <span>⭐ 對接經濟部 115 年度 AI 人才培育公版標準</span>
+        <span>🦅 鳳凰 AI 顧問團隊｜產官學三棲認證 × 國家級法人實戰經驗</span>
       </div>
       <h1 class="hero-title">
-        <span class="text-gradient">突破 POC 死亡谷</span><br>
-        <span>構築企業專屬的 AI 營運護城河</span>
+        <span class="text-gradient">30 天內完成 AI 落地盤點</span><br>
+        <span>收斂出 90 天可執行的 Quick-Win 路線圖</span>
       </h1>
       <p class="hero-description">
-        我們不只導入技術，更憑藉 <strong>10 餘年跨國與本土龍頭企業輔導經驗</strong>，深度整合國際 <strong>ISO/IEC 42001</strong> 安全防線與組織變革管理（Change Management），協助高階決策層達成真實 ROI 躍升。
+        專為 <strong>50–500 人中型企業</strong> 與數位轉型主管量身打造。憑藉 <strong>10 餘年跨國與本土龍頭企業輔導經驗</strong>，我們協助企業精算 TCO 與 ROI、構築 <strong>ISO/IEC 42001</strong> 安全治理防線與變革管理，引導企業規避盲目自建 RAG 陷阱，實現高勝率的 AI 落地模式。
       </p>
       
       <div class="hero-ctas">
@@ -2254,6 +2254,289 @@
     }
   </style>
 
+  <!-- ─── 成果交付物擬真展區 (Deliverables Preview Section) ─── -->
+  <section class="deliverables-section" id="deliverables">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.2); background: rgba(245, 166, 35, 0.05);">DELIVERABLES PREVIEW</span>
+        <h2 class="section-title">專業顧問成果交付物預覽</h2>
+        <p class="section-subtitle">
+          拒絕虛浮名詞，我們將抽象的 AI 戰略轉化為高階決策層看得見、能帶走、可稽核的實體交付資產。以下為去識別化標準交付物樣本大綱與預覽：
+        </p>
+      </div>
+
+      <style>
+        .deliverables-section {
+          padding: 100px 0;
+          position: relative;
+          background: radial-gradient(circle at 50% 50%, rgba(233, 69, 96, 0.03) 0%, transparent 70%);
+        }
+
+        .deliverables-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          margin-top: 40px;
+        }
+        @media (max-width: 1200px) {
+          .deliverables-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 768px) {
+          .deliverables-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .deliverable-card {
+          position: relative;
+          background: linear-gradient(135deg, rgba(26, 26, 58, 0.4) 0%, rgba(18, 18, 38, 0.7) 100%);
+          border: 1px solid var(--glass-border);
+          border-radius: 20px;
+          padding: 24px;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          overflow: hidden;
+        }
+        .deliverable-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(245, 166, 35, 0.35);
+          box-shadow: 0 20px 40px rgba(245, 166, 35, 0.08);
+        }
+
+        .deliverable-mock-img {
+          width: 100%;
+          height: 130px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          margin-bottom: 20px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        .deliverable-mock-img::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(180deg, transparent 60%, rgba(11, 11, 22, 0.85) 100%);
+        }
+        .deliverable-card:hover .deliverable-mock-img {
+          border-color: rgba(245, 166, 35, 0.4);
+        }
+
+        .mock-badge {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 10px;
+          font-weight: 700;
+          color: var(--phoenix-gold);
+          background: rgba(245, 166, 35, 0.15);
+          border: 1px solid rgba(245, 166, 35, 0.3);
+          padding: 2px 6px;
+          border-radius: 4px;
+          letter-spacing: 0.5px;
+          z-index: 10;
+        }
+
+        .deliverable-title {
+          font-family: var(--font-display);
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: 8px;
+          line-height: 1.4;
+        }
+
+        .deliverable-meta {
+          font-size: 12px;
+          color: var(--phoenix-teal);
+          font-weight: 600;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .deliverable-desc {
+          font-size: 13px;
+          color: var(--gray-400);
+          line-height: 1.6;
+          margin-bottom: 16px;
+          flex-grow: 1;
+        }
+
+        .deliverable-outline-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          padding-top: 14px;
+        }
+        .deliverable-outline-item {
+          position: relative;
+          padding-left: 14px;
+          font-size: 12.5px;
+          color: var(--gray-300);
+          line-height: 1.4;
+        }
+        .deliverable-outline-item::before {
+          content: '▪';
+          position: absolute;
+          left: 0;
+          color: var(--phoenix-accent);
+        }
+        .deliverable-security-tag {
+          font-size: 11px;
+          color: var(--gray-400);
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-top: 12px;
+          font-weight: 500;
+        }
+      </style>
+
+      <div class="deliverables-grid">
+        <!-- 交付物一 -->
+        <div class="deliverable-card">
+          <div class="deliverable-mock-img">
+            <span class="mock-badge">A3 總體戰略</span>
+            <div style="width: 80%; height: 60%; border: 1px solid rgba(233, 69, 96, 0.3); padding: 8px; border-radius: 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: rgba(233, 69, 96, 0.02);">
+              <div style="border: 1px dashed rgba(255,255,255,0.1); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-around; padding: 4px;">
+                <div style="height: 4px; width: 60%; background: var(--phoenix-accent); opacity: 0.6; border-radius: 2px;"></div>
+                <div style="height: 4px; width: 80%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              </div>
+              <div style="border: 1px dashed rgba(255,255,255,0.1); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-around; padding: 4px;">
+                <div style="height: 4px; width: 70%; background: var(--phoenix-teal); opacity: 0.6; border-radius: 2px;"></div>
+                <div style="height: 4px; width: 50%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              </div>
+              <div style="border: 1px dashed rgba(255,255,255,0.1); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-around; padding: 4px;">
+                <div style="height: 4px; width: 80%; background: var(--phoenix-gold); opacity: 0.6; border-radius: 2px;"></div>
+                <div style="height: 4px; width: 60%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="deliverable-title">一頁式 AI 落地戰術畫布</h3>
+          <span class="deliverable-meta">📋 交付物格式：A3 專業設計輸出</span>
+          <p class="deliverable-desc">
+            彙整企業痛點、場景優先級、變革阻力機制、API 熔斷策略與 ROI 評估。用一張 A3 畫布凝聚高管共識，提供董事會最直觀的轉型全景。
+          </p>
+          <ul class="deliverable-outline-list">
+            <li class="deliverable-outline-item">4 大核心戰略維度交叉收斂</li>
+            <li class="deliverable-outline-item">3 大高優先級 Quick-Win 場景</li>
+            <li class="deliverable-outline-item">人機協作 (HITL) 流程權責切分</li>
+          </ul>
+          <span class="deliverable-security-tag">🔒 依中華民國《個資法》去識別化</span>
+        </div>
+
+        <!-- 交付物二 -->
+        <div class="deliverable-card">
+          <div class="deliverable-mock-img">
+            <span class="mock-badge">ROI 精算表</span>
+            <div style="width: 80%; height: 60%; border: 1px solid rgba(245, 166, 35, 0.3); border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 4px; background: rgba(245, 166, 35, 0.02); font-family: monospace;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px; font-size: 8px; color: var(--gray-400);">
+                <span>項次</span><span>成本項目</span><span>ROI 比率</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 8px; color: var(--phoenix-gold);">
+                <span>01</span><span>RAG vs Buy</span><span>+ 380%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 8px;">
+                <span>02</span><span>API Cost</span><span>- 42%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 8px;">
+                <span>03</span><span>工時節省</span><span>+ 87%</span>
+              </div>
+            </div>
+          </div>
+          <h3 class="deliverable-title">企業 AI 營運 TCO/ROI 精算表</h3>
+          <span class="deliverable-meta">📊 交付物格式：Excel 可互動財務模型</span>
+          <p class="deliverable-desc">
+            杜絕盲目自建與 API 預算黑洞！提供精密的雲端 API 流量費模型、開發人月折算、製程檢索工時與機會成本節省財務精算工具。
+          </p>
+          <ul class="deliverable-outline-list">
+            <li class="deliverable-outline-item">5 年期總持有成本 (TCO) 精算</li>
+            <li class="deliverable-outline-item">真實工時機會成本省減對照</li>
+            <li class="deliverable-outline-item">買 vs 自建（Buy vs Build）決策分析</li>
+          </ul>
+          <span class="deliverable-security-tag">🔒 依中華民國《個資法》去識別化</span>
+        </div>
+
+        <!-- 交付物三 -->
+        <div class="deliverable-card">
+          <div class="deliverable-mock-img">
+            <span class="mock-badge">個資與資安規範</span>
+            <div style="width: 80%; height: 60%; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 6px; padding: 8px; display: flex; flex-direction: column; justify-content: space-around; background: rgba(0, 242, 254, 0.02); position: relative;">
+              <div style="font-size: 9px; color: var(--phoenix-teal); font-weight: 700; border-bottom: 1px solid rgba(0, 242, 254, 0.2); padding-bottom: 2px;">ISO/IEC 42001 POLICY</div>
+              <div style="height: 3px; width: 90%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              <div style="height: 3px; width: 80%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              <div style="height: 3px; width: 95%; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+              <div style="position: absolute; bottom: 8px; right: 8px; font-size: 16px; opacity: 0.8;">🛡️</div>
+            </div>
+          </div>
+          <h3 class="deliverable-title">ISO/IEC 42001 AI 安全治理文件</h3>
+          <span class="deliverable-meta">🛡️ 交付物格式: Word 核心管理制度範本</span>
+          <p class="deliverable-desc">
+            解決法務與資安主管最頭痛的「影子 AI」資料外洩問題。協助建構符合台灣《個資法》與歐盟規範的員工使用指引與遮罩防禦。
+          </p>
+          <ul class="deliverable-outline-list">
+            <li class="deliverable-outline-item">員工外部 AI 工具安全守則</li>
+            <li class="deliverable-outline-item">機密專案輸入過濾 Guardrails SOP</li>
+            <li class="deliverable-outline-item">人機衝突法律熔斷責任歸屬</li>
+          </ul>
+          <span class="deliverable-security-tag">🔒 依中華民國《個資法》去識別化</span>
+        </div>
+
+        <!-- 交付物四 -->
+        <div class="deliverable-card">
+          <div class="deliverable-mock-img">
+            <span class="mock-badge">90天路線圖</span>
+            <div style="width: 80%; height: 60%; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 8px; display: flex; flex-direction: column; justify-content: space-around; background: rgba(255, 255, 255, 0.02);">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 30px; font-size: 8px; color: var(--gray-400);">M1-30</div>
+                <div style="height: 6px; width: 40px; background: var(--phoenix-accent); border-radius: 3px; opacity: 0.8;"></div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 30px; font-size: 8px; color: var(--gray-400);">M31-60</div>
+                <div style="height: 6px; width: 55px; background: var(--phoenix-teal); border-radius: 3px; margin-left: 20px; opacity: 0.8;"></div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 30px; font-size: 8px; color: var(--gray-400);">M61-90</div>
+                <div style="height: 6px; width: 45px; background: var(--phoenix-gold); border-radius: 3px; margin-left: 45px; opacity: 0.8;"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="deliverable-title">90天 Quick-Win 落地實施路線圖</h3>
+          <span class="deliverable-meta">📅 交付物格式: Gantt 實施 Gantt 表與 RACI</span>
+          <p class="deliverable-desc">
+            拒絕專案無限期拖延！為專案管理辦公室（PMO）提供清晰的 90 天試點、阻力排除與 HITL（有人審核）系統上線路線圖。
+          </p>
+          <ul class="deliverable-outline-list">
+            <li class="deliverable-outline-item">Day 1~30 前置數據整理與快診</li>
+            <li class="deliverable-outline-item">Day 31~60 核心知識庫小規模試點</li>
+            <li class="deliverable-outline-item">Day 61~90 阻力排除與人機發布</li>
+          </ul>
+          <span class="deliverable-security-tag">🔒 依中華民國《個資法》去識別化</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── 雙認證專家顧問名片 (Team Section) ─── -->
   <section class="team-section" id="team">
     <div class="container">
@@ -2385,24 +2668,24 @@
 
         <!-- 方案 A -->
         <div class="price-card">
-          <h3 class="price-name">方案 A：15 小時企業 AI 菁英培訓專班</h3>
-          <p class="price-target">適合希望提升全員 AI 技術素養、取得培育補助的中小企業與 HR 主管</p>
+          <h3 class="price-name">方案 A：企業專屬 AI 內訓與培育專班</h3>
+          <p class="price-target">適合希望提升全員 AI 技術素養、建立系統化落地共識的中小企業與 HR 主管</p>
           <div class="price-value-box">
-            <span class="price-num">對接補助</span>
-            <span class="price-unit">/ 專案報價</span>
+            <span class="price-num" style="font-size: 26px;">企業客製內訓</span>
+            <span class="price-unit">/ 專案評估報價</span>
           </div>
           <ul class="price-features">
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>對齊中企署/產發署「115 年度企業專區 AI 人才培育標準」</span>
+              <span>協助企業評估是否符合 115 年度政府 AI 人才培育補助申請資格（實際核定結果仍依主管機關審查為準）</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>15 小時客製化實體或線上專班，協助取得完訓證書</span>
+              <span>15 小時客製化實體或線上專班，輔導對齊中企署/產發署公版培育教材標準</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>輔導建置與上架 1 門企業專屬自製教材，沉澱知識資產</span>
+              <span>協助編纂並上架 1 門企業自製專屬教材，沉澱企業內部高價值知識資產</span>
             </li>
           </ul>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-secondary">
@@ -2416,13 +2699,13 @@
           <p class="price-target">適合數位轉型長（CDO）領軍、亟需凝聚跨部門決策共識的關鍵戰略會商</p>
           <div class="price-value-box">
             <span class="price-currency">NT$</span>
-            <span class="price-num">48,000</span>
-            <span class="price-unit">起 / 年度限定特惠</span>
+            <span class="price-num" style="font-size: 26px;">30,000 ~ 50,000</span>
+            <span class="price-unit">起 / 階梯首期體驗價</span>
           </div>
           <ul class="price-features">
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span><strong>限定特惠價 NT$ 48,000 起</strong>（年度旗艦加速計畫，名額極為有限）</span>
+              <span><strong>首期合作體驗價 NT$ 30,000 ~ 50,000 起</strong>（限前 3 家合作企業以累積去識別化標竿案例，原價 NT$ 88,000~188,000 起）</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
@@ -2444,25 +2727,25 @@
 
         <!-- 方案 C -->
         <div class="price-card">
-          <h3 class="price-name">方案 C：AI 治理研習與政策設計工作坊</h3>
+          <h3 class="price-name">方案 C：企業 AI 內部治理與合規陪跑案</h3>
           <p class="price-target">專為金融、製造、上市櫃公司等對數據隱私與合規安全有極致要求的企業</p>
           <div class="price-value-box">
             <span class="price-currency">NT$</span>
-            <span class="price-num">29,800</span>
-            <span class="price-unit">起 / 標準套件</span>
+            <span class="price-num" style="font-size: 26px;">300,000 ~ 900,000</span>
+            <span class="price-unit">起 / 8~12週陪跑</span>
           </div>
           <ul class="price-features">
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span><strong>AI 內部政策治理自助套件 NT$ 29,800 起</strong>，高毛利自助範本快速配置</span>
+              <span><strong>AI 內部政策治理自助套件 NT$ 29,800 起</strong>（含高價值安全範本與使用規範）</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span><strong>顧問現況盤點與深度研習 NT$ 180,000 起</strong>，由兩位專家親自駐點</span>
+              <span><strong>深度 AI 治理輔導與合規陪跑 NT$ 300,000 ~ 900,000 起</strong>，由兩位專家顧問親自駐點輔導</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>配置員工使用規範、資料外洩遮罩SOP、對齊 ISO/IEC 42001 內部框架</span>
+              <span>配置員工 AI 安全行為準則、資料外洩安全防禦遮罩 SOP，全面對齊國際 ISO/IEC 42001 安全框架與台灣個資法防線</span>
             </li>
           </ul>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-gold">
@@ -2486,11 +2769,11 @@
     <div class="container footer-grid">
       <div>
         <a href="#home" class="logo">
-          <span class="logo-symbol">🔥</span>
+          <span class="logo-symbol">🦅</span>
           <span>鳳凰 AI 顧問</span>
         </a>
         <p class="footer-brand-desc">
-          專為現代企業高階主管、數位轉型長（CDO）及跨部門領導者打造的「AI 營運落地與變革管理開源生態系」。我們以實質 ROI 為唯一衡量指標，為您構築最安全的智能營運護城河。
+          專為現代企業高階主管、數位轉型長（CDO）及跨部門領導者打造的「AI 營運落地與變革管理開源生態系」。我們提供標準 B2B 保密協定（NDA），以實質 ROI 為衡量指標，協助企業構築最安全的智能營運護城河。
         </p>
       </div>
       
@@ -2499,18 +2782,18 @@
         <ul class="footer-links">
           <li class="footer-link-item"><a href="#home">首頁頂部</a></li>
           <li class="footer-link-item"><a href="#diagnostic">線上成熟度快測</a></li>
-          <li class="footer-link-item"><a href="#curriculum">全景開源教材</a></li>
+          <li class="footer-link-item"><a href="#deliverables">成果交付物預覽</a></li>
           <li class="footer-link-item"><a href="#team">專家顧問介紹</a></li>
           <li class="footer-link-item"><a href="#pricing">企業導入方案</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="footer-title">商務聯絡與開源</h4>
+        <h4 class="footer-title">商務聯絡與個資防線</h4>
         <ul class="footer-links">
-          <li class="footer-link-item">📧 B2B 聯絡信箱：<br><a href="mailto:allmyway2007@gmail.com" style="color: var(--phoenix-accent); font-weight: 600;">allmyway2007@gmail.com</a></li>
-          <li class="footer-link-item">💻 GitHub 倉庫庫：<br><a href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank" style="text-decoration: underline;">enterprise-ai-talent-framework</a></li>
-          <li class="footer-link-item">📄 開源許可協定：<br>MIT License (可自由列印、使用、複製)</li>
+          <li class="footer-link-item">📧 B2B 服務信箱：<br><a href="mailto:service@phoenix-ai-edu.com" style="color: var(--phoenix-accent); font-weight: 600;">service@phoenix-ai-edu.com</a></li>
+          <li class="footer-link-item">🛡️ 企業安全防禦：<br>全面簽署標準 NDA，發票開立與商務簽約對接在地專業記帳事務所（統編法人資訊準備中，待合約啟動）。</li>
+          <li class="footer-link-item">📄 開源許可協定：<br>MIT License (可自由下載與使用)</li>
         </ul>
       </div>
     </div>
@@ -2518,10 +2801,11 @@
     <div class="container footer-bottom">
       <div class="footer-copy">
         © 2026 鳳凰 AI 顧問團隊｜陳文家｜孟淑慧。著作權所有，教材程式碼部分基於 MIT 開源協定發布。<br>
-        政府培訓專班教材內容對齊中企署/產發署標準，工作坊內容不構成 ISO/IEC 42001 正式第三方認證審計服務。
+        政府培訓專班教材內容對齊中企署/產發署標準，工作坊與顧問陪跑案全面符合中華民國《個資法》規範，本網站不構成 ISO/IEC 42001 正式第三方認證審計服務。
       </div>
       <div class="footer-meta-links">
-        <a href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank" class="footer-meta-link">GitHub</a>
+        <a href="./privacy.html" class="footer-meta-link" style="color: var(--phoenix-gold); font-weight: 700;">🔒 隱私權政策與個資告知</a>
+        <a href="https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework" target="_blank" class="footer-meta-link">GitHub 倉庫</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="footer-meta-link">工具包索取</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="footer-meta-link">診斷預約</a>
       </div>
