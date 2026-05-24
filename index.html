@@ -1820,45 +1820,421 @@
         </p>
       </div>
 
-      <!-- 嵌入 Notion 視圖的玻璃擬態容器 -->
-      <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 12px; backdrop-filter: blur(12px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); overflow: hidden; height: 750px; position: relative;">
-        <!-- 頂部精緻模擬標題列 -->
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(0,0,0,0.1); margin-bottom: 8px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F56; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #FFBD2E; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #27C93F; display: inline-block;"></span>
-            <span style="font-size: 13px; color: var(--gray-400); margin-left: 8px; font-family: var(--font-display); font-weight: 500;">🦅 鳳凰 AI 標竿案例精選庫 (Notion Live-Sync)</span>
+      <!-- 奢華字卡展區 (Luxury Case Cards Showcase) -->
+      <style>
+        .cases-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
+        @media (max-width: 1024px) {
+          .cases-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 768px) {
+          .cases-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .case-card {
+          position: relative;
+          background: linear-gradient(135deg, rgba(26, 26, 58, 0.45) 0%, rgba(18, 18, 38, 0.75) 100%);
+          border: 1px solid var(--glass-border);
+          border-radius: 24px;
+          padding: 32px;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+        .case-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(90deg, var(--phoenix-teal), var(--phoenix-accent));
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: 24px 24px 0 0;
+        }
+        .case-card:hover::before {
+          opacity: 1;
+        }
+        .case-card:hover {
+          transform: translateY(-8px);
+          border-color: rgba(0, 242, 254, 0.3);
+          box-shadow: 0 30px 60px rgba(0, 242, 254, 0.08);
+        }
+
+        .case-header {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+        .case-id-badges {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+        }
+        .case-id {
+          font-family: var(--font-display);
+          font-size: 12px;
+          font-weight: 700;
+          color: var(--phoenix-gold);
+          background: rgba(245, 166, 35, 0.08);
+          padding: 4px 10px;
+          border-radius: 6px;
+          border: 1px solid rgba(245, 166, 35, 0.2);
+          letter-spacing: 0.5px;
+        }
+        .case-tag {
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--phoenix-teal);
+          background: rgba(0, 242, 254, 0.05);
+          padding: 4px 10px;
+          border-radius: 30px;
+          border: 1px solid rgba(0, 242, 254, 0.15);
+        }
+        .case-title {
+          font-family: var(--font-display);
+          font-size: 19px;
+          font-weight: 700;
+          color: var(--white);
+          line-height: 1.4;
+          margin-top: 4px;
+        }
+
+        .case-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.05);
+          margin-bottom: 20px;
+        }
+
+        .case-body {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          flex-grow: 1;
+        }
+        .case-section {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .case-section-title {
+          font-size: 12.5px;
+          font-weight: 700;
+          color: var(--gray-400);
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .case-section-content {
+          font-size: 13.5px;
+          color: var(--gray-300);
+          line-height: 1.6;
+        }
+        .case-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .case-list-item {
+          position: relative;
+          padding-left: 18px;
+          font-size: 13.5px;
+          line-height: 1.5;
+          color: var(--gray-300);
+        }
+        .case-list-item::before {
+          content: '✦';
+          position: absolute;
+          left: 0;
+          color: var(--phoenix-accent);
+          font-size: 12px;
+        }
+        .case-list-item.solution::before {
+          color: var(--phoenix-teal);
+        }
+
+        .case-roi-box {
+          background: linear-gradient(135deg, rgba(245, 166, 35, 0.08) 0%, rgba(245, 166, 35, 0.02) 100%);
+          border: 1px dashed rgba(245, 166, 35, 0.3);
+          border-radius: 16px;
+          padding: 18px;
+          margin-top: 6px;
+        }
+        .case-roi-title {
+          font-size: 13px;
+          font-weight: 800;
+          color: var(--phoenix-gold);
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          letter-spacing: 0.5px;
+        }
+        .case-roi-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .case-roi-item {
+          position: relative;
+          padding-left: 18px;
+          font-size: 13px;
+          color: var(--white);
+          line-height: 1.5;
+        }
+        .case-roi-item strong {
+          color: var(--phoenix-gold);
+        }
+        .case-roi-item::before {
+          content: '🏆';
+          position: absolute;
+          left: 0;
+          font-size: 12px;
+        }
+
+        .case-footer {
+          margin-top: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .case-target-scheme {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          padding: 10px 14px;
+          border-radius: 12px;
+          font-size: 12.5px;
+        }
+        .scheme-label {
+          color: var(--gray-400);
+        }
+        .scheme-value {
+          color: var(--phoenix-gold);
+          font-weight: 700;
+          font-family: var(--font-display);
+        }
+        .case-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-size: 13.5px;
+          font-weight: 600;
+          transition: all 0.25s ease;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: var(--gray-300);
+        }
+        .case-card:hover .case-btn {
+          background: linear-gradient(135deg, var(--phoenix-accent) 0%, rgba(233, 69, 96, 0.7) 100%);
+          border-color: transparent;
+          color: var(--white);
+          box-shadow: 0 10px 20px rgba(233, 69, 96, 0.2);
+        }
+        .case-btn:hover {
+          transform: translateY(-2px);
+        }
+        
+        .cases-note-block {
+          display: grid;
+          grid-template-columns: 2.2fr 1fr;
+          gap: 24px;
+          margin-top: 32px;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.01);
+          border: 1px solid var(--glass-border);
+          padding: 24px;
+          border-radius: 16px;
+          backdrop-filter: blur(8px);
+        }
+        @media (max-width: 768px) {
+          .cases-note-block {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+          .cases-note-block div {
+            text-align: center;
+          }
+          .cases-note-block div:last-child {
+            text-align: center;
+          }
+        }
+      </style>
+
+      <div class="cases-grid">
+        <!-- 案例 1: 精密機械 -->
+        <div class="case-card">
+          <div class="case-header">
+            <div class="case-id-badges">
+              <span class="case-id">PHX-CASE-2026-001</span>
+              <span class="case-tag">精密機械與傳統製造</span>
+            </div>
+            <h3 class="case-title">精密機械金屬加工廠｜規避盲目自建 RAG 決策案</h3>
           </div>
-          <div style="font-size: 12px; color: var(--phoenix-teal); font-weight: 600; display: flex; align-items: center; gap: 6px;">
-            <span class="live-pulse" style="width: 8px; height: 8px; border-radius: 50%; background: var(--phoenix-teal); display: inline-block;"></span>
-            即時線上同步中
+          <div class="case-divider"></div>
+          <div class="case-body">
+            <div class="case-section">
+              <span class="case-section-title">🛑 業務痛點與挑戰</span>
+              <p class="case-section-content">
+                中部中型精密扣件大廠高層欲盲目編列大筆預算自建私有 RAG 系統。經精算發現其硬體年維護成本（TCO）過高，且工廠專利圖面與報價資料庫無標準化整理，直接導入 AI 造成嚴重的幻覺，在試點階段就面臨資料安全疑慮。
+              </p>
+            </div>
+            <div class="case-section">
+              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
+              <ul class="case-list">
+                <li class="case-list-item"><strong>老員工抗拒：</strong>調機師傅習慣口語交班，排斥複雜提示詞介面，擔心工作被 AI 取代。</li>
+                <li class="case-list-item solution"><strong>現場去阻力：</strong>孟顧問親赴廠區引導，改採「免打字繁中語音即時轉譯」；策略長規劃將「使用 AI 工具節省工時」納入年終考核加分，承諾絕不裁員。</li>
+              </ul>
+            </div>
+            <div class="case-roi-box">
+              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
+              <ul class="case-roi-list">
+                <li class="case-roi-item">成功規避第一期私有化硬體與維護預算近 <strong>NT$ 50 萬</strong></li>
+                <li class="case-roi-item">採用推薦的「Notion 結構化管理 + NotebookLM 零代碼架構」</li>
+                <li class="case-roi-item">調機製程經驗檢索時間<strong>年省 1,200 小時</strong>，折合人力機會成本省下近 <strong>NT$ 240 萬</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="case-target-scheme">
+              <span class="scheme-label">對標建議方案</span>
+              <span class="scheme-value">方案 B 戰實工作坊</span>
+            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
+              📥 閱讀完整案例分析 (PDF)
+            </a>
           </div>
         </div>
-        
-        <!-- Iframe 嵌入區 (內建智慧深色濾鏡，使白色的 Notion 完美轉換成與網頁一致的深色太空質感) -->
-        <iframe 
-          src="https://onyx-cucumber-04f.notion.site/AI-3694e36f708380d186f3d10a2f724156?source=copy_link" 
-          id="notion-cases-iframe"
-          width="100%" 
-          height="100%" 
-          frameborder="0"
-          style="border: none; width: 100%; height: calc(100% - 60px); border-radius: 0 0 16px 16px; filter: invert(0.9) hue-rotate(180deg) contrast(1.15) brightness(0.95);"
-          title="鳳凰 AI 標竿案例資料庫"
-          sandbox="allow-scripts allow-same-origin allow-popups">
-        </iframe>
+
+        <!-- 案例 2: 電子代工 -->
+        <div class="case-card">
+          <div class="case-header">
+            <div class="case-id-badges">
+              <span class="case-id">PHX-CASE-2026-002</span>
+              <span class="case-tag">電子零組件與上市櫃代工</span>
+            </div>
+            <h3 class="case-title">上市櫃代工廠｜跨部門知識傳承與安全治理防線</h3>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-body">
+            <div class="case-section">
+              <span class="case-section-title">🛑 業務痛點與挑戰</span>
+              <p class="case-section-content">
+                北部電子零組件代工龍頭面臨跨部門知識傳承斷層，資深研發退休導致 Know-how 流失，新人培育週期長達 6 個月，且專案規格書涉及高度商業機密，極度缺乏安全的 AI 治理防線。
+              </p>
+            </div>
+            <div class="case-section">
+              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
+              <ul class="case-list">
+                <li class="case-list-item"><strong>中階防備心：</strong>專案經理擔心交出技術關鍵 Know-how 會失去核心話語權，不願主動建置。</li>
+                <li class="case-list-item solution"><strong>治理防線對接：</strong>導入「負責任 AI 治理防線 (ISO/IEC 42001)」權責矩陣，重新配置人機協作審核機制，並設立「AI 貢獻卓越獎章」與季度績效強綁定。</li>
+              </ul>
+            </div>
+            <div class="case-roi-box">
+              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
+              <ul class="case-roi-list">
+                <li class="case-roi-item">新手研發工程師培育週期從 6 個月<strong>縮短至 1.5 個月</strong></li>
+                <li class="case-roi-item">核心規格書知識檢索準確率提升至 <strong>94%</strong>，跨部門失誤率降低 <strong>78%</strong></li>
+                <li class="case-roi-item">建立安全合規沙盒，<strong>100% 符合《個資法》與 NDA 規範</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="case-target-scheme">
+              <span class="scheme-label">對標建議方案</span>
+              <span class="scheme-value">方案 C 治理與變革</span>
+            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
+              📥 閱讀完整案例分析 (PDF)
+            </a>
+          </div>
+        </div>
+
+        <!-- 案例 3: 專業服務 -->
+        <div class="case-card">
+          <div class="case-header">
+            <div class="case-id-badges">
+              <span class="case-id">PHX-CASE-2026-003</span>
+              <span class="case-tag">專業服務與跨國商貿</span>
+            </div>
+            <h3 class="case-title">跨國商貿集團｜多語系合約風險控管與熔斷治理</h3>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-body">
+            <div class="case-section">
+              <span class="case-section-title">🛑 業務痛點與挑戰</span>
+              <p class="case-section-content">
+                集團每日需審查大量跨國多語系商業合約，法務主管工時嚴重超載。曾嘗試自建 AI 助手，卻因模型嚴重幻覺引用錯誤法條，險些導致嚴重的國際商務履約風險。
+              </p>
+            </div>
+            <div class="case-section">
+              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
+              <ul class="case-list">
+                <li class="case-list-item"><strong>專業偏見度：</strong>法務主管與外部律師極度懷疑 AI 生成內容，認為 AI 反而增加除錯成本。</li>
+                <li class="case-list-item solution"><strong>熔斷與輔助定位：</strong>設計「雙軌驗證畫布」，將 AI 清晰定位為「格式整理與初稿協同者」；配置後台「信心閾值與財務熔斷器」，一旦超出範圍立即鎖定並轉交人工審核。</li>
+              </ul>
+            </div>
+            <div class="case-roi-box">
+              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
+              <ul class="case-roi-list">
+                <li class="case-roi-item">跨國多語系契約初審格式檢索效率<strong>提升 300%</strong></li>
+                <li class="case-roi-item">每份複雜合約初審時間由 <strong>3 天大幅縮短至 2 小時</strong></li>
+                <li class="case-roi-item">系統上線後，<strong>合約條款幻覺爭端率降至 0%</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="case-target-scheme">
+              <span class="scheme-label">對標建議方案</span>
+              <span class="scheme-value">一頁式落地診斷報告</span>
+            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
+              📥 閱讀完整案例分析 (PDF)
+            </a>
+          </div>
+        </div>
       </div>
-      
+
       <!-- 線上修改提示與白皮書 CTA -->
-      <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 24px; margin-top: 32px; align-items: center; background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px);">
+      <div class="cases-note-block">
         <div>
-          <h4 style="font-size: 15px; font-weight: 700; color: var(--phoenix-gold); margin-bottom: 6px;">💡 專門提示：如何在此處自動展示您的 Notion 案例？</h4>
-          <p style="font-size: 13px; color: var(--gray-400); line-height: 1.6;">
-            請在 Notion 中將「🌟 可公開案例精選」視圖點選右上角 <strong>Share ➔ Publish to Web</strong>，將複製的公開連結填入 <code>index.html</code> 中 <code>id="notion-cases-iframe"</code> 的 <code>src</code> 屬性內（取代原本的 <code>https://notion.so</code>）。只要您在 Notion 資料庫勾選「是否公開 = ✓」，官網便會自動即時線上同步！
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--phoenix-gold); margin-bottom: 6px;">💡 安全去識別化與合規宣告</h4>
+          <p style="font-size: 13.5px; color: var(--gray-400); line-height: 1.6;">
+            上述案例已依據中華民國《個人資料保護法》第 8 條與 B2B 保密協定（NDA）進行深度混淆與去識別化處理。所有關鍵商業細節及專利技術已完全模糊化，僅保留核心痛點、變革阻力與技術/財務 ROI 數據，以維護商業安全。
           </p>
         </div>
         <div style="text-align: right;">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary" style="padding: 12px 24px; font-size: 13.5px; width: 100%; font-weight: 600;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary" style="padding: 12px 24px; font-size: 13.5px; width: 100%; font-weight: 600; text-align: center;">
             📥 下載製造業實戰案例 PDF
           </a>
         </div>
