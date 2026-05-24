@@ -1809,6 +1809,75 @@
     </div>
   </section>
 
+  <!-- ─── 標竿案例與落地成效 (Case Studies Section) ─── -->
+  <section class="cases-section" id="cases" style="padding: 100px 0; position: relative;">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-teal); border-color: rgba(0, 242, 254, 0.2); background: rgba(0, 242, 254, 0.05);">LIVE B2B CASES</span>
+        <h2 class="section-title">標竿案例與落地成效</h2>
+        <p class="section-subtitle">
+          以下為鳳凰 AI 顧問團隊累積之企業 AI 落地實務案例，所有資訊均依據中華民國《個資法》與 B2B 保密協定（NDA）進行深度去識別化處理。與 Notion 專家案例庫即時線上同步。
+        </p>
+      </div>
+
+      <!-- 嵌入 Notion 視圖的玻璃擬態容器 -->
+      <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 12px; backdrop-filter: blur(12px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); overflow: hidden; height: 750px; position: relative;">
+        <!-- 頂部精緻模擬標題列 -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(0,0,0,0.1); margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F56; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #FFBD2E; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #27C93F; display: inline-block;"></span>
+            <span style="font-size: 13px; color: var(--gray-400); margin-left: 8px; font-family: var(--font-display); font-weight: 500;">🦅 鳳凰 AI 標竿案例精選庫 (Notion Live-Sync)</span>
+          </div>
+          <div style="font-size: 12px; color: var(--phoenix-teal); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <span class="live-pulse" style="width: 8px; height: 8px; border-radius: 50%; background: var(--phoenix-teal); display: inline-block;"></span>
+            即時線上同步中
+          </div>
+        </div>
+        
+        <!-- Iframe 嵌入區 (內建智慧深色濾鏡，使白色的 Notion 完美轉換成與網頁一致的深色太空質感) -->
+        <iframe 
+          src="https://notion.so" 
+          id="notion-cases-iframe"
+          width="100%" 
+          height="100%" 
+          frameborder="0"
+          style="border: none; width: 100%; height: calc(100% - 60px); border-radius: 0 0 16px 16px; filter: invert(0.9) hue-rotate(180deg) contrast(1.15) brightness(0.95);"
+          title="鳳凰 AI 標竿案例資料庫"
+          sandbox="allow-scripts allow-same-origin allow-popups">
+        </iframe>
+      </div>
+      
+      <!-- 線上修改提示與白皮書 CTA -->
+      <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 24px; margin-top: 32px; align-items: center; background: rgba(255, 255, 255, 0.01); border: 1px solid var(--glass-border); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px);">
+        <div>
+          <h4 style="font-size: 15px; font-weight: 700; color: var(--phoenix-gold); margin-bottom: 6px;">💡 專門提示：如何在此處自動展示您的 Notion 案例？</h4>
+          <p style="font-size: 13px; color: var(--gray-400); line-height: 1.6;">
+            請在 Notion 中將「🌟 可公開案例精選」視圖點選右上角 <strong>Share ➔ Publish to Web</strong>，將複製的公開連結填入 <code>index.html</code> 中 <code>id="notion-cases-iframe"</code> 的 <code>src</code> 屬性內（取代原本的 <code>https://notion.so</code>）。只要您在 Notion 資料庫勾選「是否公開 = ✓」，官網便會自動即時線上同步！
+          </p>
+        </div>
+        <div style="text-align: right;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary" style="padding: 12px 24px; font-size: 13.5px; width: 100%; font-weight: 600;">
+            📥 下載製造業實戰案例 PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 關鍵動畫樣式與脈衝點 -->
+  <style>
+    .live-pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 242, 254, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+    }
+  </style>
+
   <!-- ─── 雙認證專家顧問名片 (Team Section) ─── -->
   <section class="team-section" id="team">
     <div class="container">
