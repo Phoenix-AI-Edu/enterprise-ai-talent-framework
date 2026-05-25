@@ -40,3 +40,6 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 node_modules/
 dist/
+
+# Private B2B Advisor & Ops Management Directory (Never push to GitHub)
+internal_admin/
