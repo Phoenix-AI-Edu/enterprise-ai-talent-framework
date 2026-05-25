@@ -1346,6 +1346,7 @@
         <a href="#home" class="nav-link">首頁</a>
         <a href="#diagnostic" class="nav-link">成熟度快測</a>
         <a href="#curriculum" class="nav-link">全景課程</a>
+        <a href="#commercial-modules" class="nav-link">商業實戰模組</a>
         <a href="#team" class="nav-link">顧問團隊</a>
         <a href="#pricing" class="nav-link">服務方案</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="nav-cta">索取 Notion 工具包</a>
@@ -1806,6 +1807,391 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── 13 獨立商業模組與特色套餐展示區 (Commercial Modules & Packages Section) ─── -->
+  <section class="modules-showcase-section" id="commercial-modules" style="padding: 100px 0; background: radial-gradient(circle at 50% 100%, #15112e 0%, #0b0b16 50%); border-top: 1px solid rgba(255, 255, 255, 0.04); position: relative;">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.2); background: rgba(245, 166, 35, 0.05);">13 COMMERCIAL MODULES</span>
+        <h2 class="section-title">13 個高轉化 B2B 商業實戰模組</h2>
+        <p class="section-subtitle">
+          為企業高階決策者、HR、法務、CIO 與 CFO 量身打造的 90 分鐘實戰工作坊。
+          每個模組均配有 A3 實體 A3 戰略畫布或檢核表，下課直接帶回應用。點擊下方卡片深入探索各模組詳情落地頁。
+        </p>
+      </div>
+
+      <!-- 商業模組網格 -->
+      <style>
+        .modules-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          margin-top: 40px;
+          margin-bottom: 50px;
+        }
+        @media (max-width: 1024px) {
+          .modules-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+          .modules-grid { grid-template-columns: 1fr; }
+        }
+
+        .m-card {
+          position: relative;
+          background: rgba(18, 18, 38, 0.6);
+          border: 1px solid var(--glass-border);
+          border-radius: 20px;
+          padding: 28px;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        .m-card:hover {
+          transform: translateY(-5px);
+          border-color: rgba(233, 69, 96, 0.3);
+          background: rgba(255, 255, 255, 0.03);
+          box-shadow: 0 15px 30px rgba(233, 69, 96, 0.1);
+        }
+
+        .m-badge-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16px;
+        }
+
+        .m-id {
+          font-family: var(--font-display);
+          font-size: 13px;
+          font-weight: 800;
+          color: var(--phoenix-accent);
+          background: rgba(233, 69, 96, 0.1);
+          padding: 3px 8px;
+          border-radius: 6px;
+          border: 1px solid rgba(233, 69, 96, 0.2);
+        }
+
+        .m-target {
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--phoenix-gold);
+          background: rgba(245, 166, 35, 0.05);
+          padding: 3px 8px;
+          border-radius: 4px;
+          border: 1px solid rgba(245, 166, 35, 0.15);
+        }
+
+        .m-title {
+          font-size: 17px;
+          font-weight: 700;
+          color: var(--white);
+          line-height: 1.4;
+          margin-bottom: 12px;
+        }
+
+        .m-pain-quote {
+          font-size: 13px;
+          font-style: italic;
+          color: var(--gray-400);
+          background: rgba(255,255,255,0.01);
+          border-left: 3px solid var(--glass-border);
+          padding-left: 10px;
+          margin-bottom: 20px;
+          line-height: 1.5;
+          flex-grow: 1;
+        }
+
+        .m-explore-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          width: 100%;
+          padding: 10px;
+          border-radius: 8px;
+          font-size: 13.5px;
+          font-weight: 700;
+          color: var(--white);
+          background: linear-gradient(135deg, rgba(233, 69, 96, 0.8) 0%, rgba(233, 69, 96, 0.4) 100%);
+          border: 1px solid rgba(233, 69, 96, 0.3);
+          transition: all 0.25s ease;
+        }
+
+        .m-explore-btn:hover {
+          background: linear-gradient(135deg, var(--phoenix-accent) 0%, rgba(233, 69, 96, 0.8) 100%);
+          box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+          transform: translateY(-1px);
+        }
+
+        /* 套餐展區 */
+        .packages-container {
+          margin-top: 60px;
+          background: linear-gradient(135deg, rgba(20, 20, 45, 0.8) 0%, rgba(10, 10, 25, 0.9) 100%);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 24px;
+          padding: 40px;
+        }
+        @media (max-width: 600px) {
+          .packages-container { padding: 24px; }
+        }
+
+        .package-title-row {
+          text-align: center;
+          margin-bottom: 32px;
+        }
+
+        .package-main-title {
+          font-family: var(--font-display);
+          font-size: 24px;
+          font-weight: 800;
+          color: var(--white);
+          margin-bottom: 8px;
+        }
+
+        .packages-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 24px;
+        }
+        @media (max-width: 768px) {
+          .packages-grid { grid-template-columns: 1fr; }
+        }
+
+        .p-card {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid var(--glass-border);
+          border-radius: 16px;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .p-name {
+          font-size: 17px;
+          font-weight: 700;
+          color: var(--phoenix-gold);
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .p-desc {
+          font-size: 13.5px;
+          color: var(--gray-300);
+          margin-bottom: 16px;
+          line-height: 1.6;
+        }
+
+        .p-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid rgba(255,255,255,0.05);
+          padding-top: 12px;
+          font-size: 13px;
+        }
+
+        .p-price {
+          font-weight: 700;
+          color: var(--phoenix-teal);
+        }
+      </style>
+
+      <div class="modules-grid">
+        <!-- M01 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M01</span>
+            <span class="m-target">CEO 決策高層</span>
+          </div>
+          <h3 class="m-title">CEO 90 分鐘 AI 戰略速覽</h3>
+          <p class="m-pain-quote">「董事會問我們的 AI 戰略是什麼，而我發現自己連最基本的問題都答不出來...」</p>
+          <a href="m01.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M02 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M02</span>
+            <span class="m-target">HR & 法務主管</span>
+          </div>
+          <h3 class="m-title">員工 AI 使用守則制定工作坊</h3>
+          <p class="m-pain-quote">「78% 的員工自帶 AI 上班洩漏個資，我們卻沒有任何書面告知與防範規範...」</p>
+          <a href="m02.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M03 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M03</span>
+            <span class="m-target">CDO & PMO 轉型</span>
+          </div>
+          <h3 class="m-title">4+1 戰略畫布實作工作坊</h3>
+          <p class="m-pain-quote">「面對 20 個部門場景、3 種 AI 框架，我不知道該從哪一個優先開始...」</p>
+          <a href="m03.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M04 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M04</span>
+            <span class="m-target">CIO & CFO 採購</span>
+          </div>
+          <h3 class="m-title">Buy vs Build vs Rent 決策工作坊</h3>
+          <p class="m-pain-quote">「同一個 RAG 需求，自建 800 萬 vs 租用 80 萬，選錯直接浪費 1 年預算...」</p>
+          <a href="m04.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- m05 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M05</span>
+            <span class="m-target">CIO & IT 主管</span>
+          </div>
+          <h3 class="m-title">RAG 知識庫採購評估工作坊</h3>
+          <p class="m-pain-quote">「砸了 500 萬自建私有 RAG，上線後卻發現員工使用率只有慘不忍睹的 4%...」</p>
+          <a href="m05.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M06 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M06</span>
+            <span class="m-target">廠長 & 現場師傅</span>
+          </div>
+          <h3 class="m-title">Voice AI 傳產落地唯一破口</h3>
+          <p class="m-pain-quote">「師傅手在現場沾滿黑油工具，根本騰不出手來打字，怎麼可能會用打字鍵盤...」</p>
+          <a href="m06.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M07 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M07</span>
+            <span class="m-target">行銷與內容</span>
+          </div>
+          <h3 class="m-title">行銷部影片生成與合規防線</h3>
+          <p class="m-pain-quote">「AI 虛擬見證影片當作真人見證廣告被公平交易法罰了 200 萬...」</p>
+          <a href="m07.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M08 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M08</span>
+            <span class="m-target">CDO & 進階架構</span>
+          </div>
+          <h3 class="m-title">AI Agent 試點設計與安全</h3>
+          <p class="m-pain-quote">「Agent 擁有多系統寫入權，如沒有安全沙盒防護，惡意注入會直接毀掉 ERP...」</p>
+          <a href="m08.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M09 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M09</span>
+            <span class="m-target">CFO & 財務控制</span>
+          </div>
+          <h3 class="m-title">TCO 成本失控與 Token 網閘</h3>
+          <p class="m-pain-quote">「年度 API 預算在 6 個月內超支 10 倍，我卻看著複雜的 Token 帳單發呆...」</p>
+          <a href="m09.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M10 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M10</span>
+            <span class="m-target">HR & 組織變革</span>
+          </div>
+          <h3 class="m-title">消除員工取代恐懼變革 5 部曲</h3>
+          <p class="m-pain-quote">「員工抗拒 AI 是因為恐懼：『教完公司的 AI 之後，我是不是就被裁員了？』...」</p>
+          <a href="m10.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M11 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M11</span>
+            <span class="m-target">CISO 資安法務</span>
+          </div>
+          <h3 class="m-title">ISO 42001 認證前期現況研習</h3>
+          <p class="m-pain-quote">「歐美大客戶開始要求 ISO 42001 白名單，沒有 AI 治理框架訂單會被取消...」</p>
+          <a href="m11.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M12 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M12</span>
+            <span class="m-target">財務 & 專案申報</span>
+          </div>
+          <h3 class="m-title">政府 460 億 AI 補助匹配申請</h3>
+          <p class="m-pain-quote">「每年 460 億轉型紅利從沒拿過，寫幾十頁計畫書碰壁的工時成本高達 90 萬...」</p>
+          <a href="m12.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+        <!-- M13 -->
+        <div class="m-card">
+          <div class="m-badge-row">
+            <span class="m-id">M13</span>
+            <span class="m-target">董事長 & 外銷法務</span>
+          </div>
+          <h3 class="m-title">歐盟 AI Act 出口合規與 CE 標章</h3>
+          <p class="m-pain-quote">「歐盟 AI Act 罰款上限全球年營收 7%，外銷智慧機台沒有 CE 標章會被歐盟禁售...」</p>
+          <a href="m13.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
+        </div>
+      </div>
+
+      <!-- 特色學習套裝 -->
+      <div class="packages-container">
+        <div class="package-title-row">
+          <h3 class="package-main-title text-gradient-gold">🎁 鳳凰 AI 顧問推薦 B2B 套餐優惠</h3>
+          <p style="font-size: 14px; color: var(--gray-400);">針對企業不同轉型崗位精心打包，打通跨部門協作，將落地自籌款降至最低</p>
+        </div>
+        
+        <div class="packages-grid">
+          <div class="p-card">
+            <div>
+              <div class="p-name">👑 CEO 全套包 (戰略與採購決策)</div>
+              <p class="p-desc">打包 <b>M01 (戰略速覽) + M03 (4+1畫布實作) + M04 (採購財務課)</b>。一次搞定高層 AI 全景視野、戰略畫布、與 Rent vs Buy 採購模型，對齊 C-Level 核心意志。</p>
+            </div>
+            <div class="p-meta">
+              <span class="p-price">公開班: NT$ 10,000 / 人</span>
+              <span style="color: var(--phoenix-gold);">內訓: NT$ 120,000 / 案</span>
+            </div>
+          </div>
+
+          <div class="p-card">
+            <div>
+              <div class="p-name">🛡️ 合規入門包 (法務、資安與政策)</div>
+              <p class="p-desc">打包 <b>M02 (員工 AI 使用守則) + M11 (ISO 42001 內部稽核研習)</b>。90分鐘迅速產出全員可簽署之政策文件，避開個資法第8條 NT$ 1,500 萬罰鍰，安全對接國際資安標準。</p>
+            </div>
+            <div class="p-meta">
+              <span class="p-price">公開班: NT$ 7,000 / 人</span>
+              <span style="color: var(--phoenix-gold);">內訓: NT$ 110,000 起</span>
+            </div>
+          </div>
+
+          <div class="p-card">
+            <div>
+              <div class="p-name">📊 企業財務 AI 雙控套餐 (CFO 必修)</div>
+              <p class="p-desc">打包 <b>M04 (採購決策) + M09 (TCO 成本失控與 Token 網閘)</b>。從 Day 1 鎖定隱形維護與 Token 同膨，部署集中式 API Gateway 與分流路由 Router，替企業節省 70% 帳單浪費。</p>
+            </div>
+            <div class="p-meta">
+              <span class="p-price">公開班: NT$ 6,500 / 人</span>
+              <span style="color: var(--phoenix-gold);">內訓: NT$ 100,000 / 案</span>
+            </div>
+          </div>
+
+          <div class="p-card">
+            <div>
+              <div class="p-name">⚙️ 南台灣智慧製造 AI 落地套餐 (傳產必備)</div>
+              <p class="p-desc">打包 <b>M01 (戰略速覽) + M06 (Voice AI 語音) + M12 (政府 460 億補助 matching)</b>。孟顧問工研院與 PMC 輔導精華，解放師傅雙手提升使用率至 87%，安全申報政府計畫節省轉型自籌款。</p>
+            </div>
+            <div class="p-meta">
+              <span class="p-price">內訓特惠限定價</span>
+              <span style="color: var(--phoenix-gold);">NT$ 180,000 起 / 案</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 

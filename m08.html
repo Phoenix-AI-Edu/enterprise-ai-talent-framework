@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent 試點設計工作坊 90 分鐘 | 從 Chatbot 升級代理人 | 鳳凰 AI</title>
+  <meta name="description" content="2026 年 AI 競爭的真正戰場。90 分鐘工作坊讓 CDO 搞懂 MCP、LangGraph、Claude Agent SDK 等主流框架，設計貴司第一個低風險 Agent 試點。">
+  <meta name="keywords" content="AI Agent, MCP 標準, LangGraph, Claude Agent SDK, Multi-Agent">
+  
+  <!-- ─── Google Fonts ─── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- ─── 共享樣式表 ─── -->
+  <link rel="stylesheet" href="modules.css">
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-symbol">🦅</span>
+        <span>鳳凰 AI 顧問</span>
+      </div>
+      <a href="index.html" class="back-home">➔ 返回首頁</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="module-card">
+      
+      <!-- Hero 區塊 -->
+      <div class="hero-section">
+        <span class="badge">🤖 AI Agent & 進階架構專題</span>
+        <h1 class="hero-title text-gradient">AI Agent 試點設計與安全工作坊</h1>
+        <p class="hero-subtitle">從單純對話的 Chatbot 升級至能自主規劃與呼叫 API 的 AI 代理人</p>
+        <p class="hero-subtitle" style="margin-top: 10px; font-size: 13.5px; color: var(--gray-400);">
+          講師：陳文家 策略長、孟淑慧 首席顧問 | MCP 統一協定、5 大主流框架對照 | 3 大試點安全隔離防禦
+        </p>
+      </div>
+
+      <!-- 痛點故事 -->
+      <div class="section-block">
+        <h2 class="section-title">😰 從 Chatbot 走向自主代理人：生產力躍升與安全威脅</h2>
+        <div class="pain-story">
+          <p><span class="pain-highlight">2026 年，企業 AI 競爭的終極戰場正式從「對話框 (Chatbot)」轉移至「自主代理人 (AI Agent)」。</span></p>
+          <p>
+            • <b>過去（2023-2025）</b>：員工問 ChatGPT「幫我寫份給客戶的報價單草稿」——AI 寫好，員工自己複製貼上、自己去 CRM 找信箱寄信。<br>
+            • <b>現在（2026 世代）</b>：員工只需要告訴 Agent「幫我處理上週未結的 Y 專案報價」——Agent 自動去 ERP 讀取品項、去 CRM 撈取客戶資料與歷史郵件、自動用 Excel 計算利潤、將報價 PDF 上傳 SharePoint、並以 Slack 通知主管核准後自動寄出！
+          </p>
+          <p>這不是科幻電影，而是 2026 年在領先企業中已經<b>完全商用落地</b>的真實能力。然而，當 AI Agent 獲得「呼叫工具、撰寫代碼、操作電腦、發送 API」的生殺大權時，它的風險也是最致命的：</p>
+          <p><span class="pain-highlight">如果沒有做好完善的安全隔離設計，第一個 AI Agent 試點可能因為一句 Prompt Injection (提示注入攻擊) 的惡意代碼，直接呼叫 API 誤刪您的整個 ERP 或 SAP 生產資料庫！</span></p>
+          <p>CDO 與 IT 主管需要深入理解 MCP (Model Context Protocol) 統一數據存取協定，從 LangGraph、CrewAI、Claude Agent SDK 中選對框架，並妥善配置 Loop Guard (Token 暴死熔斷) 與 HITL (人類最終稽核) 安全防線！</p>
+        </div>
+      </div>
+
+      <!-- 學習目標與產出物 -->
+      <div class="section-block">
+        <h2 class="section-title">🎯 90 分鐘後，您將帶走</h2>
+        <div class="deliverables-grid">
+          <div class="deliverable-item">
+            <span class="deliverable-icon">✅</span>
+            <div>
+              <strong>「貴司第一個 AI Agent 試點安全設計藍圖」</strong>
+              <p style="font-size: 13px; color: var(--gray-400); margin-top: 4px;">找出現行組織中最安全、低風險且高回報的 3 個快速 Agent 試點場景設計</p>
+            </div>
+          </div>
+          <div class="deliverable-item">
+            <span class="deliverable-icon">✅</span>
+            <div>
+              <strong>5 大主流 Agent 框架選型對照表</strong>
+              <p style="font-size: 13px; color: var(--gray-400); margin-top: 4px;">LangGraph vs CrewAI vs AutoGen vs Claude SDK vs n8n（靈活性、安全審計、開發難度）</p>
+            </div>
+          </div>
+          <div class="deliverable-item">
+            <span class="deliverable-icon">✅</span>
+            <div>
+              <strong>HITL (人類最終確認) 閘防護與安全防衛指南</strong>
+              <p style="font-size: 13px; color: var(--gray-400); margin-top: 4px;">如何用 VM 隔離沙盒、防範 Prompt Injection 及 API Gateway 越權防禦指南</p>
+            </div>
+          </div>
+          <div class="deliverable-item">
+            <span class="deliverable-icon">✅</span>
+            <div>
+              <strong>MCP (模型上下文協定) 技術對接標準</strong>
+              <p style="font-size: 13px; color: var(--gray-400); margin-top: 4px;">如何運用 Anthropic 最新 MCP 標準，降低 80% 的外部數據與 Tool 接口封裝成本</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 課程大綱 -->
+      <div class="section-block">
+        <h2 class="section-title">📚 90分鐘極致大綱</h2>
+        <div class="syllabus-timeline">
+          <div class="syllabus-item">
+            <div class="syllabus-time">Part 1 (15 分鐘) | AI Agent 時代與 MCP 標準解析</div>
+            <div class="syllabus-detail">Chatbot vs. Agent 本質技術差異、MCP 如何統一 LLM 與企業底層數據庫/API 的交互、成熟度自評。</div>
+          </div>
+          <div class="syllabus-item">
+            <div class="syllabus-time">Part 2 (25 分鐘) | 5 大 Agent 框架特點與選型</div>
+            <div class="syllabus-detail">LangGraph (有向有環圖複雜工作流)、CrewAI (多角色團隊協同)、Claude Agent SDK、AutoGen、n8n 低代碼工具對比。</div>
+          </div>
+          <div class="syllabus-item">
+            <div class="syllabus-time">Part 3 (25 分鐘) | Agent 試點 5 大核心安全原則</div>
+            <div class="syllabus-detail">Sandboxed VM 隔離運行、Loop Guard（防死循環暴燒 Token）、HITL 閘門安全防護、審計日誌日誌追蹤與失敗自動回滾 (Rollback)。</div>
+          </div>
+          <div class="syllabus-item">
+            <div class="syllabus-time">Part 4 (15 分鐘) | 3 大低風險典型試點場景深度剖析</div>
+            <div class="syllabus-detail">採購合約智能比對與合規審查 Agent、跨部門專利與論文挖掘 Agent、ERP 自動填報與資料搬運 Agent。</div>
+          </div>
+          <div class="syllabus-item">
+            <div class="syllabus-time">Part 5 (10 分鐘) | 提示注入 (Prompt Injection) 防禦實務</div>
+            <div class="syllabus-detail">如何防範外部污染惡意指令、Tool 權限最小化原則、防範代理人自發調用付款 API 或寫入危險代碼。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 講師介紹 -->
+      <div class="section-block">
+        <h2 class="section-title">👨‍🏫 產官學三棲顧問團隊</h2>
+        <div class="presenters-grid">
+          <div class="presenter-card">
+            <div class="presenter-name">
+              <span>陳文家</span>
+              <span class="presenter-title">策略長</span>
+            </div>
+            <ul class="presenter-bio">
+              <li>教育部助理教授，高科大兼任講師</li>
+              <li>專精於 Multi-Agent 系統架構設計、MCP 統一協定開發與 LangGraph 工作流規劃</li>
+              <li>協助多家大型科技與製造企業部署安全 AI 沙盒與微調語意路由</li>
+            </ul>
+          </div>
+          <div class="presenter-card">
+            <div class="presenter-name">
+              <span>孟淑慧</span>
+              <span class="presenter-title">首席顧問</span>
+            </div>
+            <ul class="presenter-bio">
+              <li>經濟部核發 AI 產業指導講師，組織變革專家</li>
+              <li>提供變革管理與 HITL 人類最終確認流程配置</li>
+              <li>確保 AI 代理人運作符合企業日常安全管理與職務權限隔離</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 定價資訊 -->
+      <div class="pricing-section">
+        <h2 class="section-title" style="border: none; padding-left: 0; color: var(--phoenix-gold);">💰 服務方案與定價</h2>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-label">公開班 (限額小班)</div>
+            <div class="price-amount">NT$ 4,980 <span style="font-size: 14px; font-weight: normal; color: var(--gray-400);">/ 人</span></div>
+            <div class="price-desc">限額 20 人，強烈建議 CDO, PMO 與架構工程師共同參與。</div>
+          </div>
+          <div class="price-card featured">
+            <div class="price-label">企業內訓 (含現場沙盒安全演示)</div>
+            <div class="price-amount">NT$ 60,000 - 100,000 <span style="font-size: 14px; font-weight: normal; color: var(--gray-400);">/ 場</span></div>
+            <div class="price-desc">90 分鐘。可提供加值 <b>NT$ 30 萬起之 90 天 AI Agent 試點落地陪跑輔導方案</b>，協助企業產出第一個可商用的 Agent。</div>
+          </div>
+        </div>
+        <p class="pricing-note">🎁 <b>套餐特惠</b>：「<b>AI 代理人進階大禮包</b>」── <b>M05 + M08 + M09 (CFO Token 財務控制)</b> 三合一內訓只需 <b>NT$ 180,000 / 案</b>。</p>
+      </div>
+
+      <!-- 雙 CTA 按鈕 -->
+      <div class="cta-group">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-primary">
+          🚀 立即報名公開班 / 預約內訓
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="btn btn-secondary">
+          🔍 預約 Agent 試點安全與可行性自評
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+      <p>© 2026 鳳凰 AI (Phoenix AI) 企業級 AI 人才培育開源框架. All Rights Reserved.</p>
+      <p style="margin-top: 5px; color: var(--gray-600);">聯絡信箱：allmyway2007@gmail.com | 隱私權保護與保密政策對齊 ISO 42001 標準</p>
+    </footer>
+  </div>
+
+</body>
+</html>
