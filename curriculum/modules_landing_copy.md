@@ -555,16 +555,16 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 ### 📌 SEO 標題與 Meta
 
 * **SEO Title**：AI Agent 試點設計工作坊 90 分鐘 | 從 Chatbot 升級代理人 | 鳳凰 AI
-* **Meta Description**：2026 年 AI 競爭的真正戰場。90 分鐘工作坊讓 CDO 搞懂 MCP、LangGraph、Claude Agent SDK 等主流框架，設計貴司第一個低風險 Agent 試點。
+* **Meta Description**：2026 年 AI 競爭的真正戰場。90 分鐘工作坊讓 CDO 搞懂 MCP、既有 ERP/CRM 非侵入式低成本串接、LangGraph、Claude Agent SDK 等主流框架，設計第一個低風險 Agent 試點。
 * **頁面 URL**：`/modules/m08-ai-agent-pilot`
-* **關鍵字**：AI Agent / MCP 標準 / LangGraph / Claude Agent SDK / Multi-Agent
+* **關鍵字**：AI Agent / MCP 標準 / ERP 串接 / 輕量級 Agent / LangGraph
 
 ---
 
 ### 🎬 Hero Section
 
 * **主標題**：AI Agent 試點設計與安全工作坊 —— 從 Chatbot 升級到自主代理人的 90 分鐘
-* **副標題**：MCP 協定對接、5 大主流框架、3 個試點安全防線設計 | 適合已有 RAG 基礎的中大型企業
+* **副標題**：既有 ERP/CRM 非侵入式低成本串接、MCP 協定對接、5 大主流框架、3 個試點安全防線設計 | 適合已有 RAG 基礎的中大型企業
 
 ---
 
@@ -577,9 +577,9 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 這不是科幻——**這是 2026 年已經商用的能力**。
 
-但是，**Agent 擁有操作權限，風險也最高**——它可以「自己呼叫工具、操作電腦、甚至呼叫 API 花錢」。**如果沒有正確的安全設計，第一個 Agent 試點就可能因為惡意指令誤刪您的 ERP 或 SAP 資料庫。**
+難題是：**Agent 擁有操作權限，風險也最高**——它可以「自己呼叫工具、操作電腦、甚至呼叫 API 花錢」。**如果沒有正確的安全設計，第一個 Agent 試點就可能因為外部惡意指令注入 (Prompt Injection)，直接呼叫 API 誤刪您的整個 ERP 或 SAP 生產資料庫。CIO 最擔心的是：如何在不更動既有系統核心架構的前提下，安全、低成本地進行系統串接？**
 
-您需要理解 MCP（Model Context Protocol）統一協定、從 LangGraph、CrewAI、Claude Agent SDK 中選對框架，並配置預算熔斷與 HITL 人類最終確認防線。
+您需要理解 MCP（Model Context Protocol）統一數據存取協定，掌握**「非侵入式系統橋接」**策略，從 LangGraph、CrewAI、Claude Agent SDK 中選對框架，並配置預算熔斷與 HITL 人類最終確認防線。
 
 ---
 
@@ -587,6 +587,7 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 **90 分鐘後，您將帶走**：
 * ✅ **「貴司第一個 AI Agent 試點安全設計書」**
+* ✅ **既有 ERP/CRM（如 SAP、鼎新）之非侵入式低成本串接架構藍圖**
 * ✅ **5 大 Agent 框架選型對比評分表**（LangGraph vs CrewAI vs SDK）
 * ✅ **HITL（人類最終確認）流程設計 Checklist**
 * ✅ **Agent 安全防範（Prompt Injection 誤刪防護）指南**
@@ -596,11 +597,12 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 ### 📚 課程綱要
 
-* **Part 1（15 分鐘）｜Agent 時代與 MCP 標準**：Chatbot vs. Agent 的本質差異、MCP（Model Context Protocol）如何降低 80% 的 API 對接成本、2026 企業成熟度評估
-* **Part 2（25 分鐘）｜5 大主流 Agent 框架深度對比**：LangGraph (有向有環複雜工作流)、CrewAI (角色扮演)、AutoGen、Claude Agent SDK、n8n 低代碼
-* **Part 3（25 分鐘）｜Agent 試點 5 大安全原則**：VM 隔離運行、Loop Guard（防止 Token 暴燒的循環限制）、HITL 閘門、日誌審計與失敗回滾
-* **Part 4（15 分鐘）｜3 大典型試點場景設計**：合約智能審查、跨部門專利挖掘、ERP 數據自動填報試點
-* **Part 5（10 分鐘）｜Agent 安全防禦實務**：Prompt Injection 提示注入防禦、工具越權 (Tool Misuse) 預防
+* **Part 1（15 分鐘）｜Agent 時代與 MCP 標準**：Chatbot vs. Agent 的本質差異、MCP（Model Context Protocol）如何統一 LLM 與企業底層數據庫的交互、降低 80% 對接成本、2026 企業成熟度評估
+* **Part 2（20 分鐘）｜5 大主流 Agent 框架深度對比**：LangGraph (有向有環複雜工作流)、CrewAI (多角色協同)、AutoGen、Claude Agent SDK、n8n 低代碼
+* **Part 3（20 分鐘）｜Agent 試點 5 大核心安全原則**：VM 隔離運行、Loop Guard（防止 Token 暴燒的循環限制）、HITL 閘門、日誌審計與失敗自動回滾 (Rollback)
+* **Part 4（15 分鐘）｜既有 ERP/CRM 非侵入式低成本整合**：SAP/鼎新核心代碼零修改串接、唯讀副本/標準 API 橋接、MCP 伺服器地端沙盒部署、PII 數據脫敏代理
+* **Part 5（12 分鐘）｜3 大低風險典型試點場景設計與 HITL**：採購合約智能比對與合規審查、跨部門專利挖掘、ERP 自動填報與人類確認閘門 (HITL) 流程
+* **Part 6（8 分鐘）｜Agent 安全防禦實務**：Prompt Injection 提示注入防禦、工具越權 (Tool Misuse) 預防與最小權限設定
 
 ---
 

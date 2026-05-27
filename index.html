@@ -893,6 +893,134 @@
       box-shadow: 0 4px 15px rgba(var(--phoenix-accent-rgb), 0.3);
     }
 
+    /* ─── 全景課程重構新樣式 (Restructured Curriculum Style) ─── */
+    .unit-card.featured {
+      border: 1px solid rgba(245, 166, 35, 0.4);
+      box-shadow: 0 0 25px rgba(245, 166, 35, 0.1);
+      background: linear-gradient(135deg, rgba(26, 20, 10, 0.6) 0%, rgba(18, 18, 38, 0.7) 100%);
+    }
+    .unit-card.featured:hover {
+      border-color: rgba(245, 166, 35, 0.8);
+      box-shadow: 0 0 35px rgba(245, 166, 35, 0.25);
+    }
+    .unit-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--phoenix-gold);
+      background: rgba(245, 166, 35, 0.1);
+      border: 1px solid rgba(245, 166, 35, 0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+    .unit-badge-upgrade {
+      display: inline-block;
+      background: var(--phoenix-accent);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+    .unit-takeaways-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--phoenix-gold);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .unit-takeaways {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+    }
+    @media (max-width: 768px) {
+      .unit-takeaways { grid-template-columns: 1fr; gap: 10px; }
+    }
+    .unit-takeaways li {
+      font-size: 14px;
+      color: var(--gray-300);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.6;
+    }
+    .unit-takeaways li::before {
+      content: "⚡";
+      color: var(--phoenix-teal);
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .alignment-statement {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .alignment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 1024px) {
+      .alignment-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .alignment-grid { grid-template-columns: 1fr; }
+    }
+    .alignment-item {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s ease;
+    }
+    .alignment-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(0, 242, 254, 0.15);
+    }
+    .alignment-item .icon {
+      font-size: 24px;
+    }
+    .alignment-item p {
+      font-size: 13.5px;
+      color: var(--gray-300);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .alignment-disclaimer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 20px;
+      margin-top: 10px;
+    }
+    .alignment-disclaimer p {
+      font-size: 12.5px;
+      color: var(--gray-500);
+      line-height: 1.6;
+      margin: 0;
+    }
+
     /* ─── 雙認證專家顧問名片 (Team Section) ─── */
     .team-section {
       padding: 100px 0;
@@ -1530,88 +1658,56 @@
               <span class="option-marker">D</span>
               <span class="option-text">API Gateway 自動過濾機敏資料，建置自動化幻覺檢測與 IP 治理流程，對接 ISO 42001 審計流程。</span>
             </button>
-          </div>
-        </div>
-
-        <!-- 題卡 5 -->
-        <div class="quiz-card" data-step="5" data-dimension="決策時程與顧問預算">
-          <div class="question-dim">維度五：專案執行力與預算決策 (Execution & Budget)</div>
-          <h3 class="question-title">
-            <span class="question-num">Q5</span>
-            <span>貴司預計啟動核心專案的時間表與已編列的年度顧問/培訓預算規模為何？</span>
-          </h3>
-          <div class="options-grid">
-            <button class="option-btn" data-score="1">
-              <span class="option-marker">A</span>
-              <span class="option-text">尚無具體時程計畫（僅前期觀望），年度預算編列為 0 或要求 100% 成功案例才願意專案追加。</span>
-            </button>
-            <button class="option-btn" data-score="2">
-              <span class="option-marker">B</span>
-              <span class="option-text">預計在 6~12 個月內啟動 POC，已編列小於 `NT$ 10 萬` 預算（僅支持單次短課或極簡諮詢）。</span>
-            </button>
-            <button class="option-btn" data-score="3">
-              <span class="option-marker">C</span>
-              <span class="option-text">預計在 3~6 個月內正式啟動，已編列 `NT$ 10 萬 ~ 50 萬` 預算（可支持 4+1 工作坊與現況盤點）。</span>
-            </button>
-            <button class="option-btn" data-score="4">
-              <span class="option-marker">D</span>
-              <span class="option-text">專案具備高度緊迫性（1~3個月內必須落地），已編列 `NT$ 50 萬以上` 年度諮詢與導入陪跑預算。</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 結果卡片 -->
-        <div class="result-card" id="quiz-result">
-          <div class="result-score-circle">
-            <span class="result-score-num" id="quiz-score-val">0</span>
-            <span class="result-score-total">總得分 / 滿分 20</span>
-          </div>
-          <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
-          <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
-          
-          <div class="result-level-desc">
-            <p id="quiz-level-text">詳細評估分析載入中...</p>
-            <div class="result-suggestion" id="quiz-suggestion-box">
-              <span style="font-size: 16px;">💡</span>
-              <span id="quiz-suggestion-text">建議行動指引載入中...</span>
-            </div>
-          </div>
-
-          <div class="result-ctas">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="btn result-cta-lead" id="result-form-btn">
-              🎯 搶先登記預約「90 分鐘企業 AI 成熟度專家快診」(NT$ 29,800，可全額折抵後續工作坊費)
-            </a>
-            <span class="result-compliance">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
-          </div>
-        </div>
-
-        <!-- 控制欄 -->
-        <div class="quiz-navigation" id="quiz-controls">
-          <button class="quiz-nav-btn" id="quiz-btn-prev" disabled>← 上一題</button>
-          <button class="quiz-nav-btn quiz-nav-btn-next" id="quiz-btn-next" disabled>請先選擇答案</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── 全景課程展區 (Curriculum Section) ─── -->
   <section class="curriculum-section" id="curriculum">
     <div class="container">
       <div class="section-header">
         <span class="badge" style="color: var(--phoenix-accent); border-color: rgba(var(--phoenix-accent-rgb), 0.2); background: rgba(var(--phoenix-accent-rgb), 0.05);">CURRICULUM ECOSYSTEM</span>
         <h2 class="section-title">全景課程體系架構</h2>
-        <p class="section-subtitle">本專案教材全面開源，嚴格對齊國家級人才培育框架標準，共包含七大核心知識模組。點擊卡片可深入檢索授課重點與核心教材。</p>
+        <p class="section-subtitle">本專案教材全面開源，嚴格對齊國家級人才培育框架標準與國際安全架構，共包含 1 個高管入門速覽、6 個核心實戰單元與 1 個政策對接單元。點擊卡片可深入檢索授課重點與核心教材。</p>
+      </div>
+
+      <!-- 📋 課程體系對齊聲明 -->
+      <div class="alignment-statement">
+        <div class="alignment-header">
+          <h3 class="unit-takeaways-title" style="margin-top: 0; font-size: 16px;">📋 2026 課程體系對齊聲明</h3>
+          <p style="font-size: 14px; color: var(--gray-400); margin: 4px 0 0 0;">本開源課程體系之架構與教材內容設計，均參照以下台灣政府公版標準與國際合規框架：</p>
+        </div>
+        
+        <div class="alignment-grid">
+          <div class="alignment-item">
+            <span class="icon">🏛️</span>
+            <p>經濟部<strong>產業發展署 (產發署)</strong>「115 年度 AI 人才培育計畫」公版教材結構</p>
+          </div>
+          <div class="alignment-item">
+            <span class="icon">📜</span>
+            <p>iPAS 經濟部產業人才能力鑑定「<strong>AI 應用規劃師</strong>」考試鑑定範圍</p>
+          </div>
+          <div class="alignment-item">
+            <span class="icon">🛡️</span>
+            <p>NIST AI Risk Management Framework (<strong>AI RMF 1.0</strong>) 國際風險管理框架</p>
+          </div>
+          <div class="alignment-item">
+            <span class="icon">📋</span>
+            <p>ISO/IEC <strong>42001:2023</strong> AI Management System 國際人工智慧管理標準</p>
+          </div>
+        </div>
+        
+        <div class="alignment-disclaimer">
+          <p>⚠️ <strong>重要合規聲明</strong>：本課程教材為鳳凰 AI 顧問團隊原創設計，內容架構參照上述公版標準。實際申請政府補助時，企業仍需依各主管機關當年度公告辦法申請，本網站不代表已取得任何政府機關背書認證。鳳凰 AI 提供「教方法、不代寫」之諮詢與輔導服務，補助核准與否仍以主管機關審查結果為準。</p>
+        </div>
       </div>
 
       <div class="curriculum-grid">
-        <!-- 單元一 -->
-        <div class="unit-card">
+        <!-- 單元零 (新單元 - 金色 Featured) -->
+        <div class="unit-card featured">
           <div class="unit-header" onclick="toggleUnit(this)">
             <div class="unit-header-left">
-              <div class="unit-number">01</div>
+              <div class="unit-number">00</div>
               <div class="unit-title-group">
-                <h3 class="unit-title">單元一：AI 基礎理論與 2026 技術演進</h3>
-                <span class="unit-subtitle">理論與底層原理解構 — 從 Rule-based 到 Transformer 範式移轉</span>
+                <span class="unit-tag">入門速覽 · CEO 必修</span>
+                <h3 class="unit-title">單元零：CEO 90 分鐘 AI 戰略速覽</h3>
+                <span class="unit-subtitle">高階主管入門課 — 從技術迷霧到決策框架</span>
               </div>
             </div>
             <span class="unit-toggle-icon">▼</span>
@@ -1620,12 +1716,57 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">解構機器學習本質與 2026 技術分水嶺。深入 Transformer 核心架構（自注意力機制數學原理）、Tokenizer 運作原理與高維向量空間（Embedding），並剖析大語言模型預訓練（Pre-training）與直接偏好對齊（DPO）之技術本質，打破盲目調用 API 的黑盒迷思。</p>
+                <p class="unit-focus-text">專為 CEO、總經理、CDO、副總設計的 90 分鐘速覽課。在不需理解繁瑣技術原理的前提下，建立 2026 AI 全景視野：6 大 LLM 模型生態地圖、Reasoning Models 推理模型的商業意涵、MCP 標準採購建議、Buy vs Build vs Rent 5 問決策樹、4+1 戰略畫布實作、以及 90 天 Quick-Win 行動清單。現場填寫 A3 實體戰略畫布，下課直接帶回公司開會。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心交付物與帶走資產</h5>
+                <ul class="unit-takeaways">
+                  <li>🗺️ 1 張 2026 AI 全景地圖（避開技術細節，聚焦商業意涵）</li>
+                  <li>🎯 1 套 A3 紙本「4+1 戰略畫布」（現場填寫帶回公司）</li>
+                  <li>⚖️ 1 個 Buy vs Build vs Rent 5 問決策樹</li>
+                  <li>📋 1 份 90 天 Quick-Win 行動清單</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">3 小時 (對接標準框架)</span>
+                  <span class="unit-meta-value">1.5 小時 (對應商業模組 M01)</span>
+                </div>
+                <a href="./curriculum/unit_0_intro/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元一 -->
+        <div class="unit-card">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">01</div>
+              <div class="unit-title-group">
+                <h3 class="unit-title">單元一：AI 基礎理論與 2026 商業意涵</h3>
+                <span class="unit-subtitle">理論與商業意涵 — 從機器學習本質到 2026 模型生態</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">用商業視角解構 AI 的本質，避開過度技術化的數學與統計細節。內容涵蓋機器學習的基本運作邏輯、從 Rule-based 到 Transformer 範式轉移的商業價值、2026 六大主流 LLM 模型生態地圖（GPT-5、Claude 4.7、Gemini 2.5、Llama 4、DeepSeek、Phi/Gemma）的成本精算與邊界評估、Reasoning Models（推理模型）的深度思考商業價值與 ROI 計算、以及 SLM（小語言模型）本地部署的資料隱私與一次性硬體成本優勢。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🧭 6 大 LLM 模型生態地圖與企業採購決策建議</li>
+                  <li>🧠 Reasoning Models 商業價值與 Token 成本精算</li>
+                  <li>🔒 SLM 本地私有化部署的隱私防禦與成本優勢</li>
+                  <li>🚫 避開盲目調用 API 的黑盒迷思，掌握 TCO 控制根源</li>
+                </ul>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">2 小時 (對應商業模組 M01)</span>
                 </div>
                 <a href="./curriculum/unit_1_theory/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
@@ -1639,8 +1780,8 @@
             <div class="unit-header-left">
               <div class="unit-number">02</div>
               <div class="unit-title-group">
-                <h3 class="unit-title">單元二：產業常見 10 大 AI 應用功能與企業級模組</h3>
-                <span class="unit-subtitle">直擊核心場景盤點 — 數據 RAG 查找與多模態素材生成架構</span>
+                <h3 class="unit-title">單元二：2026 企業級 AI 應用 7 大實戰模組 <span class="unit-badge-upgrade">2026 大幅升級</span></h3>
+                <span class="unit-subtitle">企業落地全景 — 從 RAG 知識庫到 Agentic AI 與多模態生成</span>
               </div>
             </div>
             <span class="unit-toggle-icon">▼</span>
@@ -1649,12 +1790,20 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">拒絕空洞概念，全面拆解企業落地模組。深度研習企業級知識庫（RAG）架構與查找算法、多模態行銷素材自動化工作流、高精度合規審核、以及多模態智能客服分流助理。特別解構各場景之「開發痛點」、「ROI 量化決策模型」與 2x2 決策矩陣。</p>
+                <p class="unit-focus-text">本單元全面擴充，直擊企業落地痛點與高勝率場景。深入解構 7 大 2026 必修實戰應用：(1) <strong>傳統 RAG vs Agentic RAG</strong> 升級評估、自我修正、工具調用架構；(2) <strong>Voice AI 與 OpenAI Realtime API</strong> 製造業現場低延遲（0.5秒）語音落地破口；(3) <strong>多模態影片生成商用化</strong>與 4 大版權紅線；(4) <strong>Computer Use Agent 早期試點與安全防禦</strong>（風險極高，2星警告）；(5) <strong>多模態行銷素材</strong>自動化工作流；(6) <strong>高精度合規審核</strong>系統；(7) <strong>多模態智能客服</strong>分流助理。每個應用皆提供「ROI 量化決策模型」與「對應政府補助路徑」。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🔄 Agentic RAG 升級：多輪檢索與自我修正架構，解決使用率低落</li>
+                  <li>🎙️ Voice AI 製造業破口：語音解放雙手，突破現場師傅排斥防線</li>
+                  <li>🎬 影片生成商用化：Sora 2 / Runway 訓練片與素材節省 95% 成本</li>
+                  <li>🖥️ Computer Use Agent：安全審慎試點指南，防範誤刪資料庫</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">4 小時 (實務應用篇)</span>
+                  <span class="unit-meta-value">6 小時 (對應商業模組 M05-M08)</span>
                 </div>
                 <a href="./curriculum/unit_2_industries/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
@@ -1678,12 +1827,20 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">建立企業級安全壁壘與稽核流程。實作敏感個資自動遮罩（Data Masking）與 DLP 防護、防 Prompt Injection 安全防禦 Guardrails 連接器配置，以及部署合規的安全審計軌跡（Audit Trails），將國際風險管理標準無縫配置到系統架構中。</p>
+                <p class="unit-focus-text">建立企業級安全壁壘與稽核流程。實作敏感個資自動遮罩（Data Masking）與 DLP 防護、部署防 Prompt Injection 安全防禦 Guardrails 連接器配置，以及建置合規的安全審計軌跡（Audit Trails），將國際 AI 風險管理標準與 ISO 42001 安全條款無縫配置到企業內部系統架構中，保障外銷大廠不因資安漏洞被取消訂單。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🛡️ 敏感個資自動遮罩 (Data Masking) 技術實作</li>
+                  <li>🔒 部署 API Gateway 及 Guardrails 防 Prompt Injection 注入</li>
+                  <li>📋 ISO/IEC 42001 內部安全審計與合規稽核軌跡 (Audit Trails)</li>
+                  <li>⚖️ 符合中華民國《個人資料保護法》第 8 條規定的數據儲存架構</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">2 小時 (資安與合規)</span>
+                  <span class="unit-meta-value">2.5 小時 (對應商業模組 M02/M11)</span>
                 </div>
                 <a href="./curriculum/unit_3_responsible_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
@@ -1697,8 +1854,8 @@
             <div class="unit-header-left">
               <div class="unit-number">04</div>
               <div class="unit-title-group">
-                <h3 class="unit-title">單元四：機器學習技術理論與實務案例</h3>
-                <span class="unit-subtitle">數據特徵工程實戰 — 半導體預測性維護與智慧電力調度</span>
+                <h3 class="unit-title">單元四：中型企業機器學習實戰應用</h3>
+                <span class="unit-subtitle">數據驅動決策 — 良率預測、庫存優化與設備異常檢測</span>
               </div>
             </div>
             <span class="unit-toggle-icon">▼</span>
@@ -1707,12 +1864,20 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">實戰工業級特徵工程與算法決策。深度對接半導體精密機台的「預測性維護系統（Dry Pump 振動訊號頻域幅值分析與故障預警）」與工廠級「智慧電力負載預測」，協助技術團隊理解特徵清洗、XGBoost 理論，並在跨部門會議中量化呈現算法 ROI。</p>
+                <p class="unit-focus-text">本單元專為中型製造業與服務業設計，聚焦「<strong>不需要龐大資料科學家團隊也能快速導入</strong>」的 ML 實務應用。內容涵蓋 4 大中型企業必備數據場景：(1) <strong>良率預測與品質異常檢測</strong>（傳產與封測廠）；(2) <strong>庫存需求預測</strong>（解決積壓最痛點）；(3) <strong>設備異常檢測與預測性維護</strong>（基於既有 IoT 資料，無需硬體重投資）；(4) <strong>客戶流失預測</strong>（服務業利器）。深入講解 2026 革命性的 <strong>AutoML 與低代碼平台</strong>（Google Vertex AI AutoML、Azure ML Designer）以及 <strong>時序基礎模型</strong>（TimeGPT、Chronos）之選型與 ROI 精算。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>📈 AutoML 與低代碼平台：無 ML 工程團隊的快速開發與部署</li>
+                  <li>🔮 時序基礎模型：TimeGPT / Chronos 免除耗時訓練的零樣本預測</li>
+                  <li>🎯 4 大中型企業預測場景：良率、庫存、設備異常、流失預測</li>
+                  <li>💰 每個場景均附實際 Excel ROI 試算表與導入時程模板</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">3 小時 (工業級實戰)</span>
+                  <span class="unit-meta-value">3 小時 (對應商業模組 M06/M10)</span>
                 </div>
                 <a href="./curriculum/unit_4_machine_learning/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
@@ -1726,8 +1891,8 @@
             <div class="unit-header-left">
               <div class="unit-number">05</div>
               <div class="unit-title-group">
-                <h3 class="unit-title">單元五：鑑別式 AI 的原理與應用控制層</h3>
-                <span class="unit-subtitle">決策的安全防火牆 — 混淆矩陣與模型可解釋性 (SHAP/LIME)</span>
+                <h3 class="unit-title">單元五：AI 可解釋性與信任度評估</h3>
+                <span class="unit-subtitle">從黑盒到透明 — Mechanistic Interpretability 與 RAG 引用追溯</span>
               </div>
             </div>
             <span class="unit-toggle-icon">▼</span>
@@ -1736,14 +1901,22 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">將鑑別式 AI 定位為「核心控制的安全守護者」。深入理解混淆矩陣（精準度與召回率）、交併比（IoU），並將可解釋性 AI 技術（SHAP / LIME 值）導入金融信貸審查等自動核貸控制層，建置經得起法規審查與內部風控稽核的智能決策系統。</p>
+                <p class="unit-focus-text">當 AI 系統給出決策（如核貸、良率判定）或生成文檔時，企業必須能回答「為什麼 AI 給出這個答案」。本單元聚焦 2026 主流可解釋性與稽核技術：(1) <strong>Anthropic Mechanistic Interpretability</strong>（機制可解釋性）的商業化應用；(2) <strong>RAG 引用追溯（Citation Tracing）</strong>，確保大模型回答時可回溯至具體 PDF/SQL 段落；(3) <strong>傳統 SHAP/LIME 數值與現代生成式可解釋性</strong>的技術對比；(4) 金融、醫療、法務等高度監管場景的<strong>可稽核性（Auditability）合規設計</strong>原則。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🔬 Anthropic 機制可解釋性 (Mechanistic Interpretability) 原理</li>
+                  <li>📎 RAG 引用追溯與可回溯性設計：消除大模型幻覺的最佳稽核路徑</li>
+                  <li>🛡️ 金融、法務場景下可解釋性 AI (XAI) 的法規合規與風控審查</li>
+                  <li>📊 傳統 SHAP 和 LIME 模型在結構化數據上的實作對照與合規意義</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">2 小時 (算法控制層)</span>
+                  <span class="unit-meta-value">2 小時 (對應商業模組 M02/M11)</span>
                 </div>
-                <a href="./curriculum/unit_5_discriminative_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
+                <a href="./curriculum/unit_5_explainable_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
             </div>
           </div>
@@ -1765,12 +1938,20 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">從單點聊天工具躍升至跨系統代理自主協同。剖析「規劃代理、執行代理、審查代理」組成之 Multiagent 架構，引導學員配置開源 MLOps/LLMOps 系統，並實踐由 Google 與 Anthropic 主導的 Model Context Protocol (MCP) 標準，建構真正能對接複雜 API 的自主運營網絡。</p>
+                <p class="unit-focus-text">從單點聊天工具躍升至跨系統代理自主協同。剖析「規劃代理、執行代理、審查代理」組成之 Multiagent 架構，引導學員配置開源 MLOps/LLMOps 系統，並實踐由 Google 與 Anthropic 主導的 Model Context Protocol (MCP) 標準，建構真正能對接複雜 API 的自主運營網絡。特別新增：企業軟體採購時之「MCP 協議採購必問防線」，為企業省下百萬專案串接費。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🤖 Multiagent 協同架構：規劃、執行、審查代理的分工與安全 HITL 點</li>
+                  <li>🔌 MCP（模型上下文協議）：AI 時代的企業級 USB，隨插隨用對接資料庫</li>
+                  <li>📊 SaaS 採購防線：採購任何 ERP 或 CRM 時的 MCP 條款宣告，拒絕淘汰系統</li>
+                  <li>🛠️ Dify / n8n / CrewAI / LangGraph 的低代碼與代碼級混編架構</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">3 小時 (前沿代理篇)</span>
+                  <span class="unit-meta-value">3 小時 (對應商業模組 M08/M09)</span>
                 </div>
                 <a href="./curriculum/unit_6_generative_ai/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
@@ -1794,14 +1975,60 @@
             <div class="unit-body">
               <div class="unit-focus">
                 <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
-                <p class="unit-focus-text">這是整個框架的<strong>旗艦精華單元</strong>，專為企業領袖打造的 AI Operating Model 落地指南。包含：如何量化計算 TCO 與開發 ROI、Buy vs. Build 技術與財務決策模型、人機協作比例（HITL）決策，以及對抗一線員工排斥的「變革管理五部曲」。內附 A3 列印版總體戰略畫布與 4 張關聯主表。</p>
+                <p class="unit-focus-text">這是整個框架的<strong>旗艦精華單元</strong>，專為企業領袖打造的 AI Operating Model 落地指南。包含：如何量化計算 TCO 與開發 ROI、Buy vs. Build 技術與財務決策模型、人機協作比例（HITL）決策，以及對抗一線員工排斥的「變革管理五部曲」。內附 A3 列印版總體戰略畫布與 4 張關聯主表，協助企業打破 80% POC 死亡谷魔咒。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>💸 TCO 總營運成本與 ROI 財務精算模型 (Excel 配套)</li>
+                  <li>⚖️ Buy vs. Build vs. Rent 5 問決策樹，防範預算浪費</li>
+                  <li>🤝 變革管理五部曲：消除員工「被取代」恐懼的激勵機制設計</li>
+                  <li>🎯 跨越 POC 死亡谷的 4 大鐵則（指標、時限、決策人、後續預算）</li>
+                </ul>
               </div>
               <div class="unit-meta-box">
                 <div class="unit-meta-item">
                   <span class="unit-meta-label">建議課時</span>
-                  <span class="unit-meta-value">5 小時 (旗艦戰略篇)</span>
+                  <span class="unit-meta-value">5 小時 (對應商業模組 M03/M04/M10)</span>
                 </div>
                 <a href="./curriculum/unit_7_strategy/" class="unit-read-btn">📖 閱讀完整教材</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 單元八 (新單元 - 金色 Featured 獨家政策) -->
+        <div class="unit-card featured">
+          <div class="unit-header" onclick="toggleUnit(this)">
+            <div class="unit-header-left">
+              <div class="unit-number">08</div>
+              <div class="unit-title-group">
+                <span class="unit-tag">獨家護城河 · 政策對接</span>
+                <h3 class="unit-title">單元八：AI 與台灣產業政策對接</h3>
+                <span class="unit-subtitle">產官學三棲視角 — 解構政府 460 億補助生態與國際合規布局</span>
+              </div>
+            </div>
+            <span class="unit-toggle-icon">▼</span>
+          </div>
+          <div class="unit-content">
+            <div class="unit-body">
+              <div class="unit-focus">
+                <h4 class="unit-focus-title">🎓 單元核心 focus</h4>
+                <p class="unit-focus-text">本單元為鳳凰 AI 顧問團隊獨家之「護城河單元」。融合首席顧問於工研院、精密機械研發中心（PMC）、台中電腦公會之 10 餘年實戰輔導經驗，引導企業合法合規對接政府 460 億轉型紅利。內容涵蓋：(1) <strong>台灣 AI 政策戰略三軸架構</strong>（發展、合規、競爭）；(2) <strong>五大政府補助體系深度解析</strong>（中企署 SBIR、產發署 A+ 與智慧機械、商業署 SIIR、數產署 AI 能量登錄、勞動部投資計畫）；(3) <strong>歐盟 AI Act 對台外銷機台衝擊</strong>與罰則；(4) <strong>ISO/IEC 42001:2023 快速認證路徑</strong>；(5) <strong>政府補助申請實戰 SOP</strong>（7大計畫書骨架、5大核銷法律紅線、素材盤點表）。</p>
+                
+                <h5 class="unit-takeaways-title">🎯 核心學習要點</h5>
+                <ul class="unit-takeaways">
+                  <li>🏛️ 5 大政府補助體系全景：中企署、產發署、商業署、數產署、勞動部對接門檻</li>
+                  <li>🌍 歐盟 AI Act 與國際 CE 標章：外銷機台資安檢測與罰款避險</li>
+                  <li>📋 補助申請實戰計畫書骨架與「教方法、不代寫」的合法申報 SOP</li>
+                  <li>⚠️ 5 大計畫核銷紅線：避免事後核退與法律糾紛的保命金律</li>
+                </ul>
+              </div>
+              <div class="unit-meta-box">
+                <div class="unit-meta-item">
+                  <span class="unit-meta-label">建議課時</span>
+                  <span class="unit-meta-value">3 小時 (對應商業模組 M11-M13)</span>
+                </div>
+                <a href="./curriculum/unit_8_grants/" class="unit-read-btn">📖 閱讀完整教材</a>
               </div>
             </div>
           </div>
@@ -2082,8 +2309,8 @@
             <span class="m-id">M08</span>
             <span class="m-target">CDO & 進階架構</span>
           </div>
-          <h3 class="m-title">AI Agent 試點設計與安全</h3>
-          <p class="m-pain-quote">「Agent 擁有多系統寫入權，如沒有安全沙盒防護，惡意注入會直接毀掉 ERP...」</p>
+          <h3 class="m-title">AI Agent 試點與 ERP 整合</h3>
+          <p class="m-pain-quote">「如何低成本與既有 ERP/CRM 非侵入式安全串接？不更動核心，Agentic 橋接是答案...」</p>
           <a href="m08.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
         </div>
         <!-- M09 -->
@@ -2102,8 +2329,8 @@
             <span class="m-id">M10</span>
             <span class="m-target">HR & 組織變革</span>
           </div>
-          <h3 class="m-title">消除員工取代恐懼變革 5 部曲</h3>
-          <p class="m-pain-quote">「員工抗拒 AI 是因為恐懼：『教完公司的 AI 之後，我是不是就被裁員了？』...」</p>
+          <h3 class="m-title">AI 變革管理與 Champion 選拔</h3>
+          <p class="m-pain-quote">「如何選拔跨部門 AI 落地種子人員？提供 HR 評估量表與 5 維度指標消除恐懼...」</p>
           <a href="m10.html" class="m-explore-btn">深入探索詳情頁 ➔</a>
         </div>
         <!-- M11 -->

@@ -116,20 +116,20 @@
 ### 🎬 [單元 0：高階主管 AI 落地速覽 (引流與決策單元)](./curriculum/unit_0_intro/)
 * **核心重點**：**CEO 90 分鐘決策課**。以 Keynote 簡報級逐字稿，速覽 2026 模型生態（Reasoning/Agent/MCP 協定）、傳產 Voice AI 落地唯一破口，並現場實作 **A3 紙本 4+1 戰略畫布**、精算 10 倍財務成本選型（Buy vs. Build vs. Rent），完美引流至 NT$ 6,800 專家快診。
 
-### 📚 [單元一：AI 基礎理論與 2026 技術演進](./curriculum/unit_1_theory/)
-* **核心重點**：從傳統 Rule-based 到 Learning Representations 的範式移轉。深入解構 Tokenizer 運作、Embedding 高維向量空間、Transformer 自注意力機制數學原理，以及 LLM 預訓練與 DPO（直接偏好對齊）的對齊本質。
+### 📚 [單元一：AI 基礎理論與 2026 商業意涵](./curriculum/unit_1_theory/)
+* **核心重點**：從機器學習本質到 2026 模型生態與商業意義。避開技術數學細節，聚焦 GPT-5/Claude 4.6/Gemini 2.5/DeepSeek/Llama 4 等模型選型、Reasoning Models（推理模型）之商業決策價值與 SLM（小語言模型）本地部署之隱私防禦。
 
-### ⚙️ [單元二：產業常見 10 大 AI 應用功能與企業級模組](./curriculum/unit_2_industries/)
-* **核心重點**：直擊企業級落地模組與 2026 前沿技術。除了拆解 10 大基礎應用模組的設計痛點外，**深度補強 4 大硬核技術**：Agentic RAG、Voice AI 與 Realtime API、Computer Use 決策防線、以及多模態影片生成，內含半導體封測與重工業的真實 ROI 財務精算案例。
+### ⚙️ [單元二：2026 企業級 AI 應用 7 大實戰模組](./curriculum/unit_2_industries/)
+* **核心重點**：全面對接 2026 真實採購剛需。深度研習 7 大實戰模組：Agentic RAG 自我修正與工具調用、Voice AI (Realtime API) 製造業低延遲語音破口、多模態影片生成商用化與版權法律、Computer Use Agent 安全試點風險控管、合規審核、行銷素材自動化與客服分流。
 
 ### 🛡️ [單元三：負責任的 AI 應用 (Responsible AI)](./curriculum/unit_3_responsible_ai/)
-* **核心重點**：對齊 NIST AI RMF 與 ISO/IEC 42001 國際標準。實作資料隱私遮罩、惡意提示防禦 Guardrails 防護欄、以及使用軌跡安全審計日誌（Audit Trails）。
+* **核心重點**：對齊 NIST AI RMF 與 ISO/IEC 42001 國際標準。實作敏感個資自動遮罩（Data Masking）、DLP 安全防禦、防 Prompt Injection 閘門 (Guardrails)、以及安全審計稽核軌跡（Audit Trails）佈署。
 
-### 📈 [單元四：機器學習技術理論與實務案例](./curriculum/unit_4_machine_learning/)
-* **核心重點**：企業特徵工程與機器學習 ROI 實踐。多模態數據特徵工程，與半導體預測性維護、智慧能源管理及金融詐欺預警的深度對接。
+### 📈 [單元四：中型企業機器學習實戰應用](./curriculum/unit_4_machine_learning/)
+* **核心重點**：無 ML 資料團隊之高勝率 ML 落地指南。聚焦良率預測、庫存需求預測、設備異常檢測、客戶流失預測等 4 大場景，引進 Google Vertex AI AutoML、Azure ML Designer 等低代碼平台，以及 TimeGPT 與 Chronos 時序基礎模型實務。
 
-### 👁️ [單元五：鑑別式 AI 的原理與應用控制層](./curriculum/unit_5_discriminative_ai/)
-* **核心重點**：將鑑別式 AI 重新定位為「AI 決策的安全防火牆」。混淆矩陣、IoU、SHAP/LIME 模型可解釋性，與影像辨識控制層的安全整合。
+### 👁️ [單元五：AI 可解釋性與信任度評估](./curriculum/unit_5_explainable_ai/)
+* **核心重點**：將可解釋性 AI 重新定位為「安全防火牆與信任基礎」。深入解構 RAG 引用追溯（Citation Tracing）技術、Anthropic 機制可解釋性（Mechanistic Interpretability）、以及傳統 SHAP/LIME 在金融/醫療/法務高度合規場景下的可稽核性設計。
 
 ### 🤖 [單元六：生成式 AI 與多代理人系統 (Multiagent Systems)](./curriculum/unit_6_generative_ai/)
 * **核心重點**：從單點聊天工具演進至自主代理協作流。規劃代理 (Planning)、執行代理 (Execution) 與審查代理 (Review) 的 Multiagent 工作流，並引入 Model Context Protocol (MCP) 標準。
