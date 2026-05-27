@@ -1021,6 +1021,7 @@
       margin: 0;
     }
 
+
     /* ─── 雙認證專家顧問名片 (Team Section) ─── */
     .team-section {
       padding: 100px 0;
@@ -1658,6 +1659,70 @@
               <span class="option-marker">D</span>
               <span class="option-text">API Gateway 自動過濾機敏資料，建置自動化幻覺檢測與 IP 治理流程，對接 ISO 42001 審計流程。</span>
             </button>
+          </div>
+        </div>
+
+        <!-- 題卡 5 -->
+        <div class="quiz-card" data-step="5" data-dimension="決策時程與顧問預算">
+          <div class="question-dim">維度五：專案執行力與預算決策 (Execution & Budget)</div>
+          <h3 class="question-title">
+            <span class="question-num">Q5</span>
+            <span>貴司預計啟動核心專案的時間表與已編列的年度顧問/培訓預算規模為何？</span>
+          </h3>
+          <div class="options-grid">
+            <button class="option-btn" data-score="1">
+              <span class="option-marker">A</span>
+              <span class="option-text">尚無具體時程計畫（僅前期觀望），年度預算編列為 0 或要求 100% 成功案例才願意專案追加。</span>
+            </button>
+            <button class="option-btn" data-score="2">
+              <span class="option-marker">B</span>
+              <span class="option-text">預計在 6~12 個月內啟動 POC，已編列小於 `NT$ 10 萬` 預算（僅支持單次短課或極簡諮詢）。</span>
+            </button>
+            <button class="option-btn" data-score="3">
+              <span class="option-marker">C</span>
+              <span class="option-text">預計在 3~6 個月內正式啟動，已編列 `NT$ 10 萬 ~ 50 萬` 預算（可支持 4+1 工作坊與現況盤點）。</span>
+            </button>
+            <button class="option-btn" data-score="4">
+              <span class="option-marker">D</span>
+              <span class="option-text">專案具備高度緊迫性（1~3個月內必須落地），已編列 `NT$ 50 萬以上` 年度諮詢與導入陪跑預算。</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 結果卡片 -->
+        <div class="result-card" id="quiz-result">
+          <div class="result-score-circle">
+            <span class="result-score-num" id="quiz-score-val">0</span>
+            <span class="result-score-total">總得分 / 滿分 20</span>
+          </div>
+          <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
+          <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
+          
+          <div class="result-level-desc">
+            <p id="quiz-level-text">詳細評估分析載入中...</p>
+            <div class="result-suggestion" id="quiz-suggestion-box">
+              <span style="font-size: 16px;">💡</span>
+              <span id="quiz-suggestion-text">建議行動指引載入中...</span>
+            </div>
+          </div>
+
+          <div class="result-ctas">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="btn result-cta-lead" id="result-form-btn">
+              🎯 搶先登記預約「90 分鐘企業 AI 成熟度專家快診」(NT$ 29,800，可全額折抵後續工作坊費)
+            </a>
+            <span class="result-compliance">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
+          </div>
+        </div>
+
+        <!-- 控制欄 -->
+        <div class="quiz-navigation" id="quiz-controls">
+          <button class="quiz-nav-btn" id="quiz-btn-prev" disabled>← 上一題</button>
+          <button class="quiz-nav-btn quiz-nav-btn-next" id="quiz-btn-next" disabled>請先選擇答案</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── 全景課程展區 (Curriculum Section) ─── -->
   <section class="curriculum-section" id="curriculum">
     <div class="container">
@@ -2036,6 +2101,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ─── 13 獨立商業模組與特色套餐展示區 (Commercial Modules & Packages Section) ─── -->
   <section class="modules-showcase-section" id="commercial-modules" style="padding: 100px 0; background: radial-gradient(circle at 50% 100%, #15112e 0%, #0b0b16 50%); border-top: 1px solid rgba(255, 255, 255, 0.04); position: relative;">
