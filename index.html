@@ -2921,6 +2921,288 @@
     </div>
   </section>
 
+  <!-- ─── 互動式 HTML 簡報展示區 (B2B Presentation Showcase Section) ─── -->
+  <section class="slides-showcase-section" id="slides-showcase">
+    <style>
+      /* ─── 互動式 HTML 簡報展示區 (Slides Showcase Section Style) ─── */
+      .slides-showcase-section {
+        padding: 100px 0;
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.02) 0%, transparent 75%);
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .slides-showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+      }
+      @media (max-width: 992px) {
+        .slides-showcase-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .slide-demo-card {
+        position: relative;
+        background: linear-gradient(135deg, rgba(26, 26, 58, 0.45) 0%, rgba(18, 18, 38, 0.75) 100%);
+        border: 1px solid var(--glass-border);
+        border-radius: 28px;
+        padding: 40px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+      }
+      .slide-demo-card::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 91, 53, 0.03) 0%, transparent 60%);
+        pointer-events: none;
+        transition: transform 0.8s ease;
+      }
+      .slide-demo-card:hover::after {
+        transform: scale(1.2);
+      }
+      .slide-demo-card.henda-card:hover {
+        border-color: rgba(255, 91, 53, 0.35);
+        box-shadow: 0 30px 60px rgba(255, 91, 53, 0.08);
+        transform: translateY(-6px);
+      }
+      .slide-demo-card.yuepin-card:hover {
+        border-color: rgba(0, 242, 254, 0.35);
+        box-shadow: 0 30px 60px rgba(0, 242, 254, 0.08);
+        transform: translateY(-6px);
+      }
+
+      .slide-demo-preview {
+        width: 100%;
+        height: 180px;
+        background: #070913;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 18px;
+        margin-bottom: 28px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+      }
+
+      .slide-demo-preview-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, transparent 40%, rgba(7, 9, 19, 0.9) 100%);
+        z-index: 2;
+      }
+
+      .slide-demo-badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .slide-demo-badge {
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--gray-300);
+      }
+      .slide-demo-badge.featured {
+        color: var(--phoenix-gold);
+        border-color: rgba(245, 166, 35, 0.3);
+        background: rgba(245, 166, 35, 0.05);
+      }
+
+      .slide-demo-title {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      .slide-demo-subtitle {
+        font-size: 13.5px;
+        color: var(--phoenix-teal);
+        font-weight: 600;
+        margin-bottom: 18px;
+        letter-spacing: 0.5px;
+      }
+      .slide-demo-desc {
+        font-size: 14px;
+        color: var(--gray-400);
+        line-height: 1.7;
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .slide-demo-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 16px 24px;
+        border-radius: 14px;
+        font-size: 14.5px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        z-index: 3;
+      }
+      .henda-card .slide-demo-btn {
+        background: rgba(255, 91, 53, 0.08);
+        border: 1px solid rgba(255, 91, 53, 0.25);
+        color: var(--phoenix-accent);
+      }
+      .henda-card:hover .slide-demo-btn {
+        background: linear-gradient(135deg, var(--phoenix-accent) 0%, #e94560 100%);
+        border-color: transparent;
+        color: var(--white);
+        box-shadow: 0 15px 30px rgba(255, 91, 53, 0.25);
+        transform: translateY(-2px);
+      }
+      .yuepin-card .slide-demo-btn {
+        background: rgba(0, 242, 254, 0.08);
+        border: 1px solid rgba(0, 242, 254, 0.25);
+        color: var(--phoenix-teal);
+      }
+      .yuepin-card:hover .slide-demo-btn {
+        background: linear-gradient(135deg, var(--phoenix-teal) 0%, #00b4d8 100%);
+        border-color: transparent;
+        color: var(--white);
+        box-shadow: 0 15px 30px rgba(0, 242, 254, 0.25);
+        transform: translateY(-2px);
+      }
+    </style>
+
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.2); background: rgba(245, 166, 35, 0.05);">INTERACTIVE SLIDE PORTFOLIOS</span>
+        <h2 class="section-title">B2B 高階客製化教材簡報展示</h2>
+        <p class="section-subtitle">
+          依託「教材即程式碼 (Curriculum as Code)」理念，我們將去識別化後的頂級客戶落地成果，轉化為高保真、可動態操作與跨屏互動的簡報，供您直接在瀏覽器中感受實際輔導成果：
+        </p>
+      </div>
+
+      <div class="slides-showcase-grid">
+        <!-- 恆達精密扣件 簡報 -->
+        <div class="slide-demo-card henda-card">
+          <div class="slide-demo-preview">
+            <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #070913 0%, #17101f 100%); display: flex; align-items: center; justify-content: center;">
+              <!-- Mock Slide Layout -->
+              <div style="width: 85%; height: 75%; border: 1px solid rgba(255, 91, 53, 0.25); border-radius: 12px; background: rgba(7, 9, 19, 0.95); padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+                  <span style="font-size: 8.5px; color: var(--phoenix-accent); font-weight: 700; font-family: monospace;">M06. VOICE AI降噪 & 換模SOP</span>
+                  <span style="font-size: 8px; color: var(--gray-400);">04 / 12</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0;">
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px;">
+                    <div style="height: 5px; width: 50%; background: var(--phoenix-accent); border-radius: 2.5px;"></div>
+                    <div style="height: 3px; width: 90%; background: rgba(255,255,255,0.15); border-radius: 1.5px;"></div>
+                    <div style="height: 3px; width: 80%; background: rgba(255,255,255,0.15); border-radius: 1.5px;"></div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; position: relative;">
+                    <svg width="35" height="15" viewBox="0 0 40 20" style="opacity: 0.8;">
+                      <path d="M 0,10 Q 5,2 10,10 T 20,10 T 30,10 T 40,10" fill="none" stroke="var(--phoenix-teal)" stroke-width="2" />
+                    </svg>
+                    <span style="font-size: 6.5px; color: var(--phoenix-teal); font-weight: 700;">RNNoise Filter ON</span>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 6.5px; color: var(--gray-400);">
+                  <span>PHOENIX AI CONSULTING</span>
+                  <span style="color: var(--phoenix-gold);">Obsidian Midnight Spec</span>
+                </div>
+              </div>
+            </div>
+            <div class="slide-demo-preview-overlay"></div>
+          </div>
+          <div class="slide-demo-badge-row">
+            <span class="slide-demo-badge featured">👑 製造業旗艦版</span>
+            <span class="slide-demo-badge">12 頁全景簡報</span>
+            <span class="slide-demo-badge">麥肯錫奢華視覺</span>
+          </div>
+          <h3 class="slide-demo-title">重工業 AI 落地與出口合規簡報</h3>
+          <span class="slide-demo-subtitle">標竿對象：精密金屬加工與汽車航太扣件製造業 (數百人規模)</span>
+          <p class="slide-demo-desc">
+            直擊 85 分貝強噪音下的骨傳導 Voice AI、AOI 視覺二次品檢、沖棒預測性維護、歐盟 CBAM 碳關稅合規，以及產發署補助申報保命手冊。內建滑塊 ROI 即時精算器與音頻降噪濾波互動組件！
+          </p>
+          <a href="./curriculum/templates/henda/index.html" target="_blank" class="slide-demo-btn">
+            🖥️ 瀏覽高保真簡報模板 (HTML) ➔
+          </a>
+        </div>
+
+        <!-- 悅品餐飲集團 簡報 -->
+        <div class="slide-demo-card yuepin-card">
+          <div class="slide-demo-preview">
+            <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #070913 0%, #0d1a2c 100%); display: flex; align-items: center; justify-content: center;">
+              <!-- Mock Slide Layout -->
+              <div style="width: 85%; height: 75%; border: 1px solid rgba(0, 242, 254, 0.25); border-radius: 12px; background: rgba(7, 9, 19, 0.95); padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+                  <span style="font-size: 8.5px; color: var(--phoenix-teal); font-weight: 700; font-family: monospace;">M05. 預測性智慧排班 & 績效</span>
+                  <span style="font-size: 8px; color: var(--gray-400);">06 / 10</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 10px; margin: 8px 0;">
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px;">
+                    <div style="height: 5px; width: 60%; background: var(--phoenix-teal); border-radius: 2.5px;"></div>
+                    <div style="height: 3px; width: 90%; background: rgba(255,255,255,0.15); border-radius: 1.5px;"></div>
+                    <div style="height: 3px; width: 80%; background: rgba(255,255,255,0.15); border-radius: 1.5px;"></div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 4px; display: flex; flex-direction: column; justify-content: space-around; gap: 2px;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; height: 100%;">
+                      <div style="background: rgba(0, 242, 254, 0.2); border-radius: 1px; height: 6px;"></div>
+                      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 1px; height: 6px;"></div>
+                      <div style="background: rgba(0, 242, 254, 0.2); border-radius: 1px; height: 6px;"></div>
+                      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 1px; height: 6px;"></div>
+                      <div style="background: rgba(0, 242, 254, 0.2); border-radius: 1px; height: 6px;"></div>
+                      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 1px; height: 6px;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 6.5px; color: var(--gray-400);">
+                  <span>PHOENIX AI CONSULTING</span>
+                  <span style="color: var(--phoenix-gold);">Obsidian Midnight Spec</span>
+                </div>
+              </div>
+            </div>
+            <div class="slide-demo-preview-overlay"></div>
+          </div>
+          <div class="slide-demo-badge-row">
+            <span class="slide-demo-badge featured">👑 服務業精裝版</span>
+            <span class="slide-demo-badge">10 頁全景簡報</span>
+            <span class="slide-demo-badge">行動端翻轉提示</span>
+          </div>
+          <h3 class="slide-demo-title">服務業 AI 營運與人才培育簡報</h3>
+          <span class="slide-demo-subtitle">標竿對象：連鎖餐飲、多門店及電商集團 (3000人規模)</span>
+          <p class="slide-demo-desc">
+            解決預測性智慧排班約制優化、LightGBM 預測客流、個資法第8條 DLP 隱私遮罩沙盒流程、SaaS 採購計費陷阱（Prompt Caching）與 exit 退場機制。內建卡片式 CSS Grid 大氣排版及多語系 timelines 導引！
+          </p>
+          <a href="./curriculum/templates/yuepin/index.html" target="_blank" class="slide-demo-btn">
+            🖥️ 瀏覽高保真簡報模板 (HTML) ➔
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 關鍵動畫樣式與脈衝點 -->
   <style>
     .live-pulse {
