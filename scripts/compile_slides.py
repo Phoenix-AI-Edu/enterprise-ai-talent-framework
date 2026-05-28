@@ -11,28 +11,53 @@ import json
 import codecs
 import sys
 
-def get_header(title, client_badge, logo_text, extra_style=""):
+# Module-level compilation state (cross-function access for progress labels & speaker notes)
+_slide_labels = []
+_current_notes = ""
+
+def get_header(title, client_badge, logo_text, page_num=None, total_pages=None, extra_style=""):
+    # Generate progress dots navigation timeline
+    progress_dots = ""
+    if page_num and total_pages and page_num > 1:
+        progress_dots += '<div class="progress-dots-row">'
+        for p in range(2, total_pages + 1):
+            active_class = "active" if p == page_num else ""
+            label = _slide_labels[p-1] if _slide_labels and p-1 < len(_slide_labels) else f"P{p:02d}"
+            progress_dots += f'<div class="progress-dot-segment {active_class}">{label}</div>'
+            if p < total_pages:
+                progress_dots += '<div class="progress-dot-connector"></div>'
+        progress_dots += '</div>'
+
     return f"""<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <!-- 引入 Outfit (標題) 與 Inter (內文) 高階字型 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- 引入 Outfit (標題) 與 Inter (內文) 及 Noto Serif TC (金句) 高階字型 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {{
-            --bg-midnight: #070913;
-            --white: #FFFFFF;
-            --gray-300: #F8FAFC; /* High-contrast bright slate white */
-            --gray-400: #E2E8F0; /* High-contrast bright slate grey-white */
-            --phoenix-orange: #FF5B35;
-            --phoenix-teal: #00F2FE;
-            --phoenix-gold: #F5A623;
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-text-muted: #E2E8F0;
+            --color-brand: #FF5B35;       /* Phoenix Orange for Logo, Headers, Modules */
+            --color-warning: #FF3B30;     /* Pure Red for Risks, Law violation, Traps */
+            --color-success: #00F2FE;     /* Vibrant Cyan/Teal for KPI, gains, success */
+            --color-info: #F5A623;        /* Gold for Special badges, Meng Consultant matching */
             --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15); /* High contrast */
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
+            
+            /* Legacy variables map to preserve compatibility */
+            --bg-midnight: var(--color-bg);
+            --white: var(--color-text);
+            --gray-300: var(--color-text-muted);
+            --gray-400: var(--color-text-muted);
+            --phoenix-orange: var(--color-brand);
+            --phoenix-teal: var(--color-success);
+            --phoenix-gold: var(--color-info);
         }}
 
         * {{
@@ -42,13 +67,66 @@ def get_header(title, client_badge, logo_text, extra_style=""):
         }}
 
         body {{
-            background: var(--bg-midnight);
-            color: var(--white);
+            background: var(--color-bg);
+            color: var(--color-text);
             font-family: var(--font-body);
             width: 1920px;
             height: 1080px;
             overflow: hidden;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+        }}
+
+        /* 中英混排標籤對齊工具類 (Claude Audit: 1.3) */
+        .en-label {{
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-feature-settings: 'tnum' 1, 'kern' 1;
+        }}
+
+        /* Speaker Notes 覆蓋層 — 按 N 鍵切換 (Claude Audit: Mechanism 5) */
+        .speaker-notes-overlay {{
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }}
+        .speaker-notes-overlay .notes-header {{
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }}
+        .speaker-notes-overlay .notes-body {{
+            color: #E2E8F0;
+            font-size: 17px;
+            line-height: 1.8;
+        }}
+        .speaker-notes-overlay .notes-body li {{
+            margin-bottom: 6px;
+            list-style: none;
+            padding-left: 20px;
+            position: relative;
+        }}
+        .speaker-notes-overlay .notes-body li::before {{
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-info);
         }}
 
         /* 奢華流光背景 */
@@ -95,7 +173,7 @@ def get_header(title, client_badge, logo_text, extra_style=""):
             font-family: var(--font-display);
             font-size: 17px; /* Increased */
             font-weight: 800;
-            color: var(--phoenix-orange);
+            color: var(--color-brand);
             border: 1px solid rgba(255, 91, 53, 0.3);
             background: rgba(255, 91, 53, 0.06);
             padding: 8px 18px; /* Increased padding */
@@ -107,18 +185,45 @@ def get_header(title, client_badge, logo_text, extra_style=""):
             font-family: var(--font-display);
             font-size: 20px; /* Increased */
             font-weight: 700;
-            color: var(--white);
+            color: var(--color-text);
             letter-spacing: 0.5px;
         }}
 
         .nav-right-tag {{
             font-size: 17px; /* Increased */
-            color: var(--phoenix-teal);
+            color: var(--color-success);
             font-weight: 600;
             background: rgba(0, 242, 254, 0.05);
             border: 1px solid rgba(0, 242, 254, 0.15);
             padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
+        }}
+
+        /* Progress timeline styling */
+        .progress-dots-row {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }}
+        .progress-dot-segment {{
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }}
+        .progress-dot-segment.active {{
+            color: var(--color-success);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }}
+        .progress-dot-connector {{
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
         }}
 
         /* 頁面主要內容 */
@@ -138,26 +243,26 @@ def get_header(title, client_badge, logo_text, extra_style=""):
             padding-top: 24px;
             margin-top: 40px;
             font-size: 16px; /* Increased */
-            color: var(--gray-400);
+            color: var(--color-text-muted);
         }}
 
         .security-tag {{
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--phoenix-gold);
+            color: var(--color-info);
             font-weight: 600;
         }}
 
         /* 漸變文字與特效 */
         .text-gradient-orange {{
-            background: linear-gradient(135deg, var(--white) 30%, var(--phoenix-orange) 100%);
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-brand) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }}
 
         .text-gradient-teal {{
-            background: linear-gradient(135deg, var(--white) 30%, var(--phoenix-teal) 100%);
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-success) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }}
@@ -185,21 +290,63 @@ def get_header(title, client_badge, logo_text, extra_style=""):
                 <span class="brand-badge">{client_badge}</span>
                 <span class="logo-txt">{logo_text}</span>
             </div>
+            {progress_dots}
             <div class="nav-right-tag">B2B CORPORATE AI CONSULTING</div>
         </header>
         <div class="content-body">
 """
 
 def get_footer(page_num, total_pages):
+    notes_html = ""
+    if _current_notes:
+        notes_html = f"""
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE {page_num} (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">{_current_notes}</div>
+        </div>
+        """
+
+    # Keyboard forwarding & Speaker Notes toggle JS (resolves iframe focus capture bug via postMessage)
+    notes_toggle_js = """
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                // Send the keydown event to the parent window via postMessage (bypasses file:/// CORS blocks)
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                // Standalone fallback
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        // Listen for postMessage from parent (bypasses file:/// CORS block for notes & printing)
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    """
+
     return f"""
         </div>
+        {notes_html}
         <footer class="animate-fade delay-3">
             <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
             <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE {page_num} OF {total_pages}</div>
         </footer>
     </div>
 
-    <!-- 原生無干擾等比例縮放引擎 (Fit Engine) -->
+    <!-- 原生無干擾等比例縮放引擎 + Speaker Notes Toggle -->
     <script>
         function fit() {{
             const stage = document.getElementById('stage');
@@ -214,6 +361,7 @@ def get_footer(page_num, total_pages):
         }}
         window.addEventListener('resize', fit);
         window.addEventListener('load', fit);
+        {notes_toggle_js}
     </script>
 </body>
 </html>
@@ -221,7 +369,7 @@ def get_footer(page_num, total_pages):
 
 def generate_cover(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     
     # 封面專屬背光與樣式
     extra_style = """
@@ -257,14 +405,34 @@ def generate_cover(slide, client_badge, logo_text, page_num, total_pages):
             max-width: 1100px;
             line-height: 1.6;
         }
+        .cover-metadata {
+            margin-top: 48px;
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-info);
+            background: rgba(245, 166, 35, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            padding: 8px 24px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+        }
     """
     
-    html = get_header(title, client_badge, logo_text, extra_style)
+    version = slide.get("version", "v2026.06.01")
+    date = slide.get("date", "2026-05-28")
+    
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="cover-container">
                 <div class="cover-halo animate-fade"></div>
                 <h1 class="cover-title text-gradient-orange animate-fade delay-1">{title}</h1>
                 <p class="cover-sub animate-fade delay-2">{subtitle}</p>
+                <div class="cover-metadata animate-fade delay-3">
+                    <span>VERSION: {version}</span>
+                    <span style="margin: 0 12px; color: rgba(255,255,255,0.2);">|</span>
+                    <span>DATE: {date}</span>
+                </div>
             </div>
     """
     html += get_footer(page_num, total_pages)
@@ -272,7 +440,7 @@ def generate_cover(slide, client_badge, logo_text, page_num, total_pages):
 
 def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     badge_left = slide.get("badge_left", "C-SUITE STRATEGY")
     title_left = slide.get("title_left", "Left Pillar")
     content_left = slide.get("content_left", "")
@@ -357,7 +525,7 @@ def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
         }
     """
 
-    html = get_header(title, client_badge, logo_text, extra_style)
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="slide-title-row animate-fade">
                 <h2 class="slide-main-title text-gradient-orange">{title}</h2>
@@ -383,7 +551,7 @@ def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
 
 def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     intro_text = slide.get("intro_text", "")
     slider_min = slide.get("slider_min", 10)
     slider_max = slide.get("slider_max", 90)
@@ -496,8 +664,18 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
             text-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
         }}
     """
+    
+    translation_html = ""
+    translation_box = slide.get("translation_box", "")
+    if translation_box:
+        translation_html = f"""
+                    <div class="translation-box" style="margin-top: 20px; padding: 16px; background: rgba(0, 242, 254, 0.05); border-left: 4px solid var(--color-success); border-radius: 0 12px 12px 0; text-align: left;">
+                        <span style="font-size: 16px; font-weight: 700; color: var(--color-success); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">💡 非技術高管翻譯窗 (Layman Translation)</span>
+                        <p style="font-size: 18px; color: var(--color-text-muted); line-height: 1.6; margin: 0;">{translation_box}</p>
+                    </div>
+        """
 
-    html = get_header(title, client_badge, logo_text, extra_style)
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="slide-title-row animate-fade">
                 <h2 class="slide-main-title text-gradient-orange">{title}</h2>
@@ -517,6 +695,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
                         </div>
                         <input type="range" class="slider-input" id="roi-slider" min="{slider_min}" max="{slider_max}" value="{slider_default}">
                     </div>
+                    {translation_html}
                 </div>
 
                 <!-- 右側：動態結果 -->
@@ -560,7 +739,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
 
 def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     intro_text = slide.get("intro_text", "")
 
     extra_style = """
@@ -651,8 +830,24 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
             letter-spacing: 1px;
         }
     """
+    
+    translation_html = ""
+    translation_box = slide.get("translation_box", "")
+    if translation_box:
+        translation_html = f"""
+                    <div class="translation-box" style="margin-top: 16px; padding: 16px; background: rgba(0, 242, 254, 0.05); border-left: 4px solid var(--color-success); border-radius: 0 12px 12px 0; text-align: left;">
+                        <span style="font-size: 16px; font-weight: 700; color: var(--color-success); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">💡 非技術高管翻譯窗 (Layman Translation)</span>
+                        <p style="font-size: 18px; color: var(--color-text-muted); line-height: 1.6; margin: 0;">{translation_box}</p>
+                    </div>
+        """
+    else:
+        translation_html = f"""
+                    <div style="font-size: 22px; color: var(--phoenix-gold); font-weight: 600; line-height: 1.5;">
+                        💡 點擊右側降噪測試按鈕，可動態查看聲學波形在邊緣端被即時平滑過濾的動畫過程。
+                    </div>
+        """
 
-    html = get_header(title, client_badge, logo_text, extra_style)
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="slide-title-row animate-fade">
                 <h2 class="slide-main-title text-gradient-orange">{title}</h2>
@@ -665,9 +860,7 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
                         <h3 style="font-size: 34px; font-weight: 700; margin-bottom: 16px; color: var(--white);">技術實現：RNNoise 邊緣濾波</h3>
                         <p style="font-size: 24px; color: var(--gray-300); line-height: 1.7;">{intro_text}</p>
                     </div>
-                    <div style="font-size: 22px; color: var(--phoenix-gold); font-weight: 600; line-height: 1.5;">
-                        💡 點擊右側降噪測試按鈕，可動態查看聲學波形在邊緣端被即時平滑過濾的動畫過程。
-                    </div>
+                    {translation_html}
                 </div>
 
                 <!-- 右側：波形展示器 -->
@@ -715,7 +908,7 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
 
 def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     tabs = slide.get("tabs", [])
 
     extra_style = """
@@ -814,12 +1007,12 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
             width: 0%;
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .gantt-fill.orange { background: var(--phoenix-orange); }
-        .gantt-fill.teal { background: var(--phoenix-teal); }
-        .gantt-fill.gold { background: var(--phoenix-gold); }
+        .gantt-fill.orange { background: rgba(0, 242, 254, 1.0); box-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
+        .gantt-fill.teal { background: rgba(0, 242, 254, 0.6); }
+        .gantt-fill.gold { background: rgba(0, 242, 254, 0.25); }
     """
 
-    html = get_header(title, client_badge, logo_text, extra_style)
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="slide-title-row animate-fade">
                 <h2 class="slide-main-title text-gradient-orange">{title}</h2>
@@ -895,7 +1088,7 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
 
 def generate_next_steps(slide, client_badge, logo_text, page_num, total_pages):
     title = slide["title"]
-    subtitle = slide["subtitle"]
+    subtitle = slide.get("subtitle", "")
     card1_title = slide.get("card1_title", "Action 1")
     card1_desc = slide.get("card1_desc", "")
     card2_title = slide.get("card2_title", "Action 2")
@@ -982,14 +1175,33 @@ def generate_next_steps(slide, client_badge, logo_text, page_num, total_pages):
             letter-spacing: 0.5px;
         }
     """
+    
+    closing_html = ""
+    closing_quote = slide.get("closing_quote", "")
+    consultants = slide.get("consultants", "")
+    
+    cards_height = "520px"
+    if closing_quote:
+        cards_height = "430px"
+        closing_html = f"""
+            <div class="closing-banner animate-fade delay-3" style="margin-top: 32px; background: linear-gradient(90deg, rgba(255, 91, 53, 0.08) 0%, rgba(0, 242, 254, 0.02) 100%); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-family: 'Noto Serif TC', serif; font-size: 26px; font-style: italic; color: var(--color-text-muted); margin: 0; letter-spacing: 0.5px;">
+                    「 {closing_quote} 」
+                </p>
+                <div style="text-align: right; min-width: 320px;">
+                    <span style="font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--color-brand); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px;">PHOENIX AI LEAD CONSULTANTS</span>
+                    <span style="font-size: 20px; font-weight: 700; color: var(--color-text);">{consultants}</span>
+                </div>
+            </div>
+        """
 
-    html = get_header(title, client_badge, logo_text, extra_style)
+    html = get_header(title, client_badge, logo_text, page_num, total_pages, extra_style)
     html += f"""
             <div class="slide-title-row animate-fade">
                 <h2 class="slide-main-title text-gradient-orange">{title}</h2>
                 <p class="slide-subtitle">{subtitle}</p>
             </div>
-            <div class="cards-container">
+            <div class="cards-container" style="height: {cards_height};">
                 <!-- Action 1 -->
                 <div class="action-card animate-fade delay-1">
                     <div>
@@ -1018,6 +1230,7 @@ def generate_next_steps(slide, client_badge, logo_text, page_num, total_pages):
                     <span class="action-badge">ACCELERATION BENEFIT</span>
                 </div>
             </div>
+            {closing_html}
     """
     html += get_footer(page_num, total_pages)
     return html
@@ -1068,6 +1281,7 @@ def generate_index(slides, client_badge, logo_text, output_dir):
       border-radius: 12px;
       overflow: hidden;
       background: #000;
+      transform-origin: top left;
     }}
 
     iframe {{
@@ -1119,7 +1333,7 @@ def generate_index(slides, client_badge, logo_text, output_dir):
     <div class="progress-bar-container">
       <div class="progress-fill" id="progress-indicator"></div>
     </div>
-    <div class="control-hint">LEFT/RIGHT ARROWS OR SPACE TO NAVIGATE ｜ PRESS 'P' TO PRINT</div>
+    <div class="control-hint">← → SPACE NAVIGATE ｜ 'P' PRINT ｜ 'N' SPEAKER NOTES</div>
   </div>
 
   <script>
@@ -1152,8 +1366,18 @@ def generate_index(slides, client_badge, logo_text, output_dir):
       }}, 150);
     }}
 
-    // 鍵盤導航
+    // 鍵盤導航與 postMessage 雙向轉發監聽器 (繞過 Chrome file:/// 本地檔案 CORS 限制)
     window.addEventListener('keydown', function(e) {{
+      handleKeyboardNavigation(e);
+    }});
+
+    window.addEventListener('message', function(e) {{
+      if (e.data && e.data.type === 'keydown') {{
+        handleKeyboardNavigation(e.data);
+      }}
+    }});
+
+    function handleKeyboardNavigation(e) {{
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {{
         if (currentIndex < slides.length - 1) {{
           goToSlide(currentIndex + 1);
@@ -1163,10 +1387,17 @@ def generate_index(slides, client_badge, logo_text, output_dir):
           goToSlide(currentIndex - 1);
         }}
       }} else if (e.key === 'p' || e.key === 'P') {{
-        // 列印呼叫
-        frame.contentWindow.print();
+        // 透過 postMessage 叫 iframe 自己列印，避開 CORS 阻擋
+        try {{
+          frame.contentWindow.postMessage({{ type: 'print' }}, '*');
+        }} catch(err) {{}}
+      }} else if (e.key === 'n' || e.key === 'N') {{
+        // 透過 postMessage 叫 iframe 自己切換備忘錄，避開 CORS 阻擋
+        try {{
+          frame.contentWindow.postMessage({{ type: 'toggle-notes' }}, '*');
+        }} catch(err) {{}}
       }}
-    }});
+    }}
 
     // 全局防干擾聚焦
     window.addEventListener('click', () => {{
@@ -1179,6 +1410,7 @@ def generate_index(slides, client_badge, logo_text, output_dir):
       const w = window.innerWidth;
       const h = window.innerHeight;
       const scale = Math.min(w / 1920, h / 1080);
+      stage.style.transformOrigin = 'top left';
       stage.style.transform = `scale(${{scale}})`;
       stage.style.left = `${{(w - 1920 * scale) / 2}}px`;
       stage.style.top = `${{(h - 1080 * scale) / 2}}px`;
@@ -1196,6 +1428,7 @@ def generate_index(slides, client_badge, logo_text, output_dir):
     return html
 
 def compile_all(config_path):
+    global _slide_labels, _current_notes
     print("[Phoenix Slide Compiler] Start B2B luxury slide compilation engine...")
     
     with codecs.open(config_path, "r", "utf-8") as f:
@@ -1208,6 +1441,19 @@ def compile_all(config_path):
     slides = config["slides"]
     total_pages = len(slides)
     
+    # 執行品質門檻檢核：防呆最小頁數限制 (Claude Audit: Quality Gate)
+    min_slides = config.get("min_slides_required", 0)
+    if min_slides > 0 and total_pages < min_slides:
+        print(f"\n[Quality Gate Error] Critical Failure:")
+        print(f"  This corporate B2B case requires at least {min_slides} slides to maintain consulting depth.")
+        print(f"  Currently provided slides in JSON: {total_pages} pages.")
+        print(f"  Action Required: Please enrich your slide structure or adjust 'min_slides_required' in the JSON configuration.")
+        sys.exit(1)
+
+    
+    # Generate module-aware progress labels from JSON config (Claude Audit: 1.2)
+    _slide_labels = [s.get("progress_label", s["layout"][:4].upper()) for s in slides]
+    
     # 建立目錄
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -1218,6 +1464,7 @@ def compile_all(config_path):
         layout = slide["layout"]
         page_num = i + 1
         page_str = slide["page"]
+        _current_notes = slide.get("speaker_notes", "")
         
         print(f"[Compile] Compiling slide: {page_str}-{layout}.html (Page: {page_num}/{total_pages})")
         

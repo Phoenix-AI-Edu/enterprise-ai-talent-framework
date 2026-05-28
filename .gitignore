@@ -46,3 +46,8 @@ internal_admin/
 
 # Private B2B Client Presentation Folders (DLP Security Barrier)
 slides/
+
+# De-identification & PII raw data files
+scripts/raw_*.txt
+_C2_mapping_vault/
+

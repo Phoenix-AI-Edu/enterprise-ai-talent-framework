@@ -90,7 +90,7 @@
     <div class="progress-bar-container">
       <div class="progress-fill" id="progress-indicator"></div>
     </div>
-    <div class="control-hint">LEFT/RIGHT ARROWS OR SPACE TO NAVIGATE ｜ PRESS 'P' TO PRINT</div>
+    <div class="control-hint">← → SPACE NAVIGATE ｜ 'P' PRINT ｜ 'N' SPEAKER NOTES</div>
   </div>
 
   <script>
@@ -136,6 +136,12 @@
       } else if (e.key === 'p' || e.key === 'P') {
         // 列印呼叫
         frame.contentWindow.print();
+      } else if (e.key === 'n' || e.key === 'N') {
+        // Speaker Notes 切換
+        try {
+          var notesEl = frame.contentDocument.getElementById('speaker-notes');
+          if (notesEl) { notesEl.style.display = notesEl.style.display === 'none' ? 'block' : 'none'; }
+        } catch(err) {}
       }
     });
 

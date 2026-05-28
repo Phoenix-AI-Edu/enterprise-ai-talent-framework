@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>下一步推進行動 ｜ 服務業 AI 變革夥伴</title>
-    <!-- 引入 Outfit (標題) 與 Inter (內文) 高階字型 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- 引入 Outfit (標題) 與 Inter (內文) 及 Noto Serif TC (金句) 高階字型 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-midnight: #070913;
-            --white: #FFFFFF;
-            --gray-300: #F8FAFC; /* High-contrast bright slate white */
-            --gray-400: #E2E8F0; /* High-contrast bright slate grey-white */
-            --phoenix-orange: #FF5B35;
-            --phoenix-teal: #00F2FE;
-            --phoenix-gold: #F5A623;
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-text-muted: #E2E8F0;
+            --color-brand: #FF5B35;       /* Phoenix Orange for Logo, Headers, Modules */
+            --color-warning: #FF3B30;     /* Pure Red for Risks, Law violation, Traps */
+            --color-success: #00F2FE;     /* Vibrant Cyan/Teal for KPI, gains, success */
+            --color-info: #F5A623;        /* Gold for Special badges, Meng Consultant matching */
             --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15); /* High contrast */
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
+            
+            /* Legacy variables map to preserve compatibility */
+            --bg-midnight: var(--color-bg);
+            --white: var(--color-text);
+            --gray-300: var(--color-text-muted);
+            --gray-400: var(--color-text-muted);
+            --phoenix-orange: var(--color-brand);
+            --phoenix-teal: var(--color-success);
+            --phoenix-gold: var(--color-info);
         }
 
         * {
@@ -28,13 +37,66 @@
         }
 
         body {
-            background: var(--bg-midnight);
-            color: var(--white);
+            background: var(--color-bg);
+            color: var(--color-text);
             font-family: var(--font-body);
             width: 1920px;
             height: 1080px;
             overflow: hidden;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+        }
+
+        /* 中英混排標籤對齊工具類 (Claude Audit: 1.3) */
+        .en-label {
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-feature-settings: 'tnum' 1, 'kern' 1;
+        }
+
+        /* Speaker Notes 覆蓋層 — 按 N 鍵切換 (Claude Audit: Mechanism 5) */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+        .speaker-notes-overlay .notes-body li {
+            margin-bottom: 6px;
+            list-style: none;
+            padding-left: 20px;
+            position: relative;
+        }
+        .speaker-notes-overlay .notes-body li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-info);
         }
 
         /* 奢華流光背景 */
@@ -81,7 +143,7 @@
             font-family: var(--font-display);
             font-size: 17px; /* Increased */
             font-weight: 800;
-            color: var(--phoenix-orange);
+            color: var(--color-brand);
             border: 1px solid rgba(255, 91, 53, 0.3);
             background: rgba(255, 91, 53, 0.06);
             padding: 8px 18px; /* Increased padding */
@@ -93,18 +155,45 @@
             font-family: var(--font-display);
             font-size: 20px; /* Increased */
             font-weight: 700;
-            color: var(--white);
+            color: var(--color-text);
             letter-spacing: 0.5px;
         }
 
         .nav-right-tag {
             font-size: 17px; /* Increased */
-            color: var(--phoenix-teal);
+            color: var(--color-success);
             font-weight: 600;
             background: rgba(0, 242, 254, 0.05);
             border: 1px solid rgba(0, 242, 254, 0.15);
             padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
+        }
+
+        /* Progress timeline styling */
+        .progress-dots-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+        .progress-dot-segment {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+        .progress-dot-segment.active {
+            color: var(--color-success);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+        .progress-dot-connector {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* 頁面主要內容 */
@@ -124,26 +213,26 @@
             padding-top: 24px;
             margin-top: 40px;
             font-size: 16px; /* Increased */
-            color: var(--gray-400);
+            color: var(--color-text-muted);
         }
 
         .security-tag {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--phoenix-gold);
+            color: var(--color-info);
             font-weight: 600;
         }
 
         /* 漸變文字與特效 */
         .text-gradient-orange {
-            background: linear-gradient(135deg, var(--white) 30%, var(--phoenix-orange) 100%);
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-brand) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .text-gradient-teal {
-            background: linear-gradient(135deg, var(--white) 30%, var(--phoenix-teal) 100%);
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-success) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -247,8 +336,9 @@
         <header class="animate-fade">
             <div class="logo-group">
                 <span class="brand-badge">YUEPIN GROUP</span>
-                <span class="logo-txt">PHOENIX AI 顧問 x [連鎖餐飲暨零售集團]</span>
+                <span class="logo-txt">PHOENIX AI 顧問 x [連鎖餐飲暨零售集團 (3000人規模)]集團</span>
             </div>
+            <div class="progress-dots-row"><div class="progress-dot-segment ">M01</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M02</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M03</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M04</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M05</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M06</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">M07</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">SELF</div><div class="progress-dot-connector"></div><div class="progress-dot-segment active">NEXT</div></div>
             <div class="nav-right-tag">B2B CORPORATE AI CONSULTING</div>
         </header>
         <div class="content-body">
@@ -257,7 +347,7 @@
                 <h2 class="slide-main-title text-gradient-orange">下一步推進行動 ｜ 服務業 AI 變革夥伴</h2>
                 <p class="slide-subtitle">開啟高效落地第一步，累積去識別化標竿案例，限時折抵方案啟動</p>
             </div>
-            <div class="cards-container">
+            <div class="cards-container" style="height: 430px;">
                 <!-- Action 1 -->
                 <div class="action-card animate-fade delay-1">
                     <div>
@@ -286,15 +376,32 @@
                     <span class="action-badge">ACCELERATION BENEFIT</span>
                 </div>
             </div>
+            
+            <div class="closing-banner animate-fade delay-3" style="margin-top: 32px; background: linear-gradient(90deg, rgba(255, 91, 53, 0.08) 0%, rgba(0, 242, 254, 0.02) 100%); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-family: 'Noto Serif TC', serif; font-size: 26px; font-style: italic; color: var(--color-text-muted); margin: 0; letter-spacing: 0.5px;">
+                    「 這不是寫給學術界的教科書，而是一套寫給變革者看的戰術手冊 」
+                </p>
+                <div style="text-align: right; min-width: 320px;">
+                    <span style="font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--color-brand); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px;">PHOENIX AI LEAD CONSULTANTS</span>
+                    <span style="font-size: 20px; font-weight: 700; color: var(--color-text);">孟淑慧 & 陳文家</span>
+                </div>
+            </div>
+        
     
         </div>
+        
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 10 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body"><ul><li><b>成交引導</b>：「三個 Action，我建議的優先順序是 1→2→3。工作坊可以在下週安排。」</li><li><b>強調折抵</b>：「Action 3 的 100% 全額折抵是限定前 3 家的早鳥方案——因為我們需要累積去識別化的標竿案例。」</li><li><b>收尾金句</b>：用手指向底部那句話，沉默 3 秒讓在場的人讀完。然後說：「謝謝各位的時間，我們準備好回答任何問題。」</li></ul></div>
+        </div>
+        
         <footer class="animate-fade delay-3">
             <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
             <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 10 OF 10</div>
         </footer>
     </div>
 
-    <!-- 原生無干擾等比例縮放引擎 (Fit Engine) -->
+    <!-- 原生無干擾等比例縮放引擎 + Speaker Notes Toggle -->
     <script>
         function fit() {
             const stage = document.getElementById('stage');
@@ -309,6 +416,14 @@
         }
         window.addEventListener('resize', fit);
         window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'n' || e.key === 'N') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            }
+        });
+    
     </script>
 </body>
 </html>

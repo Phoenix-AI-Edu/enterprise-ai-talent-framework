@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://phoenix-ai-edu/schemas/slides_config.schema.json",
+  "title": "Phoenix AI Slides Config Schema",
+  "description": "鳳凰 AI B2B 簡報中央化設定檔結構驗證。每種 layout 定義各自的必填欄位，編譯前以此把關，杜絕欄位缺漏或型別錯誤。v2026.06 更新：補上 next-steps 的 closing_quote / consultants，並新增 audience 公開版數字級距規則。",
+  "type": "object",
+  "required": ["client_name", "output_dir", "min_slides_required", "slides"],
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "type": "string",
+      "enum": ["internal", "public"],
+      "default": "internal",
+      "description": "交付對象。internal=內部/客戶版（ROI 可用精確絕對值）；public=公開教材版（ROI 禁用可反推的精確絕對值，強制改用級距字串，如 '40-50 萬'）。"
+    },
+    "client_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "客戶內部名稱（不對外顯示於成品）"
+    },
+    "client_badge": {
+      "type": "string",
+      "description": "封面右上識別標籤，如 YUEPIN GROUP"
+    },
+    "logo_text": {
+      "type": "string"
+    },
+    "output_dir": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^slides/[A-Za-z0-9_\\-]+/?$",
+      "description": "輸出目錄，必須位於 slides/ 下（資安：該目錄受 .gitignore 保護）"
+    },
+    "theme": {
+      "type": "string"
+    },
+    "min_slides_required": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "品質防線安全鎖：slides 數量低於此值編譯器即中斷"
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "description": "投影片物件陣列",
+      "items": {
+        "$ref": "#/definitions/slide"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "comment": "公開版級距規則：當 audience=public 時，所有 interactive-roi 頁的 cost_base / num_workers 禁止為數字，必須是級距字串，以防由精確值反推客戶身分。",
+      "if": {
+        "properties": { "audience": { "const": "public" } },
+        "required": ["audience"]
+      },
+      "then": {
+        "properties": {
+          "slides": {
+            "type": "array",
+            "items": {
+              "if": {
+                "properties": { "layout": { "const": "interactive-roi" } }
+              },
+              "then": {
+                "properties": {
+                  "cost_base": {
+                    "type": "string",
+                    "pattern": "^[0-9]+\\s*[-~–至]\\s*[0-9]+\\s*(?:萬|千|元|K|M)?$",
+                    "description": "公開版：必須為級距字串，如 '40-50 萬'、'400~500 K'。禁止精確絕對值。"
+                  },
+                  "num_workers": {
+                    "type": "string",
+                    "pattern": "^[0-9]+\\s*[-~–至]\\s*[0-9]+\\s*(?:人|家|店)?$",
+                    "description": "公開版：必須為級距字串，如 '400-500 家'。禁止精確人數。"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "slide": {
+      "type": "object",
+      "required": ["page", "layout"],
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "type": "string",
+          "pattern": "^[0-9]{2}$",
+          "description": "兩位數頁碼字串，如 01、02"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "cover",
+            "dual-track",
+            "interactive-roi",
+            "interactive-roadmap",
+            "next-steps"
+          ]
+        },
+        "progress_label": {
+          "type": "string",
+          "description": "頂部進度條標籤，如 M01、SELF、NEXT"
+        },
+        "speaker_notes": {
+          "type": "string",
+          "description": "演講者注釋（按 N 鍵顯示）。空字串會在驗證時觸發警告"
+        },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "version": { "type": "string" },
+        "date": { "type": "string" },
+        "badge_left": { "type": "string" },
+        "title_left": { "type": "string" },
+        "content_left": { "type": "string" },
+        "badge_right": { "type": "string" },
+        "title_right": { "type": "string" },
+        "content_right": { "type": "string" },
+        "intro_text": { "type": "string" },
+        "translation_box": { "type": "string" },
+        "slider_min": { "type": "number" },
+        "slider_max": { "type": "number" },
+        "slider_default": { "type": "number" },
+        "cost_base": { "type": ["number", "string"] },
+        "num_workers": { "type": ["integer", "string"] },
+        "tabs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        "card1_title": { "type": "string" },
+        "card1_desc": { "type": "string" },
+        "card2_title": { "type": "string" },
+        "card2_desc": { "type": "string" },
+        "card3_title": { "type": "string" },
+        "card3_desc": { "type": "string" },
+        "closing_quote": { "type": "string" },
+        "consultants": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "layout": { "const": "cover" } }
+          },
+          "then": {
+            "required": ["title", "subtitle"],
+            "properties": {
+              "title": { "minLength": 1 },
+              "subtitle": { "minLength": 1 },
+              "date": { "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "layout": { "const": "dual-track" } }
+          },
+          "then": {
+            "required": [
+              "title",
+              "badge_left", "title_left", "content_left",
+              "badge_right", "title_right", "content_right"
+            ],
+            "properties": {
+              "title": { "minLength": 1 },
+              "badge_left": { "minLength": 1 },
+              "title_left": { "minLength": 1 },
+              "content_left": { "minLength": 1 },
+              "badge_right": { "minLength": 1 },
+              "title_right": { "minLength": 1 },
+              "content_right": { "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "layout": { "const": "interactive-roi" } }
+          },
+          "then": {
+            "required": [
+              "title", "slider_min", "slider_max",
+              "slider_default", "cost_base", "num_workers"
+            ],
+            "properties": {
+              "title": { "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "layout": { "const": "interactive-roadmap" } }
+          },
+          "then": {
+            "required": ["title", "tabs"],
+            "properties": {
+              "title": { "minLength": 1 },
+              "tabs": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["name", "content"],
+                  "properties": {
+                    "name": { "minLength": 1 },
+                    "content": { "minLength": 1 }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "layout": { "const": "next-steps" } }
+          },
+          "then": {
+            "required": [
+              "title",
+              "card1_title", "card1_desc",
+              "card2_title", "card2_desc",
+              "card3_title", "card3_desc",
+              "closing_quote", "consultants"
+            ],
+            "properties": {
+              "title": { "minLength": 1 },
+              "card1_title": { "minLength": 1 },
+              "card1_desc": { "minLength": 1 },
+              "card2_title": { "minLength": 1 },
+              "card2_desc": { "minLength": 1 },
+              "card3_title": { "minLength": 1 },
+              "card3_desc": { "minLength": 1 },
+              "closing_quote": { "minLength": 1 },
+              "consultants": { "minLength": 1 }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
