@@ -24,8 +24,8 @@ def get_header(title, client_badge, logo_text, extra_style=""):
         :root {{
             --bg-midnight: #070913;
             --white: #FFFFFF;
-            --gray-300: #CBD5E1;
-            --gray-400: #9CA3AF;
+            --gray-300: #F8FAFC; /* High-contrast bright slate white */
+            --gray-400: #E2E8F0; /* High-contrast bright slate grey-white */
             --phoenix-orange: #FF5B35;
             --phoenix-teal: #00F2FE;
             --phoenix-gold: #F5A623;
@@ -93,31 +93,31 @@ def get_header(title, client_badge, logo_text, extra_style=""):
 
         .brand-badge {{
             font-family: var(--font-display);
-            font-size: 13px;
+            font-size: 17px; /* Increased */
             font-weight: 800;
             color: var(--phoenix-orange);
             border: 1px solid rgba(255, 91, 53, 0.3);
             background: rgba(255, 91, 53, 0.06);
-            padding: 6px 14px;
+            padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
             letter-spacing: 1px;
         }}
 
         .logo-txt {{
             font-family: var(--font-display);
-            font-size: 15px;
+            font-size: 20px; /* Increased */
             font-weight: 700;
             color: var(--white);
             letter-spacing: 0.5px;
         }}
 
         .nav-right-tag {{
-            font-size: 13px;
+            font-size: 17px; /* Increased */
             color: var(--phoenix-teal);
             font-weight: 600;
             background: rgba(0, 242, 254, 0.05);
             border: 1px solid rgba(0, 242, 254, 0.15);
-            padding: 6px 14px;
+            padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
         }}
 
@@ -137,7 +137,7 @@ def get_header(title, client_badge, logo_text, extra_style=""):
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 24px;
             margin-top: 40px;
-            font-size: 13px;
+            font-size: 16px; /* Increased */
             color: var(--gray-400);
         }}
 
@@ -244,17 +244,17 @@ def generate_cover(slide, client_badge, logo_text, page_num, total_pages):
         }
         .cover-title {
             font-family: var(--font-display);
-            font-size: 56px;
+            font-size: 76px; /* Optimized massive executive scale */
             font-weight: 800;
             line-height: 1.25;
             margin-bottom: 24px;
             max-width: 1400px;
         }
         .cover-sub {
-            font-size: 24px;
+            font-size: 34px; /* Optimized massive executive scale */
             color: var(--gray-300);
             letter-spacing: 1px;
-            max-width: 900px;
+            max-width: 1100px;
             line-height: 1.6;
         }
     """
@@ -286,12 +286,12 @@ def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
         }
         .slide-main-title {
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }
         .slide-subtitle {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }
         .dual-grid {
@@ -326,9 +326,9 @@ def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
         .card-badge {
             align-self: flex-start;
             font-family: var(--font-display);
-            font-size: 12px;
+            font-size: 18px; /* Optimized massive executive scale */
             font-weight: 800;
-            padding: 6px 14px;
+            padding: 10px 20px; /* Increased padding */
             border-radius: 6px;
             margin-bottom: 24px;
             letter-spacing: 0.5px;
@@ -345,13 +345,13 @@ def generate_dual_track(slide, client_badge, logo_text, page_num, total_pages):
         }
         .card-title {
             font-family: var(--font-display);
-            font-size: 26px;
+            font-size: 38px; /* Optimized massive executive scale */
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.3;
         }
         .card-content {
-            font-size: 17px;
+            font-size: 25px; /* Optimized massive executive scale */
             color: var(--gray-300);
             line-height: 1.7;
         }
@@ -397,12 +397,12 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
         }}
         .slide-main-title {{
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }}
         .slide-subtitle {{
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }}
         .roi-wrapper {{
@@ -422,7 +422,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
             backdrop-filter: blur(16px);
         }}
         .roi-intro-txt {{
-            font-size: 16.5px;
+            font-size: 24px; /* Optimized massive executive scale */
             color: var(--gray-300);
             line-height: 1.7;
             margin-bottom: 24px;
@@ -433,28 +433,28 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
         .slider-label-row {{
             display: flex;
             justify-content: space-between;
-            font-size: 15px;
+            font-size: 22px; /* Optimized massive executive scale */
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--phoenix-gold);
         }}
         .slider-input {{
             width: 100%;
-            height: 8px;
+            height: 10px; /* Scaled up */
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            border-radius: 5px;
             outline: none;
             -webkit-appearance: none;
             cursor: pointer;
         }}
         .slider-input::-webkit-slider-thumb {{
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 32px; /* Increased size */
+            height: 32px; /* Increased size */
             border-radius: 50%;
             background: var(--phoenix-gold);
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(245, 166, 35, 0.8);
+            box-shadow: 0 0 15px rgba(245, 166, 35, 0.8);
             transition: transform 0.1s ease;
         }}
         .slider-input::-webkit-slider-thumb:hover {{
@@ -479,7 +479,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
             padding: 0; margin: 0;
         }}
         .result-lbl {{
-            font-size: 14px;
+            font-size: 20px; /* Optimized massive executive scale */
             color: var(--gray-400);
             text-transform: uppercase;
             letter-spacing: 0.8px;
@@ -487,7 +487,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
         }}
         .result-val {{
             font-family: var(--font-display);
-            font-size: 44px;
+            font-size: 58px; /* Optimized massive executive scale */
             font-weight: 800;
             color: var(--white);
         }}
@@ -507,13 +507,13 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
                 <!-- 左側：滑塊與引言 -->
                 <div class="calculator-panel animate-fade delay-1">
                     <div>
-                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--white);">實時精算模擬器</h3>
+                        <h3 style="font-size: 34px; font-weight: 700; margin-bottom: 16px; color: var(--white);">實時精算模擬器</h3>
                         <p class="roi-intro-txt">{intro_text}</p>
                     </div>
                     <div class="slider-section">
                         <div class="slider-label-row">
                             <span>製程工時省減率：</span>
-                            <span id="slider-val-display">{slider_default}%</span>
+                            <span id="slider-val-display" style="font-size: 26px; font-weight: 800; color: var(--phoenix-gold);">{slider_default}%</span>
                         </div>
                         <input type="range" class="slider-input" id="roi-slider" min="{slider_min}" max="{slider_max}" value="{slider_default}">
                     </div>
@@ -527,7 +527,7 @@ def generate_interactive_roi(slide, client_badge, logo_text, page_num, total_pag
                     </div>
                     <div class="result-item">
                         <div class="result-lbl">廠區規模 (以 {num_workers} 人為基準)</div>
-                        <div class="result-val" style="font-size: 28px; color: var(--phoenix-teal);">{num_workers} 名資深師傅 / 製程產線</div>
+                        <div class="result-val" style="font-size: 38px; color: var(--phoenix-teal); font-weight: 700;">{num_workers} 名資深師傅 / 製程產線</div>
                     </div>
                     <div class="result-item">
                         <div class="result-lbl">廠區每年節省總額 (Total ROI)</div>
@@ -569,12 +569,12 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
         }
         .slide-main-title {
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }
         .slide-subtitle {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }
         .wave-wrapper {
@@ -609,9 +609,9 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
             background: rgba(0, 242, 254, 0.08);
             border: 1px solid rgba(0, 242, 254, 0.25);
             color: var(--phoenix-teal);
-            padding: 16px 36px;
+            padding: 18px 40px; /* Increased padding */
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 24px; /* Optimized massive executive scale */
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -645,7 +645,7 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
             justify-content: center;
         }
         .status-txt {
-            font-size: 16px;
+            font-size: 24px; /* Optimized massive executive scale */
             font-weight: 700;
             color: var(--phoenix-teal);
             letter-spacing: 1px;
@@ -662,10 +662,10 @@ def generate_interactive_wave(slide, client_badge, logo_text, page_num, total_pa
                 <!-- 左側：技術說明 -->
                 <div class="desc-panel animate-fade delay-1">
                     <div>
-                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--white);">技術實現：RNNoise 邊緣濾波</h3>
-                        <p style="font-size: 16.5px; color: var(--gray-300); line-height: 1.7;">{intro_text}</p>
+                        <h3 style="font-size: 34px; font-weight: 700; margin-bottom: 16px; color: var(--white);">技術實現：RNNoise 邊緣濾波</h3>
+                        <p style="font-size: 24px; color: var(--gray-300); line-height: 1.7;">{intro_text}</p>
                     </div>
-                    <div style="font-size: 14.5px; color: var(--phoenix-gold); font-weight: 600; line-height: 1.5;">
+                    <div style="font-size: 22px; color: var(--phoenix-gold); font-weight: 600; line-height: 1.5;">
                         💡 點擊右側降噪測試按鈕，可動態查看聲學波形在邊緣端被即時平滑過濾的動畫過程。
                     </div>
                 </div>
@@ -724,12 +724,12 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
         }
         .slide-main-title {
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }
         .slide-subtitle {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }
         .roadmap-container {
@@ -748,9 +748,9 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
             color: var(--gray-300);
-            padding: 14px 28px;
+            padding: 16px 32px; /* Increased padding */
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 22px; /* Optimized massive executive scale */
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -775,7 +775,7 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
             position: relative;
         }
         .roadmap-card-content {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-300);
             line-height: 1.8;
         }
@@ -793,14 +793,14 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
             gap: 16px;
         }
         .gantt-lbl {
-            width: 140px;
-            font-size: 13px;
+            width: 250px; /* Increased width */
+            font-size: 22px; /* Optimized massive executive scale */
             color: var(--gray-400);
             font-weight: 600;
         }
         .gantt-bar {
-            height: 12px;
-            border-radius: 6px;
+            height: 14px; /* Increased thickness */
+            border-radius: 7px;
             background: rgba(255,255,255,0.05);
             flex-grow: 1;
             position: relative;
@@ -808,7 +808,7 @@ def generate_interactive_roadmap(slide, client_badge, logo_text, page_num, total
         }
         .gantt-fill {
             height: 100%;
-            border-radius: 6px;
+            border-radius: 7px;
             position: absolute;
             left: 0; top: 0;
             width: 0%;
@@ -909,12 +909,12 @@ def generate_next_steps(slide, client_badge, logo_text, page_num, total_pages):
         }
         .slide-main-title {
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }
         .slide-subtitle {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }
         .cards-container {
@@ -954,29 +954,29 @@ def generate_next_steps(slide, client_badge, logo_text, page_num, total_pages):
             box-shadow: 0 20px 40px rgba(245, 166, 35, 0.08);
         }
         .action-icon {
-            font-size: 44px;
+            font-size: 54px; /* Scaled up from 44px */
             margin-bottom: 24px;
         }
         .action-title-txt {
             font-family: var(--font-display);
-            font-size: 23px;
+            font-size: 32px; /* Optimized massive executive scale */
             font-weight: 700;
             color: var(--white);
             margin-bottom: 16px;
         }
         .action-desc {
-            font-size: 15px;
+            font-size: 24px; /* Optimized massive executive scale */
             color: var(--gray-300);
             line-height: 1.6;
         }
         .action-badge {
             align-self: flex-start;
-            font-size: 11px;
+            font-size: 18px; /* Optimized massive executive scale */
             font-weight: 700;
             color: var(--phoenix-gold);
             background: rgba(245, 166, 35, 0.08);
             border: 1px solid rgba(245, 166, 35, 0.2);
-            padding: 4px 10px;
+            padding: 8px 16px; /* Increased padding */
             border-radius: 4px;
             margin-top: 16px;
             letter-spacing: 0.5px;

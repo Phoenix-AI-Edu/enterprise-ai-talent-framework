@@ -10,8 +10,8 @@
         :root {
             --bg-midnight: #070913;
             --white: #FFFFFF;
-            --gray-300: #CBD5E1;
-            --gray-400: #9CA3AF;
+            --gray-300: #F8FAFC; /* High-contrast bright slate white */
+            --gray-400: #E2E8F0; /* High-contrast bright slate grey-white */
             --phoenix-orange: #FF5B35;
             --phoenix-teal: #00F2FE;
             --phoenix-gold: #F5A623;
@@ -79,31 +79,31 @@
 
         .brand-badge {
             font-family: var(--font-display);
-            font-size: 13px;
+            font-size: 17px; /* Increased */
             font-weight: 800;
             color: var(--phoenix-orange);
             border: 1px solid rgba(255, 91, 53, 0.3);
             background: rgba(255, 91, 53, 0.06);
-            padding: 6px 14px;
+            padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
             letter-spacing: 1px;
         }
 
         .logo-txt {
             font-family: var(--font-display);
-            font-size: 15px;
+            font-size: 20px; /* Increased */
             font-weight: 700;
             color: var(--white);
             letter-spacing: 0.5px;
         }
 
         .nav-right-tag {
-            font-size: 13px;
+            font-size: 17px; /* Increased */
             color: var(--phoenix-teal);
             font-weight: 600;
             background: rgba(0, 242, 254, 0.05);
             border: 1px solid rgba(0, 242, 254, 0.15);
-            padding: 6px 14px;
+            padding: 8px 18px; /* Increased padding */
             border-radius: 30px;
         }
 
@@ -123,7 +123,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 24px;
             margin-top: 40px;
-            font-size: 13px;
+            font-size: 16px; /* Increased */
             color: var(--gray-400);
         }
 
@@ -166,12 +166,12 @@
         }
         .slide-main-title {
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 52px; /* Optimized massive executive scale */
             font-weight: 800;
             margin-bottom: 8px;
         }
         .slide-subtitle {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-400);
         }
         .roadmap-container {
@@ -190,9 +190,9 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
             color: var(--gray-300);
-            padding: 14px 28px;
+            padding: 16px 32px; /* Increased padding */
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 22px; /* Optimized massive executive scale */
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -217,7 +217,7 @@
             position: relative;
         }
         .roadmap-card-content {
-            font-size: 18px;
+            font-size: 26px; /* Optimized massive executive scale */
             color: var(--gray-300);
             line-height: 1.8;
         }
@@ -235,14 +235,14 @@
             gap: 16px;
         }
         .gantt-lbl {
-            width: 140px;
-            font-size: 13px;
+            width: 250px; /* Increased width */
+            font-size: 22px; /* Optimized massive executive scale */
             color: var(--gray-400);
             font-weight: 600;
         }
         .gantt-bar {
-            height: 12px;
-            border-radius: 6px;
+            height: 14px; /* Increased thickness */
+            border-radius: 7px;
             background: rgba(255,255,255,0.05);
             flex-grow: 1;
             position: relative;
@@ -250,7 +250,7 @@
         }
         .gantt-fill {
             height: 100%;
-            border-radius: 6px;
+            border-radius: 7px;
             position: absolute;
             left: 0; top: 0;
             width: 0%;
