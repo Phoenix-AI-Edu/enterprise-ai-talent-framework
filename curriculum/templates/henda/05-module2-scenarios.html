@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組二 ｜ 語音 AI 三選一試點場景與資料流架構</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 02 (Part 2) ｜ SLIDE 5</div>
+            <h2 class="slide-title">模組二 ｜ 語音 AI 三選一試點場景與資料流架構</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%;">
+        <!-- 左欄：三大語音試點場景 (精簡文字，點擊連動右側沙盒) -->
+        <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3 class="panel-title">現場「解放雙手」三大語音試點場景 <span>(點擊模擬執行)</span></h3>
+                <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+                    <div onclick="runSandbox('A')" id="cardA" style="background: rgba(0,242,254,0.06); border: 2px solid var(--secondary-accent); padding: 18px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <strong style="color: var(--secondary-accent); font-size: 22px; display: block; margin-bottom: 4px;">場景 A ｜ 換模 SOP 語音導引</strong>
+                        <span style="font-size: 18px; color: #FFF; line-height: 1.6; display: block;">
+                            新進師傅更換 M10 螺絲模具時，耳機裡的 AI 語音導引每一步鎖緊力矩，喊「下一個」繼續。
+                        </span>
+                    </div>
+                    <div onclick="runSandbox('B')" id="cardB" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <strong style="color: var(--primary-accent); font-size: 22px; display: block; margin-bottom: 4px;">場景 B ｜ 異常通報與語音即時派工</strong>
+                        <span style="font-size: 18px; color: #FFF; line-height: 1.6; display: block;">
+                            師傅聽到機台異音，喊一句：「3 號打頭機異音，疑似沖棒裂。」系統在 MES 自動派工建單。
+                        </span>
+                    </div>
+                    <div onclick="runSandbox('C')" id="cardC" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <strong style="color: #A855F7; font-size: 22px; display: block; margin-bottom: 4px;">場景 C ｜ 現場歷史障礙快速語音問答</strong>
+                        <span style="font-size: 18px; color: #FFF; line-height: 1.6; display: block;">
+                            「上次 SUS304 搓牙崩牙是怎麼解的？」AI 自動翻查歷史排障報告並即時用語音播報。
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>💡 現場驗收指標：</strong> 新人上崗第一天，無需人員現場陪同，完全靠語音引導順利完成換模。
+            </div>
+        </div>
+        
+        <!-- 右欄：語音 RAG 沙盒模擬終端 (高對比度，大字體，動態輸出) -->
+        <div class="panel animate-fade delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-right: 5px solid var(--secondary-accent);">
+            <div>
+                <h3 class="panel-title teal">RAG 實時資訊流 ─ 沙盒模擬器</h3>
+                
+                <!-- 沙盒終端機 -->
+                <div style="background: #000; border: 2px solid var(--glass-border); border-radius: 15px; padding: 25px; height: 350px; font-family: monospace; font-size: 18px; display: flex; flex-direction: column; gap: 15px; color: #00FF66;" id="sandboxTerminal">
+                    <div><span style="color:#FFF;">[系統監控]</span> 語音 RAG 沙盒已就緒，請點擊左側場景...</div>
+                    <div style="color: var(--secondary-accent); font-weight: bold; font-size: 20px;">[師傅語音輸入]:</div>
+                    <div id="termInput" style="color: #FFF; padding-left: 20px;">「師傅喊：『下一步』」</div>
+                    <div style="color: #FF5B35; font-weight: bold; font-size: 20px;">[中央 RAG 檢索]:</div>
+                    <div id="termRAG" style="color: #CBD5E1; padding-left: 20px;">檢索 M10模具換模手冊 ➔ 步驟 3/8: 清潔模仁及沖棒公差。</div>
+                    <div style="color: #A855F7; font-weight: bold; font-size: 20px;">[0.8秒實時語音播報 (TTS)]:</div>
+                    <div id="termOutput" style="color: #00FF66; padding-left: 20px;">🔊 「師傅，第三步，請用乾淨棉布將模仁內腔擦拭乾淨，並檢查沖棒間隙。」</div>
+                </div>
+            </div>
+            
+            <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
+                <strong>💡 [南部聚落]國語優勢：</strong> 無痛降噪與術語微調，消除了一線藍領移工與師傅對新設備的抗拒心理。
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const sandboxData = {
+            A: {
+                title: "場景 A ｜ 換模 SOP 語音導引",
+                input: "「師傅喊：『下一步』」",
+                rag: "檢索 M10 模具換模 SOP ➔ 步驟 3/8: 清潔模仁及檢查沖棒間隙。",
+                output: "🔊 「師傅，第三步，請用乾淨棉布將模仁內腔擦拭乾淨，並檢查打頭針鎖緊間隙。」"
+            },
+            B: {
+                title: "場景 B ｜ 異常通報與語音即時派工",
+                input: "「師傅喊：『3號機疑似打頭針斷裂』」",
+                rag: "觸發異常特徵匹配 ➔ 自動寫入 MES 派工系統 ➔ 建立保全維修工單。",
+                output: "🔊 「收到！3號冷鍛機異常已立案，保全維修課已收到簡訊通報，預計5分鐘內到達。」"
+            },
+            C: {
+                title: "場景 C ｜ 現場歷史障礙快速語音問答",
+                input: "「師傅問：『SUS304 不鏽鋼搓牙崩牙怎麼辦？』」",
+                rag: "檢索歷史排障報告 ➔ 提取 2025.10 [南部聚落]廠搓牙事故 ➔ 判定崩牙肇因。",
+                output: "🔊 「師傅，根據三個月前紀錄，建議將滾牙輪轉速調降 5%，並改用極壓型二號成型油。」"
+            }
+        };
+        
+        function runSandbox(scene) {
+            // 變更卡片高亮
+            ['A', 'B', 'C'].forEach(s => {
+                const card = document.getElementById('card' + s);
+                if (s === scene) {
+                    card.style.background = s === 'A' ? 'rgba(0,242,254,0.06)' : (s === 'B' ? 'rgba(255,91,53,0.06)' : 'rgba(168,85,247,0.06)');
+                    card.style.borderColor = s === 'A' ? 'var(--secondary-accent)' : (s === 'B' ? 'var(--primary-accent)' : '#A855F7');
+                    card.style.borderWidth = '2px';
+                } else {
+                    card.style.background = 'rgba(255,255,255,0.02)';
+                    card.style.borderColor = 'var(--glass-border)';
+                    card.style.borderWidth = '1px';
+                }
+            });
+            
+            // 變更終端機內容
+            document.getElementById('termInput').innerText = sandboxData[scene].input;
+            document.getElementById('termRAG').innerText = sandboxData[scene].rag;
+            document.getElementById('termOutput').innerText = sandboxData[scene].output;
+        }
+    </script>
+
+    </div>
+</body>
+</html>

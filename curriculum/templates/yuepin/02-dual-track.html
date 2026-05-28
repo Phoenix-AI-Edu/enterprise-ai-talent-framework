@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[連鎖餐飲暨零售集團 (3000人規模)] AI 營運落地「雙軌分流」學習地圖</title>
+    <!-- 引入高階字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9AA8;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 背景流光與微幅網格 */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+
+        .glow-radial {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1200px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.03) 0%, rgba(0, 242, 254, 0.02) 50%, transparent 100%);
+            filter: blur(80px);
+            z-index: 2;
+        }
+
+        /* 內容容器 */
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 24px;
+        }
+
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #C2CFE0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-watermark::before {
+            content: '🦅';
+        }
+
+        /* 主要內容網格 */
+        .content-grid {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+            height: 720px;
+        }
+
+        .track-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .track-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, transparent);
+            transition: all 0.3s;
+        }
+
+        .track-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .track-card.left:hover::before {
+            background: linear-gradient(90deg, var(--primary-accent), #FF8A00);
+        }
+
+        .track-card.right:hover::before {
+            background: linear-gradient(90deg, var(--secondary-accent), #00A3FF);
+        }
+
+        .card-top {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .track-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .track-badge {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #E2ECF6;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .track-duration {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .track-duration.orange { color: var(--primary-accent); }
+        .track-duration.teal { color: var(--secondary-accent); }
+
+        .track-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .track-target {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .track-target strong {
+            color: #E2ECF6;
+        }
+
+        /* 課程特色列表 */
+        .syllabus-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .syllabus-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .item-num {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .track-card.left .item-num {
+            background: rgba(255, 91, 53, 0.1);
+            color: var(--primary-accent);
+        }
+
+        .track-card.right .item-num {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--secondary-accent);
+        }
+
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #E2ECF6;
+        }
+
+        .item-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* 底部格言 */
+        .card-bottom-metaphor {
+            font-size: 14px;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.01);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 3px solid;
+            margin-top: 20px;
+        }
+
+        .track-card.left .card-bottom-metaphor {
+            border-left-color: var(--primary-accent);
+        }
+
+        .track-card.right .card-bottom-metaphor {
+            border-left-color: var(--secondary-accent);
+        }
+
+        /* 微動畫 */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-card {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .delay-card-1 { animation-delay: 0.1s; }
+        .delay-card-2 { animation-delay: 0.25s; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+
+    <!-- 頂部 Header -->
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 01 ｜ 雙軌分流學習地圖</div>
+            <h2 class="slide-title">[連鎖餐飲暨零售集團 (3000人規模)] AI 營運落地「雙軌分流」學習地圖</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+
+    <!-- 中部 雙軌分流網格 -->
+    <div class="content-grid">
+        <!-- 軌道一：總部與決策 -->
+        <div class="track-card left animate-card delay-card-1">
+            <div class="card-top">
+                <div class="track-header">
+                    <span class="track-badge">總部幕僚與 C-Suite 決策軌</span>
+                    <span class="track-duration orange">12 Hours 實戰工作坊</span>
+                </div>
+                <h3 class="track-title">方案 B · 決策與變革重塑專班</h3>
+                <div class="track-target">
+                    <strong>培訓對象：</strong> 品牌總經理 (GM)、營運長、CDO、HR長、CFO、店長與核心幕僚
+                </div>
+                
+                <div class="syllabus-list">
+                    <div class="syllabus-item">
+                        <span class="item-num">Unit 1</span>
+                        <div class="item-content">
+                            <span class="item-title">2026 AI 戰略與 4+1 畫布實作</span>
+                            <span class="item-desc">盤點[連鎖餐飲暨零售集團 (3000人規模)]/電商/零售 20 大潛力場景，產出 90 天 Quick-Win 路線圖。</span>
+                        </div>
+                    </div>
+                    <div class="syllabus-item">
+                        <span class="item-num">Unit 2</span>
+                        <div class="item-content">
+                            <span class="item-title">AI SaaS 採購財務與 Token 網閘</span>
+                            <span class="item-desc">精算 Rent (SaaS) 的 SLA 防坑條款、計費陷阱與退出機制，控制總持有成本。</span>
+                        </div>
+                    </div>
+                    <div class="syllabus-item">
+                        <span class="item-num">Unit 3</span>
+                        <div class="item-content">
+                            <span class="item-title">變革管理與 AI-Native KPI 設計</span>
+                            <span class="item-desc">消除中階與基層員工之 AI 取代焦慮，重塑人機協作下的績效考評平衡計分卡。</span>
+                        </div>
+                    </div>
+                    <div class="syllabus-item">
+                        <span class="item-num">Unit 4</span>
+                        <div class="item-content">
+                            <span class="item-title">資安防線與政府補助申請</span>
+                            <span class="item-desc">對接經濟部 SIIR 服務業補助計畫，部署 ISO 42001 安全防線與人機轉接機制。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-bottom-metaphor">
+                <strong>💡 決策心法：</strong> 技術理論限縮於總部與後台，決策者重點在控制 TCO、確保資安合規、推進組織敏捷變革。
+            </div>
+        </div>
+
+        <!-- 軌道二：第一線店鋪 -->
+        <div class="track-card right animate-card delay-card-2">
+            <div class="card-top">
+                <div class="track-header">
+                    <span class="track-badge">第一線店鋪實務軌</span>
+                    <span class="track-duration teal">3 Hours 碎片化微單元</span>
+                </div>
+                <h3 class="track-title">方案 A · 隱形 AI (Invisible AI) 微學習</h3>
+                <div class="track-target">
+                    <strong>培訓對象：</strong> 第一線計時外場人員、收銀人員、倉儲配送與門市客服
+                </div>
+                
+                <div class="syllabus-list" style="gap: 36px;">
+                    <div class="syllabus-item">
+                        <span class="item-num">A-1</span>
+                        <div class="item-content">
+                            <span class="item-title">3分鐘外場店員 POS 系統語音排障 AI 指南</span>
+                            <span class="item-desc">
+                                <strong>實戰情境：</strong> 週末尖峰時段 POS 機刷卡感應失敗，後面大排長龍。<br>
+                                <strong>無痛解法：</strong> 手機掃碼直接開口說（支援國台語混雜），AI 於 0.8 秒內用語音和極簡 3 步排障指導（例如：重插網線、按黃色鍵重啟），免打字、免翻閱紙本，30 秒內排除障礙。
+                            </span>
+                        </div>
+                    </div>
+                    <div class="syllabus-item">
+                        <span class="item-num">A-2</span>
+                        <div class="item-content">
+                            <span class="item-title">3分鐘一線退換貨與食材履歷即時檢索指南</span>
+                            <span class="item-desc">
+                                <strong>實戰情境：</strong> 顧客在門市發問：「這個禮盒對麩質過敏可以吃嗎？發票丟了能退貨嗎？」<br>
+                                <strong>無痛解法：</strong> 店員用語音向[連鎖餐飲暨零售集團] LINE 內部助理發問，Agentic RAG 自動檢索[連鎖餐飲暨零售集團]中央知識庫，自動將複雜的退換貨條款與成份簡化為一條精準答覆，上崗第一天即具備資深店員專業度。
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-bottom-metaphor" style="margin-top: 30px;">
+                <strong>💡 落地原則：</strong> 絕不強迫第一線員工學習 Prompt 撰寫！AI 必須「隱形」在 LINE/POS 等現有界面中，一鍵即用。
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

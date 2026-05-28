@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鳳凰 AI [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]專案升級與改進時程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px; height: 1080px;
+            background-color: var(--bg-color); color: var(--text-main);
+            font-family: var(--font-body); overflow: hidden;
+            position: relative; padding: 80px 100px;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px; z-index: 1;
+        }
+        .glow-radial {
+            position: absolute; top: 80%; left: 30%; width: 900px; height: 700px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%);
+            filter: blur(100px); z-index: 2;
+        }
+        .slide-header {
+            position: relative; z-index: 10;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px;
+        }
+        .module-num {
+            font-family: var(--font-display); font-size: 20px; font-weight: 700;
+            color: var(--primary-accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;
+        }
+        .slide-title {
+            font-family: var(--font-display); font-size: 48px; font-weight: 800;
+            letter-spacing: -0.01em; background: linear-gradient(135deg, #FFF, #C2CFE0);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display); font-size: 14px; font-weight: 600;
+            color: var(--text-muted); letter-spacing: 0.25em; display: flex; align-items: center; gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-grid {
+            position: relative; z-index: 10;
+            display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 40px;
+            margin-top: 30px; height: 720px;
+        }
+        .panel {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 35px;
+            display: flex; flex-direction: column; justify-content: space-between; position: relative;
+        }
+        .panel-title {
+            font-size: 32px; font-weight: 800; color: #FFF; margin-bottom: 24px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .panel-title::before {
+            content: ''; display: inline-block; width: 5px; height: 28px; background-color: var(--primary-accent); border-radius: 2.5px;
+        }
+        .panel-title.purple::before { background-color: #A855F7; }
+        .gap-container { display: flex; flex-direction: column; gap: 18px; }
+        .gap-card {
+            background: rgba(0,0,0,0.2); border-left: 4px solid var(--primary-accent);
+            border-radius: 0 12px 12px 0; padding: 18px 24px;
+            border-top: 1px solid rgba(255,255,255,0.04); border-right: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .gap-card:nth-child(2) { border-left-color: var(--secondary-accent); }
+        .gap-card:nth-child(3) { border-left-color: #A855F7; }
+        .gap-header { font-size: 20px; font-weight: 800; color: #FFF; margin-bottom: 8px; }
+        .gap-desc { font-size: 17.5px; color: #FFF; line-height: 1.6; }
+        .gantt-box {
+            background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 30px; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .gantt-header {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            text-align: center; border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px; font-size: 18px; font-weight: 700; color: var(--secondary-accent); letter-spacing: 0.05em;
+        }
+        .gantt-header span:first-child { text-align: left; color: #FFF; }
+        .gantt-rows { display: flex; flex-direction: column; gap: 24px; margin-top: 25px; }
+        .gantt-row { display: grid; grid-template-columns: 1.8fr 3.2fr; align-items: center; gap: 20px; }
+        .task-name { font-size: 19px; font-weight: 700; color: #FFFFFF; line-height: 1.5; }
+        .bar-container {
+            width: 100%; height: 38px; background: rgba(255,255,255,0.02);
+            border-radius: 8px; position: relative; border: 1px solid rgba(255,255,255,0.06);
+        }
+        .gantt-bar {
+            height: 100%; border-radius: 7px; position: absolute;
+            display: flex; align-items: center; padding-left: 14px;
+            font-size: 15px; font-weight: 700; color: #FFF;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        .gantt-bar.t1 {
+            left: 0%; width: 45%;
+            background: linear-gradient(90deg, var(--primary-accent), #FF8A00);
+            box-shadow: 0 0 20px rgba(255, 91, 53, 0.35);
+        }
+        .gantt-bar.t2 {
+            left: 20%; width: 25%;
+            background: linear-gradient(90deg, var(--secondary-accent), #00A3FF);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+        }
+        .gantt-bar.t3 {
+            left: 45%; width: 30%;
+            background: linear-gradient(90deg, #A855F7, #D8B4FE);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+        }
+        .gantt-bar.t4 {
+            left: 55%; width: 35%;
+            background: linear-gradient(90deg, #E040FB, #F3E5F5);
+        }
+        .gantt-bar.t5 {
+            left: 28%; width: 65%;
+            background: rgba(255,255,255,0.08);
+            border: 1px dashed rgba(255,255,255,0.2);
+            color: #E2E8F0;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015); border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px; border-radius: 0 12px 12px 0;
+            font-size: 18px; color: #FFF; line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">ROADMAP ｜ [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]專案升級與改進時程</div>
+            <h2 class="slide-title">鳳凰 AI 顧問團隊誠信自我檢視與升級行動時程表 (v2026.Q2-Q3)</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-grid">
+        <div class="panel animate-fade delay-1">
+            <div>
+                <h3 class="panel-title">1. 真實自我審查 ｜ 傳產盲區自我修正</h3>
+                <div class="gap-container">
+                    <div class="gap-card">
+                        <div class="gap-header">
+                            <span>🚨 偏重製造重工業，增補扣件特徵</span>
+                        </div>
+                        <p class="gap-desc">現有範例缺乏打頭針、沖棒退化等具體感測器特徵代碼。將在 6 月前補齊真實特徵工程案例。</p>
+                    </div>
+                    <div class="gap-card">
+                        <div class="gap-header">
+                            <span>🚨 M10 變革模組增補多國籍移工四語防呆</span>
+                        </div>
+                        <p class="gap-desc">忽略了南部扣件業大量越南、泰國、印尼籍一線移工的文字障礙。本次升級正式發布四語簡易防呆說明與影片範本。</p>
+                    </div>
+                    <div class="gap-card">
+                        <div class="gap-header">
+                            <span>🚨 M04 AI 採購偏重 Build，增強 SaaS 防禦</span>
+                        </div>
+                        <p class="gap-desc">中小傳產多外購 SaaS。增設 SLA 效能保證條款以及廠商倒閉數據 Exit 保障。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
+                <strong>💡 誠信承諾：</strong> 與[精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]合作的精華成果，我們將於 Q3 前全量開源併入公版框架。
+            </div>
+        </div>
+        <div class="panel right animate-fade delay-2">
+            <div>
+                <h3 class="panel-title purple">2. 鳳凰 AI [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]專案升級行動時程表</h3>
+                <div class="gantt-box">
+                    <div>
+                        <div class="gantt-header">
+                            <span>計畫項目 (Project / Task)</span>
+                            <span>6 月 ｜ JUN</span>
+                            <span>7 月 ｜ JUL</span>
+                            <span>8 月 ｜ AUG</span>
+                        </div>
+                        <div class="gantt-rows">
+                            <div class="gantt-row">
+                                <div class="task-name">1. 傳產模具 PdM 智慧特徵工程併入 Unit 4</div>
+                                <div class="bar-container"><div class="gantt-bar t1">進行中 ｜ ACTIVE</div></div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="task-name">2. [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)] C-Suite 方案 B 實戰工作坊啟動</div>
+                                <div class="bar-container"><div class="gantt-bar t2">進行中</div></div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="task-name">3. 發布《傳產四語 AI-Native 變革操作指引》</div>
+                                <div class="bar-container"><div class="gantt-bar t3">規劃中</div></div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="task-name">4. 增補《AI SaaS 採購 SLA 合約條款範本》</div>
+                                <div class="bar-container"><div class="gantt-bar t4">規劃中</div></div>
+                            </div>
+                            <div class="gantt-row">
+                                <div class="task-name">5. 產發署智慧製造補助計畫書撰寫與輔導</div>
+                                <div class="bar-container"><div class="gantt-bar t5">持續陪跑輔導期</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-alert">
+                <strong>💡 財務亮點：</strong> 本時程完美咬合產發署今年度補助收件窗口，時間零浪費。
+            </div>
+        </div>
+    </div>
+</body>
+</html>

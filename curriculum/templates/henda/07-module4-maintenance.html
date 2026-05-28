@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組四 ｜ 打頭針與沖棒模具壽命預測性維護 (PdM)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 04 ｜ SLIDE 7</div>
+            <h2 class="slide-title">模組四 ｜ 打頭針與沖棒模具壽命預測性維護 (PdM)</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 30px; height: 100%;">
+        <!-- 上排：感測器高頻採樣視覺儀表板 (SVG) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;">
+            <!-- 振動加速規 -->
+            <div class="panel animate-fade delay-1" style="border-top: 4px solid var(--primary-accent); justify-content: flex-start; padding: 20px 25px;">
+                <h4 style="font-size: 22px; color: var(--primary-accent); margin-bottom: 6px; font-weight: 800;">🔊 10 kHz 振動加速規</h4>
+                <p style="font-size: 17px; color: #FFF; line-height: 1.5; margin-bottom: 8px;">
+                    裝在模座上，捕捉沖棒疲勞高頻邊帶特徵。
+                </p>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; height: 50px; padding: 5px;">
+                    <svg width="100%" height="100%" viewBox="0 0 400 50">
+                        <path d="M 0,25 Q 5,10 10,40 T 20,25 T 35,45 T 50,15 T 60,35 T 75,5 T 90,45 T 105,25 T 120,35 T 135,15 L 400,25" fill="none" stroke="#FF5B35" stroke-width="2"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- 電流感測器 -->
+            <div class="panel animate-fade delay-2" style="border-top: 4px solid var(--secondary-accent); justify-content: flex-start; padding: 20px 25px;">
+                <h4 style="font-size: 22px; color: var(--secondary-accent); margin-bottom: 6px; font-weight: 800;">⚡ 1 kHz 電流感測器</h4>
+                <p style="font-size: 17px; color: #FFF; line-height: 1.5; margin-bottom: 8px;">
+                    裝在主軸馬達，抓取撞擊力道波形突變。
+                </p>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; height: 50px; padding: 5px;">
+                    <svg width="100%" height="100%" viewBox="0 0 400 50">
+                        <path d="M 0,25 L 100,25 L 120,5 L 130,45 L 140,25 L 400,25" fill="none" stroke="#00F2FE" stroke-width="2"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- 壓力感測器 -->
+            <div class="panel animate-fade delay-3" style="border-top: 4px solid #A855F7; justify-content: flex-start; padding: 25px 30px;">
+                <h4 style="font-size: 22px; color: #A855F7; margin-bottom: 6px; font-weight: 800;">🩸 1 kHz 液壓感測器</h4>
+                <p style="font-size: 17px; color: #FFF; line-height: 1.5; margin-bottom: 8px;">
+                    監控液壓管路，提取滑動窗口與俏度指標。
+                </p>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; height: 50px; padding: 5px;">
+                    <svg width="100%" height="100%" viewBox="0 0 400 50">
+                        <path d="M 0,25 Q 50,15 100,30 T 200,20 T 300,35 T 400,25" fill="none" stroke="#A855F7" stroke-width="2"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 下排：實時點擊財務 ROI 計算器（完整互動滑桿） -->
+        <div class="panel animate-fade delay-3" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; padding: 25px 35px; align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: 15px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 40px;">
+                <h4 style="font-size: 23px; color: var(--primary-accent); font-weight: 800;">⚙️ 實時產線財務 ROI 模擬計算器 (拉動滑桿計算)</h4>
+                
+                <!-- 互動滑桿 1 -->
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <label style="font-size: 18px; font-weight: bold; width: 45%;">全廠冷鍛打頭機台數:</label>
+                    <input type="range" min="2" max="25" value="8" id="machineRange" oninput="calculateROI()" style="flex-grow: 1; margin: 0 15px; cursor: pointer;">
+                    <span style="font-size: 20px; font-weight: bold; color: var(--secondary-accent); width: 10%; text-align: right;" id="machineVal">8 台</span>
+                </div>
+                
+                <!-- 互動滑桿 2 -->
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <label style="font-size: 18px; font-weight: bold; width: 45%;">每台年均斷針裂模次數:</label>
+                    <input type="range" min="1" max="10" value="3" id="breakRange" oninput="calculateROI()" style="flex-grow: 1; margin: 0 15px; cursor: pointer;">
+                    <span style="font-size: 20px; font-weight: bold; color: var(--secondary-accent); width: 10%; text-align: right;" id="breakVal">3 次</span>
+                </div>
+            </div>
+            
+            <div style="padding-left: 10px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h4 style="font-size: 21px; color: var(--secondary-accent); font-weight: 800; margin-bottom: 6px;">AI 預測性維護年省金額</h4>
+                    <p style="font-size: 18px; color: #FFF; line-height: 1.5;">
+                        原事故全廠年損失: <span id="lossVal" style="color: #FF5B35; font-weight: bold;">336</span> 萬<br>
+                        AI 攔截 70% 斷模損失 ➔ <strong style="color: #00FF66;" id="saveVal">年省 235 萬</strong>
+                    </p>
+                </div>
+                <div style="text-align: right; background: rgba(0,242,254,0.05); border: 2px solid var(--secondary-accent); padding: 12px 20px; border-radius: 12px; min-width: 160px;">
+                    <span style="font-size: 14px; color: var(--secondary-accent); font-weight: 800; display: block; text-transform: uppercase;">回本週期 (ROI)</span>
+                    <strong class="highlight-number teal" style="font-size: 48px;" id="roiVal">5.1個月</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateROI() {
+            const machines = parseInt(document.getElementById('machineRange').value);
+            const breaks = parseInt(document.getElementById('breakRange').value);
+            
+            document.getElementById('machineVal').innerText = machines + " 台";
+            document.getElementById('breakVal').innerText = breaks + " 次";
+            
+            // 損耗計算 (1次事故折合模損 8萬 + 停線損 6萬 = 14萬)
+            const singleLoss = 14; 
+            const totalLoss = machines * breaks * singleLoss;
+            const savings = totalLoss * 0.70; // 攔截 70%
+            
+            // 回本期 (以建置費 100 萬為自籌基準)
+            const cost = 100;
+            const roiMonths = (cost / (savings / 12)).toFixed(1);
+            
+            document.getElementById('lossVal').innerText = totalLoss.toFixed(0);
+            document.getElementById('saveVal').innerText = "年省 " + savings.toFixed(0) + " 萬";
+            document.getElementById('roiVal').innerText = roiMonths + "個月";
+        }
+    </script>
+
+    </div>
+</body>
+</html>

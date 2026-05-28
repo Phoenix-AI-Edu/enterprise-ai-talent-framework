@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]專案推進下一步行動指引</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px; height: 1080px;
+            background-color: var(--bg-color); color: var(--text-main);
+            font-family: var(--font-body); overflow: hidden;
+            position: relative; padding: 80px 100px;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px; z-index: 1;
+        }
+        .glow-radial {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 1200px; height: 700px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.02) 50%, transparent 100%);
+            filter: blur(100px); z-index: 2;
+        }
+        .slide-header {
+            position: relative; z-index: 10;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px;
+        }
+        .module-num {
+            font-family: var(--font-display); font-size: 20px; font-weight: 700;
+            color: var(--primary-accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;
+        }
+        .slide-title {
+            font-family: var(--font-display); font-size: 48px; font-weight: 800;
+            letter-spacing: -0.01em; background: linear-gradient(135deg, #FFF, #C2CFE0);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display); font-size: 14px; font-weight: 600;
+            color: var(--text-muted); letter-spacing: 0.25em; display: flex; align-items: center; gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .steps-container {
+            position: relative; z-index: 10;
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;
+            margin-top: 30px; height: 520px;
+        }
+        .step-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 40px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
+        }
+        .step-card:hover {
+            transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); background: rgba(255, 255, 255, 0.04);
+        }
+        .card-top { display: flex; flex-direction: column; gap: 20px; }
+        .step-badge {
+            font-family: var(--font-display); font-size: 16px; font-weight: 700;
+            color: var(--primary-accent); letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px;
+        }
+        .step-badge::before { content: ''; display: inline-block; width: 20px; height: 3px; background-color: var(--primary-accent); }
+        .step-card:nth-child(2) .step-badge { color: var(--secondary-accent); }
+        .step-card:nth-child(2) .step-badge::before { background-color: var(--secondary-accent); }
+        .step-card:nth-child(3) .step-badge { color: #A855F7; }
+        .step-card:nth-child(3) .step-badge::before { background-color: #A855F7; }
+        .step-title { font-size: 30px; font-weight: 800; color: #FFF; line-height: 1.4; }
+        .step-desc { font-size: 20px; color: #FFFFFF; line-height: 1.65; }
+        .step-desc strong { color: var(--primary-accent); }
+        .step-desc span.highlight { color: var(--primary-accent); font-weight: 700; }
+        .step-card:nth-child(2) span.highlight { color: var(--secondary-accent); }
+        .step-card:nth-child(2) .step-desc strong { color: var(--secondary-accent); }
+        .step-card:nth-child(3) span.highlight { color: #D8B4FE; }
+        .step-card:nth-child(3) .step-desc strong { color: #D8B4FE; }
+        .step-footer-link {
+            font-size: 16px; font-weight: 600; color: var(--text-muted);
+            display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px; margin-top: 20px;
+        }
+        .step-card:hover .step-footer-link { color: #FFF; }
+        .bottom-quote-panel {
+            position: relative; z-index: 10; text-align: center;
+            background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px; padding: 30px; margin-top: 30px;
+        }
+        .quote-text {
+            font-family: var(--font-display); font-size: 28px; font-weight: 700; font-style: italic;
+            letter-spacing: 0.05em; background: linear-gradient(135deg, var(--primary-accent), #FF8E53);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .quote-author { font-size: 15px; color: var(--text-muted); margin-top: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">NEXT STEPS ｜ 下一步專案推進指引</div>
+            <h2 class="slide-title">[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]專案推進下一步行動指引 (Next Steps)</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="steps-container">
+        <div class="step-card animate-fade delay-1">
+            <div class="card-top">
+                <span class="step-badge">ACTION 01</span>
+                <h3 class="step-title">正式啟動 ｜ 企業 AI 一頁式戰術畫布實戰工作坊</h3>
+                <p class="step-desc">
+                    帶領[精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]董事長、廠長與核心幕僚，利用「4+1 戰術畫布」在 1 天內盤點並確立 <span class="highlight">20 大 AI 潛力落地場景</span>。<br><br>
+                    現場計算 Buy vs. Build vs. Rent 財務可行性，快速篩選出高回收的 <strong>Quick-Win 首發試點專案</strong>。
+                </p>
+            </div>
+            <div class="step-footer-link">
+                🛠️ 傳產決策與深度合規導入工作坊 ➔
+            </div>
+        </div>
+        <div class="step-card animate-fade delay-2">
+            <div class="card-top">
+                <span class="step-badge">ACTION 02</span>
+                <h3 class="step-title">併行開展 ｜ 經濟部產發署智慧製造補助申請</h3>
+                <p class="step-desc">
+                    顧問團隊深度輔導，將工作坊中篩選出最具創新價值的 3 大場景（叫貨、排障、備料），包裝撰寫為 **產發署計畫書**，<span class="highlight">爭取 150 - 1000 萬政府上限補助</span>。<br><br>
+                    孟顧問親自指導產學合作對接與 KPI 80% 安全防線，為企業轉型經費買單。
+                </p>
+            </div>
+            <div class="step-footer-link">
+                💰 政府智慧製造升級補助紅利爭取 ➔
+            </div>
+        </div>
+        <div class="step-card animate-fade delay-3">
+            <div class="card-top">
+                <span class="step-badge">ACTION 03</span>
+                <h3 class="step-title">特惠折抵 ｜ 品牌加速夥伴專屬折抵機制</h3>
+                <p class="step-desc">
+                    本案適用[精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]專屬的 <span class="highlight">「品牌加速夥伴特惠折抵機制」</span>。<br><br>
+                    工作坊順利完成後，若[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]決定委託我們進行後續的「90天 AI 落地變革管理陪跑輔導」，本工作坊之全部費用將可 <strong>100% 全額折抵</strong> 陪跑專案款項！
+                </p>
+            </div>
+            <div class="step-footer-link">
+                💎 預算極致 ROI 確保 ➔
+            </div>
+        </div>
+    </div>
+    <div class="bottom-quote-panel animate-fade delay-3">
+        <div class="quote-text">「這不是寫給學術界的教科書，而是一套寫給變革者看的戰術手冊。」</div>
+        <div class="quote-author">─ 鳳凰 AI 顧問團隊 孟淑慧 ＆ 陳文家</div>
+    </div>
+</body>
+</html>

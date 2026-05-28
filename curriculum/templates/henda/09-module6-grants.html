@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組六 ｜ 政府補助對接提案與核銷五大保命工作手冊</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 06 ｜ SLIDE 9</div>
+            <h2 class="slide-title">模組六 ｜ 政府補助對接提案與核銷五大保命工作手冊</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 40px; height: 100%;">
+        <!-- 左欄：計畫提案書黃金骨架 -->
+        <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3 class="panel-title">M12 ｜ 政府智慧機械與減碳升級補助</h3>
+                
+                <div style="font-size: 20px; color: #FFF; line-height: 1.65; display: flex; flex-direction: column; gap: 18px; margin-top: 15px;">
+                    <p style="font-size: 24px; font-weight: 800; color: var(--primary-accent);">
+                        對接產發署與中企署智慧/減碳補助（上限 100 - 1000 萬元）
+                    </p>
+                    <p>
+                        <strong>提案計畫書 4 大必過骨架：</strong>
+                    </p>
+                    <p>
+                        1. **痛點描述**：明確列出模具異常耗損與 AOI 漏檢率對企業財務的直接損傷。<br>
+                        2. **技術選型**：詳細交代 Edge AI 與 Voice Realtime API 帶來的技術降噪突破。<br>
+                        3. **可量化效益**：預估模具耗損下降 30%，品質漏檢率趨近零。<br>
+                        4. **產學加分項**：<strong>對接南部高科大、台南大學等學校研究資源</strong>，實測過件率提升 15%！
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>💡 評審規則：</strong> 評審只花 20 分鐘看計畫書。首頁的執行摘要必須在 1 分鐘內展現最強烈的商業轉型意願。
+            </div>
+        </div>
+        
+        <!-- 右欄：核銷五大保命手冊 (可點擊切換，書頁式展開) -->
+        <div class="panel animate-fade delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-right: 5px solid var(--secondary-accent);">
+            <div>
+                <h3 class="panel-title teal">核銷保命五大工作手冊 <span>(點擊翻閱審查清單)</span></h3>
+                
+                <!-- 手冊選擇鈕 -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button onclick="openBook(1)" id="btnBook1" style="background: rgba(0,242,254,0.15); border: 2px solid var(--secondary-accent); color:#FFF; padding: 6px 12px; border-radius: 8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.2s;">手冊一</button>
+                    <button onclick="openBook(2)" id="btnBook2" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color:#FFF; padding: 6px 12px; border-radius: 8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.2s;">手冊二</button>
+                    <button onclick="openBook(3)" id="btnBook3" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color:#FFF; padding: 6px 12px; border-radius: 8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.2s;">手冊三</button>
+                    <button onclick="openBook(4)" id="btnBook4" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color:#FFF; padding: 6px 12px; border-radius: 8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.2s;">手冊四</button>
+                    <button onclick="openBook(5)" id="btnBook5" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color:#FFF; padding: 6px 12px; border-radius: 8px; font-size:15px; font-weight:bold; cursor:pointer; transition:all 0.2s;">手冊五</button>
+                </div>
+                
+                <!-- 書頁展示區 -->
+                <div style="background: rgba(0,0,0,0.3); border: 2px solid var(--glass-border); border-radius: 12px; padding: 20px; margin-top: 15px; min-height: 180px;" id="bookContent">
+                    <strong style="color: var(--secondary-accent); font-size: 20px; display: block; margin-bottom: 8px;" id="bookTitle">📖 手冊一 ｜ 月度執行進度與查核追蹤表</strong>
+                    <p style="font-size: 17.5px; color: #FFF; line-height: 1.6;" id="bookDesc">
+                        - 對比計畫書，每月追蹤打頭機 PdM 特徵採集與語音 API 開發查核點。<br>
+                        - 建立「進度落後通報警示」，若落後 10% 立即啟動外部顧問介入機制。<br>
+                        - 防止因查核進度落後，遭政府審核委員刪減期中補助經費。
+                    </p>
+                </div>
+                
+                <div style="background: rgba(168, 85, 247, 0.05); border: 1.5px dashed rgba(168, 85, 247, 0.3); padding: 15px 20px; border-radius: 10px; color: #E2E8F0; font-size: 18px; line-height: 1.5; margin-top: 15px;">
+                    <strong>🎓 孟顧問誠信加分項：</strong> 南部學校（高科大、台南大學）產學資源對接，提升評審青睞度！
+                </div>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>🏆 政策套利：</strong> 手把手教您如何合法自籌、實發薪資核銷，將經費核准風險壓至最低。
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const bookData = {
+            1: {
+                title: "📖 手冊一 ｜ 月度執行進度與查核追蹤表",
+                desc: "- 對比計畫書，每月追蹤打頭機 PdM 特徵採集與語音 API 開發查核點。<br>- 建立「進度落後通報警示」，若落後 10% 立即啟動外部顧問介入機制。<br>- 防止因查核進度落後，遭政府審核委員刪減期中補助經費。"
+            },
+            2: {
+                title: "📖 手冊二 ｜ 發票與請款憑證分類歸檔規範",
+                desc: "- 全廠採購之感測器、網閘主機及開發委外合約，發票歸檔必須與科目嚴格一致。<br>- 每張發票上必須加蓋政府計畫專用章印，防範多處重疊申報。<br>- 杜絕會計科目交叉污染，保障查帳一次過關。"
+            },
+            3: {
+                title: "📖 手冊三 ｜ 人事月核銷與勞健保申報證明",
+                desc: "- 明確記錄參與計畫之課長、師傅投入人月工時比例。<br>- 嚴格核對每月薪資扣繳憑單、劃撥證明與勞健保扣繳單。<br>- 保障人事成本核銷 100% 符規合憲，免遭查退。"
+            },
+            4: {
+                title: "📖 手冊四 ｜ 補助設備資產列管與防處分",
+                desc: "- 補助款項購買之工業伺服器與檢測工業電腦，必須於實體機身張貼政府補助資產標籤。<br>- 三年內計畫資產不得私自變賣、轉讓或處分，防止查核退回經費。<br>- 每年底配合主管機關進行實地資產盤查。"
+            },
+            5: {
+                title: "📖 手冊五 ｜ 期中期末查核報告合理性撰寫",
+                desc: "- 精準包裝「未完全達成指標」之合理工藝性原因，避開評審罰則。<br>- 一線師傅訪談大綱擬定，防止在查核委員面前失言。<br>- 確保期末審查順利結案，拿到尾款。"
+            }
+        };
+        
+        function openBook(id) {
+            // 切換按鈕樣式
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById('btnBook' + i);
+                if (i === id) {
+                    btn.style.background = "rgba(0,242,254,0.15)";
+                    btn.style.borderColor = "var(--secondary-accent)";
+                } else {
+                    btn.style.background = "rgba(255,255,255,0.02)";
+                    btn.style.borderColor = "var(--glass-border)";
+                }
+            }
+            
+            // 書頁動畫切換
+            const bookContent = document.getElementById('bookContent');
+            bookContent.style.opacity = 0.5;
+            setTimeout(() => {
+                document.getElementById('bookTitle').innerHTML = bookData[id].title;
+                document.getElementById('bookDesc').innerHTML = bookData[id].desc;
+                bookContent.style.opacity = 1;
+            }, 150);
+        }
+    </script>
+
+    </div>
+</body>
+</html>

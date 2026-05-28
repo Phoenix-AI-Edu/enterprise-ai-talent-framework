@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開場白 ｜ 實事求是、黑手聽得懂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">EXECUTIVE SUMMARY ｜ SLIDE 2</div>
+            <h2 class="slide-title">開場白 ｜ 實事求是、黑手聽得懂</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 40px; height: 100%;">
+        <!-- 左欄：大膽的核心承諾卡片 -->
+        <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 5px solid var(--primary-accent);">
+            <div>
+                <h3 class="panel-title">[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]專屬 ｜ 實事求是的承諾</h3>
+                <div style="font-size: 22px; color: #FFF; line-height: 1.75; display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
+                    <p style="font-size: 28px; font-weight: 900; color: var(--primary-accent); line-height: 1.4;">
+                        「我們不跟黑手師傅講虛無縹緲的 AI 理論，我們直接對齊產線保命的痛點！」
+                    </p>
+                    <p>
+                        在冷鍛機運作 <strong style="color: var(--secondary-accent); font-size: 26px;">85 分貝噪音</strong>、滿是防鏽油與鐵粉的極端現場，任何繁雜的平板 UI 都是廢紙。
+                    </p>
+                    <p>
+                        本方案絕不講「畫大餅」的噱頭。每個模組完全對齊產線實況，將公版框架徹底<strong>去技術化、情境化、財務量化</strong>，直擊商業損益。
+                    </p>
+                </div>
+            </div>
+            <div class="bottom-alert">
+                <strong>🦅 顧問精神：</strong> 「教材即程式碼」。寫得出來、講得清楚、在廠房裡做得到，才叫落地。
+            </div>
+        </div>
+        
+        <!-- 右欄：四大戰實對標指標（排版清新通透，可點擊動態高亮） -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div class="panel animate-fade delay-2" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 class="panel-title teal">四項最真實的實戰對標評判 <span>(滑鼠懸停觸發發光)</span></h3>
+                    <div style="display: flex; flex-direction: column; gap: 18px; margin-top: 15px;">
+                        <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
+                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">🛠️ 01. 現場落地性 ─ 解放雙手</strong>
+                            語音 AI 徹底解放雙手，[南部聚落]口音專用語意詞庫，85dB 高噪拾音（識別率 &ge; 92%）。
+                        </div>
+                        <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
+                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">💰 02. 財務控本性 ─ 輕量 API</strong>
+                            拒做高昂大模型自研。採取 API 輕量架構，優化 TCO，極速收回轉型資本。
+                        </div>
+                        <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
+                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">🇪🇺 03. 國際外銷合規 ─ 審計軌跡</strong>
+                            對齊 ISO 42001 安全數據治理與 Audit Trails 密碼日誌，應對車廠 Supplier Audit。
+                        </div>
+                        <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
+                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">💸 04. 政策轉化套利 ─ 百萬補助</strong>
+                            深度對接產發署智慧製造/綠色升級補助，以政府政策紅利為企業自身研發買單。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+</html>

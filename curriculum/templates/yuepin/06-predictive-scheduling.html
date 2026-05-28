@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧排班預測模型技術大綱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9AA8;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+
+        .glow-radial {
+            position: absolute;
+            top: 80%; left: 80%;
+            width: 800px; height: 600px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 2;
+        }
+
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 24px;
+        }
+
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #C2CFE0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-watermark::before { content: '🦅'; }
+
+        /* 主要內容網格 */
+        .content-grid {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            margin-top: 30px;
+            height: 720px;
+        }
+
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .panel-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: var(--primary-accent);
+            border-radius: 2px;
+        }
+
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+
+        /* 數據表格設計 */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .spec-table th {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 14px 16px;
+            border-bottom: 2px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .spec-table td {
+            font-size: 14px;
+            padding: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            line-height: 1.5;
+        }
+
+        .spec-table tr:hover td {
+            background: rgba(255,255,255,0.01);
+            color: #FFF;
+        }
+
+        .spec-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .td-cat {
+            font-weight: 600;
+            color: #E2ECF6;
+        }
+
+        .td-field {
+            font-family: var(--font-body);
+            color: var(--secondary-accent);
+        }
+
+        /* 優化器工作流 */
+        .opt-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 24px;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .opt-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .opt-node {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 16px;
+            position: relative;
+        }
+
+        .opt-node.primary {
+            border-color: rgba(255, 91, 53, 0.2);
+            background: rgba(255, 91, 53, 0.02);
+        }
+
+        .opt-node.secondary {
+            border-color: rgba(0, 242, 254, 0.2);
+            background: rgba(0, 242, 254, 0.02);
+        }
+
+        .node-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .pillar-card:nth-child(2) .node-label { color: var(--secondary-accent); }
+
+        .node-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #FFF;
+            margin-bottom: 6px;
+        }
+
+        .node-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .node-desc span {
+            color: #E2ECF6;
+        }
+
+        .flow-line {
+            text-align: center;
+            color: rgba(255,255,255,0.1);
+            font-size: 14px;
+            line-height: 1;
+            margin: -6px 0;
+        }
+
+        /* 備註卡 */
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.01);
+            border-left: 3px solid var(--secondary-accent);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+
+        .bottom-alert strong { color: #FFF; }
+
+        /* 動畫 */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+
+    <!-- 頂部 Header -->
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 05 ｜ 智慧排班預測模型</div>
+            <h2 class="slide-title">智慧排班預測模型 (Predictive AI) 技術大綱 (Unit 4 補強)</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+
+    <!-- 中部 內容網格 -->
+    <div class="content-grid">
+        <!-- 左欄：特徵工程表格 -->
+        <div class="panel animate-fade delay-1">
+            <div>
+                <h3 class="panel-title">1. 預測性排班 (Predictive Scheduling) 核心特徵工程</h3>
+                
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">特徵類別</th>
+                            <th style="width: 40%;">具體特徵欄位 (Features)</th>
+                            <th style="width: 40%;">商業意涵 (Business Insights)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td-cat">時間維度</td>
+                            <td class="td-field">年/月/日、星期幾、時段 (15分鐘單元)、是否為國定假日/補班日</td>
+                            <td>精準識別基礎營運週期、季節性慣性與週末高峰規律。</td>
+                        </tr>
+                        <tr>
+                            <td class="td-cat">環境維度</td>
+                            <td class="td-field">當日氣溫、降雨量、颱風警報、店鋪週邊活動 (如巨蛋演唱會、百貨週年慶)</td>
+                            <td>捕捉突發性人流波動，防範因極端天氣或週邊商圈事件導致的缺工。</td>
+                        </tr>
+                        <tr>
+                            <td class="td-cat">行銷維度</td>
+                            <td class="td-field">當週促銷活動、聯名卡優惠、電商滿額贈實體餐券張數</td>
+                            <td>評估行銷推廣活動帶來的實體門市客流拉動，提前儲備人力。</td>
+                        </tr>
+                        <tr>
+                            <td class="td-cat">店鋪維度</td>
+                            <td class="td-field">店鋪位置分類 (商場店/街邊店/商辦店)、歷史客單價、桌數限制</td>
+                            <td>決定不同店型的營運慣性（如商辦店週休二日，商場店週末高峰）。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>💡 數據思維：</strong> 行動排班不僅是看排班表，而是基於高維特徵輸入矩陣進行科學預估，從根源避免人力過賸與人力荒。
+            </div>
+        </div>
+
+        <!-- 右欄：算法架構與優化器 -->
+        <div class="panel animate-fade delay-2">
+            <div>
+                <h3 class="panel-title teal">2. 雙重約束最佳化排班算法架構</h3>
+                
+                <div class="opt-container">
+                    <div class="opt-flow">
+                        <!-- 節點 1 -->
+                        <div class="opt-node primary">
+                            <span class="node-label">Phase 1 ｜ 營業額與客流預測</span>
+                            <div class="node-title">LightGBM &amp; Prophet 融合預測</div>
+                            <div class="node-desc">針對[連鎖餐飲暨零售集團] 120 家分店進行未來 14 天、以 30 分鐘為單元的<span>「客流量與營業額高精度時間序列預測」</span>。</div>
+                        </div>
+                        
+                        <div class="flow-line">▼ 輸出：每 30 分鐘人力需求密度</div>
+                        
+                        <!-- 節點 2 -->
+                        <div class="opt-node">
+                            <span class="node-label" style="color: #A855F7;">Phase 2.1 ｜ 勞基法硬約束限制 (Hard Constraints)</span>
+                            <div class="node-title">Google OR-Tools 強制規則過濾</div>
+                            <div class="node-desc">過濾違反法規之排班：單日工時上限 12h、兩班間隔 &gt; 11h、每週一例一休、單月加班上限。<span>嚴格防範違反勞基法罰款</span>。</div>
+                        </div>
+                        
+                        <div class="flow-line">＋</div>
+                        
+                        <!-- 節點 3 -->
+                        <div class="opt-node secondary">
+                            <span class="node-label" style="color: var(--secondary-accent);">Phase 2.2 ｜ 門店營運軟約束限制 (Soft Constraints)</span>
+                            <div class="node-title">營運服務品質權重平衡</div>
+                            <div class="node-desc">設定最佳化權重：店鋪主管/正職比 <span>&ge; 30%</span>、員工期望時段對齊、離尖峰人力動態平衡（嚴防尖峰漏單客訴）。</div>
+                        </div>
+                    </div>
+                    
+                    <div class="opt-node" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); text-align: center; padding: 12px; margin-top: 10px;">
+                        <strong style="color: var(--secondary-accent); font-family: var(--font-display); font-size: 16px;">🏆 最終輸出：智慧班表自動生成 (Smart Roster)</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-alert" style="border-left-color: var(--primary-accent); margin-top: 12px;">
+                <strong>💡 硬核成效：</strong> 預估能為連鎖門店<strong>直接砍掉 5% 至 10% 的無效人力耗損</strong>，並完全避免法務合規風險。
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組二 ｜ 85分貝高噪音環境的聲學降噪與工法語意識別</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 02 (Part 1) ｜ SLIDE 4</div>
+            <h2 class="slide-title">模組二 ｜ 85分貝高噪音環境的聲學降噪與工法語意識別</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; height: 100%;">
+        <!-- 左欄：聲學降噪與工法字典視覺展示 -->
+        <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3 class="panel-title">85分貝冷鍛高噪產線 ｜ 骨傳導聲學降噪實務</h3>
+                
+                <!-- 互動聲學面板 -->
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 15px; padding: 25px; margin-top: 15px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 18px; font-weight: 800; color: var(--primary-accent);" id="soundStatus">🔊 產線環境噪音 (模擬 85分貝)</span>
+                        <button onclick="toggleNoise()" id="noiseBtn" style="background: linear-gradient(135deg, var(--secondary-accent), #00A3FF); border: 0; color: #000; padding: 8px 20px; border-radius: 20px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 15px rgba(0,242,254,0.3);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            🎚️ 開啟 RNNoise 降噪模式
+                        </button>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; height: 120px; gap: 15px; background: rgba(0,0,0,0.4); border-radius: 10px; padding: 15px;">
+                        <!-- 左側：原始噪聲 -->
+                        <div style="width: 45%; height: 100%; position: relative;">
+                            <svg width="100%" height="100%" viewBox="0 0 200 100">
+                                <path id="noiseWave" d="M 0,50 Q 5,20 10,80 T 20,20 T 30,85 T 40,15 T 50,75 T 60,30 T 70,80 T 80,10 T 90,90 T 100,20 T 110,85 T 120,20 T 130,70 T 140,25 T 150,85 T 160,15 T 170,80 T 180,30 T 190,75 T 200,50" fill="none" stroke="#FF5B35" stroke-width="3"></path>
+                            </svg>
+                            <span style="position: absolute; bottom: 5px; left: 10px; font-size: 14px; font-weight: 700; color: #FF5B35; background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px;">輸入音訊 (環境干擾)</span>
+                        </div>
+                        
+                        <!-- 骨傳導顴骨拾音 -->
+                        <div style="text-align: center; width: 10%; flex-shrink: 0;">
+                            <span style="font-size: 32px; display: block;" id="headphoneEmoji">🎧</span>
+                        </div>
+                        
+                        <!-- 右側：降噪後 -->
+                        <div style="width: 45%; height: 100%; position: relative;">
+                            <svg width="100%" height="100%" viewBox="0 0 200 100">
+                                <path id="cleanWave" d="M 0,50 Q 5,20 10,80 T 20,20 T 30,85 T 40,15 T 50,75 T 60,30 T 70,80 T 80,10 T 90,90 T 100,20 T 110,85 T 120,20 T 130,70 T 140,25 T 150,85 T 160,15 T 170,80 T 180,30 T 190,75 T 200,50" fill="none" stroke="#8E9AA8" stroke-width="2"></path>
+                            </svg>
+                            <span id="cleanBadge" style="position: absolute; bottom: 5px; right: 10px; font-size: 14px; font-weight: 700; color: #FFF; background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px;">未降噪</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="font-size: 20px; color: #FFF; line-height: 1.65; margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+                    <p>
+                        <strong>骨傳導耳麥</strong> 直接拾取顴骨聲帶震動，可自然衰減 <strong>20-30 dB</strong> 的外部敲擊與搓牙高頻噪音。
+                    </p>
+                    <p>
+                        <strong>邊緣降噪盒子</strong> 於產線端部署 <code>RNNoise</code>，將殘餘噪音剝離，只將乾淨的人聲送上雲端，降低推論延遲。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>💡 [南部聚落]國語與日式術語微調：</strong> 收錄「si-to-ma (檔塊)」、「ゲージ (Gauge)」等外來語，<strong>語意識別率 &ge; 92%</strong>！
+            </div>
+        </div>
+        
+        <!-- 右欄：Realtime API 與 RAG 設計 -->
+        <div class="panel animate-fade delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-right: 5px solid var(--secondary-accent);">
+            <div>
+                <h3 class="panel-title teal">即時對話 API 與 RAG 知識檢索</h3>
+                <div style="display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
+                    <div style="background: rgba(0,242,254,0.03); border: 1px solid rgba(0,242,254,0.15); padding: 22px 26px; border-radius: 12px;">
+                        <strong style="color: var(--secondary-accent); font-size: 22px; display: block; margin-bottom: 8px;">⚡ Realtime API 極速響應</strong>
+                        <span style="font-size: 18.5px; color: #FFF; line-height: 1.65; display: block;">
+                            摒棄傳統 3-5 秒的高延遲語音流程，延遲壓在 <strong>&lt; 0.8 秒</strong>，師傅能隨時打斷 AI 說話，AI 亦能即時追問。
+                        </span>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 22px 26px; border-radius: 12px;">
+                        <strong style="color: #FFF; font-size: 22px; display: block; margin-bottom: 8px;">📚 檢索增強生成 (RAG)</strong>
+                        <span style="font-size: 18.5px; color: #E2E8F0; line-height: 1.65; display: block;">
+                            師傅提問「M8 螺絲牙搓不上」時，AI 即時檢索中央知識庫、過去 3 個月不良品歷史分析、搓牙機參數 SOP 進行播報。
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
+                <strong>🏆 核心產出：</strong> 骨傳導耳麥 + 降噪網閘 + 語音 RAG，並發布 500 個術語的**工法專用詞庫 v1.0**。
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let noiseMode = false;
+        function toggleNoise() {
+            noiseMode = !noiseMode;
+            const noiseWave = document.getElementById('noiseWave');
+            const cleanWave = document.getElementById('cleanWave');
+            const cleanBadge = document.getElementById('cleanBadge');
+            const noiseBtn = document.getElementById('noiseBtn');
+            const soundStatus = document.getElementById('soundStatus');
+            const headphoneEmoji = document.getElementById('headphoneEmoji');
+            
+            if (noiseMode) {
+                // 降噪狀態
+                noiseBtn.innerText = "🔇 重置環境噪音模式";
+                noiseBtn.style.background = "linear-gradient(135deg, var(--primary-accent), #FF8A00)";
+                soundStatus.innerHTML = "🟢 語音極速降噪過濾中 (剩餘干擾 &lt; 5%)";
+                soundStatus.style.color = "var(--secondary-accent)";
+                cleanBadge.innerText = "RNNoise 降噪啟用";
+                cleanBadge.style.color = "var(--secondary-accent)";
+                cleanBadge.style.background = "rgba(0,242,254,0.15)";
+                headphoneEmoji.innerHTML = "⚡";
+                
+                // 動態扁平波形
+                cleanWave.setAttribute('d', "M 0,50 Q 15,45 30,55 T 60,40 T 90,60 T 120,40 T 150,60 T 180,45 T 200,50");
+                cleanWave.setAttribute('stroke', "#00F2FE");
+                cleanWave.setAttribute('stroke-width', "3");
+            } else {
+                // 還原原始高噪波形
+                noiseBtn.innerText = "🎚️ 開啟 RNNoise 降噪模式";
+                noiseBtn.style.background = "linear-gradient(135deg, var(--secondary-accent), #00A3FF)";
+                soundStatus.innerHTML = "🔊 產線環境噪音 (模擬 85分貝)";
+                soundStatus.style.color = "var(--primary-accent)";
+                cleanBadge.innerText = "未降噪";
+                cleanBadge.style.color = "#FFF";
+                cleanBadge.style.background = "rgba(0,0,0,0.6)";
+                headphoneEmoji.innerHTML = "🎧";
+                
+                // 動態混亂波形
+                cleanWave.setAttribute('d', "M 0,50 Q 5,20 10,80 T 20,20 T 30,85 T 40,15 T 50,75 T 60,30 T 70,80 T 80,10 T 90,90 T 100,20 T 110,85 T 120,20 T 130,70 T 140,25 T 150,85 T 160,15 T 170,80 T 180,30 T 190,75 T 200,50");
+                cleanWave.setAttribute('stroke', "#8E9AA8");
+                cleanWave.setAttribute('stroke-width', "2");
+            }
+        }
+    </script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組七 ｜ 傳產變革管理、移工四語防呆與同儕激勵</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 07 ｜ SLIDE 10</div>
+            <h2 class="slide-title">模組七 ｜ 傳產變革管理、移工四語防呆與同儕激勵</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-rows: 1fr 1.05fr; gap: 30px; height: 100%;">
+        <!-- 上排：三大角色變革痛點與尊嚴設計 -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;">
+            <div class="panel animate-fade delay-1" style="border-top: 4px solid var(--primary-accent); padding: 20px 25px;">
+                <h4 style="font-size: 21px; color: var(--primary-accent); margin-bottom: 8px; font-weight: 800;">👨‍🔧 黑手老師傅 ─ 尊嚴設計</h4>
+                <p style="font-size: 17.5px; color: #FFF; line-height: 1.55;">
+                    抗拒被 AI 指導，覺得被機器命令。<br>
+                    <strong>對策：</strong> AI 語氣改為「請教」，僅提供歷史案例參考，將<strong>最終決策權</strong>保留給老師傅。
+                </p>
+            </div>
+            
+            <div class="panel animate-fade delay-2" style="border-top: 4px solid var(--secondary-accent); padding: 20px 25px;">
+                <h4 style="font-size: 21px; color: var(--secondary-accent); margin-bottom: 8px; font-weight: 800;">🧑‍💼 中階課長 ─ 飯碗安撫</h4>
+                <p style="font-size: 17.5px; color: #FFF; line-height: 1.55;">
+                    焦慮被 AI 取代，或者失去現場控制力。<br>
+                    <strong>對策：</strong> 輔導主管考取「AI 數字排程與預防運作分析師」，轉型為握有數據的 AI 管理官。
+                </p>
+            </div>
+            
+            <div class="panel animate-fade delay-3" style="border-top: 4px solid #A855F7; padding: 20px 25px;">
+                <h4 style="font-size: 21px; color: #A855F7; margin-bottom: 8px; font-weight: 800;">🧑‍💻 外籍移工 ─ 四語防呆</h4>
+                <p style="font-size: 17.5px; color: #FFF; line-height: 1.55;">
+                    害怕按錯 UI 被處罰扣薪水。<br>
+                    <strong>對策：</strong> 中、越、泰、印尼四語界面。強制極簡圖形與色溫防呆，下發 90秒短影片。
+                </p>
+            </div>
+        </div>
+        
+        <!-- 下排：變革管理時間軸 (點擊交互更新內容) -->
+        <div class="panel animate-fade delay-3" style="display: flex; flex-direction: column; justify-content: space-between; padding: 25px 35px;">
+            <h4 style="font-size: 22px; color: var(--secondary-accent); font-weight: 800;" id="timelineTitle">📅 [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]變革時間線 ─ 第一階段 ｜ 溝通期 (點擊切換階段)</h4>
+            
+            <!-- 水平按鈕時間線 -->
+            <div style="display: flex; justify-content: space-between; align-items: center; position: relative; margin-top: 10px;">
+                <div style="position: absolute; left: 5%; right: 5%; height: 3px; background: rgba(255,255,255,0.15); z-index: 1;"></div>
+                
+                <div onclick="selectTimeline(1)" id="timeNode1" style="z-index: 2; background: var(--bg-color); border: 2.5px solid var(--primary-accent); border-radius: 8px; padding: 8px 14px; text-align: center; width: 22%; cursor: pointer; transition: all 0.2s;">
+                    <span style="font-size: 16px; font-weight: 800; color: var(--primary-accent); display: block;">M1 ｜ 溝通期</span>
+                    <span style="font-size: 14.5px; color: #FFF; font-weight:600;" id="txtNode1">宣示不裁員、召集大會</span>
+                </div>
+                <div onclick="selectTimeline(2)" id="timeNode2" style="z-index: 2; background: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 8px; padding: 8px 14px; text-align: center; width: 22%; cursor: pointer; transition: all 0.2s;">
+                    <span style="font-size: 16px; font-weight: 800; color: #FF8A00; display: block;">M2 ｜ 培訓期</span>
+                    <span style="font-size: 14.5px; color: #FFF;" id="txtNode2">移工種子教練挑選</span>
+                </div>
+                <div onclick="selectTimeline(3)" id="timeNode3" style="z-index: 2; background: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 8px; padding: 8px 14px; text-align: center; width: 22%; cursor: pointer; transition: all 0.2s;">
+                    <span style="font-size: 16px; font-weight: 800; color: var(--secondary-accent); display: block;">M3-4 ｜ 試點期</span>
+                    <span style="font-size: 14.5px; color: #FFF;" id="txtNode3">首條冷鍛線試跑吐槽</span>
+                </div>
+                <div onclick="selectTimeline(4)" id="timeNode4" style="z-index: 2; background: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 8px; padding: 8px 14px; text-align: center; width: 22%; cursor: pointer; transition: all 0.2s;">
+                    <span style="font-size: 16px; font-weight: 800; color: #A855F7; display: block;">M5-6 ｜ 推廣期</span>
+                    <span style="font-size: 14.5px; color: #FFF;" id="txtNode4">同儕激勵、發放獎金</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const timelineData = {
+            1: {
+                title: "📅 [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]變革時間線 ─ 第一階段 ｜ 溝通期",
+                node1: "宣示不裁員、召集大會",
+                node2: "移工種子教練挑選",
+                node3: "首條冷鍛線試跑吐槽",
+                node4: "同儕激勵、發放獎金"
+            },
+            2: {
+                title: "📅 [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]變革時間線 ─ 第二階段 ｜ 培訓與四語部署",
+                node1: "越南/泰國/印尼手冊印製",
+                node2: "🚀 15名移工種子教練上崗",
+                node3: "宿舍交誼廳微視頻輪播",
+                node4: "班長與教練對齊獎金機制"
+            },
+            3: {
+                title: "📅 [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]變革時間線 ─ 第三階段 ｜ 試跑與容錯調整",
+                node1: "允許出錯、鼓勵現場改動",
+                node2: "每週召開「槽點檢討大會」",
+                node3: "🚀 滾牙/打頭線試點修正",
+                node4: "AI 詞典[南部聚落]腔二次微調"
+            },
+            4: {
+                title: "📅 [精密金屬加工暨汽車航太級扣件製造商 (數百人規模)]變革時間線 ─ 第四階段 ｜ 內化與績效激勵",
+                node1: "AI操作納入月度績效考核",
+                node2: "種子教練進度完成檢閱",
+                node3: "全廠冷鍛打頭線橫向鋪開",
+                node4: "🚀 發放2000-5000激勵獎金"
+            }
+        };
+        
+        function selectTimeline(step) {
+            // 修改標題
+            document.getElementById('timelineTitle').innerText = timelineData[step].title;
+            
+            // 修改各節點文字
+            document.getElementById('txtNode1').innerText = timelineData[step].node1;
+            document.getElementById('txtNode2').innerText = timelineData[step].node2;
+            document.getElementById('txtNode3').innerText = timelineData[step].node3;
+            document.getElementById('txtNode4').innerText = timelineData[step].node4;
+            
+            // 動態高亮節點
+            for (let i = 1; i <= 4; i++) {
+                const node = document.getElementById('timeNode' + i);
+                if (i === step) {
+                    node.style.borderWidth = '2.5px';
+                    node.style.borderColor = i === 1 ? 'var(--primary-accent)' : (i === 2 ? '#FF8A00' : (i === 3 ? 'var(--secondary-accent)' : '#A855F7'));
+                    node.style.boxShadow = '0 0 15px rgba(255,255,255,0.15)';
+                } else {
+                    node.style.borderWidth = '1px';
+                    node.style.borderColor = 'var(--glass-border)';
+                    node.style.boxShadow = 'none';
+                }
+            }
+        }
+    </script>
+
+    </div>
+</body>
+</html>

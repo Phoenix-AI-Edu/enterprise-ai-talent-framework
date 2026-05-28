@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模組三 ｜ AOI 二次覆檢與品質混淆矩陣成本精算</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.025);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            padding: 70px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-radial {
+            position: absolute;
+            top: 30%; left: 50%;
+            width: 1200px; height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.04) 0%, rgba(0, 242, 254, 0.03) 50%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .slide-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 20px;
+        }
+        .module-num {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #FFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-watermark {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-watermark::before { content: '🦅'; }
+        .content-area {
+            position: relative;
+            z-index: 10;
+            height: 740px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .panel-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-accent);
+            border-radius: 2.5px;
+        }
+        .panel-title.teal::before {
+            background-color: var(--secondary-accent);
+        }
+        .panel-title.purple::before {
+            background-color: #A855F7;
+        }
+        .bottom-alert {
+            background: rgba(255, 255, 255, 0.015);
+            border-left: 4px solid var(--secondary-accent);
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            color: #F8FAFC;
+            line-height: 1.6;
+        }
+        .bottom-alert strong { color: var(--primary-accent); }
+        
+        /* 視覺元件基礎樣式 */
+        .highlight-number {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .highlight-number.teal {
+            background: linear-gradient(135deg, var(--secondary-accent), #00A3FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+    <div class="slide-header">
+        <div>
+            <div class="module-num">MODULE 03 ｜ SLIDE 6</div>
+            <h2 class="slide-title">模組三 ｜ AOI 二次覆檢與品質混淆矩陣成本精算</h2>
+        </div>
+        <div class="brand-watermark">PHOENIX AI CONSULTING</div>
+    </div>
+    <div class="content-area">
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%;">
+        <!-- 左欄：非侵入式外掛架構 -->
+        <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3 class="panel-title">M05 ｜ 既有百萬 AOI 篩選機的 AI 二次覆檢</h3>
+                
+                <!-- 視覺化外掛流程圖 -->
+                <div style="background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 15px; padding: 25px; margin-top: 15px; text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: space-around; gap: 10px;">
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px; border-radius: 10px; width: 30%;">
+                            <span style="font-size: 30px; display: block; margin-bottom: 5px;">⚙️</span>
+                            <span style="font-size: 17px; font-weight: 700; color: #FFF;">原廠 AOI 篩選機</span>
+                        </div>
+                        <span style="font-size: 24px; color: var(--primary-accent);">➔</span>
+                        <div style="background: rgba(255,91,53,0.1); border: 2px solid var(--primary-accent); padding: 15px; border-radius: 10px; width: 35%;">
+                            <span style="font-size: 16px; font-weight: 800; color: var(--primary-accent); display: block; margin-bottom: 5px;">分流拷貝 ➔ 不動設備</span>
+                            <span style="font-size: 18px; font-weight: 700; color: #FFF;">AI 二次品檢控制層</span>
+                        </div>
+                        <span style="font-size: 24px; color: var(--secondary-accent);">➔</span>
+                        <div style="background: rgba(0,242,254,0.1); border: 2px solid var(--secondary-accent); padding: 15px; border-radius: 10px; width: 30%;">
+                            <span style="font-size: 30px; display: block; margin-bottom: 5px;">🖥️</span>
+                            <span style="font-size: 17px; font-weight: 700; color: #FFF;">YOLOv8 推論 &lt;50ms</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="font-size: 20px; color: #FFF; line-height: 1.6; margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+                    <p>
+                        <strong>非侵入式外掛架構：</strong> 直接從篩選機的相機輸出端（USB/網孔）複製一份影像，原機運作速度完全不受影響。
+                    </p>
+                    <p>
+                        <strong>零硬體保固風險：</strong> 絕不動到進口設備的封閉黑盒子系統，做壞了隨時拔掉，零風險。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bottom-alert">
+                <strong>💡 缺陷數據集：</strong> 每種缺陷（牙紋不全、頭部裂、生鏽等）在現場採集 <strong>500 張正例 + 2000 張反例</strong>，確保模型精準。
+            </div>
+        </div>
+        
+        <!-- 右欄：混淆矩陣與成本大圖 (高對比度，大字體) -->
+        <div class="panel animate-fade delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-right: 5px solid var(--secondary-accent);">
+            <div>
+                <h3 class="panel-title teal">二次品檢混淆矩陣與車規成本精算</h3>
+                
+                <!-- 成本精算卡片 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                    <div style="background: rgba(255,91,53,0.08); border: 2px solid var(--primary-accent); padding: 20px; border-radius: 12px;">
+                        <span style="font-size: 16px; font-weight: 800; color: var(--primary-accent); display: block; margin-bottom: 5px;">⚠️ 偽陰性 (漏檢) FN</span>
+                        <strong style="font-size: 22px; color: #FFF; display: block;">車規客戶退貨、抽單</strong>
+                        <span style="font-size: 15px; color: #FFF; margin-top: 5px; display: block;">➔ 客訴賠償，成本高昂！</span>
+                    </div>
+                    
+                    <div style="background: rgba(255,138,0,0.08); border: 2px solid #FF8A00; padding: 20px; border-radius: 12px;">
+                        <span style="font-size: 16px; font-weight: 800; color: #FF8A00; display: block; margin-bottom: 5px;">⚠️ 偽陽性 (誤殺) FP</span>
+                        <strong style="font-size: 22px; color: #FFF; display: block;">良品誤判為不良品</strong>
+                        <span style="font-size: 15px; color: #FFF; margin-top: 5px; display: block;">➔ 二手人工覆檢工時成本。</span>
+                    </div>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 18px; margin-top: 25px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.03);">
+                            <th style="padding: 12px; color: var(--secondary-accent); font-weight: 700;">分類結果</th>
+                            <th style="padding: 12px; color: var(--secondary-accent); font-weight: 700;">實際為良品</th>
+                            <th style="padding: 12px; color: var(--secondary-accent); font-weight: 700;">實際為不良品</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px; font-weight: 700;">AI 良品</td>
+                            <td style="padding: 14px; color: #FFF;">真陰性 (TN) ｜ ✅ 通過</td>
+                            <td style="padding: 14px; color: var(--primary-accent); font-weight: 800;">偽陰性 (FN) ｜ ❌ 漏檢</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px; font-weight: 700;">AI 不良</td>
+                            <td style="padding: 14px; color: #FF8A00;">偽陽性 (FP) ｜ ⚠️ 誤判</td>
+                            <td style="padding: 14px; color: var(--secondary-accent); font-weight: 800;">真陽性 (TP) ｜ ✅ 攔截</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
+                <strong>🏆 車規安全防線：</strong> 模型調校時刻意往「寧可錯殺、不可漏檢」偏置，最大化保障車規合規。
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+</html>

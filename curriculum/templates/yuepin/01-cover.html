@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[連鎖餐飲暨零售集團 (3000人規模)]專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案 - Cover</title>
+    <!-- 引入高階字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9AA8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 背景流光與微幅網格 */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+
+        .glow-orange {
+            position: absolute;
+            top: -200px;
+            right: -100px;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 2;
+        }
+
+        .glow-blue {
+            position: absolute;
+            bottom: -300px;
+            left: -200px;
+            width: 900px;
+            height: 900px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: 2;
+        }
+
+        /* 主要內容排版 */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 100px 120px;
+        }
+
+        /* 頂部 LOGO 與標記 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 91, 53, 0.3);
+        }
+
+        .brand-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 0.1em;
+            background: linear-gradient(to right, #FFF, #A3B3C5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.2);
+            color: var(--primary-accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* 中部標題區 */
+        .hero {
+            max-width: 1300px;
+            margin-top: 40px;
+        }
+
+        .client-tag {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--secondary-accent);
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .client-tag::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--secondary-accent);
+        }
+
+        .title {
+            font-family: var(--font-display);
+            font-size: 76px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #D8E3F0 50%, #99AABF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title span {
+            background: linear-gradient(135deg, var(--primary-accent), #FF8E53);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-muted);
+            max-width: 900px;
+            line-height: 1.6;
+            letter-spacing: 0.05em;
+        }
+
+        /* 底部資訊區 (致贈與顧問簽署) */
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .meta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--primary-accent);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 20px;
+            font-weight: 500;
+            color: #E2ECF6;
+        }
+
+        .meta-value span {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 300;
+            margin-left: 8px;
+        }
+
+        /* 微動畫 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="glow-orange"></div>
+    <div class="glow-blue"></div>
+
+    <div class="container">
+        <!-- 頂部 Header -->
+        <div class="header animate-fade">
+            <div class="brand">
+                <div class="brand-logo">🦅</div>
+                <div class="brand-name">PHOENIX AI</div>
+            </div>
+            <div class="badge">CONFIDENTIAL &amp; PROPRIETARY</div>
+        </div>
+
+        <!-- 中部 Title -->
+        <div class="hero">
+            <div class="client-tag animate-fade delay-1">YUEPIN GROUP</div>
+            <h1 class="title animate-fade delay-2">
+                [連鎖餐飲暨零售集團 (3000人規模)]專屬<br>
+                <span>2026 鳳凰 AI</span> 企業級營運落地<br>
+                與人才培育課程方案
+            </h1>
+            <p class="subtitle animate-fade delay-3">
+                針對餐飲與連鎖零售高流動、極低容錯之營運情境定制，全面實施「無痛去技術化、客製情境化、財務量化」重構，協助貴集團建立 AI 時代的剛性競爭力。
+            </p>
+        </div>
+
+        <!-- 底部 Footer -->
+        <div class="footer animate-fade delay-3">
+            <div class="meta-group">
+                <span class="meta-label">Prepared For ｜ 致</span>
+                <span class="meta-value">[執行長 閣下] <span>[連鎖餐飲暨零售集團 (3000人規模)] (3000人規模)</span></span>
+            </div>
+            <div class="meta-group" style="padding-left: 60px; border-left: 1px solid rgba(255,255,255,0.05);">
+                <span class="meta-label">Presented By ｜ 由</span>
+                <span class="meta-value">鳳凰 AI 顧問團隊 <span>首席顧問 孟淑慧 ＆ 策略長 陳文家</span></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

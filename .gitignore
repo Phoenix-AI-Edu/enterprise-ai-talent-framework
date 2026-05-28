@@ -43,3 +43,6 @@ dist/
 
 # Private B2B Advisor & Ops Management Directory (Never push to GitHub)
 internal_admin/
+
+# Private B2B Client Presentation Folders (DLP Security Barrier)
+slides/

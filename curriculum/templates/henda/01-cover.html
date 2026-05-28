@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;
+            --secondary-accent: #00F2FE;
+            --text-main: #FFFFFF;
+            --text-muted: #E2E8F0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1920px; height: 1080px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+        }
+        .grid-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+        }
+        .glow-orange {
+            position: absolute; top: -200px; right: -100px; width: 900px; height: 900px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.1) 0%, transparent 70%);
+            filter: blur(100px); z-index: 2;
+        }
+        .glow-blue {
+            position: absolute; bottom: -300px; left: -200px; width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
+            filter: blur(120px); z-index: 2;
+        }
+        .container {
+            position: relative; z-index: 10;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+            padding: 90px 110px;
+        }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--primary-accent), #FF8A00);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-family: var(--font-display); font-size: 22px; color: #fff;
+            box-shadow: 0 0 25px rgba(255, 91, 53, 0.4);
+        }
+        .brand-name {
+            font-family: var(--font-display); font-weight: 700; font-size: 24px;
+            letter-spacing: 0.15em; background: linear-gradient(to right, #FFF, #C2CFE0);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .badge {
+            background: rgba(255, 91, 53, 0.15); border: 1px solid rgba(255, 91, 53, 0.3);
+            color: #FF7D5A; padding: 8px 20px; border-radius: 20px;
+            font-size: 16px; font-weight: 700; letter-spacing: 0.08em;
+        }
+        .hero { max-width: 1400px; margin-top: 20px; }
+        .client-tag {
+            font-size: 28px; font-weight: 700; color: var(--secondary-accent);
+            letter-spacing: 0.2em; margin-bottom: 24px; display: flex; align-items: center; gap: 16px;
+        }
+        .client-tag::before {
+            content: ''; display: inline-block; width: 32px; height: 3px; background-color: var(--secondary-accent);
+        }
+        .title {
+            font-family: var(--font-display); font-size: 80px; font-weight: 900;
+            line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 30px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E2ECF6 50%, #A5B6CA 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .title span {
+            background: linear-gradient(135deg, var(--primary-accent), #FF8E53);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        .subtitle {
+            font-size: 26px; font-weight: 400; color: #FFF;
+            max-width: 1200px; line-height: 1.65; letter-spacing: 0.05em;
+        }
+        .footer {
+            display: grid; grid-template-columns: 1.1fr 0.9fr;
+            border-top: 1px solid var(--glass-border); padding-top: 35px; margin-top: 30px;
+        }
+        .meta-group { display: flex; flex-direction: column; gap: 8px; }
+        .meta-label {
+            font-size: 16px; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--primary-accent); font-weight: 700;
+        }
+        .meta-value { font-size: 24px; font-weight: 700; color: #FFFFFF; }
+        .meta-value span { color: var(--secondary-accent); font-size: 18px; font-weight: 500; margin-left: 8px; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        #mobile-rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 9, 19, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 40px;
+        }
+        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
+            #mobile-rotate-overlay {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobile-rotate-overlay">
+        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
+        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
+    </div>
+    <div class="grid-bg"></div>
+    <div class="glow-orange"></div>
+    <div class="glow-blue"></div>
+    <div class="container">
+        <div class="header animate-fade">
+            <div class="brand">
+                <div class="brand-logo">🦅</div>
+                <div class="brand-name">PHOENIX AI</div>
+            </div>
+            <div class="badge">CONFIDENTIAL &amp; PROPRIETARY</div>
+        </div>
+        <div class="hero">
+            <div class="client-tag animate-fade delay-1">HENDAR PRECISION FASTENERS</div>
+            <h1 class="title animate-fade delay-2">
+                [精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)]專屬<br>
+                <span>2026 鳳凰 AI</span> 企業級營運落地<br>
+                與人才培育課程方案
+            </h1>
+            <p class="subtitle animate-fade delay-3">
+                針對高雄[南部聚落]螺絲聚落「高噪、滿手油污、車規零容錯」極端產線客製。全面實施「無痛去技術化、客製情境化、國際出口合規與政策轉化」重構，協助貴公司建立剛性競爭力。
+            </p>
+        </div>
+        <div class="footer animate-fade delay-3">
+            <div class="meta-group">
+                <span class="meta-label">Prepared For ｜ 致</span>
+                <span class="meta-value">[董事長暨總經理 閣下] 董事長暨總經理 閣下 <span>[精密金屬加工暨汽車航太級扣件製造商 (數百人規模/南部聚落)] ([南部聚落]螺絲大廠 / 數百人規模)</span></span>
+            </div>
+            <div class="meta-group" style="padding-left: 60px; border-left: 1px solid rgba(255,255,255,0.08);">
+                <span class="meta-label">Presented By ｜ 由</span>
+                <span class="meta-value">鳳凰 AI 顧問團隊 <span>首席顧問 孟淑慧 ＆ 策略長 陳文家</span></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
