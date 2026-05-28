@@ -77,6 +77,11 @@ def check_file(file_path):
     cleaned_content = re.sub(r"`[^`\n]+`", "", content) # inline code
     cleaned_content = re.sub(r"```.*?```", "", cleaned_content, flags=re.DOTALL) # code blocks
 
+    # Clean currency patterns (e.g., NT$ 50,000, US$100, NT$) so they aren't confused with math delimiters
+    # Matches currency prefixes followed by a dollar sign (e.g. NT$, US$, HK$)
+    cleaned_content = re.sub(r"\b(?:NT|US|HK|RMB|GB|CA|AUD|EUR)\$", "", cleaned_content)
+
+
     # Count double dollar first on the cleaned content
     double_dollar_count = cleaned_content.count("$$")
     if double_dollar_count % 2 != 0:
@@ -88,6 +93,7 @@ def check_file(file_path):
     single_dollar_count = cleaned_content_no_double.count("$")
     if single_dollar_count % 2 != 0:
         errors.append("[ERROR] Unbalanced LaTeX inline dollar '$' markers. Inline math might render incorrectly.")
+
 
     return errors, warnings
 
