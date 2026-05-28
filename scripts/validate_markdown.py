@@ -50,8 +50,13 @@ def check_file(file_path):
     # 1. Heading Hierarchy Check
     h1_count = 0
     h1_line = 0
+    in_codeblock = False
     for idx, line in enumerate(lines, 1):
-        if line.strip().startswith("# "):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_codeblock = not in_codeblock
+            continue
+        if not in_codeblock and stripped.startswith("# "):
             h1_count += 1
             h1_line = idx
             
