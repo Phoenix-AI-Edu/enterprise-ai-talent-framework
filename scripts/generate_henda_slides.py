@@ -201,40 +201,9 @@ def get_header(title, module_name, slide_num, extra_style=""):
         .delay-3 {{ animation-delay: 0.4s; }}
         {extra_style}
 
-        @keyframes rotatePhone {{
-            0% {{ transform: rotate(0deg); }}
-            50% {{ transform: rotate(-90deg); }}
-            100% {{ transform: rotate(0deg); }}
-        }}
-        #mobile-rotate-overlay {{
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(7, 9, 19, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 99999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 40px;
-        }}
-        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {{
-            #mobile-rotate-overlay {{
-                display: flex;
-            }}
-        }}
-
     </style>
 </head>
 <body>
-
-    <div id="mobile-rotate-overlay">
-        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
-        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
-        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
-    </div>
     <div class="grid-bg"></div>
     <div class="glow-radial"></div>
     <div class="slide-header">
@@ -371,40 +340,9 @@ cover_html = """<!DOCTYPE html>
         .delay-2 { animation-delay: 0.3s; }
         .delay-3 { animation-delay: 0.45s; }
 
-        @keyframes rotatePhone {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(-90deg); }
-            100% { transform: rotate(0deg); }
-        }
-        #mobile-rotate-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(7, 9, 19, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 99999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 40px;
-        }
-        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
-            #mobile-rotate-overlay {
-                display: flex;
-            }
-        }
-
     </style>
 </head>
 <body>
-
-    <div id="mobile-rotate-overlay">
-        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
-        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
-        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
-    </div>
     <div class="grid-bg"></div>
     <div class="glow-orange"></div>
     <div class="glow-blue"></div>
@@ -1427,40 +1365,9 @@ roadmap_html = """<!DOCTYPE html>
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.25s; }
 
-        @keyframes rotatePhone {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(-90deg); }
-            100% { transform: rotate(0deg); }
-        }
-        #mobile-rotate-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(7, 9, 19, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 99999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 40px;
-        }
-        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
-            #mobile-rotate-overlay {
-                display: flex;
-            }
-        }
-
     </style>
 </head>
 <body>
-
-    <div id="mobile-rotate-overlay">
-        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
-        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
-        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
-    </div>
     <div class="grid-bg"></div>
     <div class="glow-radial"></div>
     <div class="slide-header">
@@ -1665,40 +1572,9 @@ next_steps_html = """<!DOCTYPE html>
         .delay-2 { animation-delay: 0.25s; }
         .delay-3 { animation-delay: 0.4s; }
 
-        @keyframes rotatePhone {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(-90deg); }
-            100% { transform: rotate(0deg); }
-        }
-        #mobile-rotate-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(7, 9, 19, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 99999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 40px;
-        }
-        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
-            #mobile-rotate-overlay {
-                display: flex;
-            }
-        }
-
     </style>
 </head>
 <body>
-
-    <div id="mobile-rotate-overlay">
-        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
-        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
-        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
-    </div>
     <div class="grid-bg"></div>
     <div class="glow-radial"></div>
     <div class="slide-header">
@@ -1814,31 +1690,6 @@ index_html = """<!DOCTYPE html>
   .nav-zone:hover .nav-hint { opacity: 1; background: rgba(255,255,255,0.08); color: #FFF; }
   /* 手機提示 */
 
-        @keyframes rotatePhone {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(-90deg); }
-            100% { transform: rotate(0deg); }
-        }
-        #mobile-rotate-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(7, 9, 19, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 99999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 40px;
-        }
-        @media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
-            #mobile-rotate-overlay {
-                display: flex;
-            }
-        }
-
   @media print {
     @page { size: 1920px 1080px; margin: 0; }
     html, body { background: #fff; overflow: visible; height: auto; }
@@ -1850,12 +1701,6 @@ index_html = """<!DOCTYPE html>
 </style>
 </head>
 <body>
-
-    <div id="mobile-rotate-overlay">
-        <div style="font-size: 80px; margin-bottom: 20px; animation: rotatePhone 2s infinite ease-in-out;">📱</div>
-        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 800; margin-bottom: 15px; background: linear-gradient(135deg, var(--primary-accent), #FF8A00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">請旋轉您的手機</h2>
-        <p style="font-size: 20px; color: #CBD5E1; line-height: 1.6; max-width: 450px;">為了獲得最佳的高保真簡報與實時財務計算機互動體驗，請將手機旋轉為橫向模式播放。</p>
-    </div>
 
 <div id="stage"><iframe id="frame" src="about:blank"></iframe></div>
 <div class="nav-zone left"  id="navL"><div class="nav-hint">‹</div></div>
