@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>決策與一線雙軌 ｜ 總部與門店分流培訓系統</title>
+    <title>智慧營運重構時程 ｜ 90天 Quick-Win 實施路線圖</title>
     <!-- 引入 Outfit (標題) 與 Inter (內文) 高階字型 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -162,7 +162,7 @@
         .delay-3 { animation-delay: 0.4s; }
         
         .slide-title-row {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         .slide-main-title {
             font-family: var(--font-display);
@@ -174,67 +174,91 @@
             font-size: 18px;
             color: var(--gray-400);
         }
-        .dual-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: stretch;
+        .roadmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
             height: 520px;
         }
-        .luxury-card {
+        .tab-btn-row {
+            display: flex;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 16px;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            color: var(--gray-300);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .tab-btn.active {
+            background: rgba(255, 91, 53, 0.08);
+            border-color: var(--phoenix-orange);
+            color: var(--white);
+            box-shadow: 0 0 15px rgba(255, 91, 53, 0.2);
+        }
+        .roadmap-view-panel {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             backdrop-filter: blur(16px);
-            transition: all 0.3s ease;
+            position: relative;
         }
-        .luxury-card:hover {
-            transform: translateY(-5px);
-        }
-        .luxury-card.left-card:hover {
-            border-color: rgba(255, 91, 53, 0.3);
-            box-shadow: 0 20px 40px rgba(255, 91, 53, 0.05);
-        }
-        .luxury-card.right-card:hover {
-            border-color: rgba(0, 242, 254, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.05);
-        }
-        .card-badge {
-            align-self: flex-start;
-            font-family: var(--font-display);
-            font-size: 12px;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 6px;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
-        }
-        .left-card .card-badge {
-            background: rgba(255, 91, 53, 0.1);
-            border: 1px solid rgba(255, 91, 53, 0.3);
-            color: var(--phoenix-orange);
-        }
-        .right-card .card-badge {
-            background: rgba(0, 242, 254, 0.1);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            color: var(--phoenix-teal);
-        }
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-        .card-content {
-            font-size: 17px;
+        .roadmap-card-content {
+            font-size: 18px;
             color: var(--gray-300);
-            line-height: 1.7;
+            line-height: 1.8;
         }
+        .gantt-chart-mock {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 24px;
+        }
+        .gantt-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .gantt-lbl {
+            width: 140px;
+            font-size: 13px;
+            color: var(--gray-400);
+            font-weight: 600;
+        }
+        .gantt-bar {
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .gantt-fill {
+            height: 100%;
+            border-radius: 6px;
+            position: absolute;
+            left: 0; top: 0;
+            width: 0%;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .gantt-fill.orange { background: var(--phoenix-orange); }
+        .gantt-fill.teal { background: var(--phoenix-teal); }
+        .gantt-fill.gold { background: var(--phoenix-gold); }
     
     </style>
 </head>
@@ -251,28 +275,78 @@
         <div class="content-body">
 
             <div class="slide-title-row animate-fade">
-                <h2 class="slide-main-title text-gradient-orange">決策與一線雙軌 ｜ 總部與門店分流培訓系統</h2>
-                <p class="slide-subtitle">重塑 3,000 人組織的 AI 認知，以雙軌分流實現最小阻力變革</p>
+                <h2 class="slide-main-title text-gradient-orange">智慧營運重構時程 ｜ 90天 Quick-Win 實施路線圖</h2>
+                <p class="slide-subtitle">點擊下方日程分頁，檢視總部橘軌與門店藍軌雙向並進的實施日程</p>
             </div>
-            <div class="dual-grid">
-                <!-- 左軌 (橘軌 - 戰略) -->
-                <div class="luxury-card left-card animate-fade delay-1">
-                    <span class="card-badge">總部橘軌 (C-Level & 幕僚)</span>
-                    <h3 class="card-title text-gradient-orange">AI 戰略畫布與採購治理防線</h3>
-                    <p class="card-content">針對總部決策高層與幕僚，開闢「總部橘軌」。聚焦於 Buy vs Build 量化評估模型、TCO 成本失控 Token 網閘、員工使用規範制定（個資法第8條合規）與 ISO 42001 認證前期研習。打通高層 AI 全景視野與決策路徑。</p>
+            <div class="roadmap-container">
+                <!-- 分頁按鈕 -->
+                <div class="tab-btn-row animate-fade delay-1">
+    
+                    <button class="tab-btn active" onclick="switchTab(0)">Month 1 (啟動期)</button>
+        
+                    <button class="tab-btn " onclick="switchTab(1)">Month 3 (試點期)</button>
+        
+                    <button class="tab-btn " onclick="switchTab(2)">Month 6 (全面上線)</button>
+        
                 </div>
-                <!-- 右軌 (藍軌 - 實務) -->
-                <div class="luxury-card right-card animate-fade delay-2">
-                    <span class="card-badge">門店藍軌 (一線主管 & 店長)</span>
-                    <h3 class="card-title text-gradient-teal">門店營運與生成式行銷實務</h3>
-                    <p class="card-content">針對一線門店店長與營運主管，開闢「門店藍軌」。聚焦於預測性智慧排班工具（客流預測與 OR-Tools 約束優化）、生成式 AI 行銷視覺版權防線（AI 融合同意書）與卓越服務之星同儕激勵機制。無縫對接一線日常營運痛點。</p>
+
+                <!-- 分頁內容展示區 -->
+                <div class="roadmap-view-panel animate-fade delay-2">
+                    <p class="roadmap-card-content" id="tab-desc-text">Select a month to load.</p>
+                    
+                    <div class="gantt-chart-mock">
+                        <div class="gantt-bar-row">
+                            <span class="gantt-lbl">1. 數據備份與安全網閘</span>
+                            <div class="gantt-bar"><div class="gantt-fill orange" id="bar1"></div></div>
+                        </div>
+                        <div class="gantt-bar-row">
+                            <span class="gantt-lbl">2. 現場機台與特警部署</span>
+                            <div class="gantt-bar"><div class="gantt-fill teal" id="bar2"></div></div>
+                        </div>
+                        <div class="gantt-bar-row">
+                            <span class="gantt-lbl">3. 補助款申報核銷軌跡</span>
+                            <div class="gantt-bar"><div class="gantt-fill gold" id="bar3"></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <script>
+                const tabData = [{"name": "Month 1 (啟動期)", "content": "<b>總部橘軌：</b>部署企業級 API 網閘與 Token 計費限制器，制定全員 AI 安全使用守則，隔離影子 AI 洩漏個資風險。<br><b>門店藍軌：</b>啟動 45 家門店店長 AI 變革倡議，建立對標基線並完成現行排班規則收集。"}, {"name": "Month 3 (試點期)", "content": "<b>總部橘軌：</b>對接台南大學與高科大產學合作，申報經濟部商業發展署 SIIR 補助計畫黃金計畫書，爭取補助轉型預算。<br><b>門店藍軌：</b>導入預測性智慧排班工具進行 5 家門店小規模試點，客流預測準確率調校達 85% 以上。"}, {"name": "Month 6 (全面上線)", "content": "<b>總部橘軌：</b>完成 ISO 42001 內部稽核研習，對齊 SIIR 計畫書專案補助款審計核銷黃金路徑。<br><b>門店藍軌：</b>智慧排班工具全面推廣至 45 家門店，「卓越服務之星」同儕激勵機制上線，排班工時節省 70%。"}];
+                
+                function switchTab(index) {
+                    const buttons = document.querySelectorAll('.tab-btn');
+                    buttons.forEach((b, i) => {
+                        if (i === index) b.classList.add('active');
+                        else b.classList.remove('active');
+                    });
+                    
+                    document.getElementById('tab-desc-text').innerHTML = tabData[index].content;
+                    
+                    // 動態更新甘特圖模擬填充度
+                    if (index === 0) {
+                        document.getElementById('bar1').style.width = '80%';
+                        document.getElementById('bar2').style.width = '10%';
+                        document.getElementById('bar3').style.width = '0%';
+                    } else if (index === 1) {
+                        document.getElementById('bar1').style.width = '100%';
+                        document.getElementById('bar2').style.width = '65%';
+                        document.getElementById('bar3').style.width = '10%';
+                    } else if (index === 2) {
+                        document.getElementById('bar1').style.width = '100%';
+                        document.getElementById('bar2').style.width = '100%';
+                        document.getElementById('bar3').style.width = '95%';
+                    }
+                }
+                
+                // 初始化
+                switchTab(0);
+            </script>
     
         </div>
         <footer class="animate-fade delay-3">
             <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
-            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 2 OF 10</div>
+            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 9 OF 10</div>
         </footer>
     </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>決策與一線雙軌 ｜ 總部與門店分流培訓系統</title>
+    <title>預測性智慧排班 ｜ 客流預測與排程優化</title>
     <!-- 引入 Outfit (標題) 與 Inter (內文) 高階字型 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -162,7 +162,7 @@
         .delay-3 { animation-delay: 0.4s; }
         
         .slide-title-row {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         .slide-main-title {
             font-family: var(--font-display);
@@ -174,66 +174,95 @@
             font-size: 18px;
             color: var(--gray-400);
         }
-        .dual-grid {
+        .roi-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: stretch;
+            gap: 48px;
             height: 520px;
         }
-        .luxury-card {
+        .calculator-panel {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
             backdrop-filter: blur(16px);
-            transition: all 0.3s ease;
         }
-        .luxury-card:hover {
-            transform: translateY(-5px);
-        }
-        .luxury-card.left-card:hover {
-            border-color: rgba(255, 91, 53, 0.3);
-            box-shadow: 0 20px 40px rgba(255, 91, 53, 0.05);
-        }
-        .luxury-card.right-card:hover {
-            border-color: rgba(0, 242, 254, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.05);
-        }
-        .card-badge {
-            align-self: flex-start;
-            font-family: var(--font-display);
-            font-size: 12px;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 6px;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
-        }
-        .left-card .card-badge {
-            background: rgba(255, 91, 53, 0.1);
-            border: 1px solid rgba(255, 91, 53, 0.3);
-            color: var(--phoenix-orange);
-        }
-        .right-card .card-badge {
-            background: rgba(0, 242, 254, 0.1);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            color: var(--phoenix-teal);
-        }
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-        .card-content {
-            font-size: 17px;
+        .roi-intro-txt {
+            font-size: 16.5px;
             color: var(--gray-300);
             line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .slider-section {
+            margin-bottom: 30px;
+        }
+        .slider-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--phoenix-gold);
+        }
+        .slider-input {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--phoenix-gold);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(245, 166, 35, 0.8);
+            transition: transform 0.1s ease;
+        }
+        .slider-input::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .results-panel {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.08) 0%, rgba(255, 91, 53, 0.02) 100%);
+            border: 1px dashed rgba(245, 166, 35, 0.35);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .result-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .result-item:last-child {
+            border: none;
+            padding: 0; margin: 0;
+        }
+        .result-lbl {
+            font-size: 14px;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+        .result-val {
+            font-family: var(--font-display);
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--white);
+        }
+        .result-val.highlight {
+            color: var(--phoenix-gold);
+            text-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
         }
     
     </style>
@@ -251,28 +280,65 @@
         <div class="content-body">
 
             <div class="slide-title-row animate-fade">
-                <h2 class="slide-main-title text-gradient-orange">決策與一線雙軌 ｜ 總部與門店分流培訓系統</h2>
-                <p class="slide-subtitle">重塑 3,000 人組織的 AI 認知，以雙軌分流實現最小阻力變革</p>
+                <h2 class="slide-main-title text-gradient-orange">預測性智慧排班 ｜ 客流預測與排程優化</h2>
+                <p class="slide-subtitle">拖動滑桿，模擬客流預測準確率提升對連鎖門店工時浪費與人力成本的影響</p>
             </div>
-            <div class="dual-grid">
-                <!-- 左軌 (橘軌 - 戰略) -->
-                <div class="luxury-card left-card animate-fade delay-1">
-                    <span class="card-badge">總部橘軌 (C-Level & 幕僚)</span>
-                    <h3 class="card-title text-gradient-orange">AI 戰略畫布與採購治理防線</h3>
-                    <p class="card-content">針對總部決策高層與幕僚，開闢「總部橘軌」。聚焦於 Buy vs Build 量化評估模型、TCO 成本失控 Token 網閘、員工使用規範制定（個資法第8條合規）與 ISO 42001 認證前期研習。打通高層 AI 全景視野與決策路徑。</p>
+            <div class="roi-wrapper">
+                <!-- 左側：滑塊與引言 -->
+                <div class="calculator-panel animate-fade delay-1">
+                    <div>
+                        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--white);">實時精算模擬器</h3>
+                        <p class="roi-intro-txt">連鎖餐飲與多零售門店集團擁有 3,000 人組織規模，店長排班工時耗損嚴重。透過 LightGBM 特徵大表進行客流預測，並使用 Google OR-Tools 進行排程約束優化。拖動下方滑塊，感受智慧排班為門店省減的機會成本！</p>
+                    </div>
+                    <div class="slider-section">
+                        <div class="slider-label-row">
+                            <span>製程工時省減率：</span>
+                            <span id="slider-val-display">20%</span>
+                        </div>
+                        <input type="range" class="slider-input" id="roi-slider" min="5" max="45" value="20">
+                    </div>
                 </div>
-                <!-- 右軌 (藍軌 - 實務) -->
-                <div class="luxury-card right-card animate-fade delay-2">
-                    <span class="card-badge">門店藍軌 (一線主管 & 店長)</span>
-                    <h3 class="card-title text-gradient-teal">門店營運與生成式行銷實務</h3>
-                    <p class="card-content">針對一線門店店長與營運主管，開闢「門店藍軌」。聚焦於預測性智慧排班工具（客流預測與 OR-Tools 約束優化）、生成式 AI 行銷視覺版權防線（AI 融合同意書）與卓越服務之星同儕激勵機制。無縫對接一線日常營運痛點。</p>
+
+                <!-- 右側：動態結果 -->
+                <div class="results-panel animate-fade delay-2">
+                    <div class="result-item">
+                        <div class="result-lbl">單人年節省成本 (機會成本)</div>
+                        <div class="result-val" id="single-savings">NT$ 0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-lbl">廠區規模 (以 45 人為基準)</div>
+                        <div class="result-val" style="font-size: 28px; color: var(--phoenix-teal);">45 名資深師傅 / 製程產線</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-lbl">廠區每年節省總額 (Total ROI)</div>
+                        <div class="result-val highlight" id="total-savings">NT$ 0</div>
+                    </div>
                 </div>
             </div>
+
+            <script>
+                document.getElementById('roi-slider').addEventListener('input', function(e) {
+                    const val = parseInt(e.target.value);
+                    document.getElementById('slider-val-display').innerText = val + '%';
+                    
+                    const costBase = 360000;
+                    const numWorkers = 45;
+                    
+                    const singleSaved = costBase * (val / 100);
+                    const totalSaved = singleSaved * numWorkers;
+                    
+                    document.getElementById('single-savings').innerText = 'NT$ ' + singleSaved.toLocaleString();
+                    document.getElementById('total-savings').innerText = 'NT$ ' + totalSaved.toLocaleString();
+                });
+                
+                // 初始化觸發一次
+                document.getElementById('roi-slider').dispatchEvent(new Event('input'));
+            </script>
     
         </div>
         <footer class="animate-fade delay-3">
             <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
-            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 2 OF 10</div>
+            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 6 OF 10</div>
         </footer>
     </div>
 
