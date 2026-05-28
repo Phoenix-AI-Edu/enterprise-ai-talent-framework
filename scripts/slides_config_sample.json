@@ -1,0 +1,78 @@
+{
+  "client_name": "鼎基精密製程",
+  "client_badge": "DINGJI PRECISION",
+  "logo_text": "PHOENIX AI 顧問 x 鼎基精密",
+  "output_dir": "slides/dingji_sample",
+  "theme": "obsidian-midnight",
+  "slides": [
+    {
+      "page": "01",
+      "layout": "cover",
+      "title": "鼎基精密製程 ｜ AI 智慧排程與出海合規解決方案",
+      "subtitle": "專屬 董事長兼總經理 林鼎基 閣下 ｜ 策略研討手冊"
+    },
+    {
+      "page": "02",
+      "layout": "dual-track",
+      "title": "戰略速覽 ｜ 高層決策與一線現場雙軌避坑",
+      "subtitle": "區分三類 AI 避坑防騙，對齊 P&L 損益表與 18個月路線圖",
+      "badge_left": "C-SUITE 橘軌決策",
+      "title_left": "規避 3 大自建 RAG 維護深坑",
+      "content_left": "避開高昂的私有伺服器年持有成本（TCO）。策略長林鼎基建議先期採用「低代碼 Notion 結構化知識庫 + NotebookLM」試點，將首期預算控制在 NT$ 5 萬以內，規避系統幻覺與安全黑洞。",
+      "badge_right": "現場藍軌實務",
+      "title_right": "高頻振動預測性維護佈點",
+      "content_right": "針對核心沖棒製程部署三向加速度感測器，採用 10kHz 高頻採樣與 FFT 特徵提取。當前製程調機經驗檢索年省 1,200 小時，折合人力機會成本省下近 NT$ 240 萬。"
+    },
+    {
+      "page": "03",
+      "layout": "interactive-roi",
+      "title": "現場動態 ROI 精算 ｜ 預測性維護省減工時模型",
+      "subtitle": "拖動滑桿，現場直觀感受調機師傅工時省減帶來的年財務回報",
+      "intro_text": "本精算模型依據鼎基廠區調機製程統計：每位資深師傅年均機會成本約為 NT$ 120 萬。透過 AI 語音換模指導與沖棒故障預測，首期可有效降低停機時間並縮短經驗檢索工時。",
+      "slider_min": 10,
+      "slider_max": 90,
+      "slider_default": 35,
+      "cost_base": 1200000,
+      "num_workers": 6
+    },
+    {
+      "page": "04",
+      "layout": "interactive-wave",
+      "title": "現場強噪音語音 AI ｜ 骨傳導拾音與邊緣降噪",
+      "subtitle": "測試點擊「音訊降噪按鈕」，查看 85分貝噪音下 RNNoise 濾波效果",
+      "intro_text": "鼎基廠區現場實測強噪音高達 85 分貝。我們採用「雙麥克風骨傳導拾音耳機」搭配輕量化 RNNoise 邊緣降噪模型。對語音 RAG 即時對話 API 進行深度微調，讓現場師傅免腾出雙手即可用語音調用換模 SOP 說明書。"
+    },
+    {
+      "page": "05",
+      "layout": "interactive-roadmap",
+      "title": "智慧製造轉型時程 ｜ 90天 Quick-Win 實施路線圖",
+      "subtitle": "點擊下方日程分頁，檢視各階段系統功能匹配與政府補助申報進度",
+      "tabs": [
+        {
+          "name": "Month 1 (啟動期)",
+          "content": "<b>核心工作：</b>完成廠區資料安全備份與 API 集中管理網閘部署；申報產發署「智慧製造低碳轉型」補助專案，黃金計畫書匹配撰寫。"
+        },
+        {
+          "name": "Month 3 (試點期)",
+          "content": "<b>核心工作：</b>現場 3 台重點機台感測器安裝完畢，建立 FFT 異常特徵資料庫；導入 4 四語防呆 UI 進行現場師傅變革管理訓練。"
+        },
+        {
+          "name": "Month 6 (全面上線)",
+          "content": "<b>核心工作：</b>補助計畫核銷審計軌跡對齊；語音 RAG 即時通訊延遲降至 <0.8秒，現場 Champion 種子人員考核加分指標上線。"
+        }
+      ]
+    },
+    {
+      "page": "06",
+      "layout": "next-steps",
+      "title": "下一步行動指引 ｜ 鼎基精密 x 鳳凰 AI 顧問夥伴",
+      "subtitle": "開啟高效落地第一步，將轉型自籌款降至最低",
+      "card1_title": "Action 1: 90分鐘工作坊",
+      "card1_desc": "召集鼎基高層治理、HR、現場廠長，進行戰略畫布對齊，90分鐘迅速產出全員可簽署之外部 AI 使用安全規範。",
+      "card2_title": "Action 2: 政府補助Matching",
+      "card2_desc": "鎖定產發署智慧轉型補助紅利，由孟首席顧問帶領對接，預算核銷保命工作手冊全面導入，安全抵銷 50% 轉型款。",
+      "card3_title": "Action 3: 加速夥伴特惠",
+      "card3_desc": "首期合作體驗特惠價，本期專案費用可 100% 全額折抵第二期系統建置自籌款，前 3 家累積去識別化標竿案例限定。"
+    }
+  ]
+}
