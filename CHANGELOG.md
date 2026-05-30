@@ -4,6 +4,22 @@
 
 ---
 
+## [1.3.0] - 2026-05-31
+
+### 🚀 新增 (Added)
+- **「CodeGraph (Tree-sitter) 本地圖譜實戰教學案例」** (`curriculum/unit_6_generative_ai/curriculum_v2026.md`)：
+  - 於單元六 MCP（Model Context Protocol）章節中新增 CodeGraph 本地優先代碼智慧圖譜實戰案例。
+  - 解析 AI 開發代理面臨的 Token 暴燒與代碼安全痛點，引證 Tree-sitter AST 解析與 SQLite 本地圖譜的技術本質，並提供標準 JSON-RPC 通訊 Schema 及 CLI 部署 SOP，展示降低 90% 代碼探索成本的商業變革價值。
+- **「本地技術除錯與開發備忘日誌」** (`internal_admin/09_dev_troubleshooting_log.md`)：
+  - 專門為開發團隊與未來 AI 助手建立的高規格技術日誌範本。
+  - 整理當前系統底層依賴基準，並錄入「LaTeX 數學定界符誤判預處理去噪」與「Slides 編譯相對路徑絕對化」兩大實戰 Bug 排障與防範因應記錄。
+
+### ✏️ 修改 (Changed)
+- **修正單元六教材代碼區塊語法衝突** (`curriculum/unit_6_generative_ai/curriculum_v2026.md`):
+  - 移除 L139 冗餘的 python 代碼標記，使 LangGraph 狀態圖代碼區塊（L144-L277）完美閉環，徹底消除 H1 標題檢測誤判與 LaTeX 定界符不平衡的 18 個編譯 Error，成功實現單元六 Markdown Linter **100% 全數通過，0 錯誤**。
+
+---
+
 ## [1.2.0] - 2026-05-21
 
 ### 🚀 新增 (Added)

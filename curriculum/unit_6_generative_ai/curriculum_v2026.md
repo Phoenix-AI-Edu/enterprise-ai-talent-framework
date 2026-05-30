@@ -136,40 +136,143 @@ System Prompt: |
 
 為防範此類事件，企業在部署 Multiagent 系統時，必須**強制在系統層實施「Loop Guard (循環防護網)」與「Max Iterations (最大迭代限制)」**：
 
+##### 🐍 LangGraph 實作：企業級 Agentic Loop Guard 熔斷防禦架構
+
+以下為 2026 企業多代理人系統部署中，最硬核且實用的 **LangGraph 狀態圖結構（StateGraph）** 熔斷實作。代碼中整合了「迭代次數」與「累計費用金額」雙重安全閥值過濾，當 Agent 陷入無限 Tool Call 循環或費用超支時，系統將自動熔斷路由至 SOP 安全處置節點，徹底杜絕財務曝險風險：
+
 ```python
-## 企業級 Loop Guard 核心防護邏輯虛擬碼
-class AgentLoopGuard:
-    def __init__(self, max_iterations=10, alert_threshold_usd=5.0):
-        self.max_iterations = max_iterations
-        self.current_iteration = 0
-        self.accumulated_cost = 0.0
-        self.alert_threshold_usd = alert_threshold_usd
+from typing import Dict, TypedDict, List
+from langgraph.graph import StateGraph, END
 
-    def check_boundary(self, step_cost_usd):
-        self.current_iteration += 1
-        self.accumulated_cost += step_cost_usd
+class AgentState(TypedDict):
+    """LangGraph 狀態定義，負責在節點間傳遞上下文字典"""
+    messages: List[Dict[str, str]]
+    next_action: str
+    loop_count: int               # 累計 Tool Call 迭代次數
+    accumulated_cost: float       # 累計 API 費用 (USD)
+    is_terminated: bool           # 熔斷狀態旗標
+    termination_reason: str       # 熔斷報警詳細原因
+
+# 費用與迭代上限之安全閥值定義
+MAX_ITERATIONS = 5
+MAX_COST_USD = 2.00 # 設定單次交互最高預算上限為 2.00 美元
+
+class LoopGuardException(Exception):
+    """Loop Guard 觸發熔斷時拋出之特許自訂異常"""
+    pass
+
+def agent_node(state: AgentState) -> Dict:
+    """模擬 AI Agent 進行思考與工具呼叫決策的節點"""
+    print(f"\n[Agent Node] 正在處理第 {state['loop_count']} 次 Tool Call 決策...")
+    # 模擬每次 LLM 推理產生的 Token 費用 (例如每次消耗 $0.35 USD)
+    step_cost = 0.35
+    
+    # 模擬 Agent 決策欲調用外部 MCP 資料庫查詢工具
+    return {
+        "loop_count": state["loop_count"] + 1,
+        "accumulated_cost": state["accumulated_cost"] + step_cost,
+        "next_action": "call_mcp_tool"
+    }
+
+def loop_guard_node(state: AgentState) -> Dict:
+    """
+    【Loop Guard 熔斷防禦攔截節點】
+    在每次 Agent 欲真正執行 Tool Call 前，強制進行雙重安全閥值檢測
+    """
+    current_cost = state["accumulated_cost"]
+    current_loops = state["loop_count"]
+    print(f"[Loop Guard] 執行邊界稽核 ➔ 累計迭代: {current_loops}/{MAX_ITERATIONS} 次, 累計費用: ${current_cost:.2f}/${MAX_COST_USD:.2f}")
+    
+    # 1. 檢測迭代次數是否超限 (死鎖風險)
+    if current_loops > MAX_ITERATIONS:
+        reason = f"超過最大 Tool Call 迭代次數限制 ({MAX_ITERATIONS} 次)，偵測到無限循環死鎖！"
+        print(f"⚠️  [熔斷報警] {reason}")
+        return {
+            "is_terminated": True,
+            "termination_reason": reason
+        }
         
-        ## 1. 迭代次數上限攔截
-        if self.current_iteration > self.max_iterations:
-            return {
-                "status": "TERMINATED",
-                "reason": f"Loop Guard triggered: Exceeded max iterations ({self.max_iterations}). Potential state deadlock."
-            }
-            
-        ## 2. 累計成本上限攔截
-        if self.accumulated_cost > self.alert_threshold_usd:
-            return {
-                "status": "TERMINATED",
-                "reason": f"Loop Guard triggered: Exceeded cumulative cost threshold (${self.alert_threshold_usd})."
-            }
-            
-        return {"status": "CONTINUE"}
+    # 2. 檢測 API 費用是否超限 (財務風險)
+    if current_cost > MAX_COST_USD:
+        reason = f"累積 API 費用達 ${current_cost:.2f}，已超越單筆對話安全預算 ${MAX_COST_USD}！"
+        print(f"⚠️  [熔斷報警] {reason}")
+        return {
+            "is_terminated": True,
+            "termination_reason": reason
+        }
+        
+    return {"is_terminated": False}
 
-## 攔截後的安全 SOP：
-## 當 Loop Guard 觸發攔截後，系統必須立即：
-## 1. 封鎖當前 Agent 的 Token Session。
-## 2. 發送高優先級警報至運維 Slack / Telegram。
-## 3. 強制切換為 Human-in-the-loop 人工介入審查，要求運維架構師手動確認並解鎖。
+def route_decision(state: AgentState) -> str:
+    """條件式路由器 (Conditional Router)：依據 Loop Guard 狀態動態分流"""
+    if state["is_terminated"]:
+        # 若已熔斷，強制路由至 terminate_sop 節點，切斷後續 API 調用
+        print("[Router] 偵測到 Loop Guard 阻斷旗標，強制切換至安全 SOP 節點。")
+        return "terminate_sop"
+    
+    # 正常狀態，允許繼續調用工具
+    return "call_mcp_tool_node"
+
+def call_mcp_tool_node(state: AgentState) -> Dict:
+    """模擬執行外部 MCP 資料庫安全查詢"""
+    print("[Tool Node] 呼叫外部 MCP PostgreSQL 唯讀服務查詢庫存...")
+    # 執行完成後返回 agent_node 進行下一輪推論
+    return {}
+
+def terminate_sop_node(state: AgentState) -> Dict:
+    """熔斷後的安全標準作業程序 (SOP) 節點"""
+    print("\n========== [SOP] 啟動 Loop Guard 熔斷救援程序 ==========")
+    print(f"1. 【Session 阻斷】 立即封鎖當前對話 Session，暫停向雲端大模型發送 API 請求。")
+    print(f"2. 【事件警報】 發送高優先級警報至 Slack/Telegram 運維群組。內容: {state['termination_reason']}")
+    print(f"3. 【人機問責】 系統強制切換為 Human-in-the-loop (HITL) 狀態，要求運維架構師手動確認並解鎖。")
+    
+    # 在生產環境中，此處應拋出特定異常以中斷 HTTP 請求，或回傳安全合規免責回覆
+    # raise LoopGuardException(state['termination_reason'])
+    return {}
+
+# 構建 LangGraph 狀態圖
+workflow = StateGraph(AgentState)
+
+# 1. 註冊所有處理節點
+workflow.add_node("agent", agent_node)
+workflow.add_node("loop_guard", loop_guard_node)
+workflow.add_node("call_mcp_tool_node", call_mcp_tool_node)
+workflow.add_node("terminate_sop", terminate_sop_node)
+
+# 2. 設定進入點
+workflow.set_entry_point("agent")
+
+# 3. 建立靜態連線
+workflow.add_edge("agent", "loop_guard")
+workflow.add_edge("call_mcp_tool_node", "agent")
+workflow.add_edge("terminate_sop", END)
+
+# 4. 註冊條件式路由邊界：在 loop_guard 節點執行完後，經由 route_decision 決定流向
+workflow.add_conditional_edges(
+    "loop_guard",
+    route_decision,
+    {
+        "call_mcp_tool_node": "call_mcp_tool_node",
+        "terminate_sop": "terminate_sop"
+    }
+)
+
+# 5. 編譯狀態圖結構
+app = workflow.compile()
+
+if __name__ == "__main__":
+    # 初始化空狀態，開始執行模擬測試
+    initial_state = {
+        "messages": [],
+        "next_action": "",
+        "loop_count": 0,
+        "accumulated_cost": 0.0,
+        "is_terminated": False,
+        "termination_reason": ""
+    }
+    
+    print("========== 開始執行多代理人 LangGraph 工作流 ==========")
+    app.invoke(initial_state)
 ```
 
 ---
@@ -203,11 +306,145 @@ class AgentLoopGuard:
   └──────────────────┴──────────────────┴───────────────────────┘
 ```
 
+#### 5.5 Model Context Protocol (MCP) JSON-RPC 2.0 通訊協定與 Schema 全解
+
+MCP 客戶端（例如 Claude Desktop 或 鳳凰AI 中台）與 MCP 伺服器端（例如資料庫網閘、Slack 連接器）之間，採用標準的 **JSON-RPC 2.0** 協定進行無狀態、雙向異步通信。底層傳輸介質可採用標準輸入輸出（Stdio）或 HTTP Server-Sent Events (SSE)。
+
+以下為企業系統開發者在對接底層協定時，必須遵循的核心生命週期 RPC Schema 全景定義：
+
+##### 🤝 1. 初始化握手階段 (Initialize Handshake)
+在連接建立的第一時間，客戶端必須與伺服器端完成能力協商（Capabilities Negotiation），確認彼此支援的資源與工具清單。
+
+###### 📥 客戶端請求 (Client Request)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {
+      "roots": {
+        "listChanged": true
+      },
+      "sampling": {}
+    },
+    "clientInfo": {
+      "name": "phoenix-ai-core-client",
+      "version": "2.5.0"
+    }
+  }
+}
+```
+
+###### 📤 伺服器端回應 (Server Response)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {
+      "resources": {
+        "subscribe": true,
+        "listChanged": true
+      },
+      "tools": {
+        "listChanged": true
+      }
+    },
+    "serverInfo": {
+      "name": "enterprise-sql-service",
+      "version": "1.0.0"
+    }
+  }
+}
+```
+
+---
+
+##### 🔍 2. 獲取可用工具清單 (List Tools)
+大模型需要了解當前伺服器暴露了哪些工具可供呼叫，以及呼叫這些工具時所需的參數 Schema。
+
+###### 📥 客戶端請求 (Client Request)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/list",
+  "params": {}
+}
+```
+
+###### 📤 伺服器端回應 (Server Response - 帶參數 JSON Schema)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "query_inventory_sql",
+        "description": "執行唯讀 SQL 查詢以獲取 ERP 本地庫存資訊。僅允許 SELECT 查詢，禁止任何修改與變更結構操作。",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "sql_query": {
+              "type": "string",
+              "description": "完整且符合 PostgreSQL 語法的 SELECT 查詢語句。"
+            }
+          },
+          "required": ["sql_query"]
+        }
+      }
+    ]
+  }
+}
+```
+
+---
+
+##### ⚡ 3. 執行工具呼叫 (Call Tool)
+當大模型決定採取行動時，會將生成的引數封裝於 JSON 內發送給伺服器，伺服器執行完成後將內容回傳。
+
+###### 📥 客戶端請求 (Client Request - Tool Call)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+    "name": "query_inventory_sql",
+    "arguments": {
+      "sql_query": "SELECT part_id, part_name, stock_quantity FROM erp_inventory WHERE stock_quantity < 50 LIMIT 5;"
+    }
+  }
+}
+```
+
+###### 📤 伺服器端回應 (Server Response - 執行結果)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "查詢執行成功。結果如下：\n[{'part_id': 'AX-900', 'part_name': '晶片散熱鰭片', 'stock_quantity': 12}, {'part_id': 'BY-102', 'part_name': '導熱矽膠墊', 'stock_quantity': 45}]"
+      }
+    ],
+    "isError": false
+  }
+}
+```
+
+---
+
 #### 6. MCP 企業級 SQL Database 安全介接實務代碼範例
 以下為採用 Python 撰寫的企業級 SQL 資料庫唯讀安全 MCP 伺服器代碼。為繞過名稱衝突與提升資安防護，該代碼採用了動態模組載入機制與 SQL 寫入稽核攔截技術：
 
 ```python
-## python
 import asyncio
 import importlib
 
@@ -310,6 +547,94 @@ if __name__ == "__main__":
 > [!IMPORTANT]
 > **MCP 的商業變革價值**：
 > 企業不再需要為大模型重寫龐大的業務邏輯。只需在資料庫與企業系統前端部署標準的 MCP 伺服器，鳳凰AI Agent 即可像「隨身碟插拔」一樣，瞬間擁有跨系統讀取、推理與自動執行的閉環能力。
+
+---
+
+#### 7. 本地優先代碼圖譜：CodeGraph (Tree-sitter) 實戰教學案例
+在企業引進 AI-Native 開源開發與維運的實務中，除了資料庫、ERP 以外，還有一個極重度的 AI 應用情境：**「AI 輔助程式碼開發與系統維護 (AI-Assisted Coding)」**。
+
+##### ⚠️ 企業開發的「Token 暴燒與效率瓶頸」
+當企業引進像 Claude Code、Cursor 或 GitHub Copilot 等 AI 開發 Agent 來維護核心系統時，IT 部門常面臨以下痛點：
+*   **上下文空間暴漲 (Context Window Bloat)**：為了讓 AI 搞懂多個檔案之間的呼叫關係，AI 助手必須遞歸呼叫 `glob` 列出目錄、使用 `grep` 搜尋關鍵字，並用 `read_file` 讀取數十個原始碼檔案。這會在一瞬間消耗數十萬 Token，造成 API 帳單暴增與嚴重的運算延遲。
+*   **代碼隱私安全**：若將大容量的專利代碼與系統架構圖全數上傳至外部雲端進行嵌入向量（Embedding）索引，容易違反跨國大廠客戶的智慧財產權與 NDA。
+
+##### 💡 解決方案：本地優先的 CodeGraph 智慧索引
+2026 年，開源社群推出了 **CodeGraph** 系統。這是一個本地運行、專門為 AI 代理設計的代碼圖譜 MCP 伺服器。
+*   **底層原理**：CodeGraph 不使用耗時且不精準的大語言模型來理解程式碼。它在本地直接調用 **Tree-sitter 語法解析器**，將專案中的 Python、TypeScript、Java 或 HTML 程式碼解析為抽象語法樹（AST）。
+*   **關係建模**：它將程式碼中的**類別（Classes）、函數（Functions）、變數（Symbols）、導入關係（Imports）與 API 路由（Routes）**解析完成後，存入本地的極簡 SQLite 資料庫中。
+*   **MCP 介面化**：將該 SQLite 資料庫包裝成標準的 MCP 伺服器。AI 代理只需發送單筆 JSON-RPC 請求，即可在毫秒內精確定位「某個 Web 路由是由哪一個函數渲染的」，**節省 90% 的代碼探索成本**。
+
+```text
+    【 AI 開發代理 (如 Claude Code) 】
+                   │ (符合 MCP 標準協定)
+                   ▼
+    ┌──────────────────────────────────────────────┐
+    │          CodeGraph MCP Client                │
+    └──────────────────────┬───────────────────────┘
+                           │ (標準 JSON-RPC 通信)
+                           ▼
+    ┌──────────────────────────────────────────────┐
+    │          CodeGraph MCP Server (本地端)       │
+    ├──────────────────────┬───────────────────────┤
+    │  1. Tree-Sitter      │ 2. SQLite 本地圖譜資料庫│
+    │  (AST 抽象語法樹解析) ➔  (符號、導入、路由索引) │
+    └──────────────────────┴───────────────────────┘
+```
+
+##### ⚙️ 企業部署 CodeGraph 快速 SOP
+1.  **安裝全域 CLI 工具**：
+    ```bash
+    npm install -g @colbymchenry/codegraph
+    ```
+2.  **在 AI_Talent 專案目錄下進行初始化索引**（CodeGraph 將在本地掃描 scripts/ 與 html，建立 AST 索引庫）：
+    ```bash
+    codegraph init
+    ```
+3.  **註冊連接至您的 AI Agent**（例如將其寫入本地的 MCP 設定檔中，讓 AI 助手自動偵測）：
+    ```bash
+    codegraph install
+    ```
+
+##### 🤝 CodeGraph 工具呼叫 Schema 實戰範例
+當 AI Agent 欲釐清本專案中 `scripts/compile_slides.py` 腳本是如何讀取 JSON 設定檔並編譯投影片時，它不需要手動讀取這六十多個設定檔，而是可以直接向 CodeGraph MCP 伺服器調用 `search_symbols` 工具。
+
+###### 📥 客戶端請求 (Client Request)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "method": "tools/call",
+  "params": {
+    "name": "search_symbols",
+    "arguments": {
+      "query": "compile_slides",
+      "file_pattern": "*.py"
+    }
+  }
+}
+```
+
+###### 📤 伺服器端回應 (Server Response)
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "在本地圖譜中找到以下匹配的 Symbol 定義：\n- 檔案: g:/我的雲端硬碟/AI_Talent/scripts/compile_slides.py\n  - 類型: Function\n  - 名稱: compile_slides_from_json\n  - 定義行數: L45-L120\n  - 依賴對象: import json, os, sys\n  - 關聯調用: validate_config (定義於 validate_config.py L20)"
+      }
+    ],
+    "isError": false
+  }
+}
+```
+
+##### 👑 CDO 與 CEO 的商業智慧啟示
+CodeGraph 為企業轉型帶來了革命性的**「智慧財產權局部安全島」**思維：
+*   **私有大腦地端化**：企業的核心演算法、交易系統或車載代碼，**不需要**上傳到外網進行昂貴的 AI 訓練或嵌入。
+*   **降本增效**：IT 部門只需部署一個本地 Tree-sitter MCP 節點，即可賦予外網大模型「瞬間看透百萬行程式碼架構」的超能力，以最低的 Token 成本實現超高速度的系統重構與排障。
 
 ---
 
