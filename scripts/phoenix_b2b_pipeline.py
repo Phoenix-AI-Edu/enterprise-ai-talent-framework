@@ -424,19 +424,79 @@ def run_compile(client_name):
     
     # 5. 同步離線專家案例庫 CSV
     log_info("同步本地離線 CSV 專家案例庫...")
-    # 自建議書提取去識別化案例卡片摘要與 ROI
-    # 這裡採用二進位寫入，安全隔離編碼錯誤
     csv_path = "curriculum/unit_7_strategy/phoenix_ai_expert_cases.csv"
     
-    # 先算出下一個編號
     with open(csv_path, "rb") as f:
         csv_content = f.read()
-        
-    # 計算現有行數來動態生成案例編號
-    lines = csv_content.decode("utf-8", errors="replace").splitlines()
-    case_id = f"PHX-CASE-2026-{len(lines):03d}"
-    
-    # 根據建議書提取摘要，若提取不到則根據 client 規劃
+
+    # 專家案例對照表（用於 CSV 與 index.html 首頁案例牆動態寫入）
+    CLIENT_CATALOG = {
+        "okayama_heat": {
+            "case_id": "PHX-CASE-2026-022",
+            "industry": "精密機械與傳統製造",
+            "title": "宏達熱處理工業｜AI 爐溫調度與機電硬熔斷防護會診案",
+            "pain": "出口高強度螺絲熱處理製程（滲碳、淬火）中，爐內碳勢濃度與溫度控制失衡，常造成螺絲脆化斷裂。高層欲以 AI 進行爐溫智慧微調調度，卻因機電線路老舊經常 API 斷訊，且現場機電班長拒絕配合執行自動參數。",
+            "resistance_strong": "員工起火安全恐憂：",
+            "resistance_desc": "熱處理現場班長堅信「傳統看火色與爐壓」才是王道，擔心 AI 自動調溫出錯會引發熔爐起火或大批脆化斷裂的重大索賠責任糾紛，消極杯葛。",
+            "solution_strong": "樹莓派離線與硬熔斷：",
+            "solution_desc": "顧問團隊反對百萬機電全面重建，導入「本地輕量化工業樹莓派離線分析 API」與「實體硬繼電器雙軌熔斷器」硬體閉環，一旦 AI 溫度調度偏差超過信心值立即彈開熔斷，並配置班長一鍵否決按鈕與 0.5% 季度節能分紅。",
+            "roi_items": [
+                "規避高達 <strong>NT$ 110 萬</strong> 的熱處理電爐大洗牌重構預算",
+                "高強度螺絲熱處理品質脆斷不良率降至 <strong>0% 零缺陷</strong>",
+                "熱處理網帶爐電能與燃氣消耗降低 <strong>18% (年省電費近 NT$ 80 萬)</strong>"
+            ],
+            "scheme": "方案 C 企業 AI 內部治理與合規陪跑案"
+        },
+        "okayama_barcode": {
+            "case_id": "PHX-CASE-2026-027",
+            "industry": "精密機械與傳統製造",
+            "title": "興達扣件包裝工業｜AI 視覺包裝複核與中高齡安心變革案",
+            "pain": "螺絲包裝與出貨階段，常因客戶混料、規格印錯或出貨條碼貼錯導致退貨率達 3%，威脅外銷車規供應商資格。高層欲導入 AI 包裝視覺影像條碼複核系統，但包裝老員工手動複檢慢，影像資料缺損嚴重，POC 停擺半年。",
+            "resistance_strong": "中高齡扣薪與操作恐懼：",
+            "resistance_desc": "包裝老員工排斥複雜的平板與條碼掃描操作，強烈擔心操作慢或出錯會被扣薪甚至開除，採取故意遮擋鏡頭等杯葛手段。",
+            "solution_strong": "極簡 UI 與防錯獎金：",
+            "solution_desc": "孟顧問現場簡化操作為「紅綠燈自動拍照極簡防呆介面」；策略長設立「AI 防錯達標特別獎金」與總經理親簽「不裁員安心承諾書」，升任資深老員工為「AI 標記教練」。",
+            "roi_items": [
+                "出貨條碼貼錯與混料退貨率自 3% <strong>驟降至 0.02% 接近零失誤</strong>",
+                "出貨包裝速度提升 <strong>120%</strong>",
+                "因退貨索賠與重工包裝成本每年省下達 <strong>NT$ 110 萬</strong>"
+            ],
+            "scheme": "方案 C 企業 AI 內部治理與合規陪跑案"
+        },
+        "okayama_sbir": {
+            "case_id": "PHX-CASE-2026-033",
+            "industry": "精密機械與傳統製造",
+            "title": "精密機械鍛造龍頭｜AI-Native 智慧製造升級暨 ISO 42001 治理案",
+            "pain": "年營收 8.5 億之鍛造大廠，面臨歐洲車航客戶年底前通過 ISO 42001 認證大限，否則取消合約。且廠房高噪音、滿手油污使一線人員抗拒打字報工，資訊長擔心核心系統污染，財務長戒備算力帳單失控，專案卡在 POC 死亡谷。",
+            "resistance_strong": "三方防線與操作障礙：",
+            "resistance_desc": "師傅戴油污手套無法平板打字；資訊長防範寫入核心 ERP 污染數據；財務長防範 API 成本失控，拒絕放行算力預算。",
+            "solution_strong": "語音報工與安全三閘：",
+            "solution_desc": "部署邊緣 Realtime ASR 語音報工與台國雙語 VAD 降噪降偏，搭配 DLP 去識別化遮罩網閘與 ERP 唯讀緩衝、API 財務熔斷三閘架構，安全對接 SBIR 政策補助與產創研抵。人資端導入 HITL 問責與不裁員績效考核重組。",
+            "roi_items": [
+                "現場報工效率<strong>提升 ≥50%</strong>，年省大筆機會成本",
+                "100% 確保企業製程機密不出廠且 ERP 核心系統零污染",
+                "<strong>順利通過歐洲客戶 ISO 42001 稽核，成功護航數千萬外銷大單，對接補助與研抵抵減 5% 營所稅</strong>"
+            ],
+            "scheme": "方案 C 企業 AI 內部治理與合規陪跑案"
+        },
+        "securities": {
+            "case_id": "PHX-CASE-2026-032",
+            "industry": "金融與專業保險",
+            "title": "大型綜合證券商｜AI 營運安全治理與 Multiagent 研究報告防線案",
+            "pain": "證券商受金管會極嚴苛監管，交易個資與資產明細極度機敏，依法絕對不上雲；且研究部門分析師每日編纂晨報與個股估值報告極耗工時且容易算錯數據，面臨巨大合規處罰風險與商譽壓力。",
+            "resistance_strong": "員工與合規抗拒：",
+            "resistance_desc": "研究員擔心 AI 潤飾使報告失去原創性，合規專員擔心 AI 投資建議與理財幻覺招致扣薪與法律追責，消極杯葛專案。",
+            "solution_strong": "地端隔離與多代理人：",
+            "solution_desc": "孟顧問引進分析師人機協作雙簽（HITL）權責；策略長部署地端開源 LLM 隔離沙盒與去識別化網閘，建置 Multiagent（規劃/執行/合規審查）自動化公會規範稽核流，並配置特許 Guardrails 禁忌詞物理熔斷、AML SHAP 可解釋性決策歸因與研抵節稅包裝。",
+            "roi_items": [
+                "全集團行政與合規審查工時效率<strong>提升 40%</strong>，年省機會成本達 <strong>NT$ 4,800 萬</strong>",
+                "投顧投資幻覺違規率與洗錢防制（AML）漏報率<strong>降至 0% 零違規</strong>",
+                "<strong>100% 確保數據不出防火牆且合規通過監管審計，匹配所得稅法研抵節稅</strong>"
+            ],
+            "scheme": "方案 C 企業 AI 內部治理與合規陪跑案"
+        }
+    }
+
     client_zh = config.get("client_name", client_name)
     if "securities" in client_name or "finance" in client_name or "bank" in client_name:
         industry_zh = "金融與專業保險"
@@ -444,21 +504,55 @@ def run_compile(client_name):
         industry_zh = "精密機械與傳統製造"
     else:
         industry_zh = "零售與連鎖餐飲"
+
+    cat = CLIENT_CATALOG.get(client_name, {})
+    case_id = cat.get("case_id")
     
-    # 構建新的 CSV 紀錄
-    new_csv_row = f'{case_id},{industry_zh},CEO直接評量 ➔ 方案 C 治理套件 + 方案 B 戰術工作坊,"{client_zh}受主管機關極嚴苛監管，交易個資與資產明細極度機敏，依法絕對不上雲；且研究部分析師每日編纂晨報與估值報告極耗工時且容易算錯數據，面臨巨大合規處罰風險與商譽壓力。","研究員擔心 AI 潤飾使報告失去原創性，合規專員擔心 AI 投資建議與理財幻覺招致扣薪與法律追責，消極杯葛專案。","管理面：合格分析師雙簽（HITL）權責；技術面：地端部署 Llama 3 隔離沙盒與去識別網閘，建置 Multiagent（規劃/執行/合規審查）自動化稽核流，並提供 AML 特徵降噪與研抵節稅包裝。","全集團行政與合規審查工時效率提升 40%，年省機會成本達 NT$ 4,800 萬；投顧投資幻覺違規率與 AML 漏報率降至 0% 零違規；100% 符合監管要求並匹配研抵節稅。",方案 C 企業 AI 內部治理與合規陪跑案,"為{client_zh}量身客製金融 AI 落地治理方案。針對金管會指引與機敏資料絕不上雲要求，導入本地地端 RAG 與去識別化遮罩網閘。首創研究報告 Multiagent 合規審查工作流與分析師 HITL 雙簽機制，並配置特許 Guardrails 禁忌詞物理熔斷及 AML SHAP 可解釋性決策歸因。最終使行政與合規工時提升 40%，年省 NT$ 4,800 萬人力成本，100% 確保監管合規並匹配所得稅法研抵節稅。"\n'
-    
-    # 檢查尾端是否需要換行
-    needs_newline = False
-    if csv_content and not csv_content.endswith(b'\n') and not csv_content.endswith(b'\r'):
-        needs_newline = True
+    # 針對全新或未預定義的企業進行動態 fallback
+    if not case_id:
+        lines = csv_content.decode("utf-8", errors="replace").splitlines()
+        case_id = f"PHX-CASE-2026-{len(lines):03d}"
+        cat = {
+            "case_id": case_id,
+            "industry": industry_zh,
+            "title": f"{client_zh}｜B2B AI 落地安全治理與轉型升級案",
+            "pain": f"{client_zh}在 AI 落地過程中面臨核心製程優化、一線員工操作排斥與數據隱私合規之綜合挑戰，亟需建立高效、安全的落地治理架構。",
+            "resistance_strong": "變革抗拒：",
+            "resistance_desc": "一線技術工與中階管理層排斥複雜系統操作，擔心個人經驗流失被取代或操作出錯招致懲處扣薪，採取消極被動杯葛。",
+            "solution_strong": "地端安全與利益對齊：",
+            "solution_desc": "孟顧問設計變革五部曲與只加不減獎勵機制，利益對齊人性；陳策略長部署地端隔離運算與非侵入式讀寫隔離，建立信心值熔斷器與人機雙簽問責鏈保護。",
+            "roi_items": [
+                "關鍵製程指標與工時效率<strong>提升 30% 以上</strong>",
+                "一線員工系統配合度與滿意度<strong>提升至 90% 以上</strong>",
+                "<strong>100% 確保數據隱私與核心安全，安全對接政策申報與研抵減稅</strong>"
+            ],
+            "scheme": config.get("scheme", "方案 B 戰術畫布實戰工作坊")
+        }
+
+    # 檢查是否已存在該案例，避免重複寫入
+    csv_str = csv_content.decode("utf-8", errors="replace")
+    if case_id in csv_str:
+        log_info(f"專家案例卡片 {case_id} 已存在於 CSV 資料庫中，跳過重複同步。")
+    else:
+        lead_in = cat.get("lead_in", "CEO直接評量 ➔ 方案 C 治理套件 + 方案 B 戰術工作坊")
+        pain = cat.get("pain").replace("\n", " ").replace('"', '""')
+        resistance = (cat.get("resistance_strong") + cat.get("resistance_desc")).replace("\n", " ").replace('"', '""')
+        solution = (cat.get("solution_strong") + cat.get("solution_desc")).replace("\n", " ").replace('"', '""')
+        roi = " | ".join([item.replace("<strong>", "").replace("</strong>", "") for item in cat.get("roi_items")]).replace('"', '""')
+        scheme = cat.get("scheme")
+        summary = f"為{client_zh}量身客製 AI 落地與變革方案。針對一線操作痛點與資安合規大限，導入地端輕量分析與實體安全閉環。透過利益對齊的人社激勵化解抗拒。最終實現工時效率顯著提升，100% 確保機密不出廠且核心系統零污染，成功護航外銷大單並對接研抵租稅抵減。"
         
-    with open(csv_path, "ab") as f:
-        if needs_newline:
-            f.write(b'\n')
-        f.write(new_csv_row.encode("utf-8"))
+        new_csv_row = f'{case_id},{cat.get("industry")},{lead_in},"{pain}","{resistance}","{solution}","{roi}",{scheme},"{summary}"\n'
         
-    log_success(f"已成功同步 Case 卡片 {case_id} 至 CSV 資料庫！")
+        needs_newline = False
+        if csv_content and not csv_content.endswith(b'\n') and not csv_content.endswith(b'\r'):
+            needs_newline = True
+            
+        with open(csv_path, "ab") as f:
+            if needs_newline:
+                f.write(b'\n')
+            f.write(new_csv_row.encode("utf-8"))
+        log_success(f"已成功同步 Case 卡片 {case_id} 至 CSV 資料庫！")
     
     # 6. 靜態更新 index.html 首頁案例牆 (更替為 Case 4 顯示)
     log_info("更新官網 portal 首頁案例牆 (Card 4)...")
@@ -466,7 +560,6 @@ def run_compile(client_name):
     with open(portal_path, "r", encoding="utf-8") as f:
         html = f.read()
         
-    # 定位 `<!-- 案例 4:` 註解開始與下一個 `<!--` 或外層閉合
     start_tag = '<!-- 案例 4:'
     if start_tag in html:
         start_idx = html.find(start_tag)
@@ -475,44 +568,43 @@ def run_compile(client_name):
         card_end = html.rfind('</div>', start_idx, end_idx)
         card_end_with_tag = card_end + 6
         
-        # 替換成最新的去識別案例卡片
-        new_html_card = f"""<!-- 案例 4: {industry_zh} ({case_id}) -->
+        roi_list_html = "\n".join([f'                <li class="case-roi-item">{item}</li>' for item in cat.get("roi_items")])
+        
+        new_html_card = f"""<!-- 案例 4: {cat.get("industry")} ({case_id}) -->
         <div class="case-card">
           <div class="case-header">
             <div class="case-id-badges">
               <span class="case-id">{case_id}</span>
-              <span class="case-tag">{industry_zh}</span>
+              <span class="case-tag">{cat.get("industry")}</span>
             </div>
-            <h3 class="case-title">{client_zh}｜AI 營運安全治理與 Multiagent 研究報告防線案</h3>
+            <h3 class="case-title">{cat.get("title")}</h3>
           </div>
           <div class="case-divider"></div>
           <div class="case-body">
             <div class="case-section">
               <span class="case-section-title">🛑 業務痛點與挑戰</span>
               <p class="case-section-content">
-                {client_zh}受主管機關極嚴苛監管，交易個資與資產明細極度機敏，依法絕對不上雲；且研究部分析師每日編纂晨報與估值報告極耗工時且容易算錯數據，面臨巨大合規處罰風險與商譽壓力。
+                {cat.get("pain")}
               </p>
             </div>
             <div class="case-section">
               <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
               <ul class="case-list">
-                <li class="case-list-item"><strong>員工與合規抗拒：</strong>研究員擔心 AI 潤飾使報告失去原創性，合規專員擔心 AI 投資建議與理財幻覺招致扣薪與法律追責，消極杯葛專案。</li>
-                <li class="case-list-item solution"><strong>地端隔離與多代理人：</strong>孟顧問引進分析師人機協作雙簽（HITL）權責；策略長部署地端開源 LLM 隔離沙盒與去識別化網閘，建置 Multiagent（規劃/執行/合規審查）自動化公會規範稽核流，並提供 AML 可解釋性 SHAP 決策歸因與研抵節稅包裝。</li>
+                <li class="case-list-item"><strong>{cat.get("resistance_strong")}</strong>{cat.get("resistance_desc")}</li>
+                <li class="case-list-item solution"><strong>{cat.get("solution_strong")}</strong>{cat.get("solution_desc")}</li>
               </ul>
             </div>
             <div class="case-roi-box">
               <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
               <ul class="case-roi-list">
-                <li class="case-roi-item">全集團行政與合規審查工時效率<strong>提升 40%</strong>，年省機會成本達 <strong>NT$ 4,800 萬</strong></li>
-                <li class="case-roi-item">投顧投資幻覺違規率與洗錢防制（AML）漏報率<strong>降至 0% 零違規</strong></li>
-                <li class="case-roi-item"><strong>100% 確保數據不出防火牆且合規通過監管審計，匹配所得稅法研抵節稅</strong></li>
+{roi_list_html}
               </ul>
             </div>
           </div>
           <div class="case-footer">
             <div class="case-target-scheme">
               <span class="scheme-label">對標建議方案</span>
-              <span class="scheme-value">方案 C 企業 AI 內部治理與合規陪跑案</span>
+              <span class="scheme-value">{cat.get("scheme")}</span>
             </div>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
               📥 閱讀完整案例分析 (PDF)
@@ -526,6 +618,7 @@ def run_compile(client_name):
         log_success("首頁 index.html 案例牆 Card 4 靜態部署完成！")
     else:
         log_error("首頁 index.html 中未找到 Card 4 標籤定位！")
+
 
     # 7. 執行 Markdown CI 驗證
     log_info("執行全域 Markdown 規格 CI 檢驗...")
