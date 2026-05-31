@@ -162,16 +162,76 @@ def run_init(client_name, raw_path):
             "title": "金融科技租稅抵減與研發核銷 (Dual-Track)",
             "desc": "所得稅法第 15 條之 1 研發支出投資抵減（研抵）實務包裝，會計師簽證免剔除防線。"
         })
+
+    # 精密機械與製造集群專屬 Slide 1: Voice AI 語音報工與 VAD 降噪
+    if any(k in clean_text for k in ["語音", "台語", "ASR", "黑手", "口語", "滿手油", "聽聲音", "戴手套"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "Voice AI 邊緣語音報工與 VAD 降噪 (Dual-Track)",
+            "desc": "邊緣端語音 ASR（台國雙語對照）配合 VAD 靜音與環境降噪演算法，解決一線黑手師傅雙手沾油、排斥打字之報工防線。"
+        })
+
+    # 精密機械與製造集群專屬 Slide 2: 邊緣離線運算與樹莓派硬熔斷
+    if any(k in clean_text for k in ["斷訊", "離線", "機電", "老舊", "樹莓派", "繼電器", "熔斷器", "起火"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "邊緣離線運算與樹莓派硬熔斷 (Dual-Track)",
+            "desc": "部署輕量化工業樹莓派離線分析 API，搭配 10ms 機電實體繼電器硬熔斷保護，異常自動斷電，杜絕雲端斷訊與起火責任。"
+        })
+
+    # 精密機械與製造集群專屬 Slide 3: 光學影像缺陷過濾與人機雙簽 (HITL)
+    if any(k in clean_text for k in ["缺陷", "品管", "瑕疵", "影像", "篩選", "誤報", "油污", "品管班長"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "光學影像缺陷過濾與人機雙簽 (Dual-Track)",
+            "desc": "部署雙向偏見校準與濾鏡優化 Pipeline，隔離電鍍油污背景；有人在環（HITL）分流二次覆核，品管老手升級 AI 標記教練。"
+        })
+
+    # 精密機械與製造集群專屬 Slide 4: 配方優化 IP 授權與營運達標分紅
+    if any(k in clean_text for k in ["電鍍", "配方", "排污", "環保", "廢水", "獨門心法", "技術股", "授權合約", "分紅"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "配方優化 IP 授權與營運達標分紅 (Dual-Track)",
+            "desc": "系統正名為工程師專利專家配方庫，並簽署技術特許授權合約，良率與環保排污達標即獲 0.5% 季度分紅，破解師傅技術掏空恐慌。"
+        })
+
+    # 精密機械與製造集群專屬 Slide 5: 歐盟 CBAM 碳足跡與大模型 RAG 護航
+    if any(k in clean_text for k in ["CBAM", "碳稅", "碳排", "碳足跡", "申報", "歐洲", "關稅"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "歐盟 CBAM 碳足跡與大模型 RAG 護航 (Dual-Track)",
+            "desc": "對接 CBAM 碳排大模型與稅則解碼 RAG，使申報工時自 10 天縮短至 4 小時；匹配綠色業務達標激勵，防堵歐盟高額關稅處罰。"
+        })
+
+    # 精密機械與製造集群專屬 Slide 6: 出貨包裝 AI 視覺紅綠燈防呆防線
+    if any(k in clean_text for k in ["包裝", "條碼", "混料", "中高齡", "貼錯", "防錯", "紅綠燈"]):
+        page_count += 1
+        slide_blueprint.append({
+            "page": f"{page_count:02d}",
+            "layout": "dual-track",
+            "title": "出貨包裝 AI 視覺紅綠燈防呆防線 (Dual-Track)",
+            "desc": "部署自動拍照紅綠燈極簡防呆介面，為中高齡包裝老員工提供免扣薪、防錯達標特別獎金，徹底杜絕出貨混料與條碼貼錯退貨。"
+        })
         
     # 互動 ROI 試算器 (必備)
     page_count += 1
     # 根據行業動態調整預設成本基數
     cost_base = 480000
     num_workers = 450
-    if "證券" in clean_text or "金融" in clean_text:
+    if "證券" in clean_text or "金融" in clean_text or "securities" in client_name:
         cost_base = 1200000
         num_workers = 100
-    elif "製造" in clean_text or "精密" in clean_text:
+    elif "製造" in clean_text or "精密" in clean_text or any(k in client_name for k in ["okayama", "luzhu", "forge", "fastener", "heat", "cbam", "filter", "electroplate", "coldheading", "barcode", "sbir"]):
         cost_base = 1800000
         num_workers = 50
 
@@ -378,7 +438,12 @@ def run_compile(client_name):
     
     # 根據建議書提取摘要，若提取不到則根據 client 規劃
     client_zh = config.get("client_name", client_name)
-    industry_zh = "金融與專業保險" if "securities" in client_name else "零售與連鎖餐飲"
+    if "securities" in client_name or "finance" in client_name or "bank" in client_name:
+        industry_zh = "金融與專業保險"
+    elif any(k in client_name for k in ["okayama", "luzhu", "forge", "fastener", "heat", "cbam", "filter", "electroplate", "coldheading", "barcode", "sbir", "dingsheng"]):
+        industry_zh = "精密機械與傳統製造"
+    else:
+        industry_zh = "零售與連鎖餐飲"
     
     # 構建新的 CSV 紀錄
     new_csv_row = f'{case_id},{industry_zh},CEO直接評量 ➔ 方案 C 治理套件 + 方案 B 戰術工作坊,"{client_zh}受主管機關極嚴苛監管，交易個資與資產明細極度機敏，依法絕對不上雲；且研究部分析師每日編纂晨報與估值報告極耗工時且容易算錯數據，面臨巨大合規處罰風險與商譽壓力。","研究員擔心 AI 潤飾使報告失去原創性，合規專員擔心 AI 投資建議與理財幻覺招致扣薪與法律追責，消極杯葛專案。","管理面：合格分析師雙簽（HITL）權責；技術面：地端部署 Llama 3 隔離沙盒與去識別網閘，建置 Multiagent（規劃/執行/合規審查）自動化稽核流，並提供 AML 特徵降噪與研抵節稅包裝。","全集團行政與合規審查工時效率提升 40%，年省機會成本達 NT$ 4,800 萬；投顧投資幻覺違規率與 AML 漏報率降至 0% 零違規；100% 符合監管要求並匹配研抵節稅。",方案 C 企業 AI 內部治理與合規陪跑案,"為{client_zh}量身客製金融 AI 落地治理方案。針對金管會指引與機敏資料絕不上雲要求，導入本地地端 RAG 與去識別化遮罩網閘。首創研究報告 Multiagent 合規審查工作流與分析師 HITL 雙簽機制，並配置特許 Guardrails 禁忌詞物理熔斷及 AML SHAP 可解釋性決策歸因。最終使行政與合規工時提升 40%，年省 NT$ 4,800 萬人力成本，100% 確保監管合規並匹配所得稅法研抵節稅。"\n'
