@@ -237,7 +237,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "02", layout: "dual-track" -->
+<!-- slide-page: "02", layout: "dual-track", progress_label: "DIAGNOSTIC" -->
 
 ### 簡報頁 02｜雙軌診斷:顯性損失 vs 隱性損失
 
@@ -259,7 +259,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "03", layout: "dual-track" -->
+<!-- slide-page: "03", layout: "dual-track", progress_label: "DIAGNOSTIC" -->
 
 ### 簡報頁 03｜為什麼半年導入失敗:不是技術,是鳳姐
 
@@ -281,7 +281,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "04", layout: "dual-track" -->
+<!-- slide-page: "04", layout: "dual-track", progress_label: "DIAGNOSTIC" -->
 
 ### 簡報頁 04｜戰略翻轉:鳳姐不是阻礙,是您最珍貴的訓練資料
 
@@ -303,7 +303,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "05", layout: "dual-track" -->
+<!-- slide-page: "05", layout: "dual-track", progress_label: "SOLUTION" -->
 
 ### 簡報頁 05｜紅綠燈介面:為鳳姐量身設計的「鳳姐介面」
 
@@ -325,7 +325,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "06", layout: "dual-track" -->
+<!-- slide-page: "06", layout: "dual-track", progress_label: "SOLUTION" -->
 
 ### 簡報頁 06｜績效獎金重設計:只加不減,化解扣薪恐懼
 
@@ -347,7 +347,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "07", layout: "dual-track" -->
+<!-- slide-page: "07", layout: "dual-track", progress_label: "SOLUTION" -->
 
 ### 簡報頁 07｜總經理親簽不裁員承諾書:第一天最重要的動作
 
@@ -369,7 +369,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "08", layout: "dual-track" -->
+<!-- slide-page: "08", layout: "dual-track", progress_label: "SOLUTION" -->
 
 ### 簡報頁 08｜地端 + DLP 安控架構:守住車廠供應商資格
 
@@ -432,7 +432,7 @@ AI 推論 → 信心度判斷
 
 ---
 
-<!-- slide-page: "11", layout: "dual-track" -->
+<!-- slide-page: "11", layout: "dual-track", progress_label: "CHANGE" -->
 
 ### 簡報頁 11｜風險清單與化解對策:把可能的失敗講在前面
 
