@@ -50,14 +50,19 @@ title: "單元三：負責任的 AI 應用與地端治理實踐 (Responsible AI 
 #### 2. ISO/IEC 42001:2023 (人工智慧管理體系)
 ISO/IEC 42001 採用 PDCA 架構，要求企業建立可持續改善的 **AIMS (Artificial Intelligence Management System)**。針對地端部署，企業應特別對位以下控制項：
 
-##### 📋 地端 ISO/IEC 42001 落地實務指南與控制項對照表
+##### 📋 ISO/IEC 42001:2023 企業 AI 導入自評與差距分析量表 (Self-Assessment & Gap Analysis Dashboard)
 
-| 控制項編號 | 控制項名稱 (Control Name) | 地端環境實務落地指南 (On-Premise Implementation Guide) | 交付合規證據 (Audit Evidence Required) |
-| :--- | :--- | :--- | :--- |
-| **A.7.2** | **AI 系統衝擊評估 (Impact Assessment)** | 專案啟動前，必須產出 DPIA（資料保護衝擊評估），特別評估模型是否調用 PII。若調用，必須明確說明去識別化技術。 | 📋 DPIA 評估報告與資料流分級藍圖。 |
-| **A.7.3** | **資料與資料生命週期 (Data Lifecycle)** | 規範微調數據集（Dataset Lineage）的存儲與標註權限。地端資料庫必須實施 RBAC（角色存取控制），且向量庫（Vector DB）必須關閉直接外網同步。 | 📋 數據流脈絡日誌、地端向量資料庫訪問控制列表 (ACL)。 |
-| **A.8.2** | **向感興趣方提供資訊 (Info to Interested Parties)** | 當 AI 系統產出涉及投資價值研判（如證券研報）時，必須明確標記「初稿由 AI 撰寫」，並由合格分析師完成最終覆核簽章（HITL）。 | 📋 分析師數位雙簽時序軌跡（Audit Trail）、系統防拷貝/防未授權匯出配置證明。 |
-| **A.9.3** | **AI 系統紀錄與審計 (System Logging)** | 所有使用者提問（Prompt）與 AI 回答（Completion）必須留存於物理隔離的日誌伺服器中，保存期限對齊監管要求，且日誌本身必須進行 PII 遮罩防漏。 | 📋 審計日誌（Audit Log）加密備份清單、DLP 拦截日誌（NER Blocked Log）。 |
+本自評表專為引導企業數位轉型處、資安處與合規小組進行前期 Gap Analysis 設計。各項控制點皆緊密咬合 ISO 42001 規範，並提供具體之「地端落地指引」、「合規差距評估」與「補救執行路徑」。
+
+| 控制項編號 | 控制項名稱 (Control Name) | 核心規範要求 (Requirements) | 當前企業現況與常見差距 (Common Gaps) | 合規評估狀態 | 改善與補救路徑 (Remediation Path) | 應提交之稽核證據 (Audit Evidence Required) |
+| :--- | :--- | :--- | :--- | :---: | :--- | :--- |
+| **A.2.1** | **AI 政策與方針 (AI Policy & Guidance)** | 制定與發布企業級 AI 安全使用政策，明確界定 AI 的合理使用邊界與限制。 | ❌ 僅有口頭宣導，缺乏正式經董事會或總經理親簽之《員工 AI 安全使用守則》。 | **🔴 未啟動 (Gap)** | 參照 M02 模組，起草並發布《企業 AI 安全與合規使用指南》，明確界定紅黃綠數據使用限制。 | 📋 總經理親簽之 AI 使用政策 PDF 檔案、內部發佈與教育訓練紀錄。 |
+| **A.3.1** | **內部組織與權責 (AI Governance Organization)** | 成立 AI 治理委員會，分配專案的開發者、部署者、使用者之職責與 RACI 矩陣。 | ❌ AI 導入由各部門 (例如行銷、IT) 零散 POC 進行，無跨部門集中審查與治理組織。 | **🔴 未啟動 (Gap)** | 建立跨部門 AI 治理委員會，由轉型長 (CDO) 與資訊安全長 (CISO) 共同主持，配置專案 RACI 矩陣。 | 📋 委員會組織章程、權責分配表 (RACI 矩陣)、定期會議審查紀錄。 |
+| **A.5.1** | **AI 系統衝擊評估 (AI System Impact Assessment)** | 專案啟動前進行資安、隱私、倫理與商業合規的系統性衝擊評估 (AIIA/DPIA)。 | ❌ 缺乏前置評估程序，多數專案未經法遵與資安審核便直接對外調用第三方大模型 API。 | **🔴 未啟動 (Gap)** | 制定《AI 專案隱私與衝擊評估 SOP》，凡調用個人資料 (PII) 或特許數據之專案，強制在設計階段完成 DPIA。 | 📋 資料保護衝擊評估 (DPIA) 報告、法遵處與資安長簽核紀錄。 |
+| **A.6.2** | **大模型生命週期與版控 (AI System Lifecycle)** | 規範模型的微調、部署、測試與退役流程，實施演算法與代碼的版本控制與防毒毒化。 | ❌ 演算法代碼、微調數據集隨意存放在工程師本機，缺乏集中版控與防毒毒化掃描機制。 | **🟡 進行中 (In Progress)** | 導入 Git 與 MLflow / Git LFS 進行代碼與模型權重版控，並於地端 CI/CD 流程中加入靜態代碼與依賴項掃描。 | 📋 地端 CI/CD 部署日誌、大模型微調參數與數據集 Lineage 版本追溯表。 |
+| **A.7.3** | **數據集生命週期安全 (Data for AI System)** | 規範微調數據集 (Dataset Lineage) 存儲權限。地端向量庫需關閉外網同步，並實施 RBAC。 | ❌ 向量資料庫 (Vector DB) 直接暴露在公網，且未設定訪問權限控管 (RBAC)，無資料行級加密。 | **🟡 進行中 (In Progress)** | 關閉地端向量庫 (如 pgvector, Milvus) 的直接外網接口，強制僅能經由 API 網關在 DMZ 內存取，並配置 RBAC。 | 📋 向量資料庫存取控制列表 (ACL)、網絡拓撲圖與物理隔離防護報告。 |
+| **A.8.2** | **向感興趣方提供資訊 (Info to Interested Parties)** | 當 AI 用於投資研判等高度敏感決策時，需明確標記「AI生成」，並由合格分析師覆核雙簽。 | ❌ AI 生成的研報或投資分析直接發送給客戶，缺乏明確之免責宣告與合格專業人員審查軌跡。 | **🔴 未啟動 (Gap)** | 部署人機協作 (HITL) 雙簽系統，大模型初稿輸出自動附帶「紅印封記」，需經分析師數位簽章後方可解封。 | 📋 分析師數位雙簽時序軌跡 (Audit Trail)、系統防拷貝與防未授權匯出之技術驗證報告。 |
+| **A.9.3** | **AI 系統紀錄與審計 (System Logging & Audit)** | 所有 Prompt 與 Completion 需加密留存於物理隔離的日誌伺服器中，並在日誌中對 PII 進行遮罩。 | ❌ 使用者提問直接發送，且伺服器日誌以明文儲存，極易因日誌外流造成二次 PII 洩漏。 | **🔴 未啟動 (Gap)** | 部署「地端雙向去識別化 DLP 網閘」，在 Prompt 寫入日誌前完成遮蔽，日誌儲存採 AES-256 加密。 | 📋 審計日誌 (Audit Log) 加密備份清單、DLP 攔截阻斷日誌 (DLP Blocked Logs)。 |
 
 ---
 
@@ -98,55 +103,130 @@ ISO/IEC 42001 採用 PDCA 架構，要求企業建立可持續改善的 **AIMS (
 #### 🛡️ 第一道防線：DLP 本地 NER 遮罩網閘 (Data Loss Prevention Pipeline)
 此防線部署於企業內網與大模型中台之間，確保任何含有機敏資訊的文本在離開內網防火牆前，已被就地去識別化。
 
-##### 🐍 Python 實作：地端自適應 DLP NER 遮罩網閘
-以下代碼演示了如何在本地利用正則表達式與專用 Named Entity Recognition (NER) 技術，將台灣身分證、信用卡號及姓名自動遮蔽：
+##### 🐍 Python 實作：地端自適應雙向去識別化與 Token 還原網閘 (Reversible DLP Pipeline)
+以下代碼演示了如何在本地利用正則表達式與 Named Entity Recognition (NER) 技術，在將資料送往雲端 LLM 之前，將台灣身分證、信用卡號、姓名等敏感個資（PII）雙向去識別化，並在安全地端 DMZ 內利用 Token Vault 將模型回覆還原的完整生產級實作：
 
 ```python
 import re
 import spacy
+from typing import Dict, List
 
-# 載入繁體中文 NER 模型 (建議地端部署輕量級 zh_core_web_sm 或 transformers 模型)
-try:
-    nlp = spacy.load("zh_core_web_sm")
-except IOError:
-    # 兜底：若無模型則使用基礎分詞
-    nlp = None
-
-def redact_pii(text: str) -> str:
+class LocalDLPPipeline:
     """
-    雙層本地去識別化：正則表達式 (精準匹配) + Spacy NER (語意實體識別)
+    企業級地端雙向去識別化與還原管道 (Reversible De-identification DLP Pipeline)
+    對位 ISO/IEC 42001 條款 A.7 (資料生命週期) 與 A.9 (系統記錄)
     """
-    redacted = text
-    
-    # 1. 台灣身分證字號正則匹配 (第一碼大寫英文字母 + 9碼數字，其中第二碼為1或2)
-    id_pattern = re.compile(r'[A-Z][1-2]\d{8}')
-    redacted = id_pattern.sub("[REDACTED_ID]", redacted)
-    
-    # 2. 信用卡號正則匹配 (16碼數字，可帶有連字號)
-    card_pattern = re.compile(r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b')
-    redacted = card_pattern.sub("[REDACTED_CARD]", redacted)
-    
-    # 3. 企業常用金融代碼/銀行帳戶 (示意)
-    bank_pattern = re.compile(r'\b\d{3}[- ]?\d{3}[- ]?\d{6,8}\b')
-    redacted = bank_pattern.sub("[REDACTED_BANK_ACCOUNT]", redacted)
-    
-    # 4. Spacy NER 命名實體識別 (姓名與地名)
-    if nlp:
-        doc = nlp(redacted)
-        # 反向替換以避免字元偏移錯誤
-        for ent in sorted(doc.ents, key=lambda e: e.start_char, reverse=True):
-            if ent.label_ == "PERSON":
-                redacted = redacted[:ent.start_char] + "[REDACTED_NAME]" + redacted[ent.end_char:]
-            elif ent.label_ == "GPE" or ent.label_ == "LOC":
-                redacted = redacted[:ent.start_char] + "[REDACTED_ADDRESS]" + redacted[ent.end_char:]
+    def __init__(self, spacy_model: str = "zh_core_web_sm"):
+        # 1. 初始化繁中 NER 語言模型大腦
+        try:
+            self.nlp = spacy.load(spacy_model)
+            print(f"[DLP Pipeline] 成功載入地端 NER 模型: {spacy_model}")
+        except IOError:
+            self.nlp = None
+            print(f"[DLP Pipeline] 警告: 未能載入地端 NER 模型 ({spacy_model})，將採用純 Regex 兜底機制")
+            
+        # 2. 定義精準的正則表達式規則庫 (台灣專屬特有 PII 格式)
+        self.regex_rules = {
+            "TAIWAN_ID": re.compile(r'[A-Z][1-2]\d{8}'), # 台灣身分證字號
+            "CREDIT_CARD": re.compile(r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b'), # 16位信用卡號
+            "BANK_ACCOUNT": re.compile(r'\b\d{3}[- ]?\d{3}[- ]?\d{6,8}\b'), # 銀行帳戶代號
+            "MOBILE_PHONE": re.compile(r'\b09\d{2}[- ]?\d{3}[- ]?\d{3}\b'), # 手機號碼
+            "EMAIL": re.compile(r'\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b') # 電子郵件
+        }
+        
+        # 3. 實體對照表 (Token Vault)：儲存於本地 DMZ 內，嚴禁向外網暴露
+        # 格式: { "synthetic_token": "original_pii" }
+        self.token_vault: Dict[str, str] = {}
+        
+    def _get_synthetic_token(self, original_text: str, category: str) -> str:
+        """生成唯一的虛擬替代標籤，若已遮蔽過則沿用相同的 token 以免混淆"""
+        for tok, orig in self.token_vault.items():
+            if orig == original_text:
+                return tok
                 
-    return redacted
+        # 依類別計算當前序號
+        index = len([k for k in self.token_vault.keys() if category in k])
+        synthetic_token = f"[REDACTED_{category}_{index}]"
+        self.token_vault[synthetic_token] = original_text
+        return synthetic_token
+        
+    def de_identify(self, text: str) -> str:
+        """
+        【去識別化 (Anonymization)】
+        輸入含有敏感資訊的原始文本，將其 PII 遮蔽為虛擬 Token，並寫入地端 Token Vault。
+        """
+        if not text:
+            return ""
+            
+        redacted = text
+        
+        # 第一步：正則表達式掃描 (精準匹配標準樣式)
+        for category, pattern in self.regex_rules.items():
+            matches = list(pattern.finditer(redacted))
+            # 必須「反向替換」，防止因為字串長度改變而導致的字元偏移錯誤
+            for m in sorted(matches, key=lambda x: x.start(), reverse=True):
+                original_val = m.group(0)
+                synthetic_token = self._get_synthetic_token(original_val, category)
+                redacted = redacted[:m.start()] + synthetic_token + redacted[m.end()]
+                
+        # 第二步：Spacy NER 命名實體識別掃描 (繁體中文語境下的人名與地名)
+        if self.nlp:
+            doc = self.nlp(redacted)
+            # 反向替換
+            for ent in sorted(doc.ents, key=lambda e: e.start_char, reverse=True):
+                if ent.label_ == "PERSON":
+                    synthetic_token = self._get_synthetic_token(ent.text, "PERSON_NAME")
+                    redacted = redacted[:ent.start_char] + synthetic_token + redacted[ent.end_char:]
+                elif ent.label_ in ["GPE", "LOC"]:
+                    synthetic_token = self._get_synthetic_token(ent.text, "ADDRESS")
+                    redacted = redacted[:ent.start_char] + synthetic_token + redacted[ent.end_char:]
+                    
+        return redacted
+        
+    def re_identify(self, anonymized_text: str) -> str:
+        """
+        【重識別/還原 (De-anonymization)】
+        將含有虛擬 Token 的大模型輸出文本，利用地端 Token Vault 還原為真實個資。
+        此步驟必須完全在地端安全防火牆 (DMZ) 內由授權的終端系統執行。
+        """
+        if not anonymized_text:
+            return ""
+            
+        restored = anonymized_text
+        # 按 token 長度反向排序，防止長度短的 token (例如 _1) 提早部分替換了長 token (例如 _10)
+        sorted_tokens = sorted(self.token_vault.keys(), key=len, reverse=True)
+        for token in sorted_tokens:
+            restored = restored.replace(token, self.token_vault[token])
+        return restored
+        
+    def clear_vault(self):
+        """定期清理 Token Vault，符合 ISO 42001 資料過期銷毀規範"""
+        self.token_vault.clear()
 
 if __name__ == "__main__":
-    raw_input = "客戶陳建宇 (身分證 A123456789) 住在台北市大安區，其信用卡號為 4311-9527-1234-5678，預計匯入帳戶 007-123-45678901。"
-    clean_output = redact_pii(raw_input)
-    print("DLP 處理前:", raw_input)
-    print("DLP 處理後:", clean_output)
+    # 初始化地端安全管道
+    dlp = LocalDLPPipeline()
+    
+    # 模擬內網接收之敏感原始提問
+    raw_input = "客戶陳建宇 (身分證字號 A123456789，電話 0912-345-678) 住在台北市大安區信義路，其信用卡為 4311-9527-1234-5678，要求將利息存入帳戶 007-123-45678901。"
+    
+    # 1. 在邊界網閘端進行「去識別化」
+    safe_prompt = dlp.de_identify(raw_input)
+    print("========== 地端去識別化流程 ==========")
+    print("【原始明文資料】:", raw_input)
+    print("【送往外網大模型】:", safe_prompt)
+    print("\n【地端 Token Vault 儲存庫】:")
+    for token, orig in dlp.token_vault.items():
+        print(f"  - {token} ➔ {orig}")
+        
+    # 2. 模擬外部 LLM 處理後回傳之含 Token 報告 (此處模擬外部 LLM 依 Token 指代回覆)
+    llm_completion = "針對客戶 [REDACTED_PERSON_NAME_0] (身分證 [REDACTED_TAIWAN_ID_0]) 之申請，其居住地為 [REDACTED_ADDRESS_0]。我們已將扣款卡片限制於 [REDACTED_CREDIT_CARD_0]，且確認款項將匯往帳戶 [REDACTED_BANK_ACCOUNT_0]，感謝您的辦理。"
+    
+    # 3. 在內網解密還原
+    restored_output = dlp.re_identify(llm_completion)
+    print("\n========== 安全地端重識別還原 ==========")
+    print("【外部 LLM 回傳原始結果】:", llm_completion)
+    print("【地端還原明文安全呈現】:", restored_output)
 ```
 
 ---
