@@ -55,5 +55,18 @@ _C2_mapping_vault/
 curriculum/**/instructor_guide.md
 curriculum/unit_*/instructor_guide.md
 
+# Private B2B Consulting Proposals (High-value B2B pitches & assets)
+scripts/proposal_*.md
+scripts/proposal_*.json
+
+# Private B2B System Master Prompts & Raw/Clean Scripts
+scripts/master_prompt_*.txt
+scripts/clean_*.txt
+scripts/raw_*.txt
+
+# Private Slide Configurations (Contains high-fidelity slide contents)
+scripts/slides_config_*.json
+
+
 
 
