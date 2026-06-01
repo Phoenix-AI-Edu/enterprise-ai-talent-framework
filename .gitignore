@@ -52,7 +52,8 @@ scripts/raw_*.txt
 _C2_mapping_vault/
 
 # Private B2B Instructor Manuals (Speaker notes, transcripts, time control & slide outlines)
-curriculum/**/README*.md
-curriculum/unit_*/README*.md
+curriculum/**/instructor_guide.md
+curriculum/unit_*/instructor_guide.md
+
 
 
