@@ -11,6 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
+  <!-- ─── Chart.js ─── -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
   <style>
     /* ─── 設計系統變數 ─── */
     :root {
@@ -1698,6 +1701,11 @@
           <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
           <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
           
+          <!-- 雷達圖可視化 -->
+          <div class="result-chart-container" style="max-width: 420px; margin: 30px auto; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.3);">
+            <canvas id="radar-chart"></canvas>
+          </div>
+          
           <div class="result-level-desc">
             <p id="quiz-level-text">詳細評估分析載入中...</p>
             <div class="result-suggestion" id="quiz-suggestion-box">
@@ -1808,6 +1816,7 @@
             <div class="unit-header-left">
               <div class="unit-number">01</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.25); color: var(--phoenix-teal);">C-Suite 戰略組 × 全員通用基礎</span>
                 <h3 class="unit-title">單元一：AI 基礎理論與 2026 商業意涵</h3>
                 <span class="unit-subtitle">理論與商業意涵 — 從機器學習本質到 2026 模型生態</span>
               </div>
@@ -1845,6 +1854,7 @@
             <div class="unit-header-left">
               <div class="unit-number">02</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(233, 69, 96, 0.1); border-color: rgba(233, 69, 96, 0.25); color: var(--phoenix-accent);">全員實戰與變革適應組</span>
                 <h3 class="unit-title">單元二：2026 企業級 AI 應用 7 大實戰模組 <span class="unit-badge-upgrade">2026 大幅升級</span></h3>
                 <span class="unit-subtitle">企業落地全景 — 從 RAG 知識庫到 Agentic AI 與多模態生成</span>
               </div>
@@ -1882,6 +1892,7 @@
             <div class="unit-header-left">
               <div class="unit-number">03</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.25); color: var(--phoenix-teal);">全員安全與合規防線組</span>
                 <h3 class="unit-title">單元三：負責任的 AI 應用 (Responsible AI)</h3>
                 <span class="unit-subtitle">接軌國際合規防線 — 對齊 NIST AI RMF 與 ISO/IEC 42001 標準</span>
               </div>
@@ -1919,6 +1930,7 @@
             <div class="unit-header-left">
               <div class="unit-number">04</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(245, 166, 35, 0.1); border-color: rgba(245, 166, 35, 0.25); color: var(--phoenix-gold);">數據實務與預算控制組</span>
                 <h3 class="unit-title">單元四：中型企業機器學習實戰應用</h3>
                 <span class="unit-subtitle">數據驅動決策 — 良率預測、庫存優化與設備異常檢測</span>
               </div>
@@ -1956,6 +1968,7 @@
             <div class="unit-header-left">
               <div class="unit-number">05</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.25); color: var(--phoenix-teal);">高度監管合規與審計組</span>
                 <h3 class="unit-title">單元五：AI 可解釋性與信任度評估</h3>
                 <span class="unit-subtitle">從黑盒到透明 — Mechanistic Interpretability 與 RAG 引用追溯</span>
               </div>
@@ -1993,6 +2006,7 @@
             <div class="unit-header-left">
               <div class="unit-number">06</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(233, 69, 96, 0.1); border-color: rgba(233, 69, 96, 0.25); color: var(--phoenix-accent);">進階系統與代理人設計組</span>
                 <h3 class="unit-title">單元六：生成式 AI 與多代理人系統 (Multiagent Systems)</h3>
                 <span class="unit-subtitle">工作流升級與跨系統對接 — 自主代理人協作與 MCP 標準實踐</span>
               </div>
@@ -2030,6 +2044,7 @@
             <div class="unit-header-left">
               <div class="unit-number">07</div>
               <div class="unit-title-group">
+                <span class="unit-tag" style="background: rgba(245, 166, 35, 0.1); border-color: rgba(245, 166, 35, 0.25); color: var(--phoenix-gold);">C-Suite 營運頂層戰略組</span>
                 <h3 class="unit-title">單元七：企業 AI 導入、治理與營運策略</h3>
                 <span class="unit-subtitle">C-Level 頂層運作框架 — 變革管理阻力阻斷、採購自研矩陣與 A3 戰略畫布</span>
               </div>
@@ -2067,7 +2082,7 @@
             <div class="unit-header-left">
               <div class="unit-number">08</div>
               <div class="unit-title-group">
-                <span class="unit-tag">獨家護城河 · 政策對接</span>
+                <span class="unit-tag" style="background: rgba(245, 166, 35, 0.1); border-color: rgba(245, 166, 35, 0.25); color: var(--phoenix-gold); display: block; margin-bottom: 8px;">獨家護城河 · 政策對接</span>
                 <h3 class="unit-title">單元八：AI 與台灣產業政策對接</h3>
                 <span class="unit-subtitle">產官學三棲視角 — 解構政府 460 億補助生態與國際合規布局</span>
               </div>
@@ -2777,6 +2792,7 @@
             <div class="case-id-badges">
               <span class="case-id">PHX-CASE-2026-004</span>
               <span class="case-tag">金屬製品與鋼鐵製造</span>
+              <span class="case-tag" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.25); background: rgba(245, 166, 35, 0.1);">👥 HR 變革管理組</span>
             </div>
             <h3 class="case-title">中型鋼鐵製品廠｜AI 視覺檢測與一線變革管理案</h3>
           </div>
@@ -2821,6 +2837,7 @@
             <div class="case-id-badges">
               <span class="case-id">PHX-CASE-2026-010</span>
               <span class="case-tag">醫療健康與連鎖診所</span>
+              <span class="case-tag" style="color: var(--phoenix-teal); border-color: rgba(0, 242, 254, 0.25); background: rgba(0, 242, 254, 0.1);">🔒 資安隱私合規組</span>
             </div>
             <h3 class="case-title">連鎖健康機構｜健檢 Line 諮詢 AI 隱私與雙簽防線</h3>
           </div>
@@ -2865,6 +2882,7 @@
             <div class="case-id-badges">
               <span class="case-id">PHX-CASE-2026-012</span>
               <span class="case-tag">零售與跨國電商</span>
+              <span class="case-tag" style="color: var(--phoenix-accent); border-color: rgba(233, 69, 96, 0.25); background: rgba(233, 69, 96, 0.1);">🔌 進階系統設計組</span>
             </div>
             <h3 class="case-title">跨國電商集團｜多代理人客服越獄漏洞與折扣熔斷防禦</h3>
           </div>
@@ -2910,6 +2928,7 @@
             <div class="case-id-badges">
               <span class="case-id">PHX-CASE-2026-027</span>
               <span class="case-tag">精密機械與傳統製造</span>
+              <span class="case-tag" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.25); background: rgba(245, 166, 35, 0.1);">👥 HR 變革管理組</span>
             </div>
             <h3 class="case-title">興達扣件包裝工業｜AI 視覺包裝複核與中高齡安心變革案</h3>
           </div>
@@ -3638,37 +3657,37 @@
       <div class="pricing-grid">
         <!-- 方案 1 -->
         <div class="price-card featured">
-          <h3 class="price-name">企業 AI 落地一頁式診斷報告</h3>
-          <p class="price-target">專為希望快速評估、打通決策瓶頸的 C-Level 主管設計</p>
+          <h3 class="price-name">企業 AI 落地與補助可行性專家初診案</h3>
+          <p class="price-target">專為希望快速評估、對接政府政策與技術可行性之 C-Level 決策層設計</p>
           <div class="price-value-box">
             <span class="price-currency">NT$</span>
-            <span class="price-num">6,800</span>
-            <span class="price-unit">/ 單次特惠</span>
+            <span class="price-num">12,800</span>
+            <span class="price-unit">/ 客製初診費</span>
           </div>
           <ul class="price-features">
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>5 個工作天內交付 <strong>8–12 頁客製化 PDF 診斷報告</strong></span>
+              <span>由孟淑慧顧問與陳文家策略長親自研析，5 個工作天內交付 <strong>8–12 頁客製化 PDF 診斷報告</strong></span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>「4+1 戰略畫布」現況全維評分雷達圖</span>
+              <span>提供「4+1 戰略畫布」現況全維評分雷達圖，收斂出 Quick-Win 點評</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>3 個最具 ROI 潛力的 AI 試點場景優先級象限</span>
+              <span>台灣五大補助體系（SBIR/SIIR/智慧機械等）之<strong>專屬匹配度與套利申報路徑規劃</strong></span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span>30 分鐘顧問線上視訊深度問答與下一步行動指引</span>
+              <span>30 分鐘顧問線上視訊深度問答，針對企業痛點提供具體行動指引</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span style="color: var(--phoenix-gold); font-weight: 600;">※ 報告費用可後續 100% 全額折抵方案 B/C 服務費用</span>
+              <span style="color: var(--phoenix-gold); font-weight: 600;">※ 初診費用可後續 100% 全額折抵方案 B/C 服務費用</span>
             </li>
           </ul>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="price-btn price-btn-primary">
-            立即申請診斷報告
+            立即預約專家初診
           </a>
         </div>
 
@@ -3681,6 +3700,10 @@
             <span class="price-unit">/ 專案評估報價</span>
           </div>
           <ul class="price-features">
+            <li class="price-feature-item">
+              <span class="price-feature-icon">✓</span>
+              <span><strong>分軌分組授課：</strong>劃分為「C-Suite 戰略組」與「全員通用與變革適應組」，非技術同仁無痛上手，降低 HR 培訓推動阻力</span>
+            </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
               <span>協助企業評估是否符合 115 年度政府 AI 人才培育補助申請資格（實際核定結果仍依主管機關審查為準）</span>
@@ -3705,13 +3728,13 @@
           <p class="price-target">適合數位轉型長（CDO）領軍、亟需凝聚跨部門決策共識的關鍵戰略會商</p>
           <div class="price-value-box">
             <span class="price-currency">NT$</span>
-            <span class="price-num" style="font-size: 26px;">30,000 ~ 50,000</span>
-            <span class="price-unit">起 / 階梯首期體驗價</span>
+            <span class="price-num" style="font-size: 26px;">88,000 ~ 188,000</span>
+            <span class="price-unit">起 / 專案評估價</span>
           </div>
           <ul class="price-features">
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
-              <span><strong>首期合作體驗價 NT$ 30,000 ~ 50,000 起</strong>（限前 3 家合作企業以累積去識別化標竿案例，原價 NT$ 88,000~188,000 起）</span>
+              <span><strong style="color: var(--phoenix-teal);">※ 品牌加速夥伴首期限定特惠價 NT$ 48,000 起</strong>（限前 3 家願意去識別化發表成效之特定產業龍頭申請）</span>
             </li>
             <li class="price-feature-item">
               <span class="price-feature-icon">✓</span>
@@ -3996,6 +4019,77 @@
         formBtn.style.background = "linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%)";
         formBtn.style.boxShadow = "0 8px 30px rgba(245, 166, 35, 0.25)";
       }
+
+      // 初始化或更新雷達圖
+      const ctx = document.getElementById('radar-chart').getContext('2d');
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['戰略對齊', '技術就緒', '變革適應', '安全合規', '決策預算'],
+          datasets: [{
+            label: '成熟度得分 (%)',
+            data: [
+              scores[1] * 25,
+              scores[2] * 25,
+              scores[3] * 25,
+              scores[4] * 25,
+              scores[5] * 25
+            ],
+            backgroundColor: 'rgba(233, 69, 96, 0.25)',
+            borderColor: 'rgba(233, 69, 96, 1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(0, 242, 254, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(233, 69, 96, 1)',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              pointLabels: {
+                color: 'rgba(255, 255, 255, 0.8)',
+                font: {
+                  family: "'Inter', 'Noto Sans TC', sans-serif",
+                  size: 13,
+                  weight: '600'
+                }
+              },
+              ticks: {
+                backdropColor: 'transparent',
+                color: 'rgba(255, 255, 255, 0.5)',
+                stepSize: 25,
+                callback: function(value) {
+                  return value + '%';
+                }
+              },
+              min: 0,
+              max: 100
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'rgba(255, 255, 255, 0.8)',
+                font: {
+                  family: "'Inter', 'Noto Sans TC', sans-serif",
+                  size: 12,
+                  weight: '500'
+                }
+              }
+            }
+          }
+        }
+      });
 
       // 展示結果卡片
       resultCard.style.display = 'block';
