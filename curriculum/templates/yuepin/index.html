@@ -39,6 +39,7 @@
       border-radius: 12px;
       overflow: hidden;
       background: #000;
+      transform-origin: top left; /* Fix offset scaling */
     }
 
     iframe {
@@ -65,21 +66,49 @@
       transition: width 0.3s cubic-bezier(0.1, 0.8, 0.25, 1);
     }
 
-    /* 快捷鍵控制指示 */
+    /* 快捷鍵控制與導覽按鈕指示 */
     .control-hint {
       position: absolute;
       bottom: 20px;
       right: 40px;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 6px 12px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       color: #9CA3AF;
       z-index: 1000;
-      font-family: monospace;
-      pointer-events: none;
+      font-family: var(--font-body);
+      pointer-events: auto; /* Allow clicking buttons */
       backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .nav-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-size: 12px;
+    }
+
+    .nav-btn:hover {
+      background: var(--phoenix-orange);
+      border-color: var(--phoenix-orange);
+    }
+
+    .slide-counter {
+      color: #FFFFFF;
+      font-weight: 600;
+      min-width: 45px;
+      text-align: center;
     }
   </style>
 </head>
@@ -90,7 +119,12 @@
     <div class="progress-bar-container">
       <div class="progress-fill" id="progress-indicator"></div>
     </div>
-    <div class="control-hint">← → SPACE NAVIGATE ｜ 'P' PRINT ｜ 'N' SPEAKER NOTES</div>
+    <div class="control-hint">
+      <button class="nav-btn" id="prev-btn">◀ Prev</button>
+      <span class="slide-counter" id="slide-num">1 / 10</span>
+      <button class="nav-btn" id="next-btn">Next ▶</button>
+      <span style="margin-left: 8px; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 12px; font-family: monospace;">← → SPACE NAVIGATE ｜ 'P' PRINT ｜ 'N' SPEAKER NOTES</span>
+    </div>
   </div>
 
   <script>
@@ -103,6 +137,7 @@
     function updateProgress() {
       const pct = ((currentIndex + 1) / slides.length) * 100;
       indicator.style.width = pct + '%';
+      document.getElementById('slide-num').textContent = `${currentIndex + 1} / ${slides.length}`;
     }
 
     function goToSlide(index) {
@@ -143,6 +178,16 @@
           if (notesEl) { notesEl.style.display = notesEl.style.display === 'none' ? 'block' : 'none'; }
         } catch(err) {}
       }
+    });
+
+    // 導覽按鈕點擊事件
+    document.getElementById('prev-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentIndex > 0) goToSlide(currentIndex - 1);
+    });
+    document.getElementById('next-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentIndex < slides.length - 1) goToSlide(currentIndex + 1);
     });
 
     // 全局防干擾聚焦
