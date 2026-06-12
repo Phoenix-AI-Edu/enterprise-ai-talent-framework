@@ -29,5 +29,6 @@
 ---
 
 ✉️ **合作與諮詢對接**：
+* 離線 Excel 工具包直接下載：👉 **[📥 點此直接下載《政府補助與核銷實戰手冊》互動 Excel 檔](./phoenix_ai_grants_handbook.xlsx)**
 * 登記索取 Notion 資料庫協作模板工具包：**[📥 免費登記索取表單](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
 * 預約 30 分鐘專家線上快診諮詢或 B2B 內訓提案，請來信官方服務信箱：**allmyway2007@gmail.com**
