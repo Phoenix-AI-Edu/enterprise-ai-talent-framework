@@ -476,16 +476,16 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 ### 📌 SEO 標題與 Meta
 
 * **SEO Title**：AI 影片生成行銷工作坊 90 分鐘 | 省 95% 影片預算 | 鳳凰 AI
-* **Meta Description**：連鎖餐飲將 200 集員工訓練影片用 HeyGen 重製，從 NT$ 600 萬降至 NT$ 30 萬。90 分鐘工作坊讓行銷部搞懂 Sora 2、Veo 3、Runway 等 6 大工具與法律風險。
+* **Meta Description**：連鎖餐飲將 200 集員工訓練影片用 Synthesia 2.0 / Kling AI 重製，從 NT$ 600 萬降至 NT$ 30 萬。90 分鐘工作坊讓行銷部搞懂 Runway Gen-3/Gen-4.5、Kling AI 3.0、Luma Ray3 等 6 大工具與法律風險。
 * **頁面 URL**：`/modules/m07-ai-video-generation`
-* **關鍵字**：AI 影片生成 / Sora 2 / Veo 3 / Runway / HeyGen / Synthesia
+* **關鍵字**：AI 影片生成 / Runway Gen-3 / Kling AI 3.0 / Luma Ray3 / Synthesia 2.0 / Colossyan
 
 ---
 
 ### 🎬 Hero Section
 
 * **主標題**：行銷部影片生成與合規防線工作坊 —— 90 分鐘搞懂如何省下 95% 影片預算並避開侵權深淵
-* **副標題**：Sora 2、Veo 3、Runway、HeyGen、Synthesia 全工具實測對比 | 4 大法律合規紅線完整規避
+* **副標題**：Runway Gen-3/Gen-4.5、Kling AI 3.0、Luma Ray3、Synthesia 2.0、Colossyan 全工具實測對比 | 4 大法律合規紅線完整規避
 
 ---
 
@@ -496,7 +496,7 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 * 一集 5 分鐘員工訓練影片，傳統 NT$ 8 萬
 * 一支社群短影音，傳統 NT$ 3 萬
 
-**AI 真的能做出可商用品質的影片嗎？** 我們先給您數據——**某大型連鎖餐飲將 200 集移工培訓與服務 SOP 影片用 HeyGen 全部重製**：原本拍攝成本為 **NT$ 600 萬**，使用 HeyGen 虛擬主播重製成本僅 **NT$ 30 萬**，**節省 95%。**
+**AI 真的能做出可商用品質的影片嗎？** 我們先給您數據——**某大型連鎖餐飲將 200 集移工培訓與服務 SOP 影片用 Synthesia 2.0 / Kling AI 虛擬主播全部重製**：原本拍攝成本為 **NT$ 600 萬**，使用 Synthesia 2.0 / Kling AI 虛擬主播重製成本僅 **NT$ 30 萬**，**節省 95%。**
 
 但是——**這不代表「全部用 AI 就好」**。
 
@@ -510,7 +510,7 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 **90 分鐘後，您將帶走**：
 * ✅ **「貴司影片生成工具選型建議表」**
-* ✅ **6 大主流工具完整評分對比**（Sora 2 vs Runway vs HeyGen）
+* ✅ **6 大主流工具完整評分對比**（Runway Gen-3 vs Kling AI 3.0 vs Synthesia 2.0）
 * ✅ **法律合規 Checklist**（肖像授權書範本、廣告標示法規對照）
 * ✅ **4 大導入路徑成本對比**
 * ✅ **員工 AI 肖像授權法律書範本**
@@ -519,8 +519,8 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 ### 📚 課程綱要
 
-* **Part 1（10 分鐘）｜為什麼影片生成 AI 是行銷剛需**：Statista 2026 最新數據、連鎖餐飲移工培訓片 HeyGen 重製案例
-* **Part 2（25 分鐘）｜6 大主流工具對比**：Sora 2 創意生成、Veo 3、Runway Gen-4、Pika 2.0、HeyGen 虛擬主播、Synthesia
+* **Part 1（10 分鐘）｜為什麼影片生成 AI 是行銷剛需**：Statista 2026 最新數據、連鎖餐飲移工培訓片 Synthesia 2.0 / Kling AI 重製案例
+* **Part 2（25 分鐘）｜6 大主流工具對比**：Runway Gen-3/Gen-4.5 創意生成、Kling AI 3.0、Luma Ray3、MiniMax (Hailuo)、Synthesia 2.0 虛擬主播、Colossyan
 * **Part 3（20 分鐘）｜4 大企業導入路徑**：行銷部低成本試水、訓練部標準化、內容工廠、顧客互動體驗整合
 * **Part 4（25 分鐘）｜法律與倫理 4 大紅線**：著作權歸屬爭議、員工 AI 肖像永久商用授權同意書、AI 內容標示義務、公平交易法防範
 * **Part 5（10 分鐘）｜實戰演練**：現場需求診斷、顧問現場推薦工具組合與 ROI 即時精算
