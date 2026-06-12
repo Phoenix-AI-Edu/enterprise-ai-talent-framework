@@ -117,6 +117,7 @@ AI 落地不是單純的技術升級，而是**「權利與習慣的重新分配
 
 > ### 🎁 企業 AI 一頁式總體戰略畫布工具包（含 ROI 自動計算試算表與 Notion 關聯資料庫模板）
 > * **A3 列印版空白畫布 (PDF 直接下載)**：適合工作坊現場列印張貼，引導跨部門共創戰略藍圖。👉 **[📥 點此直接免留資料下載 A3 空白 PDF 畫布](./phoenix_ai_canvas_A3_print.html)** (請在瀏覽器開啟後另存)。
+> * **5 年 TCO 財務精算 Excel 模板 (直接下載)**：包含硬體折舊、API 調用量成長、工程維運工時與 Token 通膨係數的專業試算表。👉 **[📥 點此直接免留資料下載 5年 TCO 估算 Excel 模板](./phoenix_ai_tco_estimator.xlsx)**。
 > * **Google 試算表互動版（含 ROI 自動計算） & Notion 協作模板**：
 >   👉 **[📥 立即點此填寫表單登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
 >   *(本登記表單蒐集之個人資料僅用於工具包發送與服務推廣。填寫即代表您同意依中華民國個人資料保護法第 8 條規定蒐集、處理及利用您的個人資料。)*
