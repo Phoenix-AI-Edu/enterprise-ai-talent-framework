@@ -342,7 +342,7 @@ def run_init(client_name, raw_path):
         
     log_success(f"專屬 Master Prompt 已成功寫入：{prompt_path}")
     print("\n" + "="*80)
-    print(f"\033[93m【機制就緒】請複製 {prompt_path} 內容貼入外部 LLM（如 Claude 4.7 Opus / ChatGPT 5.5）\033[0m")
+    print(f"\033[93m【機制就緒】請複製 {prompt_path} 內容貼入外部 LLM（如 Claude Fable 5 / GPT-5.5 Pro）\033[0m")
     print(f"運行產出後，請將 Markdown 覆蓋存檔於 scripts/proposal_{client_name}.md，然後在本地運行：")
     print(f"  \033[96mpython scripts/phoenix_b2b_pipeline.py compile --client {client_name}\033[0m")
     print("="*80 + "\n")

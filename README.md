@@ -115,7 +115,7 @@
 * **核心重點**：**CEO 90 分鐘決策課**。以 Keynote 簡報級逐字稿，速覽 2026 模型生態（Reasoning/Agent/MCP 協定）、傳產 Voice AI 落地唯一破口，並現場實作 **A3 紙本 4+1 戰略畫布**、精算 10 倍財務成本選型（Buy vs. Build vs. Rent），完美引流至 NT$ 12,800 專家初診案。
 
 ### 📚 [單元一：AI 基礎理論與 2026 商業意涵](./curriculum/unit_1_theory/)
-* **核心重點**：從機器學習本質到 2026 模型生態與商業意義。避開技術數學細節，聚焦 GPT-5/Claude 4.6/Gemini 2.5/DeepSeek/Llama 4 等模型選型、Reasoning Models（推理模型）之商業決策價值與 SLM（小語言模型）本地部署之隱私防禦。
+* **核心重點**：從機器學習本質到 2026 模型生態與商業意義。避開技術數學細節，聚焦 GPT-5.5 Pro / Claude Fable 5 / Gemini 3.1 Pro / Gemini 3.5 Flash / Llama 4 / DeepSeek 等模型選型、Reasoning Models（推理模型）之商業決策價值與 SLM（小語言模型）本地部署之隱私防禦。
 
 ### ⚙️ [單元二：2026 企業級 AI 應用 7 大實戰模組](./curriculum/unit_2_industries/)
 * **核心重點**：全面對接 2026 真實採購剛需。深度研習 7 大實戰模組：Agentic RAG 自我修正與工具調用、Voice AI (Realtime API) 製造業低延遲語音破口、多模態影片生成商用化與版權法律、Computer Use Agent 安全試點風險控管、合規審核、行銷素材自動化與客服分流。
