@@ -417,7 +417,7 @@ def compile_cases():
         
         # Format HTML with single curly brace replacement to avoid CSS/JS brace issues
         # We replace {title} and {markdown_content} explicitly
-        html_content = html_template.replace("{title}", metadata["title"]).replace("{markdown_content}", body_text)
+        html_content = html_template.replace("{{", "{").replace("}}", "}").replace("{title}", metadata["title"]).replace("{markdown_content}", body_text)
         
         # Write HTML file
         html_path = os.path.join(html_dir, html_filename)
