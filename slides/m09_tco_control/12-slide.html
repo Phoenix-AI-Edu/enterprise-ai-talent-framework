@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實作演練：真實 API 帳單結構診斷與 3 大浪費點抓漏</title>
+    <!-- Outfit, Inter, and Noto Serif TC/Noto Sans TC fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-text-muted: #E2E8F0;
+            --color-brand: #FF5B35;       /* Phoenix Orange */
+            --color-warning: #FF3B30;     /* Warning Red */
+            --color-success: #00F2FE;     /* Vibrant Cyan/Teal */
+            --color-info: #F5A623;        /* Gold */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+            
+            --phoenix-orange: var(--color-brand);
+            --phoenix-teal: var(--color-success);
+            --phoenix-gold: var(--color-info);
+            --white: var(--color-text);
+            --gray-300: var(--color-text-muted);
+            --gray-400: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Grid Background styling */
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 91, 53, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.04) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 24px;
+            margin-bottom: 40px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-badge {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--color-brand);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            background: rgba(255, 91, 53, 0.06);
+            padding: 8px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+
+        .logo-txt {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right-tag {
+            font-size: 17px;
+            color: var(--color-success);
+            font-weight: 600;
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+
+        .progress-dots-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        .progress-dot-segment {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-dot-segment.active {
+            color: var(--color-success);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+
+        .progress-dot-connector {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content Body styling */
+        .content-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-title-row {
+            margin-bottom: 30px;
+        }
+
+        .slide-main-title {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-brand) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-subtitle {
+            font-size: 26px;
+            color: var(--gray-400);
+        }
+
+        /* Grid Layouts */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .luxury-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-badge {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .left-card .card-badge {
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+        }
+
+        .right-card .card-badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--phoenix-teal);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .left-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .right-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-content {
+            font-size: 24px;
+            color: var(--gray-300);
+            line-height: 1.7;
+        }
+
+        /* List-based layouts */
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .list-item-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            backdrop-filter: blur(16px);
+        }
+
+        .list-item-bullet {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .list-item-text {
+            font-size: 24px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .list-item-text strong {
+            color: #FFFFFF;
+        }
+
+        /* Triple Grid layout */
+        .triple-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Formula display box */
+        .slide-formulas-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+        .formula-item {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-success);
+            font-family: var(--font-display);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Steps Timeline layout */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .step-card {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 32px 32px 32px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .step-card:hover {
+            border-color: var(--color-brand);
+            box-shadow: 0 15px 30px rgba(255, 91, 53, 0.15);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            background: linear-gradient(135deg, var(--color-brand), var(--color-info));
+            color: #070913;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 15px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 91, 53, 0.3);
+        }
+        .step-badge {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-success);
+            margin-bottom: 16px;
+            font-family: var(--font-display);
+            background: linear-gradient(135deg, #FFF, var(--color-success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-text {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+        .step-text code {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--color-brand);
+        }
+
+        /* Speaker Notes Overlays */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .speaker-notes-overlay .notes-body p {
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body strong {
+            color: var(--phoenix-orange);
+        }
+
+        /* Footer styling */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            margin-top: 40px;
+            font-size: 16px;
+            color: var(--color-text-muted);
+        }
+
+        .security-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-info);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div id="stage">
+        <header class="animate-fade">
+            <div class="logo-group">
+                <span class="brand-badge">📚 U07 TCO</span>
+                <span class="logo-txt">🦅 鳳凰 AI ── 單元七：TCO 成本失控與 Token 網閘防護工作坊 (v2026)</span>
+            </div>
+            <div class="progress-dots-row"><div class="progress-dot-segment ">INTRO</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">THEORY</div><div class="progress-dot-connector"></div><div class="progress-dot-segment active">PRACTICE</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">SUMMARY</div></div>
+            <div class="nav-right-tag">B2B CORPORATE AI CONSULTING</div>
+        </header>
+
+        <div class="content-body">
+            <div class="slide-title-row animate-fade">
+                <h2 class="slide-main-title">現場實作挑戰一：攜帶貴司真實 API 帳單現場診斷抓漏</h2>
+                
+            </div>
+            
+            
+        <div class="list-container">
+            
+            <div class="list-item-card animate-fade delay-1">
+                <div class="list-item-bullet">1</div>
+                <div class="list-item-text"><strong>工作坊畫布風格</strong>：金色亮框手寫畫布，備有倒計時沙漏。</div>
+            </div>
+            <div class="list-item-card animate-fade delay-2">
+                <div class="list-item-bullet">2</div>
+                <div class="list-item-text"><strong>浪費點一</strong>：未優化之繁中 Token 溢出率（檢測 Tokenizer 分詞效率）📄</div>
+            </div>
+            <div class="list-item-card animate-fade delay-3">
+                <div class="list-item-bullet">3</div>
+                <div class="list-item-text"><strong>浪費點二</strong>：冗餘歷史對話 Context 佔比（檢測是否缺乏滑動窗口限制）🔄</div>
+            </div>
+            <div class="list-item-card animate-fade delay-4">
+                <div class="list-item-bullet">4</div>
+                <div class="list-item-text"><strong>浪費點三</strong>：Reasoning 模型不合理調用率（檢測是否缺乏 Model Router 分流）💻</div>
+            </div>
+            <div class="list-item-card animate-fade delay-5">
+                <div class="list-item-bullet">5</div>
+                <div class="list-item-text"><strong>下方提示</strong>：<code>「現場抓出一項浪費，即可折抵本次工作坊 10 倍學費」</code>。</div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 12 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">
+                <p><strong>孟顧問（Meng）：</strong><br>好，聽完了精彩的財務防線與監控儀表板，現在是工作坊最刺激的實作時間！<br>請大家翻開桌上 A3 戰略畫布的第八頁，這就是我們的「真實 API 帳單 3 大浪費點自診表」。<br>在課前通知中，我們特別請各桌的資訊長或財務長，攜帶了貴公司過去一個月的實際 Azure 或 OpenAI API 帳單明細。</p><p>現在，請各桌的主管們坐在一起，把您的帳單明細拿出來，我們現場對照這 3 大指標進行抓漏！</p><p><strong>陳策略長（Phoenix）：</strong><br>（顧問在各桌間巡視，參與討論與明細計算）<br>我看到第六桌的總經理和 CIO 已經把帳單攤開了！<br>來，我們來算一下。您這邊上個月的總 Token 消耗量是 5,000 萬個，但我們仔細一看，其中有將近 3,500 萬個 Token 是重複傳送的「歷史對話上下文」。<br>這意味著，因為您的系統沒有設置滑動窗口裁剪，您上個月多支付了新台幣 12 萬元的「垃圾重複閱讀費」！<br>這張自診表，能在 5 分鐘內，幫您現場抓出這些隱藏在技術迷霧中的財務吸血鬼！</p><p>---</p>
+            </div>
+        </div>
+
+        <footer class="animate-fade delay-3">
+            <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
+            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 12 OF 15</div>
+        </footer>
+    </div>
+
+    <!-- Scaler & keyboard hook scripts -->
+    <script>
+        function fit() {
+            const stage = document.getElementById('stage');
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const scale = Math.min(w / 1920, h / 1080);
+            stage.style.transform = `scale(${scale})`;
+            stage.style.left = `${(w - 1920 * scale) / 2}px`;
+            stage.style.top = `${(h - 1080 * scale) / 2}px`;
+            stage.style.transformOrigin = 'top left';
+            stage.style.position = 'absolute';
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>

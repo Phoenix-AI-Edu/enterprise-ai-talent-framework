@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中型鋼鐵製品廠｜AI 視覺檢測與一線變革管理案 ｜ 鳳凰 AI 企業案例庫</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {{
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;    /* Phoenix Orange */
+            --secondary-accent: #00F2FE;  /* Vibrant Cyan */
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }}
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        body {{
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }}
+        .grid-bg {{
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+            pointer-events: none;
+        }}
+        .glow-radial {{
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 900px; height: 900px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.03) 0%, rgba(255, 91, 53, 0.015) 60%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }}
+        .container {{
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }}
+        .back-link {{
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary-accent);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            gap: 8px;
+        }}
+        .back-link:hover {{
+            color: var(--primary-accent);
+            transform: translateX(-4px);
+        }}
+        .header-bar {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+        }}
+        .logo-txt {{
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #FFF, var(--secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .badge {{
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--primary-accent);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+        }}
+        .markdown-body {{
+            line-height: 1.8;
+            font-size: 16px;
+            color: #E2E8F0;
+        }}
+        .markdown-body h1 {{
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #FFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 15px;
+        }}
+        .markdown-body h2 {{
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+        .markdown-body h3 {{
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #FFF;
+        }}
+        .markdown-body p {{
+            margin-bottom: 20px;
+            color: #CBD5E1;
+        }}
+        .markdown-body ul, .markdown-body ol {{
+            margin-bottom: 25px;
+            padding-left: 24px;
+        }}
+        .markdown-body li {{
+            margin-bottom: 10px;
+            color: #CBD5E1;
+        }}
+        .markdown-body li strong {{
+            color: #FFF;
+        }}
+        .markdown-body blockquote {{
+            border-left: 4px solid var(--primary-accent);
+            background: rgba(255, 91, 53, 0.03);
+            padding: 16px 24px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }}
+        .markdown-body blockquote p {{
+            margin-bottom: 0;
+            font-style: italic;
+        }}
+        .markdown-body code {{
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 14.5px;
+            color: var(--secondary-accent);
+        }}
+        .markdown-body pre {{
+            background: rgba(10, 15, 30, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 14px;
+            overflow-x: auto;
+            margin: 25px 0;
+        }}
+        .markdown-body pre code {{
+            background: none;
+            padding: 0;
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #CBD5E1;
+        }}
+        .markdown-body table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }}
+        .markdown-body th, .markdown-body td {{
+            border: 1px solid var(--glass-border);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 15px;
+        }}
+        .markdown-body th {{
+            background: rgba(255, 255, 255, 0.03);
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: #FFF;
+        }}
+        .markdown-body tr:nth-child(even) {{
+            background: rgba(255, 255, 255, 0.005);
+        }}
+        .markdown-body hr {{
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 40px 0;
+        }}
+        
+        /* Alert components from GitHub alerts */
+        .markdown-body .alert {{
+            border-left: 4px solid #1f6feb;
+            background-color: rgba(31, 111, 235, 0.05);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }}
+        .markdown-body .alert-title {{
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+        
+        /* Mermaid styling */
+        .mermaid {{
+            background: rgba(10, 15, 30, 0.6) !important;
+            border: 1px solid var(--glass-border) !important;
+            padding: 20px !important;
+            border-radius: 14px !important;
+            margin: 25px 0 !important;
+            display: flex;
+            justify-content: center;
+        }}
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+
+    <div class="container">
+        <a href="../../index.html#cases" class="back-link">← 返回官網首頁案例庫</a>
+        <div class="header-bar">
+            <span class="logo-txt">🦅 PHOENIX AI 鳳凰顧問</span>
+            <span class="badge">企業實戰示範報告</span>
+        </div>
+        
+        <div class="markdown-body" id="content">
+            <!-- Content will be rendered here -->
+        </div>
+    </div>
+
+    <!-- Hidden Raw Markdown Data -->
+    <script type="text/markdown" id="rawMarkdown"># 鋼鐵製品廠 AI 視覺檢測與一線變革實踐報告
+
+## 📌 背景說明
+本案目標為協助南部某中型鋼鐵製品廠，將傳統人工目視缺陷檢測升級為 AI 視覺檢測。該廠長期面臨高漏檢率（約 8%）及客訴頻繁的痛點。然而，在系統引進初期，因未考量現場作業人員的心理抗拒與系統操作複雜度，導致資料標記停擺，漏檢率甚至一度惡化。
+
+## ⚠️ 一線變革阻力與痛點分析
+1. **老員工的監視焦慮**：現場資深領班與技術工對新引入的平板界面極度排斥，甚至將其視為管理高層用於監視工時與懲處出錯的「數位電子鎖」。
+2. **操作介面過於繁瑣**：原設計之標記系統需要員工在觸控螢幕上執行多個選擇與文字登錄步驟，對於習慣粗重鋼鐵作業、戴防護手套的工人而言極為不便。
+
+## 🛠️ 鳳凰顧問解決方案
+*   **極簡介面改造**：孟顧問親臨現場，將平板標記畫面精簡為只有「紅燈（瑕疵）」與「綠燈（合格）」兩個大型防呆按鈕，免除繁雜的文字輸入。
+*   **變革管理與激勵機制**：策略長重組變革管理考核指標，取消任何可能與出錯掛鉤的扣分制，改為以「標記貢獻度」發放產線季度安全獎金，並透過領班溝通大會，解除「被監視」的恐懼，轉化為「AI 協作防錯」的共識。
+
+## 📈 專案成效 (ROI)
+*   **品質改善**：缺陷漏檢率由 8% 驟降至 **0.5% 以下**，出貨客訴歸零。
+*   **效率提升**：現場一線數據標記與反饋效率提升 **150%**。
+*   **財務收益**：每年因客訴賠償及重工包裝成本減少，挽回損失達 **NT$ 180 萬**。</script>
+
+    <script>
+        // Set marked.js options
+        marked.setOptions({{
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        }});
+
+        // Render Markdown
+        const mdText = document.getElementById('rawMarkdown').textContent;
+        const htmlContent = marked.parse(mdText);
+        document.getElementById('content').innerHTML = htmlContent;
+
+        // Extract and format Mermaid code blocks for Mermaid.js rendering
+        const codeBlocks = document.querySelectorAll('code.language-mermaid');
+        codeBlocks.forEach(codeBlock => {{
+            const pre = codeBlock.parentElement;
+            const mermaidDiv = document.createElement('div');
+            mermaidDiv.className = 'mermaid';
+            mermaidDiv.textContent = codeBlock.textContent.trim();
+            pre.replaceWith(mermaidDiv);
+        }});
+
+        // Initialize and run Mermaid
+        mermaid.initialize({{
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeVariables: {{
+                background: '#070913',
+                primaryColor: '#1F4E78',
+                secondaryColor: '#FF5B35',
+                tertiaryColor: '#E8F8F5'
+            }}
+        }});
+        mermaid.run();
+    </script>
+</body>
+</html>

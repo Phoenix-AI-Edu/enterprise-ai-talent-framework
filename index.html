@@ -2514,7 +2514,7 @@
         </p>
       </div>
 
-      <!-- 奢華字卡展區 (Luxury Case Cards Showcase) -->
+<!-- 奢華字卡展區 (Luxury Case Cards Showcase) -->
       <style>
         .cases-grid {
           display: grid;
@@ -2748,6 +2748,7 @@
           background: rgba(255, 255, 255, 0.04);
           border: 1px solid rgba(255, 255, 255, 0.08);
           color: var(--gray-300);
+          text-decoration: none;
         }
         .case-card:hover .case-btn {
           background: linear-gradient(135deg, var(--phoenix-accent) 0%, rgba(233, 69, 96, 0.7) 100%);
@@ -2783,192 +2784,83 @@
             text-align: center;
           }
         }
+
+        /* Tabs styling */
+        .case-filters {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 30px;
+          margin-bottom: 40px;
+        }
+        .filter-btn {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 30px;
+          color: var(--gray-300);
+          padding: 10px 22px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 13.5px;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+        .filter-btn:hover {
+          border-color: rgba(0, 242, 254, 0.3);
+          color: var(--white);
+          background: rgba(255, 255, 255, 0.06);
+          transform: translateY(-1px);
+        }
+        .filter-btn.active {
+          background: linear-gradient(135deg, var(--phoenix-teal), rgba(0, 242, 254, 0.6));
+          border-color: transparent;
+          color: var(--white);
+          box-shadow: 0 5px 15px rgba(0, 242, 254, 0.15);
+        }
+        .case-card.animate-fade {
+          animation: fadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .no-cases {
+          grid-column: 1 / -1;
+          text-align: center;
+          padding: 60px 20px;
+          color: var(--gray-400);
+          font-size: 15px;
+          background: rgba(255, 255, 255, 0.01);
+          border: 1px dashed var(--glass-border);
+          border-radius: 20px;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
       </style>
 
-      <div class="cases-grid">
-        <!-- 案例 1: 金屬製品與鋼鐵製造 (PHX-CASE-2026-004) -->
-        <div class="case-card">
-          <div class="case-header">
-            <div class="case-id-badges">
-              <span class="case-id">PHX-CASE-2026-004</span>
-              <span class="case-tag">金屬製品與鋼鐵製造</span>
-              <span class="case-tag" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.25); background: rgba(245, 166, 35, 0.1);">👥 HR 變革管理組</span>
-            </div>
-            <h3 class="case-title">中型鋼鐵製品廠｜AI 視覺檢測與一線變革管理案</h3>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-body">
-            <div class="case-section">
-              <span class="case-section-title">🛑 業務痛點與挑戰</span>
-              <p class="case-section-content">
-                南部中型鋼鐵製品廠傳統依賴人工目視缺陷檢測，漏檢率高達 8% 且客訴頻繁。引進 AI 視覺檢測系統上線後，漏檢率反而不降反升，經查發現因一線員工抗拒操作，導致現場根本未配合執行資料標記。
-              </p>
-            </div>
-            <div class="case-section">
-              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
-              <ul class="case-list">
-                <li class="case-list-item"><strong>員工監視焦慮：</strong>現場老領班與技術工排斥複雜的平板界面，私下認為 AI 是高層用來監視與懲罰員工的監控工具，因而消極上傳或登錄偏差數據。</li>
-                <li class="case-list-item solution"><strong>介面簡化與激勵：</strong>孟顧問親赴現場簡化操作平板為「紅綠防呆大按鈕」；策略長重組變革考核，改以「標記貢獻」發放季度產線安全獎金，排除「被監視」恐懼。</li>
-              </ul>
-            </div>
-            <div class="case-roi-box">
-              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
-              <ul class="case-roi-list">
-                <li class="case-roi-item">鋼材表面缺陷漏檢率自 8% <strong>驟降至 0.5% 以下</strong>，客訴歸零</li>
-                <li class="case-roi-item">現場一線 AI 標記效率<strong>提升 150%</strong></li>
-                <li class="case-roi-item">每年挽回之退貨賠償與重工損失達 <strong>NT$ 180 萬</strong></li>
-              </ul>
-            </div>
-          </div>
-          <div class="case-footer">
-            <div class="case-target-scheme">
-              <span class="scheme-label">對標建議方案</span>
-              <span class="scheme-value">方案 A 企業專屬內訓專班</span>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
-              📥 閱讀完整案例分析 (PDF)
-            </a>
-          </div>
-        </div>
+      <!-- 產業篩選 Tab 鍵 -->
+      <div class="case-filters">
+        <button class="filter-btn active" data-filter="all">全部案例</button>
+        <button class="filter-btn" data-filter="manufacturing">製造與傳產</button>
+        <button class="filter-btn" data-filter="medical">醫療與健康</button>
+        <button class="filter-btn" data-filter="ecommerce">跨境電商</button>
+        <button class="filter-btn" data-filter="professional">專業服務 (法務/會計)</button>
+      </div>
 
-        <!-- 案例 2: 醫療健康與連鎖診所 (PHX-CASE-2026-010) -->
-        <div class="case-card">
-          <div class="case-header">
-            <div class="case-id-badges">
-              <span class="case-id">PHX-CASE-2026-010</span>
-              <span class="case-tag">醫療健康與連鎖診所</span>
-              <span class="case-tag" style="color: var(--phoenix-teal); border-color: rgba(0, 242, 254, 0.25); background: rgba(0, 242, 254, 0.1);">🔒 資安隱私合規組</span>
-            </div>
-            <h3 class="case-title">連鎖健康機構｜健檢 Line 諮詢 AI 隱私與雙簽防線</h3>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-body">
-            <div class="case-section">
-              <span class="case-section-title">🛑 業務痛點與挑戰</span>
-              <p class="case-section-content">
-                連鎖健康機構欲導入 AI 智慧助理回覆健檢 Line 諮詢以提升排程效率。但病歷與健檢資料高度敏感，若直接串接將面臨嚴厲的個資洩漏處罰風險與醫療糾紛隱患。
-              </p>
-            </div>
-            <div class="case-section">
-              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
-              <ul class="case-list">
-                <li class="case-list-item"><strong>醫護責任抗拒：</strong>診所醫生與健檢護理師強烈抗拒，拒絕為 AI 生成之醫療建議報告做連帶法律背書，擔心醫療糾紛反增工作負擔。</li>
-                <li class="case-list-item solution"><strong>雙向屏蔽與雙簽：</strong>在 Line 前端架設個資去識別化隔離 Pipeline；配置「醫護雙簽覆核（RACI）流程」，AI 僅整理草稿，回覆出站必須經專業人員確認。</li>
-              </ul>
-            </div>
-            <div class="case-roi-box">
-              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
-              <ul class="case-roi-list">
-                <li class="case-roi-item">健檢報告摘要整理工時自 20 分鐘<strong>縮短至 3 分鐘 (效率暴增 6 倍)</strong></li>
-                <li class="case-roi-item">Line 客服滿意度自 50% <strong>躍升至 94%</strong>，健檢回診率增加 35%</li>
-                <li class="case-roi-item"><strong>100% 規避敏感病歷個資訴訟與合規漏洞</strong></li>
-              </ul>
-            </div>
-          </div>
-          <div class="case-footer">
-            <div class="case-target-scheme">
-              <span class="scheme-label">對標建議方案</span>
-              <span class="scheme-value">一頁式落地診斷報告</span>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
-              📥 閱讀完整案例分析 (PDF)
-            </a>
-          </div>
-        </div>
+      <!-- 動態載入容器 -->
+      <div class="cases-grid" id="casesGridContainer" style="transition: opacity 0.2s ease;">
+        <!-- JavaScript 會自動將卡片渲染至此 -->
+      </div>
+      
 
-        <!-- 案例 3: 零售與跨國電商 (PHX-CASE-2026-012) -->
-        <div class="case-card">
-          <div class="case-header">
-            <div class="case-id-badges">
-              <span class="case-id">PHX-CASE-2026-012</span>
-              <span class="case-tag">零售與跨國電商</span>
-              <span class="case-tag" style="color: var(--phoenix-accent); border-color: rgba(233, 69, 96, 0.25); background: rgba(233, 69, 96, 0.1);">🔌 進階系統設計組</span>
-            </div>
-            <h3 class="case-title">跨國電商集團｜多代理人客服越獄漏洞與折扣熔斷防禦</h3>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-body">
-            <div class="case-section">
-              <span class="case-section-title">🛑 業務痛點與挑戰</span>
-              <p class="case-section-content">
-                多國跨境電商客服成本高昂且存在時差。欲引進 AI 多代理人（Multi-agent）工作流，卻在測試中遭遇惡意「模型越獄（Jailbreaking）」漏洞，AI 被引導發放非授權折扣碼，險釀巨額財務損失。
-              </p>
-            </div>
-            <div class="case-section">
-              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
-              <ul class="case-list">
-                <li class="case-list-item"><strong>主管安全疑慮：</strong>客服主管對 AI 越權承諾或給予不實退款抱持高度戒備，強烈要求管理層全面下線 AI 助理以規避責任。</li>
-                <li class="case-list-item solution"><strong>Guardrails 閘道：</strong>策略長在代理人架構中部署「多層 Guardrails 防禦閘道」與折扣熔斷防禦，將 AI 回覆權限嚴格限制在安全合規的 FAQ 範疇。</li>
-              </ul>
-            </div>
-            <div class="case-roi-box">
-              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
-              <ul class="case-roi-list">
-                <li class="case-roi-item">成功攔截並封堵模型越獄漏洞，<strong>客訴退款率降至 0.1% 以下</strong></li>
-                <li class="case-roi-item">多國客服即時回覆率達 99%，<strong>年省夜間人力 NT$ 120 萬</strong></li>
-                <li class="case-roi-item"><strong>保障電商財務零漏洞，規避財務越獄危機</strong></li>
-              </ul>
-            </div>
-          </div>
-          <div class="case-footer">
-            <div class="case-target-scheme">
-              <span class="scheme-label">對標建議方案</span>
-              <span class="scheme-value">一頁式落地診斷報告</span>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
-              📥 閱讀完整案例分析 (PDF)
-            </a>
-          </div>
-        </div>
-
-
-        <!-- 案例 4: 精密機械與傳統製造 (PHX-CASE-2026-027) -->
-        <div class="case-card">
-          <div class="case-header">
-            <div class="case-id-badges">
-              <span class="case-id">PHX-CASE-2026-027</span>
-              <span class="case-tag">精密機械與傳統製造</span>
-              <span class="case-tag" style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.25); background: rgba(245, 166, 35, 0.1);">👥 HR 變革管理組</span>
-            </div>
-            <h3 class="case-title">興達扣件包裝工業｜AI 視覺包裝複核與中高齡安心變革案</h3>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-body">
-            <div class="case-section">
-              <span class="case-section-title">🛑 業務痛點與挑戰</span>
-              <p class="case-section-content">
-                螺絲包裝與出貨階段，常因客戶混料、規格印錯或出貨條碼貼錯導致退貨率達 3%，威脅外銷車規供應商資格。高層欲導入 AI 包裝視覺影像條碼複核系統，但包裝老員工手動複檢慢，影像資料缺損嚴重，POC 停擺半年。
-              </p>
-            </div>
-            <div class="case-section">
-              <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
-              <ul class="case-list">
-                <li class="case-list-item"><strong>中高齡扣薪與操作恐懼：</strong>包裝老員工排斥複雜的平板與條碼掃描操作，強烈擔心操作慢或出錯會被扣薪甚至開除，採取故意遮擋鏡頭等杯葛手段。</li>
-                <li class="case-list-item solution"><strong>極簡 UI 與防錯獎金：</strong>孟顧問現場簡化操作為「紅綠燈自動拍照極簡防呆介面」；策略長設立「AI 防錯達標特別獎金」與總經理親簽「不裁員安心承諾書」，升任資深老員工為「AI 標記教練」。</li>
-              </ul>
-            </div>
-            <div class="case-roi-box">
-              <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
-              <ul class="case-roi-list">
-                <li class="case-roi-item">出貨條碼貼錯與混料退貨率自 3% <strong>驟降至 0.02% 接近零失誤</strong></li>
-                <li class="case-roi-item">出貨包裝速度提升 <strong>120%</strong></li>
-                <li class="case-roi-item">因退貨索賠與重工包裝成本每年省下達 <strong>NT$ 110 萬</strong></li>
-              </ul>
-            </div>
-          </div>
-          <div class="case-footer">
-            <div class="case-target-scheme">
-              <span class="scheme-label">對標建議方案</span>
-              <span class="scheme-value">方案 C 企業 AI 內部治理與合規陪跑案</span>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="case-btn">
-              📥 閱讀完整案例分析 (PDF)
-            </a>
-          </div>
-        </div>
-
-
-      <!-- 線上修改提示與白皮書 CTA -->
       <div class="cases-note-block">
         <div>
           <h4 style="font-size: 16px; font-weight: 700; color: var(--phoenix-gold); margin-bottom: 6px;">💡 安全去識別化與合規宣告</h4>
@@ -4158,6 +4050,120 @@
       } else if (!navLinks.classList.contains('active')) {
         navLinks.style.display = 'none';
       }
+    });
+  </script>
+  <!-- ─── 企業標竿案例數據庫 ─── -->
+  <script src="./cases/cases_data.js"></script>
+  <!-- ─── 企業標竿案例動態載入與篩選 JS 邏輯 ─── -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let allCases = typeof PHOENIX_CASES_DB !== "undefined" ? PHOENIX_CASES_DB : [];
+      const container = document.getElementById("casesGridContainer");
+      const filterBtns = document.querySelectorAll(".filter-btn");
+
+      // 格式化加粗文字
+      const formatText = text => text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+      // 1. 載入案例庫 (優先使用靜態導入的 PHOENIX_CASES_DB，若無則以 fetch 作為備援)
+      if (allCases.length > 0) {
+        renderCases("all");
+      } else {
+        fetch("./cases/cases.json")
+          .then(response => response.json())
+          .then(data => {
+            allCases = data;
+            renderCases("all");
+          })
+          .catch(err => {
+            console.error("無法載入案例庫:", err);
+            container.innerHTML = `<div class="no-cases">無法載入案例庫，請檢查網路連線或稍後再試。</div>`;
+          });
+      }
+
+      // 2. 渲染卡片函數
+      function renderCases(filter) {
+        container.style.opacity = 0; // 漸隱動畫
+        
+        setTimeout(() => {
+          container.innerHTML = "";
+          const filteredCases = filter === "all" 
+            ? allCases 
+            : allCases.filter(c => c.industry === filter);
+
+          if (filteredCases.length === 0) {
+            container.innerHTML = `<div class="no-cases">此分類目前尚無公開範例，如需專屬產業簡報請對接顧問快診。</div>`;
+            container.style.opacity = 1;
+            return;
+          }
+
+          filteredCases.forEach(c => {
+            const card = document.createElement("div");
+            card.className = "case-card animate-fade";
+            
+            // 決定標籤顏色樣式
+            let tagStyle = "";
+            if (c.tag.includes("HR") || c.tag.includes("變革")) {
+              tagStyle = 'style="color: var(--phoenix-gold); border-color: rgba(245, 166, 35, 0.25); background: rgba(245, 166, 35, 0.1);"';
+            } else if (c.tag.includes("資安") || c.tag.includes("隱私") || c.tag.includes("合規")) {
+              tagStyle = 'style="color: var(--phoenix-teal); border-color: rgba(0, 242, 254, 0.25); background: rgba(0, 242, 254, 0.1);"';
+            } else {
+              tagStyle = 'style="color: var(--phoenix-accent); border-color: rgba(233, 69, 96, 0.25); background: rgba(233, 69, 96, 0.1);"';
+            }
+
+            // 痛點與解法清單 HTML
+            const painsHTML = c.pain_points.map(p => `<li class="case-list-item">${formatText(p)}</li>`).join("");
+            const solsHTML = c.solutions.map(s => `<li class="case-list-item solution">${formatText(s)}</li>`).join("");
+            const roiHTML = c.roi.map(r => `<li class="case-roi-item">${formatText(r)}</li>`).join("");
+
+            card.innerHTML = `
+              <div class="case-header">
+                <div class="case-id-badges">
+                  <span class="case-id">${c.id}</span>
+                  <span class="case-tag" ${tagStyle}>${c.tag}</span>
+                </div>
+                <span class="case-tag" style="align-self: flex-start; margin-top: 4px; border-color: rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: var(--gray-300);">${c.industry_name}</span>
+                <h3 class="case-title">${c.title}</h3>
+              </div>
+              <div class="case-divider"></div>
+              <div class="case-body">
+                <div class="case-section">
+                  <span class="case-section-title">🛑 業務痛點與挑戰</span>
+                  <ul class="case-list">${painsHTML}</ul>
+                </div>
+                <div class="case-section">
+                  <span class="case-section-title">⚡ 一線阻力與顧問解法</span>
+                  <ul class="case-list">${solsHTML}</ul>
+                </div>
+                <div class="case-roi-box">
+                  <span class="case-roi-title">📈 量化落地成效 (ROI)</span>
+                  <ul class="case-roi-list">${roiHTML}</ul>
+                </div>
+              </div>
+              <div class="case-footer">
+                <div class="case-target-scheme">
+                  <span class="scheme-label">對標建議方案</span>
+                  <span class="scheme-value">${c.scheme}</span>
+                </div>
+                <a href="${c.detail_url}" target="_blank" class="case-btn">
+                  🖥️ 閱讀完整規劃報告 (HTML) ➔
+                </a>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+          
+          container.style.opacity = 1; // 漸顯動畫
+        }, 200);
+      }
+
+      // 3. Tab 切換事件綁定
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          e.target.classList.add("active");
+          renderCases(e.target.getAttribute("data-filter"));
+        });
+      });
     });
   </script>
 </body>

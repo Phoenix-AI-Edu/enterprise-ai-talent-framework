@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenization 的商業算計：分詞不當如何讓企業 API 成本暴增 3 倍</title>
+    <!-- Outfit, Inter, and Noto Serif TC/Noto Sans TC fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-text-muted: #E2E8F0;
+            --color-brand: #FF5B35;       /* Phoenix Orange */
+            --color-warning: #FF3B30;     /* Warning Red */
+            --color-success: #00F2FE;     /* Vibrant Cyan/Teal */
+            --color-info: #F5A623;        /* Gold */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+            
+            --phoenix-orange: var(--color-brand);
+            --phoenix-teal: var(--color-success);
+            --phoenix-gold: var(--color-info);
+            --white: var(--color-text);
+            --gray-300: var(--color-text-muted);
+            --gray-400: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Grid Background styling */
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 91, 53, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.04) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 24px;
+            margin-bottom: 40px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-badge {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--color-brand);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            background: rgba(255, 91, 53, 0.06);
+            padding: 8px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+
+        .logo-txt {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right-tag {
+            font-size: 17px;
+            color: var(--color-success);
+            font-weight: 600;
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+
+        .progress-dots-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        .progress-dot-segment {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-dot-segment.active {
+            color: var(--color-success);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+
+        .progress-dot-connector {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content Body styling */
+        .content-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-title-row {
+            margin-bottom: 30px;
+        }
+
+        .slide-main-title {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-brand) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-subtitle {
+            font-size: 26px;
+            color: var(--gray-400);
+        }
+
+        /* Grid Layouts */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .luxury-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-badge {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .left-card .card-badge {
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+        }
+
+        .right-card .card-badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--phoenix-teal);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .left-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .right-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-content {
+            font-size: 24px;
+            color: var(--gray-300);
+            line-height: 1.7;
+        }
+
+        /* List-based layouts */
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .list-item-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            backdrop-filter: blur(16px);
+        }
+
+        .list-item-bullet {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .list-item-text {
+            font-size: 24px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .list-item-text strong {
+            color: #FFFFFF;
+        }
+
+        /* Triple Grid layout */
+        .triple-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Formula display box */
+        .slide-formulas-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+        .formula-item {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-success);
+            font-family: var(--font-display);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Steps Timeline layout */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .step-card {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 32px 32px 32px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .step-card:hover {
+            border-color: var(--color-brand);
+            box-shadow: 0 15px 30px rgba(255, 91, 53, 0.15);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            background: linear-gradient(135deg, var(--color-brand), var(--color-info));
+            color: #070913;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 15px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 91, 53, 0.3);
+        }
+        .step-badge {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-success);
+            margin-bottom: 16px;
+            font-family: var(--font-display);
+            background: linear-gradient(135deg, #FFF, var(--color-success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-text {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+        .step-text code {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--color-brand);
+        }
+
+        /* Speaker Notes Overlays */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .speaker-notes-overlay .notes-body p {
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body strong {
+            color: var(--phoenix-orange);
+        }
+
+        /* Footer styling */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            margin-top: 40px;
+            font-size: 16px;
+            color: var(--color-text-muted);
+        }
+
+        .security-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-info);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div id="stage">
+        <header class="animate-fade">
+            <div class="logo-group">
+                <span class="brand-badge">📚 U01 THEORY</span>
+                <span class="logo-txt">🦅 鳳凰 AI ── 單元一：AI 基礎理論與 2026 技術演進 (v2026)</span>
+            </div>
+            <div class="progress-dots-row"><div class="progress-dot-segment ">INTRO</div><div class="progress-dot-connector"></div><div class="progress-dot-segment active">THEORY</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">PRACTICE</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">SUMMARY</div></div>
+            <div class="nav-right-tag">B2B CORPORATE AI CONSULTING</div>
+        </header>
+
+        <div class="content-body">
+            <div class="slide-title-row animate-fade">
+                <h2 class="slide-main-title">Token 標記化的商業算計：避開繁體中文分詞的 API 財務陷阱</h2>
+                <p class="slide-subtitle">Tokenizer (分詞器) 對繁體中文優化不足將導致企業 API 成本暴增 3 倍</p>
+            </div>
+            
+            
+        <div class="dual-grid">
+            <div class="luxury-card left-card animate-fade delay-1">
+                <span class="card-badge">WARNING (優化不足)</span>
+                <h3 class="card-title">繁體中文優化不足的模型</h3>
+                <p class="card-content">• 輸入「這家銀行的行長」➔ 拆為 12 個無規律 Token (如 <code>這</code>、<code>##家</code>、<code>銀</code>、<code>##行</code>、<code>的</code>、<code>##行</code>、<code>##長</code>)<br>• <strong>後果</strong>：Token 數 = 12，API 費用 3 倍暴增，Context Window 浪費且推理速度下降</p>
+            </div>
+            <div class="luxury-card right-card animate-fade delay-2">
+                <span class="card-badge">OPTIMIZED (深度優化)</span>
+                <h3 class="card-title">鳳凰 AI 繁中優化系統</h3>
+                <p class="card-content">• 同一個句子 ➔ 乾淨俐落地拆為 4 個 Token (<code>這家</code>、<code>銀行</code>、<code>的</code>、<code>行長</code>)<br>• <strong>優勢</strong>：Token 數 = 4，算力與推理速度最優化，API 費用節省 60%</p>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 4 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">
+                <p><strong>陳策略長（Phoenix）：</strong><br>好，現在我們進入核心技術的解密。<br>大模型是看不懂中文文字的，在文字進入大腦前，必須先被切碎，這個步驟叫做「Tokenization (標記化)」，而執行的工具叫做 Tokenizer (分詞器)。<br>這一步聽起來很純技術，但我必須告訴大家，這是一個巨大的<strong>商業財務地雷</strong>。</p><p>大模型 API 的計費，是嚴格按照 Token 的數量來收錢的。<br>如果我們使用了一個對繁體中文優化不足的開源模型，當我們輸入「這家銀行的行長」時，它的 Tokenizer 會把每個中文字拆成 2 到 3 個破碎的亂碼 Token。結果，明明只有 7 個字，卻被計費了 20 個 Token！</p><p><strong>孟顧問（Meng）：</strong><br>這代表您的 API 帳單將會無緣無故暴增 3 倍！<br>不僅如此，因為模型每次能處理的總 Token 長度是有限的（也就是 Context Window 限制），當 Token 被亂拆暴增時，意味著您原本能一次讀取 10 頁合約，現在讀到第 3 頁模型就「失憶」了，且推理速度大幅變慢。</p><p><strong>陳策略長（Phoenix）：</strong><br>所以，引進大模型的第一步，就是要求技術小組實測 Token 壓縮比。<br>在鳳凰 AI 的繁體中文優化架構下，我們能做到用最少、最乾淨的 Token 語意單位來表徵中文，在源頭上為企業砍掉 60% 的 API 無謂帳單支出。這才是真正的財務精算。</p><p>---</p>
+            </div>
+        </div>
+
+        <footer class="animate-fade delay-3">
+            <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
+            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 4 OF 15</div>
+        </footer>
+    </div>
+
+    <!-- Scaler & keyboard hook scripts -->
+    <script>
+        function fit() {
+            const stage = document.getElementById('stage');
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const scale = Math.min(w / 1920, h / 1080);
+            stage.style.transform = `scale(${scale})`;
+            stage.style.left = `${(w - 1920 * scale) / 2}px`;
+            stage.style.top = `${(h - 1080 * scale) / 2}px`;
+            stage.style.transformOrigin = 'top left';
+            stage.style.position = 'absolute';
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>

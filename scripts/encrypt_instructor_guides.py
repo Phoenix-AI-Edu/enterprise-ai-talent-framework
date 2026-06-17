@@ -215,6 +215,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             border-color: rgba(239, 68, 68, 0.3);
             color: #EF4444;
         }}
+        .present-btn {{
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }}
+        .present-btn:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.45) !important;
+            filter: brightness(1.15);
+        }}
         
         /* Premium Markdown Styles */
         .markdown-body {{
@@ -334,6 +342,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="content-header">
             <div>
                 <h1 class="content-title">{title} 講師手稿</h1>
+                {slide_link_html}
             </div>
             <button class="logout-btn" onclick="handleLogout()">登出手冊</button>
         </div>
@@ -458,6 +467,8 @@ def encrypt_guide(md_path, html_path):
     
     # Extract clean title from md_path
     dir_name = os.path.basename(os.path.dirname(md_path))
+    file_name = os.path.basename(md_path)
+    
     # Parse title from folder name
     unit_map = {
         "unit_0_intro": "單元零 ｜ 高階主管 AI 落地速覽",
@@ -470,13 +481,63 @@ def encrypt_guide(md_path, html_path):
         "unit_7_strategy": "單元七 ｜ 企業 AI 導入、治理與營運策略",
         "unit_8_grants": "單元八 ｜ AI 與台灣產業政策對接"
     }
-    title = unit_map.get(dir_name, "鳳凰 AI 講師手稿")
     
+    # Try to extract title from first line of Markdown
+    title = ""
+    try:
+        with open(md_path, "r", encoding="utf-8") as f:
+            first_line = f.readline().strip()
+        if first_line.startswith("#"):
+            title = first_line.replace("#", "").replace("📚", "").strip()
+    except Exception:
+        pass
+        
+    if not title:
+        title = unit_map.get(dir_name, "鳳凰 AI 講師手稿")
+    
+    # Slide mappings for standard curriculum modules
+    slide_map = {
+        "unit_0_intro": ("m01_ceo_strategy", 44),
+        "unit_1_theory": ("u1_theory", 15),
+        "unit_2_industries": ("m06_voice_ai", 15),
+        "unit_4_machine_learning": ("m04_buy_build_rent", 15),
+        "unit_6_generative_ai": ("m08_ai_agent_pilot", 15),
+        "unit_8_grants": ("m12_government_grants", 20)
+    }
+    
+    slide_map_by_file = {
+        "README_M05_RAG.md": ("m05_rag_procurement", 15),
+        "README_M07_Video.md": ("m07_video_generation", 15),
+        "README_M09_TCO.md": ("m09_tco_control", 15),
+        "README_M10_Change.md": ("m10_change_management", 15),
+        "README_M13_AIAct.md": ("m13_eu_ai_act", 15),
+    }
+    
+    if file_name in slide_map_by_file:
+        slide_info = slide_map_by_file[file_name]
+    elif file_name == "instructor_guide.md" and dir_name == "unit_2_industries":
+        slide_info = ("m06_voice_ai", 15)
+    else:
+        slide_info = slide_map.get(dir_name)
+    
+    if slide_info:
+        folder, count = slide_info
+        slide_link_html = f'''
+        <div style="margin-top: 15px; display: flex; gap: 15px; align-items: center;">
+            <a href="../../slides/{folder}/index.html" target="_blank" class="present-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--secondary-accent), #00b4d8); color: #070913; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-family: var(--font-display); font-size: 14px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);">
+                🖥️ 點此進入本單元簡報播控系統 (共 {count} 張投影片) ➔
+            </a>
+        </div>
+        '''
+    else:
+        slide_link_html = ""
+
     # Format HTML
     html_content = HTML_TEMPLATE.format(
         title=title,
         ciphertext=ciphertext_b64,
-        iv=iv_hex
+        iv=iv_hex,
+        slide_link_html=slide_link_html
     )
     
     with open(html_path, "w", encoding="utf-8") as f:
@@ -492,9 +553,9 @@ def main():
     guides_processed = 0
     for root, dirs, files in os.walk(curriculum_dir):
         for file in files:
-            if file == "instructor_guide.md":
+            if file == "instructor_guide.md" or (file.startswith("README_M") and file.endswith(".md")):
                 md_path = os.path.join(root, file)
-                html_path = os.path.join(root, "instructor_guide.html")
+                html_path = os.path.join(root, file.replace(".md", ".html"))
                 encrypt_guide(md_path, html_path)
                 guides_processed += 1
                 

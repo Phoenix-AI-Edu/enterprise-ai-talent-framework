@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👑 單元四：機器學習技術理論與實務案例 簡報播控器 ｜ PHOENIX AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #070913;
+      --glass-bg: rgba(255, 255, 255, 0.02);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --phoenix-orange: #FF5B35;
+      --phoenix-teal: #00F2FE;
+    }
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-deep);
+      font-family: 'Inter', sans-serif;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #stage {
+      width: 1920px;
+      height: 1080px;
+      position: absolute;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      transform-origin: top left;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: var(--bg-deep);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 6px;
+      background: rgba(255,255,255,0.05);
+      z-index: 999;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--phoenix-orange), var(--phoenix-teal));
+      transition: width 0.3s cubic-bezier(0.1, 0.8, 0.25, 1);
+    }
+
+    /* Control Bar Floating UI (Claude Audit: Mechanism 6) */
+    .control-hint {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #E2E8F0;
+      z-index: 1000;
+      font-family: monospace;
+      pointer-events: auto;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #FFF;
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .nav-btn:hover {
+      background: var(--phoenix-orange);
+      border-color: var(--phoenix-orange);
+    }
+    .slide-counter {
+      font-weight: 600;
+      color: var(--phoenix-teal);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="stage">
+    <iframe id="slide-frame" src="01-cover.html"></iframe>
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progress-indicator"></div>
+    </div>
+    <div class="control-hint">
+      <button class="nav-btn" onclick="prevSlide()">◀ Prev</button>
+      <span class="slide-counter" id="counter-txt">1 / 15</span>
+      <button class="nav-btn" onclick="nextSlide()">Next ▶</button>
+      <span>← → SPACE NAVIGATE ｜ 'P' PRINT ｜ 'N' SPEAKER NOTES</span>
+    </div>
+  </div>
+
+  <script>
+    const slides = ["01-cover.html", "02-slide.html", "03-slide.html", "04-slide.html", "05-slide.html", "06-slide.html", "07-slide.html", "08-slide.html", "09-slide.html", "10-slide.html", "11-slide.html", "12-slide.html", "13-slide.html", "14-slide.html", "15-slide.html"];
+    let currentIndex = 0;
+
+    const frame = document.getElementById('slide-frame');
+    const indicator = document.getElementById('progress-indicator');
+    const counterTxt = document.getElementById('counter-txt');
+
+    function updateProgress() {
+      const pct = ((currentIndex + 1) / slides.length) * 100;
+      indicator.style.width = pct + '%';
+      counterTxt.innerText = (currentIndex + 1) + ' / ' + slides.length;
+    }
+
+    function goToSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+      
+      frame.style.opacity = 0;
+      
+      setTimeout(() => {
+        currentIndex = index;
+        frame.src = slides[currentIndex];
+        
+        frame.onload = () => {
+          frame.style.opacity = 1;
+        };
+        
+        updateProgress();
+      }, 150);
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) goToSlide(currentIndex - 1);
+    }
+
+    function nextSlide() {
+      if (currentIndex < slides.length - 1) goToSlide(currentIndex + 1);
+    }
+
+    window.addEventListener('keydown', function(e) {
+      handleKeyboardNavigation(e);
+    });
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'keydown') {
+        handleKeyboardNavigation(e.data);
+      }
+    });
+
+    function handleKeyboardNavigation(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'p' || e.key === 'P') {
+        try {
+          frame.contentWindow.postMessage({ type: 'print' }, '*');
+        } catch(err) {}
+      } else if (e.key === 'n' || e.key === 'N') {
+        try {
+          frame.contentWindow.postMessage({ type: 'toggle-notes' }, '*');
+        } catch(err) {}
+      }
+    }
+
+    window.addEventListener('click', () => {
+      frame.focus();
+    });
+
+    function fit() {
+      const stage = document.getElementById('stage');
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const scale = Math.min(w / 1920, h / 1080);
+      stage.style.transformOrigin = 'top left';
+      stage.style.transform = `scale(${scale})`;
+      stage.style.left = `${(w - 1920 * scale) / 2}px`;
+      stage.style.top = `${(h - 1080 * scale) / 2}px`;
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', () => {
+      fit();
+      updateProgress();
+      frame.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+==================== unit_1_theory (15 slides) ====================
+--- Slide 1: 工作坊開場與標題頁 ---
+  Title: AI 基礎理論與 2026 商業意涵 (CEO 90分鐘戰略速覽)
+  Subtitle: 從技術思維到決策邏輯：破除參數迷信，建構企業級大模型營運底座
+  Visual Line: *   **背景色調**：使用極致高端的暗曜紫 (#1A0F30) 與太空黑 (#05020A) 的暗色玻璃光澤漸層，展現深邃神祕的智性美學。
+  Visual Line: *   **視覺元素**：中央為一個由點、線、面編織而成的 3D 動態金屬幾何球體，象徵高維度語意嵌入空間 (Embedding Vector Space) 的旋轉與對齊，邊緣散發幽藍色光芒。
+  Visual Line: *   **排版結構**：黃金分割比例排版。左上角置入鳳凰 AI 高端標誌，署名首席顧問孟淑慧、策略長陳文家。
+
+--- Slide 2: 規則導向的黃昏與表示學習的範式跨越 ---
+  Title: 技術底層的範式革命：Rule-Based vs. 表示學習 (Learning Representations)
+  Visual Line: *   **版面設計**：橫向雙軌對比流程圖。
+  Visual Line: *   **上軌道 (Rule-Based)**：暗沉的石灰色調。`輸入資料` ➔ `人類工程師寫死的 "IF-THEN" 規則` ➔ `脆弱的輸出 (一旦語意稍微改變就崩潰)`。
+  Visual Line: *   **下軌道 (表示學習)**：亮麗的科技金黃色調。`輸入資料` ➔ `語意目標` ➔ `模型自動在幾何空間中對齊表徵` ➔ `靈活具備泛化能力的智慧輸出`。
+  Visual Line: *   **視覺暗示**：在下軌道旁標注「用幾何空間取代硬編碼」。
+
+--- Slide 3: 2026 鳳凰 AI 現代營運架構公式 ---
+  Title: 2026 鳳凰 AI 現代大模型營運架構公式
+  Visual Line: *   **視覺中心**：中央高亮呈現亮金色的營運架構公式， LaTeX 數學字體格外醒目，字體放大 1.5 倍。
+  Visual Line: *   **下方網格**：以五張半透明的「技術盾牌」卡片支撐公式，分別寫著「海量資料」、「Transformer 架構」、「自監督學習」、「偏好對齊 (RLHF/DPO)」、「推理與工具調用」。
+  Visual Line: *   **標籤註記**：卡片邊緣點綴 `NIST AI RMF` 與 `ISO/IEC 42001` 安全與控制控制項的微小金色水印。
+
+--- Slide 4: Tokenization 的商業算計：分詞不當如何讓企業 API 成本暴增 3 倍 ---
+  Title: Token 標記化的商業算計：避開繁體中文分詞的 API 財務陷阱
+  Visual Line: *   **版面設計**：高對比雙欄對比案例。
+  Visual Line: *   **左欄 (對繁體中文優化不足的模型)**：一個紅色的「警告」卡片。輸入句子「這家銀行的行長」，被亂拆為 12 個無規律的 Token（如 `這`、`##家`、`銀`、`##行`、`的`、`##行`、`##長`，並帶有亂碼符號），標注：`Token 數 = 12`，`API 費用 3 倍暴增`。
+  Visual Line: *   **右欄 (對繁體中文深度優化的鳳凰 AI 系統)**：綠色「安全」卡片。同一個句子，乾淨俐落地拆為 4 個 Token（`這家`、`銀行`、`的`、`行長`），標注：`Token 數 = 4`，`算力與推理速度最優化`。
+
+--- Slide 5: 餘弦相似度的幾何魅力與 RAG 的向量嵌入本質 ---
+  Title: 餘弦相似度與向量嵌入的幾何魅力：RAG 知識庫的絕對本質
+  Visual Line: *   **視覺特效**：深色星空背景下的 3D 向量座標軸。
+  Visual Line: *   **向量 A**：一條發出淡藍色光芒的箭頭，起點為原點，終點標注為 `[退款申請]` 向量座標。
+  Visual Line: *   **向量 B**：一條發出淡金黃色光芒的箭頭，與向量 A 夾角極小，終點標注為 `[我想拿回我的錢]`。
+  Visual Line: *   **夾角弧線**：以金色亮線標出 $\theta$ 角，並高亮餘弦相似度數學公式。
+  Visual Line: *   **向量 C**：一個指向完全相反方向的灰色箭頭，標注為 `[水果蘋果]`，顯示與 A 和 B 的夾角接近 90度。
+
+--- Slide 6: Transformer 自注意力機制：Query, Key, Value 的現場說解 ---
+  Title: Transformer 架構核心：自注意力機制 (Self-Attention) 說解
+  Visual Line: *   **視覺元素**：中央高亮呈現自注意力計算公式：`$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V$$`
+  Visual Line: *   **圖解對位**：
+  Visual Line: *   一個信封 (Query, $Q$) 寫著「查詢：我想關注的詞」。
+  Visual Line: *   一排檔案櫃標籤 (Key, $K$) 寫著「索引：其他詞的特徵標籤」。
+  Visual Line: *   檔案櫃內的實體文件 (Value, $V$) 寫著「內容：其他詞的實際語意」。
+  Visual Line: *   **動態箭頭**：展示 $Q$ 與 $K$ 相乘後，通過 `softmax` 轉化為加權百分比，最後乘上 $V$ 的完整計算路徑。
+
+--- Slide 7: KV Cache 頻寬地獄與 2026 技術救星：GQA (集群查詢注意力) ---
+  Title: 突破 KV Cache 頻寬地獄：GQA (集群查詢注意力) 之商業節能奇蹟
+  Visual Line: *   **版面設計**：三欄橫向對比卡片。
+  Visual Line: *   **左卡片 (MHA 多頭)**：標記紅色警告。四個 Query 頭各自連接四個獨立的 Key/Value 頭，線路繁瑣混亂，標註：`KV Cache VRAM 暴增`，`硬體部署成本高昂`。
+  Visual Line: *   **中卡片 (MQA 單頭)**：標記黃色。四個 Query 頭共用一個 Key/Value 頭，線路極簡但標註：`模型精度受損，長文本失憶`。
+  Visual Line: *   **右卡片 (GQA 集群)**：標記亮金色。分組共享，每兩個 Query 頭共享一組 Key/Value 頭，結構對稱、優雅，標註：`KV Cache 頻寬消耗降低 8 倍`，`精度近乎零損耗`。
+
+--- Slide 8: 為什麼不需要人工標註？自監督學習 Next-Token Prediction 煉丹術 ---
+  Title: 自監督預訓練：模型是如何無痛學習人類語言的？
+  Visual Line: *   **視覺特效**：一個動態的「挖空填詞」模擬介面。
+  Visual Line: *   **原始文本**：`鳳凰AI 致力於提供企業最頂級的 [ ? ]`。
+  Visual Line: *   **模型預測概率圖**：
+  Visual Line: *   `AI 培訓課程` ➔ **82% 概率** (亮綠色高亮)
+  Visual Line: *   `水果籃` ➔ 0.01% 概率 (灰色)
+  Visual Line: *   `太空船` ➔ 0.02% 概率 (灰色)
+  Visual Line: *   **下方字體**：標注「自監督學習：利用文本本身作為標準答案，無需人工手動標註」。
+
+--- Slide 9: 從無情文字聯想機到品牌代言人：偏好對齊的商業剛需 ---
+  Title: 人類偏好對齊的商業剛需：從無情聯想機到品牌代言人
+  Visual Line: *   **視覺對比**：
+  Visual Line: *   **左側 (未對齊的純預訓練模型)**：狂野的怪獸形象。標示「只要看到開頭，就無情聯想。輸入：『我該怎麼調配炸藥？』，回答：『步驟一：準備化學原料...』」，標註：`高法律合規風險`、`幻覺與偏見發散`。
+  Visual Line: *   **右側 (經過 DPO 偏好對齊的模型)**：身穿優雅商務西裝的專業顧問形象。同一個輸入，回答：「對不起，我無法提供此有害訊息。我可以協助您了解安全防護規範。」，標註：`符合 NIST AI RMF`、`品牌聲調一致`。
+
+--- Slide 10: 硬核對決：複雜的 RLHF 強化學習 vs 穩健優雅的 DPO 損失函數 ---
+  Title: 偏好對齊的技術演進：RLHF 強化學習 vs. DPO (直接偏好最佳化)
+  Visual Line: *   **版面設計**：高強度左右對比卡片。
+  Visual Line: *   **左卡片 (RLHF)**：紅灰色調。展示極其繁瑣的架構圖，包含四個並行的模型（大模型、參考模型、獎勵模型、價值模型），線路交織、標註：`PPO 強化學習`、`顯存消耗巨大`、`訓練極度不穩定、難以收斂`。
+  Visual Line: *   **右卡片 (DPO)**：亮金色與深紫。展示直接將大模型與偏好對照數據擬合的極簡路徑，中央高亮 DPO 損失函數 LaTeX 公式，標註：`2026 技術主流`、`免除訓練 Reward Model`、`收斂極度穩定`。
+
+--- Slide 11: 避坑指南：DPO 的過擬合限制與數據質量把關 ---
+  Title: 避坑指南：DPO 對齊微調的物理限制與過擬合危機
+  Visual Line: *   **視覺元素**：一個黃黑相間的「CAUTION」警戒線框卡片。
+  Visual Line: *   **圖表內容**：展示一條隨著 DPO 訓練迭代次數增加的雙線走向圖。
+  Visual Line: *   *對齊安全度 (綠線)*：一路上升。
+  Visual Line: *   *基礎推理能力/數學邏輯 (紅線)*：在某個臨界點後，突然發生懸崖式的下滑崩塌，標註：`過擬合 (Overfitting)`、`基礎推理坍塌`。
+  Visual Line: *   **左下角文字**：標註 `OOD (分佈外數據) 警示`。
+
+--- Slide 12: 從空談到執行：工具調用與 Action 閉環 ---
+  Title: 從空談到執行：Function Calling (工具調用) 機制之商業閉環
+  Visual Line: *   **版面設計**：左右循環的動態時序流程圖。
+  Visual Line: *   **步驟 1 (使用者提問)** ➡️ 「幫我查詢客戶 C102 目前的餘額是多少？」
+  Visual Line: *   **步驟 2 (AI 意圖推理)** ➡️ 模型識別出此需求無法直接編造，輸出一個高亮的 JSON 函數調用：`{ "name": "get_customer_balance", "arguments": { "customer_id": "C102" } }`。
+  Visual Line: *   **步驟 3 (企業中台執行)** ➡️ 企業後台攔截 JSON，安全讀取 ERP 資料庫，回傳 `$500,000`。
+  Visual Line: *   **步驟 4 (語意回答)** ➡️ 模型合流資訊，溫雅回覆：「客戶 C102 目前餘額為新台幣 50 萬元整。」
+
+--- Slide 13: 2026 最新連線通道：MCP 協定 ---
+  Title: 2026 最新連線標準：Model Context Protocol (MCP 協定)
+  Visual Line: *   **視覺元素**：中央展示一個發出亮藍色霓虹光芒的「MCP 協定插座」。
+  Visual Line: *   **插頭側**：各種主流大模型 (Gemini, Claude, Llama)。
+  Visual Line: *   **插座側**：模組化插拔的企業資料源 (Postgres, Slack, GitHub, 既有 ERP)。
+  Visual Line: *   **動態暗示**：只要通過 MCP 連接線，原本需要個別撰寫複雜接口的異構系統，瞬間全部連通，標註：`標準化模組插拔協定`、`開發維運成本降低 80%`。
+
+--- Slide 14: 工作坊現場實作自評：分詞地雷與 Agent 安全邊界 ---
+  Title: 現場實作挑戰：繁中分詞評估與 AI Agent 安全防線設計
+  Visual Line: *   **工作坊風格**：亮黃色邊框包覆的實作白板，右側有一個動態沙漏。
+  Visual Line: *   **實作一卡片 (分詞自診)**：
+  Visual Line: *   評估句子：`「本保險契約特別條款之給付限額」`
+  Visual Line: *   請估算：若模型對此段繁中分詞錯誤（如將「給付限額」拆為 6 個亂碼 Token），對 RAG 檢索相似度計算 Cosine Similarity 將造成何種精度影響？
+  Visual Line: *   **實作二卡片 (Agent 防禦)**：
+  Visual Line: *   行銷 Agent 自動發信場景，請在畫布上勾勒出 `Human-in-the-loop (人工覆核)` 與 `意圖過濾閘門` 應該部屬在何處，以防範 Prompt Injection 導致的公關災難。
+
+--- Slide 15: 預約 NTD 6,800 AI 可行性快診引流與結語 ---
+  Title: 為企業 AI 營運建構理性防線：可行性診斷預約
+  Visual Line: *   **視覺高光**：右側展示一份精緻、帶有金色鳳凰標章的 `8-12 頁客製化 PDF 診斷報告` 的 3D 質感縮圖。
+  Visual Line: *   **左側卡片說明**：
+  Visual Line: *   *專家快診費用*：**NTD 6,800** (依法開立勞務報酬單)
+  Visual Line: *   *保證承諾*：報告款項可**全額折抵**後續方案 B / C 工作坊費用。
+  Visual Line: *   *預約入口*：右下角巨型高對比的 QR Code，標註：`👉 [立即掃碼預約兩位顧問的專屬診斷]`。
+
+==================== unit_4_machine_learning (15 slides) ====================
+--- Slide 1: 工作坊開場與標題頁 ---
+  Title: 機器學習與數據預測財務決策工作坊 (CFO & CDO 數據資產營運學)
+  Subtitle: 破除唯 LLM 算力泡沫：以最優 TCO 與多模態特徵工程建構企業數據預測防線
+  Visual Line: *   **背景色調**：採用極致奢華的深邃墨藍 (#0B132B) 與曜石黑 (#1C2541) 漸層，展現沉穩的高科技尊貴感。
+  Visual Line: *   **視覺元素**：左側呈現由密集成感測器數據流 (時序折線) 轉化為清晰金色財務條形圖的 3D 粒子流特效；右側為高對比的無襯線字體，搭配金色標記線。
+  Visual Line: *   **排版結構**：頂部置入鳳凰 AI 精緻雙標誌，底部署名首席顧問孟淑慧、策略長陳文家。
+
+--- Slide 2: 用大砲打小鳥的財務悲劇 ---
+  Title: 傳統機器學習 vs. 生成式大模型：算力與推理成本的萬倍鴻溝
+  Visual Line: *   **版面配置**：左右高強度對比卡片設計。
+  Visual Line: *   **左卡片 (Traditional ML)**：清爽極簡的翠綠色外框，標示「XGBoost / LightGBM 預測」，底色為暗綠，放上小巧的樹狀圖，標注：`推理成本 < 0.01 USD / 萬次`。
+  Visual Line: *   **右卡片 (Generative AI)**：警示紅色外框，標示「GPT-4o / Claude 3.5 API」，底色為暗紅，放上複雜的神經網絡圖，標注：`推理成本 > 10.00 USD / 萬次`。
+  Visual Line: *   **中央動態線**：一條金色的閃電箭頭從右指向左，標示：`算力成本高達 10,000 倍差距！`。
+
+--- Slide 3: 技術決策 ROI 算力公式與 AutoML 導入選型樹 ---
+  Title: 企業 AI 專案淨收益公式與技術導入決策路線圖
+  Visual Line: *   **上半部**：黃金框線包裹的「企業機器學習專案之實質財務收益公式」，字體放大，LaTeX 公式高亮呈現。
+  Visual Line: *   **下半部**：精緻的 SVG 決策樹流程圖。從「是否有專職 Data Scientist / ML 團隊？」開始分流，通往「AutoML 平台」、「Low-Code 平台」與「自研 Python 演算法」三個高對比的彩虹終點卡片。
+
+--- Slide 4: 時序預測基礎模型 (TimeGPT / Chronos) 零樣本預估與冷啟動 ---
+  Title: 時序預測的範式轉移：時間序列基礎模型 (TSFMs) 崛起
+  Visual Line: *   **版面設計**：採用三欄對比表格，清晰對比「第一代 (ARIMA)」、「第二代 (DeepAR/TFT)」與「第三代 (TimeGPT/Chronos)」的維度。
+  Visual Line: *   **動畫/圖表**：右側展示一個動態波形圖，展示只有 3 個數據點的「極短冷啟動序列」，隨後 TimeGPT (以虛線標記) 精準勾勒出未來 7 天的預測波動，背景發出淡金色微光。
+
+--- Slide 5: 孟顧問的『冷熱分流時序混合戰略』 ---
+  Title: 降本增效的核心：熱數據地端 LightGBM vs. 冷數據雲端 TimeGPT
+  Visual Line: *   **視覺架構**：一個漏斗狀的「雙軌分流系統圖」。
+  Visual Line: *   **上方入口**：企業待預測的百萬級 SKU 數據流。
+  Visual Line: *   **熱路徑 (佔 95% 流量)**：直通「地端自主訓練 LightGBM/XGBoost」，標注：`歷史長度 > 3 個月`、`算力成本 0`、`極速本地推理`。
+  Visual Line: *   **冷路徑 (佔 5% 流量)**：直通「雲端 TimeGPT / Chronos API」，標注：`歷史長度 < 3 個月`、`按次付費 API`、`零樣本冷啟動`。
+  Visual Line: *   **中間切換線**：一條金色的循環箭頭，標記：`當冷數據累積足夠歷史後，自動降級收編至地端常規軌道`。
+
+--- Slide 6: 多模態特徵工程一：滑動窗口統計與差分特徵 ---
+  Title: 時間序列特徵工程：滑動窗口統計與差分特徵實務
+  Visual Line: *   **版面設計**：左側展示原始的時序波動線圖；右側展示經過特徵工程處理後的「特徵矩陣表格」。
+  Visual Line: *   **動畫指引**：一個半透明的金色「滑動窗口」在時序波形上緩慢移動，同步在右側表格中填入滑動均值 $\mu_t$ 與滑動標準差 $\sigma_t$。
+  Visual Line: *   **公式呈現**：清晰美觀的 LaTeX 數學公式置於卡片中央。
+
+--- Slide 7: 多模態特徵工程二：傅立葉變換 (FFT) 頻域特徵與真空幫浦軸承故障預測 ---
+  Title: 頻域特徵奇蹟：快速傅立葉變換 (FFT) 與預測性維護 (PdM) 實務
+  Visual Line: *   **視覺特效**：左右分欄。
+  Visual Line: *   **左側圖表**：時域波形圖。展現混亂、無規律的微小高頻震動，標示「時域訊號：無明顯異常」。
+  Visual Line: *   **右側圖表**：頻域光譜圖。透過金色 FFT 變換曲線，在 120Hz 處呈現一根極高聳、耀眼的金色能量特徵峰，背景發出藍色科技光暈。
+  Visual Line: *   **核心公式**：高亮呈現傅立葉變換 LaTeX 公式。
+
+--- Slide 8: 多模態特徵工程三：歷史維護日誌的 Sentence Embedding 向量化 ---
+  Title: 文本特徵融合：將歷史人工維護日誌 Sentence Embedding 向量化
+  Visual Line: *   **視覺流向圖**：
+  Visual Line: *   **步驟一**：一張帶有手寫文字的工單卡片，內容為「軸承有微小異音，已更換油封但仍有輕微抖動」。
+  Visual Line: *   **步驟二**：通過一個名為 `Sentence-Transformers (768-dim)` 的亮藍色漏斗。
+  Visual Line: *   **步驟三**：生成一排密集的浮點數向量 `[0.12, -0.45, ..., 0.88]`。
+  Visual Line: *   **步驟四**：與前述的 FFT 頻域特徵、滑動窗口特徵進行「特徵拼接與交叉融合」，共同餵入「XGBoost 預測引擎」。
+
+--- Slide 9: 學術指標的謊言：精準率、召回率與 F1-Score 的商業轉譯 ---
+  Title: 跳出學術指標的誤區：精準率 (Precision) 與召回率 (Recall) 的商業翻譯
+  Visual Line: *   **版面設計**：高對比的雙欄對稱設計。
+  Visual Line: *   **左側卡片 (Precision)**：青藍色外框。數學公式 $\text{Precision} = \frac{TP}{TP + FP}$。商業轉譯：「判定為瑕疵的商品中，有多少是真的瑕疵？」關鍵字：**不誤報**。
+  Visual Line: *   **右側卡片 (Recall)**：澄黃色外框。數學公式 $\text{Recall} = \frac{TP}{TP + FN}$。商業轉譯：「產線上所有真正的瑕疵品，模型成功抓出了多少？」關鍵字：**不漏報**。
+  Visual Line: *   **中下方**：F1-Score 的調和平均公式，標示「兩者的權衡藝術」。
+
+--- Slide 10: 財務精算：半導體產線預測性維護的混淆矩陣成本加權淨收益公式 ---
+  Title: 混淆矩陣成本加權財務評估框架 (Cost-Weighted ROI Framework)
+  Visual Line: *   **核心視覺**：一個經典的 $2 \times 2$ 混淆矩陣 (Confusion Matrix) 表格。
+  Visual Line: *   **TP 象限 (True Positive)**：綠色背景。標示「預防維修成功，避免突發大停機」。
+  Visual Line: *   **FP 象限 (False Positive)**：橙色背景。標示「誤報！工程師白跑一趟，損失預防排查成本」。
+  Visual Line: *   **FN 象限 (False Negative)**：深紅警告背景。標示「漏報！設備突發報銷，引發災難性停機與成批報廢」。
+  Visual Line: *   **TN 象限 (True Negative)**：灰色背景。標示「正常運行，無額外成本」。
+  Visual Line: *   **矩陣下方**：亮金色邊框包覆的「實質財務收益公式」，LaTeX 公式完美對齊。
+
+--- Slide 11: 實質說解：為什麼一個 90% 準確率的模型反而會讓企業大虧數億元？ ---
+  Title: 致命精算：模型 A (學術優化) vs. 模型 B (財務優化) 損益對決
+  Visual Line: *   **版面設計**：高對比的對立卡片設計，模擬商業損益表 (P&L)。
+  Visual Line: *   **左側模型 A 卡片**：標題「模型 A：學術型 (追求平衡)」，標注：`Precision = 80%`，`Recall = 80%`，`FN = 20 次`，`FP = 20 次`。底端計算：`淨收益 = 1.96 億元`。
+  Visual Line: *   **右側模型 B 卡片**：標題「模型 B：商業工程型 (容忍誤報、力防漏報)」，標注：`Precision = 50%`，`Recall = 98%`，`FN = 2 次`，`FP = 100 次`。底端計算：`淨收益 = 4.50 億元`。
+  Visual Line: *   **底欄高亮**：`模型 B 為企業多賺了 2.54 億元！` (亮金色巨型字體，背景動態炫光)。
+
+--- Slide 12: 實作演練：計算產線瑕疵檢測之『非對稱商業損失』財務決策 ---
+  Title: 現場實作挑戰一：瑕疵檢測非對稱商業損失精算
+  Visual Line: *   **工作坊互動風格**：帶有手寫白板質感的排版設計，配上倒計時沙漏動態組件。
+  Visual Line: *   **挑戰卡片**：
+  Visual Line: *   **已知商業參數**：
+  Visual Line: *   *漏檢損失 ($L_{\text{leak}}$)*：瑕疵晶片漏檢出貨，單個損失 **5,000 元**。
+  Visual Line: *   *誤檢重工成本 ($L_{\text{over}}$)*：合格晶片誤判為瑕疵，人工複檢重工成本 **100 元**。
+  Visual Line: *   **待評估模型**：
+  Visual Line: *   *模型 A*：$FN = 10, FP = 300$
+  Visual Line: *   *模型 B*：$FN = 40, FP = 20$
+  Visual Line: *   **公式提示**：`$$\text{Total Loss} = FN \times L_{\text{leak}} + FP \times L_{\text{over}}$$`
+
+--- Slide 13: 實作自評：明日蔬菜銷售時序特徵工程自填 ---
+  Title: 現場實作挑戰二：明日生鮮蔬菜銷量預測特徵工程設計
+  Visual Line: *   **版面設計**：一個大型的三欄填空畫布。
+  Visual Line: *   *第一欄*：時間序列特徵 (待學員填寫 4 個) 📅
+  Visual Line: *   *第二欄*：店鋪與商品特徵 (待學員填寫 3 個) 🏪
+  Visual Line: *   *第三欄*：外部環境特徵 (待學員填寫 3 個) ⛈️
+  Visual Line: *   **下半部卡片**：極端事件處理指引。標示「中秋節前夕」或「颱風警報」的特徵處理技術（One-Hot 突發事件特徵或歷史差分特徵）。
+
+--- Slide 14: B2B 機敏數據安全與雙向 NDA、結案 6 個月銷毀承諾 ---
+  Title: 數據資產的主動治理：安全防線與雙向機敏保護
+  Visual Line: *   **視覺元素**：金色安全鎖盾牌與藍色數據光柵環繞。
+  Visual Line: *   **左側標章**：對齊 `ISO/IEC 42001` 與 `NIST AI RMF` 安全架構圖。
+  Visual Line: *   **右側三大承諾**：
+  Visual Line: 1.  *承諾一*：簽署雙向 NDA，核心製程數據地端隔離，絕不落地。
+  Visual Line: 2.  *承諾二*：建置敏感資料遮罩閘門，去識別化過濾。
+  Visual Line: 3.  *承諾三*：**專案結案後 6 個月，自動銷毀所有測試數據與模型拷貝**。
+
+--- Slide 15: 預約 NTD 6,800 機器學習與數據預測成熟度快診與結語 ---
+  Title: 邁出理性的第一步：企業 ML 落地與預測成熟度前置快診
+  Visual Line: *   **版面視覺**：右側展示一份精美的 `8-12 頁客製化 PDF 診斷報告` 的 3D Mockup 縮圖，背景帶有金色科技光澤。
+  Visual Line: *   **左側方案說明**：
+  Visual Line: *   *專家諮詢費用*：**NTD 6,800**
+  Visual Line: *   *交付成果*：
+  Visual Line: 1. 企業 ML 技術與數據成熟度雷達圖。
+  Visual Line: 2. Buy vs. Build 財務與技術量化路徑評估。
+  Visual Line: 3. 台灣五大政策補助最佳匹配與核銷套利路線規劃。
+  Visual Line: 4. 後續工作坊或顧問服務費用**全額折抵**。
+  Visual Line: *   **引流入口**：右下角巨型高對比的 QR Code，標註：`👉 [立即掃碼預約前置快診診斷]`。
+
+==================== unit_6_generative_ai (15 slides) ====================
+--- Slide 1: Slide 1 ---
+
+--- Slide 2: Slide 2 ---
+
+--- Slide 3: Slide 3 ---
+
+--- Slide 4: Slide 4 ---
+
+--- Slide 5: Slide 5 ---
+
+--- Slide 6: Slide 6 ---
+
+--- Slide 7: Slide 7 ---
+
+--- Slide 8: Slide 8 ---
+
+--- Slide 9: Slide 9 ---
+
+--- Slide 10: Slide 10 ---
+
+--- Slide 11: Slide 11 ---
+
+--- Slide 12: Slide 12 ---
+
+--- Slide 13: Slide 13 ---
+
+--- Slide 14: Slide 14 ---
+
+--- Slide 15: Slide 15 ---
+
+==================== unit_8_grants (20 slides) ====================
+--- Slide 1: Slide 1 ---
+
+--- Slide 2: Slide 2 ---
+
+--- Slide 3: Slide 3 ---
+
+--- Slide 4: Slide 4 ---
+
+--- Slide 5: Slide 5 ---
+
+--- Slide 6: Slide 6 ---
+
+--- Slide 7: Slide 7 ---
+
+--- Slide 8: Slide 8 ---
+
+--- Slide 9: Slide 9 ---
+
+--- Slide 10: Slide 10 ---
+
+--- Slide 11: Slide 11 ---
+
+--- Slide 12: Slide 12 ---
+
+--- Slide 13: Slide 13 ---
+
+--- Slide 14: Slide 14 ---
+
+--- Slide 15: Slide 15 ---
+
+--- Slide 16: Slide 16 ---
+
+--- Slide 17: Slide 17 ---
+
+--- Slide 18: Slide 18 ---
+
+--- Slide 19: Slide 19 ---
+
+--- Slide 20: Slide 20 ---

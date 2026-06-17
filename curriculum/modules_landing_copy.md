@@ -83,7 +83,7 @@
 ### 🚀 雙 CTA
 
 * **[強 CTA]** 👉 **[立即報名公開班與預約內訓](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* **[弱 CTA]** 👉 **[預約 NT$ 6,800 專家快診](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（90分鐘1對1，5個工作天交付 8-12 頁診斷報告，可全額折抵後續服務）
+* **[弱 CTA]** 👉 **[預約 NT$ 12,800 專家快診](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（90分鐘1對1，5個工作天交付 8-12 頁診斷報告，可全額折抵後續服務）
 
 ---
 
@@ -225,7 +225,7 @@
 
 * **公開班**：**NT$ 3,980 / 人**（限 20 人，確保互動品質）
 * **企業內訓**：**NT$ 50,000 - 80,000 / 場**
-  * *加值服務*：+ NT$ 6,800 / 位主管（會後 1 對 1 客製化諮詢）
+  * *加值服務*：+ NT$ 12,800 / 位主管（會後 1 對 1 客製化諮詢）
 * **🎁 套餐優惠**：「**戰略全套**」：M01 + M03 + M10（變革管理）── 內訓 **NT$ 150,000 / 案**
 
 ---
@@ -233,7 +233,7 @@
 ### 🚀 雙 CTA
 
 * **[強 CTA]** 👉 **[立即報名公開班與預約內訓](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* **[弱 CTA]** 👉 **[預約 NT$ 6,800 專家快診](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（先做一份貴司初步戰略診斷）
+* **[弱 CTA]** 👉 **[預約 NT$ 12,800 專家快診](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（先做一份貴司初步戰略診斷）
 
 ---
 
@@ -382,7 +382,7 @@ IT 主管說：「**自建比較安全、長期較便宜，我們的資料機密
 
 * **公開班**：**NT$ 2,980 / 人**
 * **企業內訓**：**NT$ 35,000 - 50,000 / 場**
-* **🎁 套餐優惠**：「**知識管理套餐**」：M05 + M08（AI Agent 試點）── 公開班 **NT$ 7,500 / 人** ｜ 內訓 **NT$ 130,000 / 案**
+* **🎁 套餐優惠**：「**知識管理套餐**」：M05 + M08（AI Agent 試點）── 公開班 **NT$ 6,980 / 人** ｜ 內訓 **NT$ 90,000 / 案**
 
 ---
 
@@ -869,7 +869,7 @@ ISO/IEC 42001 是全球第一個 AI 管理系統（AIMS）認證標準。**自 2
 ### 🚀 雙 CTA
 
 * **[強 CTA]** 👉 **[立即報名公開班與預約內訓](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* **[弱 CTA]** 👉 **[預約「ISO/IEC 42001 認證前期差距自評快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 6,800，可全額折抵後續研習或顧問費）
+* **[弱 CTA]** 👉 **[預約「ISO/IEC 42001 認證前期差距自評快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 12,800，可全額折抵後續研習或顧問費）
 
 ---
 
@@ -948,7 +948,7 @@ ISO/IEC 42001 是全球第一個 AI 管理系統（AIMS）認證標準。**自 2
 ### 🚀 雙 CTA
 
 * **[強 CTA]** 👉 **[立即報名公開班與預約內訓](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* **[弱 CTA]** 👉 **[預約「企業 AI 補助素材匹配與可行性快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 6,800，可全額折抵後續服務費）
+* **[弱 CTA]** 👉 **[預約「企業 AI 補助素材匹配與可行性快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 12,800，可全額折抵後續服務費）
 
 ---
 
@@ -1038,4 +1038,4 @@ ISO/IEC 42001 是全球第一個 AI 管理系統（AIMS）認證標準。**自 2
 ### 🚀 雙 CTA
 
 * **[強 CTA]** 👉 **[立即報名公開班與預約內訓](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* **[弱 CTA]** 👉 **[預約「出口 AI Act 風險自評快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 6,800，可全額折抵後續合規服務費）
+* **[弱 CTA]** 👉 **[預約「出口 AI Act 風險自評快診」](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**（NT$ 12,800，可全額折抵後續合規服務費）

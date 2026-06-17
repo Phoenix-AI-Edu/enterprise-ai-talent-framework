@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>震撼開場</title>
+    <!-- Outfit, Inter, and Noto Serif TC/Noto Sans TC fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-brand: #FF5B35;
+            --color-info: #F5A623;
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 91, 53, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.04) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            position: relative;
+        }
+        .cover-halo {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.08) 0%, transparent 60%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+        .cover-title-big {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            max-width: 1400px;
+            background: linear-gradient(135deg, #FFF 30%, var(--color-brand) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cover-sub-big {
+            font-size: 32px;
+            color: #94A3B8;
+            max-width: 1100px;
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+        .cover-authors-badge {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-info);
+            background: rgba(245, 166, 35, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            padding: 12px 36px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+        /* Speaker Notes Overlays */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .speaker-notes-overlay .notes-body p {
+            margin-bottom: 12px;
+        }
+        .speaker-notes-overlay .notes-body strong {
+            color: var(--color-brand);
+        }
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div id="stage">
+        <div class="cover-container">
+            <div class="cover-halo animate-fade"></div>
+            <h1 class="cover-title-big animate-fade delay-1">政府 460 億 AI 補助匹配與合規實戰</h1>
+            <p class="cover-sub-big animate-fade delay-2">不要讓政府撥給您的幾百萬轉型預算，因為資料夾沒放對、發票日期開錯，最終付之一炬</p>
+            <div class="cover-authors-badge animate-fade delay-3">首席顧問 孟淑慧 ｜ 策略長 陳文家</div>
+        </div>
+
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 1 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">
+                <p>「各位企業領袖、CFO、研發長，下午好。我是孟淑慧。<br>  <br>  政府每年編列高達 460 億元推動企業 AI 與數位轉型。但我站在這台上的第一天，就必須告訴各位一個殘酷的實情：<br>  <br>  <strong>這 460 億元，跟有沒有寫出厲害的演算法無關。它是一場高度精密的『資源套利、財務會計與審計核銷』。</strong><br>  <br>  今天，我和策略長陳文家，將不講任何技術大道理，而是交給各位 <strong>5 張保命工作表</strong>。我們會把我們 20 年來，成功輔導數百家中小企業拿到補助款，且 100% 安全結案的底牌，毫無保留地交給各位。我們開始。」</p><p>---</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fit() {
+            const stage = document.getElementById('stage');
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const scale = Math.min(w / 1920, h / 1080);
+            stage.style.transform = `scale(${scale})`;
+            stage.style.left = `${(w - 1920 * scale) / 2}px`;
+            stage.style.top = `${(h - 1080 * scale) / 2}px`;
+            stage.style.transformOrigin = 'top left';
+            stage.style.position = 'absolute';
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>

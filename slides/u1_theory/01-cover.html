@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作坊開場與標題頁</title>
+    <!-- Outfit, Inter, and Noto Serif TC/Noto Sans TC fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-brand: #FF5B35;
+            --color-info: #F5A623;
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 91, 53, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.04) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            position: relative;
+        }
+        .cover-halo {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 91, 53, 0.08) 0%, transparent 60%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+        .cover-title-big {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            max-width: 1400px;
+            background: linear-gradient(135deg, #FFF 30%, var(--color-brand) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cover-sub-big {
+            font-size: 32px;
+            color: #94A3B8;
+            max-width: 1100px;
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+        .cover-authors-badge {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-info);
+            background: rgba(245, 166, 35, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            padding: 12px 36px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+        /* Speaker Notes Overlays */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .speaker-notes-overlay .notes-body p {
+            margin-bottom: 12px;
+        }
+        .speaker-notes-overlay .notes-body strong {
+            color: var(--color-brand);
+        }
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div id="stage">
+        <div class="cover-container">
+            <div class="cover-halo animate-fade"></div>
+            <h1 class="cover-title-big animate-fade delay-1">AI 基礎理論與 2026 商業意涵 (CEO 90分鐘戰略速覽)</h1>
+            <p class="cover-sub-big animate-fade delay-2">從技術思維到決策邏輯：破除參數迷信，建構企業級大模型營運底座</p>
+            <div class="cover-authors-badge animate-fade delay-3">首席顧問 孟淑慧 ｜ 策略長 陳文家</div>
+        </div>
+
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 1 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">
+                <p><strong>孟顧問（Meng）：</strong><br>各位執行長、數位轉型長、高階決策主管，大家早上好。我是孟淑慧。<br>歡迎來到單元一的 CEO 戰略速覽課。<br>很多企業在開啟 AI 轉型時，遇到的第一個障礙不是「預算不足」，而是「語言不通」。<br>技術主管拿著一份充滿了「Transformer」、「自注意力機制」、「微調對齊」的報告來敲您的辦公室大門；而您作為決策者，心裡想的只有：這能幫公司省多少錢？我們會不會有資安洩漏風險？我們要怎麼考核員工的準備度？</p><p><strong>陳策略長（Phoenix）：</strong><br>大家好，我是陳文家。<br>是的，這就是為什麼我們這堂課的定位是「破除技術話術，建立商業直覺」。<br>我們不會逼大家去背誦微積分公式，但我們會用最清晰、最理性的商業模型，帶領大家剖析 2026 年大語言模型底層的五大技術支柱。<br>我們要讓每一位 CEO 聽完後，能立刻聽懂工程師在說什麼，並精準判斷一項 AI 技術方案的「商業含金量」與「隱性財務陷阱」。</p><p><strong>孟顧問（Meng）：</strong><br>今天，我們就從最底層的思維跨越——「範式轉移」開始談起。</p><p>---</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fit() {
+            const stage = document.getElementById('stage');
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const scale = Math.min(w / 1920, h / 1080);
+            stage.style.transform = `scale(${scale})`;
+            stage.style.left = `${(w - 1920 * scale) / 2}px`;
+            stage.style.top = `${(h - 1080 * scale) / 2}px`;
+            stage.style.transformOrigin = 'top left';
+            stage.style.position = 'absolute';
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>

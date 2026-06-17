@@ -1,0 +1,155 @@
+=== Slide 1 ===
+Title: 工作坊開場與標題頁
+
+=== Slide 2 ===
+Title: 規則導向的黃昏與表示學習的範式跨越
+  Header: 上軌道 (Rule-Based)
+    - <code>輸入資料</code>
+    - <code>人類工程師寫死的 "IF-THEN" 規則</code>
+    - <code>脆弱的輸出 (一旦語意稍微改變就崩潰)</code>
+  Header: 下軌道 (表示學習)
+    - <code>輸入資料</code>
+    - <code>語意目標</code>
+    - <code>模型自動在幾何空間中對齊表徵</code>
+    - <code>靈活具備泛化能力的智慧輸出</code>
+
+=== Slide 3 ===
+Title: 2026 鳳凰 AI 現代營運架構公式
+
+=== Slide 4 ===
+Title: Tokenization 的商業算計：分詞不當如何讓企業 API 成本暴增 3 倍
+  Header: 左欄 (對繁體中文優化不足的模型)
+    - 這家銀行的行長
+    - <code>這</code>
+    - <code>##家</code>
+    - <code>銀</code>
+    - <code>##行</code>
+    - <code>的</code>
+    - <code>##行</code>
+    - <code>##長</code>
+    - <code>Token 數 = 12</code>
+    - <code>API 費用 3 倍暴增</code>
+  Header: 右欄 (對繁體中文深度優化的鳳凰 AI 系統)
+    - <code>這家</code>
+    - <code>銀行</code>
+    - <code>的</code>
+    - <code>行長</code>
+    - <code>Token 數 = 4</code>
+    - <code>算力與推理速度最優化</code>
+
+=== Slide 5 ===
+Title: 餘弦相似度的幾何魅力與 RAG 的向量嵌入本質
+  Header: 向量 A
+    - <code>[退款申請]</code>
+  Header: 向量 B
+    - <code>[我想拿回我的錢]</code>
+  Header: 向量 C
+    - <code>[水果蘋果]</code>
+
+=== Slide 6 ===
+Title: Transformer 自注意力機制：Query, Key, Value 的現場說解
+  Header: 一個信封 (Query, $Q$) 寫著「查詢
+    - 查詢：我想關注的詞
+  Header: 一排檔案櫃標籤 (Key, $K$) 寫著「索引
+    - 索引：其他詞的特徵標籤
+  Header: 檔案櫃內的實體文件 (Value, $V$) 寫著「內容
+    - 內容：其他詞的實際語意
+
+=== Slide 7 ===
+Title: KV Cache 頻寬地獄與 2026 技術救星：GQA (集群查詢注意力)
+  Header: 左卡片 (MHA 多頭)
+    - <code>KV Cache VRAM 暴增</code>
+    - <code>硬體部署成本高昂</code>
+  Header: 中卡片 (MQA 單頭)
+    - <code>模型精度受損，長文本失憶</code>
+  Header: 右卡片 (GQA 集群)
+    - <code>KV Cache 頻寬消耗降低 8 倍</code>
+    - <code>精度近乎零損耗</code>
+
+=== Slide 8 ===
+Title: 為什麼不需要人工標註？自監督學習 Next-Token Prediction 煉丹術
+  Header: 原始文本
+    - <code>鳳凰AI 致力於提供企業最頂級的 [ ? ]</code>
+  Header: 模型預測概率圖
+  Header: 
+    - <code>AI 培訓課程</code>
+  Header: 
+    - <code>水果籃</code>
+  Header: 
+    - <code>太空船</code>
+  Header: 下方字體
+    - 自監督學習：利用文本本身作為標準答案，無需人工手動標註
+
+=== Slide 9 ===
+Title: 從無情文字聯想機到品牌代言人：偏好對齊的商業剛需
+  Header: 視覺對比
+  Header: 左側 (未對齊的純預訓練模型)
+    - 只要看到開頭，就無情聯想。輸入：『我該怎麼調配炸藥？』，回答：『步驟一：準備化學原料...』
+    - 我該怎麼調配炸藥？
+    - 步驟一：準備化學原料...
+    - <code>高法律合規風險</code>
+    - <code>幻覺與偏見發散</code>
+  Header: 右側 (經過 DPO 偏好對齊的模型)
+    - 對不起，我無法提供此有害訊息。我可以協助您了解安全防護規範。
+    - <code>符合 NIST AI RMF</code>
+    - <code>品牌聲調一致</code>
+
+=== Slide 10 ===
+Title: 硬核對決：複雜的 RLHF 強化學習 vs 穩健優雅的 DPO 損失函數
+  Header: 左卡片 (RLHF)
+    - <code>PPO 強化學習</code>
+    - <code>顯存消耗巨大</code>
+    - <code>訓練極度不穩定、難以收斂</code>
+  Header: 右卡片 (DPO)
+    - <code>2026 技術主流</code>
+    - <code>免除訓練 Reward Model</code>
+    - <code>收斂極度穩定</code>
+
+=== Slide 11 ===
+Title: 避坑指南：DPO 的過擬合限制與數據質量把關
+  Header: *對齊安全度 (綠線)*
+    - 一路上升。
+  Header: *基礎推理能力/數學邏輯 (紅線)*
+    - <code>過擬合 (Overfitting)</code>
+    - <code>基礎推理坍塌</code>
+
+=== Slide 12 ===
+Title: 從空談到執行：工具調用與 Action 閉環
+  Header: 
+    - 幫我查詢客戶 C102 目前的餘額是多少？
+  Header: 步驟 2 (AI 意圖推理)** ➡️ 模型識別出此需求無法直接編造，輸出一個高亮的 JSON 函數調用
+    - <code>{ "name": "get_customer_balance", "arguments": { "customer_id": "C102" } }</code>
+  Header: 
+    - <code>$500,000</code>
+  Header: 步驟 4 (語意回答)** ➡️ 模型合流資訊，溫雅回覆
+    - 客戶 C102 目前餘額為新台幣 50 萬元整。
+
+=== Slide 13 ===
+Title: 2026 最新連線通道：MCP 協定
+  Header: 插頭側
+    - 各種主流大模型 (Gemini, Claude, Llama)。
+  Header: 插座側
+    - 模組化插拔的企業資料源 (Postgres, Slack, GitHub, 既有 ERP)。
+
+=== Slide 14 ===
+Title: 工作坊現場實作自評：分詞地雷與 Agent 安全邊界
+  Header: 實作一卡片 (分詞自診)
+  Header: 評估句子
+    - 本保險契約特別條款之給付限額
+    - <code>「本保險契約特別條款之給付限額」</code>
+  Header: 請估算
+    - 給付限額
+  Header: 實作二卡片 (Agent 防禦)
+  Header: 
+    - <code>Human-in-the-loop (人工覆核)</code>
+    - <code>意圖過濾閘門</code>
+
+=== Slide 15 ===
+Title: 預約 NTD 6,800 AI 可行性快診引流與結語
+  Header: 左側卡片說明
+  Header: *專家快診費用*
+    - **NTD 6,800** (依法開立勞務報酬單)
+  Header: *保證承諾*
+    - 報告款項可**全額折抵**後續方案 B / C 工作坊費用。
+  Header: *預約入口*
+    - <code>👉 [立即掃碼預約兩位顧問的專屬診斷]</code>

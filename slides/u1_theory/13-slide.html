@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 最新連線通道：MCP 協定</title>
+    <!-- Outfit, Inter, and Noto Serif TC/Noto Sans TC fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --color-bg: #070913;
+            --color-text: #FFFFFF;
+            --color-text-muted: #E2E8F0;
+            --color-brand: #FF5B35;       /* Phoenix Orange */
+            --color-warning: #FF3B30;     /* Warning Red */
+            --color-success: #00F2FE;     /* Vibrant Cyan/Teal */
+            --color-info: #F5A623;        /* Gold */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+            
+            --phoenix-orange: var(--color-brand);
+            --phoenix-teal: var(--color-success);
+            --phoenix-gold: var(--color-info);
+            --white: var(--color-text);
+            --gray-300: var(--color-text-muted);
+            --gray-400: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Grid Background styling */
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 91, 53, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.04) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 24px;
+            margin-bottom: 40px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-badge {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--color-brand);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            background: rgba(255, 91, 53, 0.06);
+            padding: 8px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+
+        .logo-txt {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right-tag {
+            font-size: 17px;
+            color: var(--color-success);
+            font-weight: 600;
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+
+        .progress-dots-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        .progress-dot-segment {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-dot-segment.active {
+            color: var(--color-success);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+
+        .progress-dot-connector {
+            width: 20px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content Body styling */
+        .content-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-title-row {
+            margin-bottom: 30px;
+        }
+
+        .slide-main-title {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--color-text) 30%, var(--color-brand) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-subtitle {
+            font-size: 26px;
+            color: var(--gray-400);
+        }
+
+        /* Grid Layouts */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .luxury-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-badge {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .left-card .card-badge {
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+        }
+
+        .right-card .card-badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--phoenix-teal);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .left-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .right-card .card-title {
+            background: linear-gradient(135deg, #FFF, var(--phoenix-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-content {
+            font-size: 24px;
+            color: var(--gray-300);
+            line-height: 1.7;
+        }
+
+        /* List-based layouts */
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .list-item-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            backdrop-filter: blur(16px);
+        }
+
+        .list-item-bullet {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--phoenix-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .list-item-text {
+            font-size: 24px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .list-item-text strong {
+            color: #FFFFFF;
+        }
+
+        /* Triple Grid layout */
+        .triple-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Formula display box */
+        .slide-formulas-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+        .formula-item {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-success);
+            font-family: var(--font-display);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Steps Timeline layout */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .step-card {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 32px 32px 32px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .step-card:hover {
+            border-color: var(--color-brand);
+            box-shadow: 0 15px 30px rgba(255, 91, 53, 0.15);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            background: linear-gradient(135deg, var(--color-brand), var(--color-info));
+            color: #070913;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 15px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 91, 53, 0.3);
+        }
+        .step-badge {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-success);
+            margin-bottom: 16px;
+            font-family: var(--font-display);
+            background: linear-gradient(135deg, #FFF, var(--color-success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-text {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+        .step-text code {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--color-brand);
+        }
+
+        /* Speaker Notes Overlays */
+        .speaker-notes-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 35%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(245, 166, 35, 0.4);
+            padding: 24px 40px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .speaker-notes-overlay .notes-header {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body {
+            color: #E2E8F0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .speaker-notes-overlay .notes-body p {
+            margin-bottom: 12px;
+        }
+
+        .speaker-notes-overlay .notes-body strong {
+            color: var(--phoenix-orange);
+        }
+
+        /* Footer styling */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            margin-top: 40px;
+            font-size: 16px;
+            color: var(--color-text-muted);
+        }
+
+        .security-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-info);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade {
+            animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div id="stage">
+        <header class="animate-fade">
+            <div class="logo-group">
+                <span class="brand-badge">📚 U01 THEORY</span>
+                <span class="logo-txt">🦅 鳳凰 AI ── 單元一：AI 基礎理論與 2026 技術演進 (v2026)</span>
+            </div>
+            <div class="progress-dots-row"><div class="progress-dot-segment ">INTRO</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">THEORY</div><div class="progress-dot-connector"></div><div class="progress-dot-segment active">PRACTICE</div><div class="progress-dot-connector"></div><div class="progress-dot-segment ">SUMMARY</div></div>
+            <div class="nav-right-tag">B2B CORPORATE AI CONSULTING</div>
+        </header>
+
+        <div class="content-body">
+            <div class="slide-title-row animate-fade">
+                <h2 class="slide-main-title">2026 最新連線標準：Model Context Protocol (MCP 協定)</h2>
+                <p class="slide-subtitle">MCP 協定是大模型界的 "Type-C 標準接口"，免除複雜的一對一客製整合</p>
+            </div>
+            
+            
+        <div class="dual-grid">
+            <div class="luxury-card left-card animate-fade delay-1">
+                <span class="card-badge">PLUG (CLIENT)</span>
+                <h3 class="card-title">插頭側 (主流大模型)</h3>
+                <p class="card-content">• Gemini, Claude, Llama 等模型端<br>• 支持統一標準化連線通道，隨插即用</p>
+            </div>
+            <div class="luxury-card right-card animate-fade delay-2">
+                <span class="card-badge">SOCKET (SERVER)</span>
+                <h3 class="card-title">插座側 (企業數據源)</h3>
+                <p class="card-content">• Postgres, Slack, GitHub, 既有 ERP 等異構系統<br>• 僅需開發標準 MCP Server 即可實現模組化插拔對接，集成成本降低 80%</p>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="speaker-notes-overlay" id="speaker-notes">
+            <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 13 (PRESS N TO TOGGLE)</div>
+            <div class="notes-body">
+                <p><strong>陳策略長（Phoenix）：</strong><br>雖然 Function Calling 很好用，但過去 IT 主管最痛苦的是，如果要讓 AI 連接 GitHub，要寫一套介面；連接 Postgres 資料庫，又要寫一套介面；連接 Slack 客服，還要寫一套。<br>這導致中台的集成代碼變得極其臃腫，開發與維護成本居高不下。</p><p>這就引出了 2026 年最震撼的開源標準——「MCP (Model Context Protocol, 模型上下文協定)」。<br>如果我們把大模型比作一架頂級的電視機，以前不同的資料源就像是不同的特殊插頭，您必須買各種昂貴的轉換器。<br>而 MCP 協定，就是大模型界的「Type-C 標準接口」。</p><p><strong>孟顧問（Meng）：</strong><br>只要大模型支援 MCP 協定，企業內部的資料源只需要開發一個標準的 MCP Server，模型就可以像插拔 USB 隨身碟一樣，無縫且安全地即插即用！<br>這成功將企業跨系統集成的開發維護成本，<strong>直接砍掉了 80%</strong>！</p><p><strong>陳策略長（Phoenix）：</strong><br>鳳凰 AI 的現代營運架構已全面對接 MCP 標準。<br>不論您的資料是在舊式的 SQL Server 還是現代的 Slack 裡，我們都能以最輕量、最安全的模組化插接方式，快速為您的 AI 賦能。這才是符合 2026 年前瞻性標準的企業級架構。</p><p>---</p>
+            </div>
+        </div>
+
+        <footer class="animate-fade delay-3">
+            <div class="security-tag">🛡️ 本簡報所有關鍵商業細節及專利技術已完全進行深度去識別化處理</div>
+            <div>PHOENIX AI CONSULTING &copy; 2026 ｜ PAGE 13 OF 15</div>
+        </footer>
+    </div>
+
+    <!-- Scaler & keyboard hook scripts -->
+    <script>
+        function fit() {
+            const stage = document.getElementById('stage');
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const scale = Math.min(w / 1920, h / 1080);
+            stage.style.transform = `scale(${scale})`;
+            stage.style.left = `${(w - 1920 * scale) / 2}px`;
+            stage.style.top = `${(h - 1080 * scale) / 2}px`;
+            stage.style.transformOrigin = 'top left';
+            stage.style.position = 'absolute';
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('load', fit);
+        
+        document.addEventListener('keydown', function(e) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'keydown',
+                    key: e.key,
+                    keyCode: e.keyCode,
+                    code: e.code
+                }, '*');
+            } else {
+                if (e.key === 'n' || e.key === 'N') {
+                    var el = document.getElementById('speaker-notes');
+                    if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+                }
+            }
+        });
+
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'toggle-notes') {
+                var el = document.getElementById('speaker-notes');
+                if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+            } else if (e.data && e.data.type === 'print') {
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>

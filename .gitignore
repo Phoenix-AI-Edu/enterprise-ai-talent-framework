@@ -45,7 +45,21 @@ dist/
 internal_admin/
 
 # Private B2B Client Presentation Folders (DLP Security Barrier)
-slides/
+slides/*
+!slides/m01_ceo_strategy/
+!slides/m02_employee_policy/
+!slides/m03_strategic_canvas/
+!slides/m04_buy_build_rent/
+!slides/m05_rag_procurement/
+!slides/m06_voice_ai/
+!slides/m07_video_generation/
+!slides/m08_ai_agent_pilot/
+!slides/m09_tco_control/
+!slides/m10_change_management/
+!slides/m11_iso42001_workshop/
+!slides/m12_government_grants/
+!slides/m13_eu_ai_act/
+!slides/u1_theory/
 
 # De-identification & PII raw data files
 scripts/raw_*.txt

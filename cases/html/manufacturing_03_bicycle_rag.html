@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A 公司｜售後服務 PDF 檢索與 RAG 安全防幻覺工作流設計案 ｜ 鳳凰 AI 企業案例庫</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Marked.js Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {{
+            --bg-color: #070913;
+            --primary-accent: #FF5B35;    /* Phoenix Orange */
+            --secondary-accent: #00F2FE;  /* Vibrant Cyan */
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }}
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        body {{
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }}
+        .grid-bg {{
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 1;
+            pointer-events: none;
+        }}
+        .glow-radial {{
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 900px; height: 900px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.03) 0%, rgba(255, 91, 53, 0.015) 60%, transparent 100%);
+            filter: blur(120px);
+            z-index: 2;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }}
+        .container {{
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }}
+        .back-link {{
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary-accent);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            gap: 8px;
+        }}
+        .back-link:hover {{
+            color: var(--primary-accent);
+            transform: translateX(-4px);
+        }}
+        .header-bar {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+        }}
+        .logo-txt {{
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #FFF, var(--secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .badge {{
+            background: rgba(255, 91, 53, 0.1);
+            border: 1px solid rgba(255, 91, 53, 0.3);
+            color: var(--primary-accent);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+        }}
+        .markdown-body {{
+            line-height: 1.8;
+            font-size: 16px;
+            color: #E2E8F0;
+        }}
+        .markdown-body h1 {{
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #FFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 15px;
+        }}
+        .markdown-body h2 {{
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+        .markdown-body h3 {{
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #FFF;
+        }}
+        .markdown-body p {{
+            margin-bottom: 20px;
+            color: #CBD5E1;
+        }}
+        .markdown-body ul, .markdown-body ol {{
+            margin-bottom: 25px;
+            padding-left: 24px;
+        }}
+        .markdown-body li {{
+            margin-bottom: 10px;
+            color: #CBD5E1;
+        }}
+        .markdown-body li strong {{
+            color: #FFF;
+        }}
+        .markdown-body blockquote {{
+            border-left: 4px solid var(--primary-accent);
+            background: rgba(255, 91, 53, 0.03);
+            padding: 16px 24px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }}
+        .markdown-body blockquote p {{
+            margin-bottom: 0;
+            font-style: italic;
+        }}
+        .markdown-body code {{
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 14.5px;
+            color: var(--secondary-accent);
+        }}
+        .markdown-body pre {{
+            background: rgba(10, 15, 30, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 14px;
+            overflow-x: auto;
+            margin: 25px 0;
+        }}
+        .markdown-body pre code {{
+            background: none;
+            padding: 0;
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #CBD5E1;
+        }}
+        .markdown-body table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }}
+        .markdown-body th, .markdown-body td {{
+            border: 1px solid var(--glass-border);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 15px;
+        }}
+        .markdown-body th {{
+            background: rgba(255, 255, 255, 0.03);
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: #FFF;
+        }}
+        .markdown-body tr:nth-child(even) {{
+            background: rgba(255, 255, 255, 0.005);
+        }}
+        .markdown-body hr {{
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 40px 0;
+        }}
+        
+        /* Alert components from GitHub alerts */
+        .markdown-body .alert {{
+            border-left: 4px solid #1f6feb;
+            background-color: rgba(31, 111, 235, 0.05);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }}
+        .markdown-body .alert-title {{
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+        
+        /* Mermaid styling */
+        .mermaid {{
+            background: rgba(10, 15, 30, 0.6) !important;
+            border: 1px solid var(--glass-border) !important;
+            padding: 20px !important;
+            border-radius: 14px !important;
+            margin: 25px 0 !important;
+            display: flex;
+            justify-content: center;
+        }}
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow-radial"></div>
+
+    <div class="container">
+        <a href="../../index.html#cases" class="back-link">← 返回官網首頁案例庫</a>
+        <div class="header-bar">
+            <span class="logo-txt">🦅 PHOENIX AI 鳳凰顧問</span>
+            <span class="badge">企業實戰示範報告</span>
+        </div>
+        
+        <div class="markdown-body" id="content">
+            <!-- Content will be rendered here -->
+        </div>
+    </div>
+
+    <!-- Hidden Raw Markdown Data -->
+    <script type="text/markdown" id="rawMarkdown"># A 公司 AI 落地戰略評估與「售後問答模組」RAG 工作流設計報告
+
+## 📌 背景說明
+本案委託單位為 A 公司（跨國自行車零件製造商）。目前面臨三大痛點：第一，售後服務手冊繁雜，經銷商每次提問技術細節，客服平均要花 30 分鐘查閱 PDF；第二，烤漆產線目前完全依賴人工肉眼檢測微小刮傷，員工工時長且容易漏檢；第三，採購合約散落各地，法務部門每年因為沒注意到過期的「自動續約與漲價條款」而損失數百萬元。
+
+對照「十大企業級 AI 應用模組」，我們為其挑選最合適的 3 個 AI 應用模組進行導入評估，並將「RAG 企業知識庫問答系統」列為第一波 Quick-Win 試點專案。
+
+---
+
+## 🔄 「售後服務問答模組」RAG 核心工作流設計
+
+為了確保 RAG 系統能精確檢索複雜的自行車零件規格（例如專有名詞與型號），我們為 A 公司設計了以下進階混合檢索與雙層分塊工作流：
+
+### 1. 核心工作流 Mermaid 流程圖
+
+```mermaid
+graph TD
+    %% 資料寫入端 (Data Ingestion)
+    subgraph Data_Ingestion [資料寫入端 (Data Ingestion)]
+        A[Bicycle PDF 手冊] --> B[1. 表格重構 Table Structuring]
+        B --> C[2. 語意分塊 Semantic Chunking]
+        C --> D{3. 雙層分塊 Parent-Child}
+        D -->|大於 1000 Tokens| E[父分塊 Parent Chunks]
+        D -->|100~200 Tokens| F[子分塊 Child Chunks]
+        F --> G[4. 向量化 Vector Embedding]
+        G --> H[(向量資料庫 Vector DB)]
+        E -.->|映射關聯 ID| H
+    end
+
+    %% 使用者檢索端 (Retrieval & Generation)
+    subgraph Retrieval_Generation [使用者檢索與生成端 (User Query)]
+        I[經銷商/客服提問 <br> 'Bicycle-Hub-2026-X1 扭力規範'] --> J{5. Intent Router 意圖路由器}
+        J -->|特定零件與型號| K[稀疏檢索 Sparse BM25]
+        J -->|感性/口語化發問| L[稠密檢索 Dense Vector]
+        
+        K --> M[6. 混合檢索融合 Hybrid Fusion <br> alpha = 0.2]
+        L --> M
+        
+        H -.->|檢索子分塊| M
+        M --> N[7. 重排序 Re-ranking]
+        N --> O[8. 父分塊上下文還原 Parent Retrieval]
+        O --> P[9. 組合 Prompt 與安全護欄]
+        P --> Q[10. 大模型推理 LLM Inference]
+        Q --> R[無幻覺售後解答]
+    end
+```
+
+### 2. 工作流步驟詳解
+1. **表格重構 (Table Structuring)**：自行車手冊中含有大量的「螺絲扭力值、軸承尺寸」等表格。在寫入前，系統使用多模態 LLM 將 PDF 中的表格重構為 Markdown 格式，避免傳統 PDF 轉文字時的排版錯亂。
+2. **語意分塊 (Semantic Chunking)**：以句為單位，計算相鄰句子的向量餘弦相似度。當相似度跌破動態閾值（如 0.82）時才切分，確保「步驟描述」不被粗暴地從中切斷。
+3. **父子分塊 (Parent-Child Chunking)**：
+   * 將手冊切分為小顆粒度的 **子分塊** (100~200 Tokens)，用於提高向量檢索的精準度。
+   * 保留對應的 **父分塊** (1000~2000 Tokens，包含完整的上下文脈絡) 在資料庫中。
+4. **混合檢索 (Hybrid Search) 與 $\alpha$ 動態調校**：
+   * 由於經銷商的提問常包含精確的自行車零件型號（如 *Bicycle-Hub-2026-X1*），因此 **意圖路由器 (Intent Router)** 會在檢索時判定，並將 **$\alpha$ 權重下調至 0.2**。
+   * 這代表系統會**極度偏重稀疏向量檢索 (BM25 關鍵字匹配)**，確保型號精確匹配，避免被 Embedding 向量空間的語意模糊化。
+5. **父分塊還原**：當檢索命中子分塊後，系統會透過 ID 自動向上召回其對應的 **父分塊** 送入 LLM 上下文，提供完整的操作防護說明與警告資訊。
+
+---
+
+## 🛡️ 多維度防幻覺安全機制
+
+為了確保 AI 客服不會對經銷商「胡謅規格」或「承諾非官方的保固條款」，我們設計了 **RAG 三元組評估框架 (RAG Triad)** 與防幻覺安全防線：
+
+```text
+               ┌──────────────────────────────────────────┐
+               │              1. 使用者提問                │
+               └──────────────┬────────────────────▲──────┘
+                              │                    │
+                Context       │                    │ Answer
+              Relevance       ▼                    │ Relevance
+               ┌──────────────┴───────────┐        │
+               │   2. 檢索到的上下文資訊   ├────────┴──────┐
+               └──────────────┬───────────┘                │
+                              │                    ┌───────┴──────┐
+                              │ Groundedness       │ 3. 模型回答   │
+                              └───────────────────►└──────────────┘
+```
+
+### 1. RAG 三元組評估防線 (RAG Triad)
+在 LLM 生成回答前，系統會在後台啟動三個獨立的微型鑑別器進行評估，不合格者將直接攔截：
+* **上下文相關性評估 (Context Relevance)**：檢查檢索出的 PDF 手冊分塊，是否真的包含與提問（例如「扭力規格」）相關的內容。若無，代表知識庫無此資料，直接輸出標準回覆：「抱歉，官方手冊無此零件扭力資料，已為您派接真人客服。」
+* **真實性評估 (Groundedness / Hallucination Grader)**：檢查模型生成的回答，其中每一句話是否都能在檢索到的 PDF 上下文中找到**直接的文字支持**（檢查是否有模型自我發揮的幻覺）。
+* **回答相關性評估 (Answer Relevance)**：檢查最終生成的回答是否切中經銷商的提問，避免模型答非所問。
+
+### 2. 提示詞工程約束 (Prompt Grounding & Negative Constraint)
+在 System Instruction 中加入最嚴格的**負向約束條件**：
+```text
+【系統角色與原則】
+你是一位專業的自行車售後技術支持助理。
+1. 你「只能」依據下方 [Provided Context] 內的內容進行回答。
+2. 如果 [Provided Context] 中的資訊不足以回答使用者的提問，你必須說：「抱歉，目前提供的手冊中沒有相關的技術參數，我已為您記錄並轉接技術支援人員。」，絕對不允許進行任何推論或猜測。
+3. 嚴禁承諾任何退款、折扣、延長保固或退換貨條件。
+```
+
+### 3. 可追溯的審計日誌與引用機制 (Citation & Lineage)
+* **自動標註引用源**：模型輸出之所有規格數據，必須強制以 `[手冊名稱][頁碼][段落]` 的格式進行標註（如：*建議鎖緊扭力為 6 Nm [經銷商手冊-2026版][Page 14]*）。
+* **安全網閘攔截**：如果模型輸出的內容中含有數據（如數字、溫度、扭力），但該輸出沒有成功關聯到上下文的引用，系統後台會直接熔斷該次輸出，防止幻覺數據外洩。
+
+### 4. 人機協作 (HITL) 與 OOD 熔斷機制
+* 當 RAG 三元組的綜合置信度分數（Confidence Score）低於 **0.78** 時，系統將自動啟動 **HITL (Human-in-the-loop) 流程**。
+* 此時系統不會將 AI 的回答直接發送給經銷商，而是將「提問 + AI 客稿 + 檢索到的 PDF 頁籤」推送至後台的真人客服審核介面（Validator 模式），由客服人員確認或修改後再行送出。</script>
+
+    <script>
+        // Set marked.js options
+        marked.setOptions({{
+            gfm: true,
+            breaks: true,
+            headerIds: true,
+            mangle: false
+        }});
+
+        // Render Markdown
+        const mdText = document.getElementById('rawMarkdown').textContent;
+        const htmlContent = marked.parse(mdText);
+        document.getElementById('content').innerHTML = htmlContent;
+
+        // Extract and format Mermaid code blocks for Mermaid.js rendering
+        const codeBlocks = document.querySelectorAll('code.language-mermaid');
+        codeBlocks.forEach(codeBlock => {{
+            const pre = codeBlock.parentElement;
+            const mermaidDiv = document.createElement('div');
+            mermaidDiv.className = 'mermaid';
+            mermaidDiv.textContent = codeBlock.textContent.trim();
+            pre.replaceWith(mermaidDiv);
+        }});
+
+        // Initialize and run Mermaid
+        mermaid.initialize({{
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeVariables: {{
+                background: '#070913',
+                primaryColor: '#1F4E78',
+                secondaryColor: '#FF5B35',
+                tertiaryColor: '#E8F8F5'
+            }}
+        }});
+        mermaid.run();
+    </script>
+</body>
+</html>
