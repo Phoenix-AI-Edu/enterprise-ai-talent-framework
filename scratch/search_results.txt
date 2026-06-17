@@ -1,0 +1,25 @@
+
+--- Checking Sheet: 總表-一頁式戰略畫布 ---
+
+--- Checking Sheet: 主表一-場景盤點 ---
+Row 4, Col 1: 售後技術客服查手冊速度慢
+→ 導入 RAG 企業知識庫
+Row 4, Col 3: Q&A (問答/RAG)
+
+--- Checking Sheet: 附表-2x2決策象限 ---
+Row 6, Col 4: 【 第一象限：Quick Wins 】
+
+🏆 優先試點 (Score >= 4.0)
+
+• 特徵：高價值、高可行性、低風險
+• 決策：第一波衝刺試點，30天內快速上線見效
+• 示例：客服 RAG 知識庫、會議紀錄自動摘要與翻譯
+
+--- Checking Sheet: 主表二-架構與資安 ---
+Row 4, Col 1: 售後技術客服 RAG 系統
+
+--- Checking Sheet: 主表三-試點與變革 ---
+Row 4, Col 1: 售後技術客服 RAG 系統
+
+--- Checking Sheet: 主表四-營運與治理 ---
+Row 4, Col 1: 售後技術客服 RAG
