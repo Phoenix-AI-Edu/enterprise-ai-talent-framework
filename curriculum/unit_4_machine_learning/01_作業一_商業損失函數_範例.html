@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4 課後實務演練 (範例解答 - 題目一)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --page-width: 21cm;
+            --page-min-height: 29.7cm;
+            --page-margin: 2cm;
+            --font-primary: 'Noto Sans TC', sans-serif;
+            --font-serif: 'Noto Serif TC', serif;
+            --color-primary: #1F4E78;
+            --color-secondary: #FF5B35;
+            --color-bg: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-primary);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page {
+            background: white;
+            width: var(--page-width);
+            min-height: var(--page-min-height);
+            margin-bottom: 20px;
+            padding: var(--page-margin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+                page-break-after: always;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-primary);
+            font-family: var(--font-serif);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 5px solid var(--color-primary);
+            margin-top: 30px;
+        }
+        
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+        
+        ul {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Unit 4 課後實務演練 (範例解答)</h1>
+<h2>題目一：產線瑕疵檢測之「商業損失函數」數學建置</h2>
+<p><strong>應用場景</strong>：半導體封裝廠 AI 影像瑕疵檢測系統評估
+<strong>核心觀念</strong>：打破「準確率 (Accuracy) 越高越好」的迷思，從企業真實的商業成本出發，透過建構客製化的「商業損失函數 (Business Loss Function)」，尋找 ROI 最高的模型。</p>
+<hr />
+<h3>第一部分：總商業損失函數公式建置</h3>
+<p>在半導體瑕疵檢測的場景中，每一種錯誤預測帶來的商業代價是完全不對等的：
+*   <strong>漏檢損失 ($L_{\text{leak}}$)</strong>：對應混淆矩陣中的 <strong>False Negative (FN，偽陰性)</strong>。即原本是瑕疵，AI 卻沒抓到，導致出貨客訴。單次成本 = <strong>$5,000 元</strong>。
+*   <strong>誤檢損失 ($L_{\text{over}}$)</strong>：對應混淆矩陣中的 <strong>False Positive (FP，偽陽性)</strong>。即原本是良品，AI 卻以為是瑕疵，導致人工需花時間複檢。單次成本 = <strong>$100 元</strong>。</p>
+<p>因此，該廠的總商業損失函數 (Total Business Loss) 可定義為：
+$$ \text{Total Loss} = (\text{FN} \times L_{\text{leak}}) + (\text{FP} \times L_{\text{over}}) $$
+$$ \text{Total Loss} = (\text{FN} \times 5000) + (\text{FP} \times 100) $$</p>
+<hr />
+<h3>第二部分：模型 A 與模型 B 之商業損失計算與優劣判定</h3>
+<p>現有兩款待評估的 AI 模型，我們將其性能指標代入上述的商業損失函數中進行計算：</p>
+<h4>1. 評估【模型 A】</h4>
+<p>模型 A 傾向於「寧可錯殺一百，不可放過一個」（高召回率 Recall，低精準率 Precision）。
+*   FN (漏檢次數) = 10
+*   FP (誤檢次數) = 300
+*   <strong>模型 A 總損失</strong> = $(10 \times 5000) + (300 \times 100)$ = $50,000 + 30,000$ = <strong>$80,000 元</strong></p>
+<h4>2. 評估【模型 B】</h4>
+<p>模型 B 傾向於「非常有把握才報警」（高精準率 Precision，低召回率 Recall）。
+*   FN (漏檢次數) = 40
+*   FP (誤檢次數) = 20
+*   <strong>模型 B 總損失</strong> = $(40 \times 5000) + (20 \times 100)$ = $200,000 + 2,000$ = <strong>$202,000 元</strong></p>
+<h4>🏆 最終決策與優劣判定</h4>
+<p>經過精算，<strong>【模型 A】才是對公司而言「最省錢、ROI 最高」的最優解</strong>（損失 $80,000 &lt; $202,000）。</p>
+<p><strong>💡 實務洞察 (Business Insight)：</strong>
+如果不看商業損失，僅看常見的指標，業務單位可能會誤以為「模型 B 誤判率那麼低 (FP 才 20)，一定是好模型」。但對於半導體製造業而言，「漏掉一顆瑕疵晶片 (FN)」的賠償代價是「誤殺一顆好晶片 (FP)」的 <strong>50 倍</strong>。
+因此，在這種極端成本不對稱的場景下，企業寧願犧牲一點精準度，讓人力去多做幾次複檢（承擔較高的 FP 成本），也絕對要拉高模型的召回率 (Recall)，盡可能把所有的瑕疵都抓出來，這正是 CDO 與資料科學家在落地 AI 專案時必須具備的商業思維。</p>
+    </div>
+    <script>
+        document.body.innerHTML = document.body.innerHTML
+            .replace(/🏆/g, '<span style="font-size:1.2em;">🏆</span>')
+            .replace(/💡/g, '<span style="color:#FBC02D; font-size:1.2em;">💡</span>');
+    </script>
+</body>
+</html>
