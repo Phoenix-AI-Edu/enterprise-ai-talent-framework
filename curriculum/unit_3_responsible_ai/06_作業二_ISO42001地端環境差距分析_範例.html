@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 課後實務演練 (範例解答 - 題目二)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-width: 21cm;
+            --page-min-height: 29.7cm;
+            --page-margin: 2cm;
+            --font-primary: 'Noto Sans TC', sans-serif;
+            --font-serif: 'Noto Serif TC', serif;
+            --color-primary: #1F4E78;
+            --color-secondary: #FF5B35;
+            --color-bg: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-primary);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page {
+            background: white;
+            width: var(--page-width);
+            min-height: var(--page-min-height);
+            margin-bottom: 20px;
+            padding: var(--page-margin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+                page-break-after: always;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-primary);
+            font-family: var(--font-serif);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 5px solid var(--color-primary);
+            margin-top: 30px;
+        }
+        
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background-color: #f4f4f4;
+            color: var(--color-primary);
+        }
+        
+        .red-zone { color: #D32F2F; font-weight: bold; }
+        .green-zone { color: #388E3C; font-weight: bold; }
+        
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Unit 3 課後實務演練 (範例解答)</h1>
+<h2>題目二：ISO/IEC 42001 地端環境差距分析 (Gap Analysis)</h2>
+<p><strong>應用場景</strong>：大型商業銀行，預計於今年度將開源大語言模型 (如 Llama 3) 落地部署於內部地端機房，並申請 ISO/IEC 42001 認證。</p>
+<hr />
+<h3>第一部分：公司目前最缺乏的 3 個地端管理程序 (Gap Identification)</h3>
+<p>在傳統 IT 與資安防護下，企業常忽略針對「AI 專屬資產」的管理。依據 ISO 42001 標準，我們盤點出現階段地端機房最急需補足的 3 大缺口：</p>
+<h4>🔴 缺口一：缺乏 AI 模型權重與微調數據集之安全生命週期管理 (對應 A.6 系統生命週期)</h4>
+<ul>
+<li><strong>現況描述</strong>：資料科學家在本地伺服器訓練模型時，權重檔 (Weights, <code>.safetensors</code>) 與微調用的機敏資料集 (Datasets) 散落在各節點的硬碟中，未實施嚴格的版本控制 (Version Control) 與存取控制 (RBAC)。</li>
+<li><strong>合規風險</strong>：若員工離職或遭到勒索軟體攻擊，公司無法追溯模型是用哪一批資料訓練的，甚至可能導致含有客戶個資的微調檔案外洩（違反資料毒化防護與重現性要求）。</li>
+</ul>
+<h4>🔴 缺口二：缺乏針對「提示詞 (Prompt)」之雙向去識別化 DLP 網閘 (對應 A.7 資料處理)</h4>
+<ul>
+<li><strong>現況描述</strong>：儘管模型是地端部署，但內部員工的 Prompt 會以明文形式在內網傳輸，且直接進入 GPU 伺服器運算，這代表任何接觸該伺服器日誌的工程師都能看見原始 PII（個人可識別資訊）。</li>
+<li><strong>合規風險</strong>：未實踐最小權限原則。若對話中包含真實的客戶身分證字號或財報數字，等同於在系統內部產生了巨大的資料外洩斷點。</li>
+</ul>
+<h4>🔴 缺口三：缺乏 AI 決策「可解釋性 (Explainability)」之審計日誌 (對應 A.9 系統紀錄)</h4>
+<ul>
+<li><strong>現況描述</strong>：現有系統只記錄了「誰在什麼時候呼叫了 AI API」，但沒有記錄 AI 模型判定高風險或核貸拒絕的「原因特徵貢獻度」。</li>
+<li><strong>合規風險</strong>：當金管會或客戶針對 AI 決策提出異議時，銀行無法給出合理且科學的解釋（陷入「黑盒子」困境），無法滿足金融特許行業對演算法透明度的監管要求。</li>
+</ul>
+<hr />
+<h3>第二部分：改善時程表、交付證據標準與權責劃分 (Remediation Plan &amp; RACI)</h3>
+<p>針對上述三大缺口，我們為數位轉型辦公室與資安處起草了以下為期半年的改善計畫 (Q3-Q4)：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">缺口項目</th>
+<th style="text-align: left;">具體改善行動與交付證據標準 (Audit Evidence)</th>
+<th style="text-align: left;">預定完成時程</th>
+<th style="text-align: left;">權責劃分 (RACI 矩陣)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>缺口一：模型與數據生命週期版控</strong></td>
+<td style="text-align: left;"><strong>行動</strong>：導入 MLflow 搭配 Git LFS 建立地端模型註冊中心 (Model Registry)。強制所有微調腳本與數據集必須鎖定版號並進入集中式儲存區。<br><strong>交付證據</strong>：<br>1. AI 模型版控與存取 SOP 文件<br>2. MLflow 權限控管系統截圖<br>3. 模型訓練歷程追溯表 (Lineage)</td>
+<td style="text-align: left;">2026 年 Q3 <br> (7-8月)</td>
+<td style="text-align: left;"><strong>[A] 負責</strong>：轉型辦公室 (AI 架構師)<br><strong>[R] 執行</strong>：資料科學團隊<br><strong>[C] 諮詢</strong>：資安處 (審核 IAM)<br><strong>[I] 被知會</strong>：合規部</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>缺口二：Prompt 雙向去識別化 DLP</strong></td>
+<td style="text-align: left;"><strong>行動</strong>：在地端大模型 API 網關前，強制部署包含 Regex 與 spaCy NER 架構的「去識別化/還原」Python Pipeline。確保寫入底層伺服器日誌的只有安全 Token。<br><strong>交付證據</strong>：<br>1. DLP 網閘架構圖<br>2. DLP Pipeline 滲透與繞過測試報告<br>3. 經過去識別化的伺服器日誌 (Log) 抽樣樣本</td>
+<td style="text-align: left;">2026 年 Q3 <br> (9月)</td>
+<td style="text-align: left;"><strong>[A] 負責</strong>：資安處 (CISO)<br><strong>[R] 執行</strong>：資安工程團隊<br><strong>[C] 諮詢</strong>：法務處 (定義 PII 範圍)<br><strong>[I] 被知會</strong>：轉型辦公室</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>缺口三：可解釋性 (SHAP) 審計日誌</strong></td>
+<td style="text-align: left;"><strong>行動</strong>：修改現有的資料庫 Schema (DDL)，加入模型決策的 SHAP / LIME 特徵歸因欄位。確保每一次的高風險業務決策，都能在日誌中找到「前 3 大影響特徵權重」。<br><strong>交付證據</strong>：<br>1. 新版 AI 審計日誌資料庫 Schema (DDL)<br>2. 整合 SHAP 計算模組之原始碼<br>3. 面向稽核人員的可解釋性儀表板展示</td>
+<td style="text-align: left;">2026 年 Q4 <br> (10-11月)</td>
+<td style="text-align: left;"><strong>[A] 負責</strong>：合規部 (合規長)<br><strong>[R] 執行</strong>：轉型辦公室 (資料工程師)<br><strong>[C] 諮詢</strong>：外部 ISO 42001 輔導顧問<br><strong>[I] 被知會</strong>：總經理室</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>💡 RACI 定義說明：</strong>
+*   <strong>R (Responsible) 執行者</strong>：實際下手寫程式或執行工作的人。
+*   <strong>A (Accountable) 負責者</strong>：對該任務成敗負最終責任的主管（只能有一人）。
+*   <strong>C (Consulted) 諮詢者</strong>：過程中需要提供專業意見的人。
+*   <strong>I (Informed) 被知會者</strong>：任務完成後需要被告知結果的人。</p>
+</blockquote>
+    </div>
+    <script>
+        document.body.innerHTML = document.body.innerHTML
+            .replace(/🔴/g, '<span class="red-zone">🔴</span>')
+            .replace(/🟢/g, '<span class="green-zone">🟢</span>')
+            .replace(/⚠️/g, '<span class="red-zone">⚠️</span>')
+            .replace(/💡/g, '<span style="color:#FBC02D; font-size:1.2em;">💡</span>');
+    </script>
+</body>
+</html>
