@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6 課後實務演練 (範例解答 - 題目一)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Mermaid for rendering diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            sequence: {
+                useMaxWidth: true,
+                showSequenceNumbers: true
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --page-width: 21cm;
+            --page-min-height: 29.7cm;
+            --page-margin: 2cm;
+            --font-primary: 'Noto Sans TC', sans-serif;
+            --font-serif: 'Noto Serif TC', serif;
+            --color-primary: #1F4E78;
+            --color-secondary: #FF5B35;
+            --color-bg: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-primary);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page {
+            background: white;
+            width: var(--page-width);
+            min-height: var(--page-min-height);
+            margin-bottom: 20px;
+            padding: var(--page-margin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+                page-break-after: always;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-primary);
+            font-family: var(--font-serif);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 5px solid var(--color-primary);
+            margin-top: 30px;
+        }
+        
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+            background-color: #fcfcfc;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Unit 6 課後實務演練 (範例解答)</h1>
+<h2>題目一：「智慧行銷與法規合規」多代理人協作系統設計</h2>
+<p><strong>應用場景</strong>：跨國化妝品品牌「全自動新品社群推廣與各國廣告法規合規審查」系統。
+<strong>核心觀念</strong>：多代理人架構 (Multi-Agent System) 的精髓在於<strong>「分權與制衡」</strong>。讓負責發想創意的 LLM 與負責嚴格把關法規的 LLM 相互對抗與協作，能達成人類團隊般的「自主品質迭代 (Autonomous Refinement)」。</p>
+<hr />
+<h3>第一部分：三大核心 Agent 角色與工具賦能設計</h3>
+<p>在該系統中，我們規劃了三個各司其職的 Agent，組成一個具備自我修正能力的閉環團隊：</p>
+<h4>🎨 Agent 1：創意文案大師 (Marketing Copywriter Agent)</h4>
+<ul>
+<li><strong>Role (角色定位)</strong>：頂尖的國際美妝社群行銷總監。</li>
+<li><strong>System Instructions (系統指令)</strong>：
+    「你負責依據新品特徵與目標受眾，產出高轉化率、具備強烈時尚感的社群文案（IG/Facebook）。你的文案必須包含吸引人的鉤子 (Hook)、情感共鳴以及明確的行動呼籲 (CTA)。」</li>
+<li><strong>授權 MCP Tools (模型上下文協議工具)</strong>：<ul>
+<li><code>mcp/product_database_search</code>：檢索新品成分、功效與主打賣點。</li>
+<li><code>mcp/social_trend_analyzer</code>：抓取當下美妝圈的熱門 Hashtag 與流行語。</li>
+</ul>
+</li>
+</ul>
+<h4>⚖️ Agent 2：法規審查鐵面 (Global Compliance Reviewer Agent)</h4>
+<ul>
+<li><strong>Role (角色定位)</strong>：嚴格無私的跨國化妝品法規法務長。</li>
+<li><strong>System Instructions (系統指令)</strong>：
+    「你是無情的合規把關者。請嚴格審查文案中是否出現當地法規（如台灣衛福部、歐盟化妝品法規）禁用的『醫療療效、誇大不實、保證字眼』（如：徹底根除、抗發炎、細胞再生）。若發現違規，請退回並具體列出【違規詞彙】與【修改建議】；若完全合規，請給予 <code>[APPROVED]</code> 標記。」</li>
+<li><strong>授權 MCP Tools (模型上下文協議工具)</strong>：<ul>
+<li><code>mcp/global_fda_regulations_db</code>：檢索各國最新的化妝品廣告禁用詞庫與法規條文。</li>
+</ul>
+</li>
+</ul>
+<h4>🚀 Agent 3：營運發布總管 (Automation Dispatcher Agent)</h4>
+<ul>
+<li><strong>Role (角色定位)</strong>：跨國營運與自動化部署專家。</li>
+<li><strong>System Instructions (系統指令)</strong>：
+    「你只接收帶有 <code>[APPROVED]</code> 標記的文案。負責根據指定的發布國家進行在地化微調排版，並將最終定稿發送至企業內部的 Slack 通知群組，並排程至社群平台。」</li>
+<li><strong>授權 MCP Tools (模型上下文協議工具)</strong>：<ul>
+<li><code>mcp/slack_webhook_sender</code>：呼叫企業內部 API，將核准內容發送至跨國行銷部的 Slack 頻道。</li>
+<li><code>mcp/social_media_scheduler</code>：串接發文系統，自動排程發布。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>第二部分：閉環自主修正歷程 (Autonomous Refinement Loop)</h3>
+<p>當 Agent 1 寫了一句「使用七天，讓受損肌膚<strong>細胞重生</strong>，徹底<strong>治癒</strong>敏感紅腫！」時，系統的運作流程如下圖與偽代碼所示：</p>
+<h4>🔄 系統架構與互動流程圖</h4>
+<div class="mermaid">sequenceDiagram
+    participant H as 人類主管
+    participant A1 as 🎨 創意文案 Agent
+    participant A2 as ⚖️ 法規審查 Agent
+    participant A3 as 🚀 營運發布 Agent
+    participant S as Slack 頻道
+
+    H-&gt;&gt;A1: 下達任務：撰寫修護霜新品文案
+    A1-&gt;&gt;A2: 提交草稿 1 (含&quot;細胞重生&quot;,&quot;治癒&quot;)
+    activate A2
+    Note over A2: 呼叫 MCP 工具檢索各國法規
+    A2--&gt;&gt;A1: ❌ [REJECTED] 退回修改！&lt;br/&gt;「細胞重生」、「治癒」違反醫療法規。&lt;br/&gt;建議改為「活化肌膚」、「舒緩不適」。
+    deactivate A2
+
+    A1-&gt;&gt;A2: 提交草稿 2 (已修正為&quot;舒緩不適&quot;)
+    activate A2
+    Note over A2: 再次檢核
+    A2--&gt;&gt;A3: ✅ [APPROVED] 文案合規，准予發布
+    deactivate A2
+
+    activate A3
+    A3-&gt;&gt;S: 呼叫 Slack MCP 發送通知與排程
+    A3--&gt;&gt;H: 任務完成回報
+    deactivate A3
+</div>
+<h4>💻 核心協作控制偽代碼 (Orchestration Pseudocode)</h4>
+<pre><code class="language-python">def multi_agent_workflow(product_brief, target_country):
+    max_revisions = 3
+    revision_count = 0
+    feedback = &quot;&quot;
+
+    # 閉環對抗機制 (Loop)
+    while revision_count &lt; max_revisions:
+        # 1. 創意 Agent 生成或根據回饋修改文案
+        draft = copywriter_agent.generate(product_brief, feedback)
+
+        # 2. 法規 Agent 進行嚴格審核
+        review_result = compliance_agent.evaluate(draft, target_country)
+
+        if &quot;[APPROVED]&quot; in review_result:
+            # 3. 審查通過，跳出修改迴圈，交給營運 Agent
+            print(f&quot;迭代 {revision_count+1} 次後，法規審查通過！&quot;)
+            dispatcher_agent.publish_to_slack_and_social(draft)
+            return &quot;✅ 自動化發布成功&quot;
+
+        else:
+            # 4. 審查失敗，提取審查意見並要求重寫
+            print(f&quot;第 {revision_count+1} 次審查失敗，退回修改中...&quot;)
+            feedback = review_result  # 將失敗原因餵回給 Agent 1
+            revision_count += 1
+
+    # 防止無限迴圈的安全機制
+    dispatcher_agent.alert_human(&quot;⚠️ 達到最大修改次數限制，請人類主管介入人工審查。&quot;)
+    return &quot;❌ 任務暫停，等待人工介入&quot;
+</div>
+<blockquote>
+<p><strong>💡 實務洞察 (Business Insight)：</strong>
+這種 <strong>Actor-Critic (演員與評論家)</strong> 的多代理人架構，徹底解決了單一 LLM 容易「顧此失彼」（要它有創意，法規就容易出錯；要它嚴謹，文案就變得死板）的痛點。透過分離角色與 MCP 工具，我們能打造出兼顧爆款流量與零合規風險的企業級 AI 行銷自動化產線。</p>
+</blockquote>
+    </div>
+    <script>
+        document.body.innerHTML = document.body.innerHTML
+            .replace(/✅/g, '<span style="font-size:1.2em; color:green;">✅</span>')
+            .replace(/❌/g, '<span style="font-size:1.2em; color:red;">❌</span>')
+            .replace(/🛑/g, '<span style="font-size:1.2em; color:red;">🛑</span>')
+            .replace(/⚠️/g, '<span style="color:#D32F2F; font-weight:bold;">⚠️</span>')
+            .replace(/💡/g, '<span style="color:#FBC02D; font-size:1.2em;">💡</span>')
+            .replace(/🔄/g, '<span style="font-size:1.2em;">🔄</span>')
+            .replace(/💻/g, '<span style="font-size:1.2em;">💻</span>')
+            .replace(/🎨/g, '<span style="font-size:1.2em;">🎨</span>')
+            .replace(/⚖️/g, '<span style="font-size:1.2em;">⚖️</span>')
+            .replace(/🚀/g, '<span style="font-size:1.2em;">🚀</span>');
+    </script>
+</body>
+</html>
