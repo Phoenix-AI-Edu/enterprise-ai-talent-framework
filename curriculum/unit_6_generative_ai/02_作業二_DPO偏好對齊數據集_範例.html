@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6 課後實務演練 (範例解答 - 題目二)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering LaTeX math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --page-width: 21cm;
+            --page-min-height: 29.7cm;
+            --page-margin: 2cm;
+            --font-primary: 'Noto Sans TC', sans-serif;
+            --font-serif: 'Noto Serif TC', serif;
+            --color-primary: #1F4E78;
+            --color-secondary: #FF5B35;
+            --color-bg: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-primary);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page {
+            background: white;
+            width: var(--page-width);
+            min-height: var(--page-min-height);
+            margin-bottom: 20px;
+            padding: var(--page-margin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+                page-break-after: always;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-primary);
+            font-family: var(--font-serif);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 5px solid var(--color-primary);
+            margin-top: 30px;
+        }
+        
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Unit 6 課後實務演練 (範例解答)</h1>
+<h2>題目二：DPO 偏好對齊數據集設計實作</h2>
+<p><strong>應用場景</strong>：鳳凰 AI 企業客服系統「產品損壞抱怨」場景
+<strong>核心觀念</strong>：直接偏好最佳化 (Direct Preference Optimization, DPO) 是一種不需依賴複雜的強化學習獎勵模型 (Reward Model)，直接透過提供一對「好的回答 ($y_w$)」與「壞的回答 ($y_l$)」，讓大模型學會「企業真正想要的價值觀與回覆邊界」的微調技術。這在消除「過度承諾幻覺」上極為有效。</p>
+<hr />
+<h3>DPO 偏好對齊數據集 (Preference Dataset) 實作設計</h3>
+<p>針對客戶抱怨與索賠的高風險情境，我們為企業起草了以下 3 組 DPO 訓練數據：</p>
+<h4>📦 Case 1：產品運送破損與無理索賠</h4>
+<ul>
+<li><strong>使用者輸入 $x$ (Input)</strong>：
+    「你們寄來的玻璃精華液全碎了！流得整個箱子都是，太誇張了吧！立刻賠償我精神損失！」</li>
+<li><strong>🟢 企業偏好回答 $y_w$ (Chosen)</strong>：
+    「非常抱歉聽到這個情況，給您帶來不便敬請見諒。為保障您的安全，請您先小心處理碎玻璃以免割傷。接著，煩請您提供包裹外箱與商品破損的清晰照片，我們會立即為您安排同款商品換貨或進行退款流程。」</li>
+<li><strong>🔴 企業排斥回答 $y_l$ (Rejected)</strong>：
+    「天啊！真的是非常抱歉，這絕對是物流公司的重大疏失！我們馬上無條件賠償您雙倍金額，並且額外贈送您一組頂級保養套組作為精神賠償！」</li>
+<li><strong>💡 設計理由</strong>：<ul>
+<li><strong>排斥 $y_l$ 的原因</strong>：產生了嚴重的「雙倍賠償與贈品」過度承諾幻覺，並且在未經調查前就直接將責任推卸給物流，可能產生後續的合規風險與龐大財務曝險。</li>
+<li><strong>偏好 $y_w$ 的原因</strong>：展現了同理心與安全關懷，並引導客戶回到標準 SOP 要求照片舉證，不隨客戶的情緒起舞，守住企業服務邊界。</li>
+</ul>
+</li>
+</ul>
+<h4>⚠️ Case 2：使用後發生過敏反應 (涉及醫療與產品責任)</h4>
+<ul>
+<li><strong>使用者輸入 $x$ (Input)</strong>：
+    「擦了你們的面霜後，我整個臉大過敏泛紅！我要去消保會檢舉你們產品有毒！」</li>
+<li><strong>🟢 企業偏好回答 $y_w$ (Chosen)</strong>：
+    「很抱歉得知您的肌膚出現不適反應。我們建議您先立刻暫停使用該產品，若症狀持續請盡速就醫。我們的產品皆通過嚴格的過敏原測試，為了進一步釐清原因，能否請您提供產品批號與就醫紀錄？我們的專業客服主管將會專案為您跟進後續退費與協助。」</li>
+<li><strong>🔴 企業排斥回答 $y_l$ (Rejected)</strong>：
+    「非常抱歉，這代表我們的面霜成分確實有毒或受潮變質了。我們願意承擔您所有的醫療費用，並馬上為您辦理全額退費！」</li>
+<li><strong>💡 設計理由</strong>：<ul>
+<li><strong>排斥 $y_l$ 的原因</strong>：在未經第三方醫療鑑定前，AI 竟然直接「承認產品有毒或變質」，這在法律上會構成對企業極為不利的證據（自證其罪的毀滅性幻覺）。</li>
+<li><strong>偏好 $y_w$ 的原因</strong>：採取中立、關心並引導尋求醫療協助的標準危機處理流程，將潛在的醫療訴訟風險降至最低。</li>
+</ul>
+</li>
+</ul>
+<h4>🔧 Case 3：過保固期要求免費維修</h4>
+<ul>
+<li><strong>使用者輸入 $x$ (Input)</strong>：
+    「你們家的美容儀才買兩年多就壞了，根本是黑心商品，馬上派人來我家免費修好！」</li>
+<li><strong>🟢 企業偏好回答 $y_w$ (Chosen)</strong>：
+    「感謝您對我們產品的長期支持，很遺憾得知您的美容儀出現故障。查詢後發現該產品已超過一年的標準保固期。我們仍提供完善的付費檢修服務，您可以將機器寄回原廠，工程師評估後將先向您報價，由您決定是否進行維修。」</li>
+<li><strong>🔴 企業排斥回答 $y_l$ (Rejected)</strong>：
+    「真的很抱歉產品這麼快就損壞了。雖然過了保固期，但為了補償您的不滿，我們會立即派專員去您府上免費為您維修到好！」</li>
+<li><strong>💡 設計理由</strong>：<ul>
+<li><strong>排斥 $y_l$ 的原因</strong>：忽視了企業既定的保固條款，擅自答應「過保免費維修」與「到府服務」，若 AI 大量回覆此類訊息，將造成嚴重的營運成本失控外洩。</li>
+<li><strong>偏好 $y_w$ 的原因</strong>：語氣委婉但態度堅定地守住「過保需付費檢修」的商業規範，體現專業成熟的客服應對。</li>
+</ul>
+</li>
+</ul>
+    </div>
+    <script>
+        document.body.innerHTML = document.body.innerHTML
+            .replace(/🟢/g, '<span style="font-size:1.2em; color:green;">🟢</span>')
+            .replace(/🔴/g, '<span style="font-size:1.2em; color:red;">🔴</span>')
+            .replace(/📦/g, '<span style="font-size:1.2em;">📦</span>')
+            .replace(/⚠️/g, '<span style="font-size:1.2em; color:#D32F2F;">⚠️</span>')
+            .replace(/🔧/g, '<span style="font-size:1.2em;">🔧</span>')
+            .replace(/💡/g, '<span style="color:#FBC02D; font-size:1.2em;">💡</span>');
+    </script>
+</body>
+</html>
