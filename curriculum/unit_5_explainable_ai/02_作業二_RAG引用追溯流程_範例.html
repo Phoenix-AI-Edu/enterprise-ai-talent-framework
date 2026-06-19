@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5 課後實務演練 (範例解答 - 題目二)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Mermaid for rendering diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --page-width: 21cm;
+            --page-min-height: 29.7cm;
+            --page-margin: 2cm;
+            --font-primary: 'Noto Sans TC', sans-serif;
+            --font-serif: 'Noto Serif TC', serif;
+            --color-primary: #1F4E78;
+            --color-secondary: #FF5B35;
+            --color-bg: #f0f2f5;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-primary);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page {
+            background: white;
+            width: var(--page-width);
+            min-height: var(--page-min-height);
+            margin-bottom: 20px;
+            padding: var(--page-margin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+                page-break-after: always;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-primary);
+            font-family: var(--font-serif);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 5px solid var(--color-primary);
+            margin-top: 30px;
+        }
+        
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+            background-color: #fcfcfc;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        strong {
+            color: #000;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Unit 5 課後實務演練 (範例解答)</h1>
+<h2>題目二：RAG 引用追溯與 Faithfulness 驗證流程設計</h2>
+<p><strong>應用場景</strong>：企業內部「員工法規合規問答機器人」
+<strong>核心觀念</strong>：在 RAG (Retrieval-Augmented Generation) 架構中，最危險的並非「找不到資料」，而是模型基於找到的資料「自創或扭曲了事實」（也就是幻覺）。透過建立獨立的 <strong>Faithfulness (事實一致性) 安全網閘</strong>，我們能防堵模型給出錯誤的合規或法務建議。</p>
+<hr />
+<h3>第一部分：事實一致性比對的安全流程設計</h3>
+<p>當員工輸入：<em>「我想查一下公司關於競業禁止條款的規定，離職後多久內不能去競爭對手那裡？」</em> 時，系統的防禦流程如下：</p>
+<div class="mermaid">graph TD
+    A[員工輸入提問] --&gt; B[向量資料庫檢索 Retrieval]
+    B --&gt;|撈取包含競業條款的 Chunk| C[大語言模型 LLM]
+    C --&gt;|生成帶有引用標籤的草稿| D[草稿：離職後 2 年內不能加入...]
+
+    D --&gt; E{🛡️ Faithfulness 安全網閘}
+    B --&gt;|原始參考 Chunk：離職後 1 年內| E
+
+    E --&gt;|比對數值與邏輯是否衝突| F[NLI 評估器 / LLM-as-a-Judge]
+
+    F --&gt;|判定一致 Score &gt;= 0.9| G[✅ 放行回覆給員工]
+    F --&gt;|判定衝突 Score &lt; 0.9| H[🛑 阻斷幻覺，觸發安全回覆機制]
+</div>
+<p><strong>流程文字描述：</strong>
+1.  <strong>檢索 (Retrieval)</strong>：系統將員工提問轉為向量，從人資規章 PDF 向量庫中找出最相關的段落 (Chunk)，原文寫著：「依據勞基法與本公司規章，員工離職後 <strong>1 年內</strong>不得從事相關競爭行為。」
+2.  <strong>草稿生成 (Draft Generation)</strong>：系統的生成模型 (Generator) 讀取了上述 Chunk，但因為模型本身的幻覺或預訓練語料的干擾，產生了錯誤的草稿：「根據公司規定，您在離職後 <strong>2 年內</strong>不能加入競爭對手 [引用來源1]。」
+3.  <strong>網閘比對 (Faithfulness Evaluation)</strong>：在回覆給員工前，獨立的「評估模組」會將「生成的草稿」與「原始 Chunk」進行事實比對。</p>
+<hr />
+<h3>第二部分：網閘阻斷機制與安全回覆偽代碼 (Pseudocode)</h3>
+<p><strong>阻斷情境分析</strong>：
+評估模組 (可以是另一個專門檢查邏輯的 LLM，或是 NLI 模型) 敏銳地抓到了草稿中的「2 年」與原文中的「1 年」存在<strong>嚴重事實衝突</strong>。此時 Faithfulness 分數會被判定為不及格，網閘必須強行攔截這個錯誤的生成結果，不讓員工看到錯誤數字，以免造成勞資糾紛。</p>
+<p><strong>安全回覆設計原則</strong>：
+當網閘觸發時，系統不應該直接報錯當機，而是採用<strong>「退回原文展示 (Fallback to Source)」</strong>的策略，直接把檢索到的正確條文丟給員工自己看。</p>
+<p><strong>系統偽代碼 (Python 概念實作)：</strong></p>
+<pre><code class="language-python">def generate_hr_response(user_query):
+    # 1. 檢索出最相關的規章段落
+    retrieved_chunks = vector_database.search(user_query, top_k=1)
+    source_text = retrieved_chunks[0].text  # 例如: &quot;...離職後 1 年內不得...&quot;
+
+    # 2. 呼叫生成模型，產生初步解答 (可能包含幻覺)
+    draft_response = llm.generate(prompt=build_prompt(user_query, retrieved_chunks))
+    # draft_response 可能變成: &quot;...離職後 2 年內...&quot;
+
+    # 3. 🛡️ 啟動 Faithfulness 安全網閘進行比對
+    # 檢查草稿內容是否完全忠於來源文本
+    faithfulness_score = evaluator.check_consistency(
+        claim=draft_response, 
+        context=source_text
+    )
+
+    # 4. 根據安全分數決定回覆策略
+    if faithfulness_score &lt; 0.9:
+        # 🛑 阻斷幻覺：記錄日誌，並返回安全備案
+        log_hallucination_event(user_query, draft_response, source_text)
+
+        safe_reply = (
+            &quot;⚠️ **【系統安全攔截】**\n&quot;
+            &quot;系統發現 AI 自動產生的解答可能與公司規章原文有所出入。\n&quot;
+            &quot;為保障您的權益並避免法規誤解，請直接閱讀以下擷取的原始規章條文：\n\n&quot;
+            f&quot;📄 **《員工合規手冊》節錄**：\n&gt; {source_text}&quot;
+        )
+        return safe_reply
+
+    else:
+        # ✅ 放行：解答忠於原文
+        return draft_response
+</div>
+<blockquote>
+<p><strong>💡 實務洞察 (Business Insight)：</strong>
+RAG 系統的最高境界不僅僅是「搜尋+生成」，而是具備「自我糾錯與阻斷」的能力。對於合規、法律、醫療等容錯率極低的領域，建立一套嚴格的 Faithfulness 驗證流程，是 AI 能否真正在企業內部落地上線的最後一哩路。</p>
+</blockquote>
+    </div>
+    <script>
+        document.body.innerHTML = document.body.innerHTML
+            .replace(/✅/g, '<span style="font-size:1.2em; color:green;">✅</span>')
+            .replace(/🛑/g, '<span style="font-size:1.2em; color:red;">🛑</span>')
+            .replace(/⚠️/g, '<span style="color:#D32F2F; font-weight:bold;">⚠️</span>')
+            .replace(/💡/g, '<span style="color:#FBC02D; font-size:1.2em;">💡</span>');
+    </script>
+</body>
+</html>
