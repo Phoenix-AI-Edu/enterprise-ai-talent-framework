@@ -18,7 +18,10 @@
       "檢索召回率與型號精準度達 98% 以上",
       "100% 規避 AI 客服幻覺造成的錯誤規格與承諾風險"
     ],
-    "detail_url": "./cases/html/manufacturing_03_bicycle_rag.html"
+    "detail_url": "./cases/html/manufacturing_03_bicycle_rag.html",
+    "consultation_type": "advanced_system",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-002",
@@ -38,7 +41,10 @@
       "發票登帳正確率達 99.8% 接近零失誤",
       "釋放記帳員 40% 重複性行政工時至高價值稅務諮詢"
     ],
-    "detail_url": "./cases/html/accounting_01_ledger.html"
+    "detail_url": "./cases/html/accounting_01_ledger.html",
+    "consultation_type": "advanced_system",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-003",
@@ -58,7 +64,10 @@
       "判例檢索時間自數天縮短至數分鐘，避免漏檢關鍵勝訴判例",
       "100% 確保高階律師對輸出結果進行覆核 (HITL 模式)"
     ],
-    "detail_url": "./cases/html/law_firm_01_contract.html"
+    "detail_url": "./cases/html/law_firm_01_contract.html",
+    "consultation_type": "advanced_system",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-004",
@@ -80,7 +89,10 @@
       "現場一線 AI 標記效率提升 150%",
       "每年挽回之退貨賠償與重工損失達 NT$ 180 萬"
     ],
-    "detail_url": "./cases/html/manufacturing_01_steel_defect.html"
+    "detail_url": "./cases/html/manufacturing_01_steel_defect.html",
+    "consultation_type": "hr_change",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-005",
@@ -100,7 +112,10 @@
       "降低助理手動撥打電話確認之重複行政工時 80%",
       "100% 規避醫療診斷軟體之 TFDA 醫材認證法規風險"
     ],
-    "detail_url": "./cases/html/medical_02_dental_clinic.html"
+    "detail_url": "./cases/html/medical_02_dental_clinic.html",
+    "consultation_type": "advanced_system",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-010",
@@ -121,7 +136,10 @@
       "Line 客服滿意度自 50% 躍升至 94%，健檢回診率增加 35%",
       "100% 規避敏感病歷個資訴訟與合規漏洞"
     ],
-    "detail_url": "./cases/html/medical_01_health_chat.html"
+    "detail_url": "./cases/html/medical_01_health_chat.html",
+    "consultation_type": "compliance",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-012",
@@ -142,7 +160,10 @@
       "多國客服即時回覆率達 99%，年省夜間人力 NT$ 120 萬",
       "保障電商財務零漏洞，規避財務越獄危機"
     ],
-    "detail_url": "./cases/html/ecommerce_01_guardrails.html"
+    "detail_url": "./cases/html/ecommerce_01_guardrails.html",
+    "consultation_type": "advanced_system",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   },
   {
     "id": "PHX-CASE-2026-027",
@@ -163,6 +184,9 @@
       "出貨包裝速度提升 120%",
       "因退貨索賠與重工包裝成本每年省下達 NT$ 110 萬"
     ],
-    "detail_url": "./cases/html/manufacturing_02_screw_packing.html"
+    "detail_url": "./cases/html/manufacturing_02_screw_packing.html",
+    "consultation_type": "hr_change",
+    "cta_primary": "🔍 免費預約企業 AI 現況快診",
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
   }
 ]

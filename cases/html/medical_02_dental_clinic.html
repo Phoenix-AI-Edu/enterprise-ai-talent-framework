@@ -249,7 +249,55 @@
             display: flex;
             justify-content: center;
         }
-    </style>
+    
+        /* Case detail conversion CTA */
+        .case-next-steps {
+          margin-top: 48px;
+          padding: 32px;
+          background: linear-gradient(135deg, rgba(26,26,58,0.6), rgba(18,18,38,0.8));
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 20px;
+          text-align: center;
+          backdrop-filter: blur(12px);
+        }
+        .case-next-steps h3 {
+          font-family: var(--font-display);
+          font-size: 22px;
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: 10px;
+        }
+        .case-next-steps p {
+          color: var(--gray-300);
+          font-size: 15px;
+          line-height: 1.6;
+          margin-bottom: 20px;
+        }
+        .case-next-steps .case-btn-primary {
+          display: inline-block;
+          background: linear-gradient(135deg, var(--phoenix-accent), #ff7b42);
+          color: #fff;
+          border: none;
+          padding: 14px 32px;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 15px;
+          text-decoration: none;
+          cursor: pointer;
+          box-shadow: 0 8px 20px rgba(255,91,53,0.3);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .case-next-steps .case-btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 14px 30px rgba(255,91,53,0.4);
+        }
+        .case-next-steps-note {
+          margin-top: 14px;
+          font-size: 13px;
+          color: var(--gray-400);
+        }
+
+</style>
 </head>
 <body>
     <div class="grid-bg"></div>
