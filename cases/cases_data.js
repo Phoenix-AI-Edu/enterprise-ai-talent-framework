@@ -164,5 +164,48 @@ const PHOENIX_CASES_DB = [
       "因退貨索賠與重工包裝成本每年省下達 NT$ 110 萬"
     ],
     "detail_url": "./cases/html/manufacturing_02_screw_packing.html"
+  },
+  {
+    "id": "PHX-CASE-2026-036",
+    "title": "明茶道國際餐飲加盟集團｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案",
+    "industry": "retail",
+    "industry_name": "連鎖餐飲與加盟零售",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "全球超過 450 家手搖飲加盟店，一線工讀生流動率高、SOP 考核困難，且原物料預測只能依賴店長經驗，损耗难以管控。"
+    ],
+    "solutions": [
+      "SaaS 化 AI 預測與語音助理：規劃 RAG 知識庫與語音互動輔助，降低一線訓練成本，並以 SaaS 模式降低加盟主前期投資門檻。",
+      "總部治理與 Quick-Win 路線：以 4+1 戰略畫布收斂 90 天可執行的落地路徑，同步設計變革管理與激勵方案，降低加盟主接受門檻。"
+    ],
+    "roi": [
+      "以 90 天 Quick-Win 路線圖收斂首批 AI 落地優先項目",
+      "SaaS 分攤模式降低加盟主初期投資與總部推廣阻力",
+      "人機雙簽工作流確保品質與合規紅線，降低總部管控風險"
+    ],
+    "detail_url": "./cases/html/retail_02_mingchadao_tea_ai.html"
+  },
+  {
+    "id": "PHX-CASE-2026-037",
+    "title": "振鑫表面防鏽工業｜電鍍良率與環保合規 AI 配方優化案",
+    "industry": "electroplate",
+    "industry_name": "金屬電鍍與表面處理",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "電鍍良率與環保排污難以兼顧：追求品質常導致高濃度藥劑排放，屢遇環保 high-profile 罰款。",
+      "核心配方參數登錄意願低落，數據缺口導致預測模型無法收斂，改善方案難以落地。"
+    ],
+    "solutions": [
+      "數據清洗流程與配方知識庫：建立結構化資料管道，搭配 HITL 工程師審核，讓 AI 僅在可信資料上提供建議。",
+      "環保監控閘道：設定排放與成本管制上限，將合規紅線寫入系統規則，降低法規風險。"
+    ],
+    "roi": [
+      "以化合參數預測降低配方試驗成本，縮短良率收斂時間",
+      "環保合規閘值納入系統把關，降低裁罰與改善支出",
+      "保留工程師配方 IP 並以人機雙簽建立可追蹤決策鏈"
+    ],
+    "detail_url": "./cases/html/manufacturing_04_electroplate_ai.html"
   }
-];\n
+];

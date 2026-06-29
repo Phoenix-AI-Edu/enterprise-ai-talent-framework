@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHX-CASE-2026-036：明茶道｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#F6F8FB; --text:#1f2937; --text-secondary:#52607a;
+      --border:#e5e7eb; --shadow: 0 4px 10px rgba(0,0,0,0.06);
+      --accent-ben:#1e8a73; --accent-note:#7898b0; --accent-gold:#E9B239;
+      --glass-bg:rgba(255,255,255,0.7); --glass-border:rgba(16,28,50,0.08);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{font-family:"Inter","Noto Sans TC","PingFang TC",system-ui,sans-serif;background:radial-gradient(circle at 80% -10%,#e8f0f7 0%,#f6f8fb 55%) fixed;color:var(--text);margin:0}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 24px 80px}
+
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:all .2s ease;cursor:pointer;border:1px solid transparent}
+    .btn-primary{background:linear-gradient(135deg,var(--accent-ben),#177a66);color:#fff;border-color:rgba(255,255,255,0.15)}
+    .btn-secondary{background:rgba(255,255,255,0.6);color:#22303d;border-color:var(--glass-border)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,138,115,0.25)}
+    .btn-secondary:hover{border-color:rgba(16,28,50,0.18)}
+
+    .page-header{margin-bottom:26px}
+    .id-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .id-pill{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--accent-gold);background:rgba(233,178,57,0.1);padding:5px 10px;border-radius:8px;border:1px dashed rgba(233,178,57,0.35)}
+    .tag{font-size:12px;font-weight:700;color:var(--accent-ben);background:rgba(30,138,115,0.08);padding:5px 10px;border-radius:999px;border:1px solid rgba(30,138,115,0.18)}
+    h1{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:clamp(22px,2.4vw,30px);font-weight:800;line-height:1.25;margin:6px 0 10px;color:#0B1220}
+    .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.7;max-width:860px}
+
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:8px}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:18px;padding:22px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+    .card h2{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:16px;font-weight:700;color:#0B1220;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+
+    .list{padding-left:0;margin:0;display:flex;flex-direction:column;gap:10px}
+    .list-item{position:relative;padding-left:22px;font-size:14.5px;color:#2a3344;line-height:1.65}
+    .list-item::before{content:"✦";position:absolute;left:0;top:0;color:var(--accent-ben);font-size:12px}
+    .list-item.tick::before{content:"✔";color:#2f9e6a}
+
+    .roi-box{background:linear-gradient(135deg,rgba(233,178,57,0.08),rgba(233,178,57,0.02));border:1px dashed rgba(233,178,57,0.35);border-radius:16px;padding:18px}
+    .roi-title{font-size:13px;font-weight:800;color:var(--accent-gold);margin-bottom:8px;display:flex;align-items:center;gap:8px;letter-spacing:.3px}
+    .roi-item{position:relative;padding-left:22px;font-size:14px;color:#2a3344;line-height:1.6}
+    .roi-item::before{content:"🏆";position:absolute;left:0;top:0;font-size:12px}
+
+    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+    .kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center}
+    .kpi strong{display:block;font-size:18px;color:#0B1220}
+    .kpi span{font-size:12px;color:var(--text-secondary)}
+
+    .disclaimer{margin-top:24px;padding:14px 16px;border-radius:14px;background:#eef2f7;border:1px solid #dde3ea;color:#55718a;font-size:12px;line-height:1.7}
+    .back{margin-top:18px;display:inline-flex;align-items:center;gap:8px;color:#38618a;font-weight:600}
+    .back:hover{color:#12243a}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="btn btn-secondary" href="../index.html#cases">← 返回案例櫥窗</a>
+      <a class="btn btn-primary" href="./index.html#pricing">索取企業現況快診</a>
+    </div>
+
+    <div class="page-header">
+      <div class="id-row">
+        <span class="id-pill">PHX-CASE-2026-036</span>
+        <span class="tag">連鎖餐飲與加盟零售</span>
+        <span class="tag">方案 B 企業工作坊</span>
+      </div>
+      <h1>明茶道國際餐飲加盟集團 — 連鎖茶飲 AI-Native 人力與原物料智能中台規劃案</h1>
+      <p class="subtitle">本案例聚焦連鎖加盟總部在「一線工讀生高流動率」「原物料損耗難預測」「加盟主接受門檻」三大紅線，以 <strong>90 天 Quick-Win 路線圖</strong> 與 <strong>SaaS 先行、人機雙簽</strong> 的合約與治理設計，讓總部具備量化判斷基礎。</p>
+    </div>
+
+    <div class="grid">
+    <div>
+      <div class="card" style="margin-bottom:22px">
+        <h2>🛑 業務痛點</h2>
+        <ul class="list">
+          <li class="list-item">全球超過 450 家手搖飲加盟店，一線工讀生流動率高，SOP 培訓與考核極度依賴人力。</li>
+          <li class="list-item">原物料備料高度依賴店長經驗，鮮奶/鮮果報廢率與缺貨爭議難量化追蹤。</li>
+          <li class="list-item">任何新系統導入都必須兼顧加盟主信任、總部品質紅線與成本冰凍壓力。</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-bottom:22px">
+        <h2>⚡ 顧問解法</h2>
+        <ul class="list">
+          <li class="list-item tick">SaaS 化 AI 預測與語音助理：RAG 知識庫 + 語音互動，降低一線訓練門檻與總部推廣阻力。</li>
+          <li class="list-item tick">總部治理與 Quick-Win 路線：以 4+1 戰略畫布收斂 90 天可執行的落地路徑，確保方案可呈報董事會。</li>
+          <li class="list-item tick">變革管理與激勵設計：針對加盟主與一線員工同步配套，降低接受門檻與使用阻力。</li>
+        </ul>
+      </div>
+
+      <div class="roi-box">
+        <div class="roi-title">📈 量化落地成效 (ROI)</div>
+        <ul class="list" style="margin-top:6px">
+          <li class="roi-item">以 <strong>90 天 Quick-Win</strong> 路線圖收斂首批可驗證落地項目</li>
+          <li class="roi-item">SaaS 分攤模式降低加盟主初期投資與總部推廣阻力</li>
+          <li class="roi-item">人機雙簽工作流確保品質與合規紅線，降低總部管控風險</li>
+        </ul>
+      </div>
+
+      <p class="disclaimer">本案例數據僅供參考，以客戶最終驗證數據與正式顧問簽署報告為準。<br>本頁已依據中華民國《個資法》與 B2B 保密協定進行去識別化處理，不含可識別客戶與個資內容。</p>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:22px">
+        <h2>📌 本案重點數據</h2>
+        <div class="kpi-row">
+          <div class="kpi"><strong>90 天</strong><span>Quick-Win</span></div>
+          <div class="kpi"><strong>450+</strong><span>加盟店</span></div>
+          <div class="kpi"><strong>4+1</strong><span>戰略畫布</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:22px">
+        <h2>🔗 相關資源</h2>
+        <ul class="list">
+          <li class="list-item tick">方案 B：企業 AI 一頁式戰略畫布實戰工作坊</li>
+          <li class="list-item tick">一頁式落地診斷報告（可帶回董事會）</li>
+          <li class="list-item tick">與顧問團隊對接 Quick-Win 驗證路徑</li>
+        </ul>
+      </div>
+      <a class="back" href="../index.html#cases">返回案例櫥窗</a>
+    </div>
+    </div>
+  </div>
+</body>
+</html>
