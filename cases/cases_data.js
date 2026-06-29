@@ -1,7 +1,7 @@
 const PHOENIX_CASES_DB = [
   {
     "id": "PHX-CASE-2026-001",
-    "title": "A 公司｜售後服務 PDF 檢索與 RAG 安全防幻覺工作流設計案",
+    "title": "某自行車零件製造商｜售後服務 PDF 檢索與 RAG 安全防幻覺工作流設計案",
     "industry": "manufacturing",
     "industry_name": "精密機械與傳統製造",
     "tag": "🔌 進階系統設計組",
@@ -146,7 +146,7 @@ const PHOENIX_CASES_DB = [
   },
   {
     "id": "PHX-CASE-2026-027",
-    "title": "興達扣件包裝工業｜AI 視覺包裝複核與中高齡安心變革案",
+    "title": "某螺絲包裝製造廠｜AI 視覺包裝複核與中高齡安心變革案",
     "industry": "manufacturing",
     "industry_name": "精密機械與傳統製造",
     "tag": "👥 HR 變革管理組",
@@ -167,7 +167,7 @@ const PHOENIX_CASES_DB = [
   },
   {
     "id": "PHX-CASE-2026-036",
-    "title": "明茶道國際餐飲加盟集團｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案",
+    "title": "某連鎖餐飲集團｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案",
     "industry": "retail",
     "industry_name": "連鎖餐飲與加盟零售",
     "tag": "🔌 進階系統設計組",
