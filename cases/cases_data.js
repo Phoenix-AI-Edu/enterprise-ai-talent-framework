@@ -167,7 +167,7 @@ const PHOENIX_CASES_DB = [
   },
   {
     "id": "PHX-CASE-2026-036",
-    "title": "某連鎖餐飲集團｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案",
+    "title": "明茶道國際餐飲加盟集團｜連鎖茶飲 AI-Native 人力與原物料智能中台規劃案",
     "industry": "retail",
     "industry_name": "連鎖餐飲與加盟零售",
     "tag": "🔌 進階系統設計組",
@@ -229,5 +229,27 @@ const PHOENIX_CASES_DB = [
       "現場語音報工降低師傅鍵值負擔，提高系統接受度"
     ],
     "detail_url": "./cases/html/manufacturing_05_sbir_ready_ai.html"
+  },
+  {
+    "id": "PHX-CASE-2026-039",
+    "title": "某精密沖壓零件廠｜AI 視覺檢測與 Mura 判定標準化案",
+    "industry": "manufacturing",
+    "industry_name": "精密機械與傳統製造",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "外銷精密沖壓零件長期依賴人工目視檢查，漏檢率高且判定標準不一致，導致客戶退貨率上升。",
+      "檢測標準隨檢驗員主觀經驗漂移，AQL 抽樣無法即時回饋製程偏移，問題到下游才被发现。"
+    ],
+    "solutions": [
+      "AI 視覺分層檢測：針對刮傷、缺料、變形三类缺陷建立小樣本模型，並以人機雙簽覆核降低誤判。",
+      "Mura 量化標準化：把經驗法則轉為可自動更新的 defect map，回饋給沖壓參數調整，形成 PDCA 闭环。"
+    ],
+    "roi": [
+      "外觀漏檢率降低 85%，客訴退貨率趨近於零",
+      "檢測標準一致化，減少新進人員訓練成本",
+      "製程參數回授縮短問題定位時間，提升一次良率"
+    ],
+    "detail_url": "./cases/html/manufacturing_06_ai_visual_inspection.html"
   }
 ];
