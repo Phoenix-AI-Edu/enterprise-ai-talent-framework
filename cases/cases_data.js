@@ -188,13 +188,13 @@ const PHOENIX_CASES_DB = [
   },
   {
     "id": "PHX-CASE-2026-037",
-    "title": "振鑫表面防鏽工業｜電鍍良率與環保合規 AI 配方優化案",
+    "title": "某電鍍加工廠｜電鍍良率與環保合規 AI 配方優化案",
     "industry": "electroplate",
     "industry_name": "金屬電鍍與表面處理",
     "tag": "🔌 進階系統設計組",
     "scheme": "方案 B 企業工作坊",
     "pain_points": [
-      "電鍍良率與環保排污難以兼顧：追求品質常導致高濃度藥劑排放，屢遇環保 high-profile 罰款。",
+      "電鍍良率與環保排污難以兼顧：追求品質常導致高濃度藥劑排放，屢遇環保裁罰。",
       "核心配方參數登錄意願低落，數據缺口導致預測模型無法收斂，改善方案難以落地。"
     ],
     "solutions": [
@@ -210,7 +210,7 @@ const PHOENIX_CASES_DB = [
   },
   {
     "id": "PHX-CASE-2026-038",
-    "title": "龍圖精密機械｜扣件鍛造 AI 語音報工與合規稽核先行案",
+    "title": "某扣件精鍛廠｜AI 語音報工與合規稽核先行案",
     "industry": "manufacturing",
     "industry_name": "精密機械与传统製造",
     "tag": "🔌 進階系統設計組",
