@@ -207,5 +207,27 @@ const PHOENIX_CASES_DB = [
       "保留工程師配方 IP 並以人機雙簽建立可追蹤決策鏈"
     ],
     "detail_url": "./cases/html/manufacturing_04_electroplate_ai.html"
+  },
+  {
+    "id": "PHX-CASE-2026-038",
+    "title": "龍圖精密機械｜扣件鍛造 AI 語音報工與合規稽核先行案",
+    "industry": "manufacturing",
+    "industry_name": "精密機械与传统製造",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "外銷一級供應商面臨歐盟 AI Act 與 ISO 42001 合規大限，未通過將影響數千萬訂單。",
+      "現場師傅過去兩年 POC 屢屢失敗，寫回 ERP 的數據污染與算力超支成為高層阻力和預算紅線。"
+    ],
+    "solutions": [
+      "邊緣 ASR 語音報工 + DLP 遮罩：以語音解放現場雙手，並在出站前完成機密遮罩。",
+      "唯讀 ERP 與 API 財務熔斷：系統設計為唯讀銜接，搭配每日調用上限，避免數據污染與成本失控。"
+    ],
+    "roi": [
+      "以 90 天工作坊收斂合規導入優先路徑，降低 POC 失敗風險",
+      "構建可追溯審核鏈，對接 ISO 42001 與 SBIR 補助查核",
+      "現場語音報工降低師傅鍵值負擔，提高系統接受度"
+    ],
+    "detail_url": "./cases/html/manufacturing_05_sbir_ready_ai.html"
   }
 ];
