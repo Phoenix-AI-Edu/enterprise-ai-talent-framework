@@ -1,5 +1,5 @@
 ```markdown
-# 振鑫表面 (okayama_electroplate) AI 專案管理資料庫 (4+1 Notion-Aligned Databases)
+# 某電鍍加工廠 (okayama_electroplate) AI 專案管理資料庫 (4+1 Notion-Aligned Databases)
 
 ## 🗃️ 資料表一：企業 AI 場景盤點資料庫 (Scenario Inventory Database)
 | 對應場景專案           | 業務痛點                                         | 主責部門       | 核心 AI 任務                  | 商業價值 (V) | 數據就緒度 (D) | 一線阻力 (R)                 | ROI 綜合指數 | 導入優先級決策 |

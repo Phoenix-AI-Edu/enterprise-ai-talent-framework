@@ -234,7 +234,7 @@ def main():
         {"key": "okayama_heat", "name": "宏達熱處理 (okayama_heat)"},
         {"key": "okayama_cbam", "name": "吉翔航太 (okayama_cbam)"},
         {"key": "okayama_filter", "name": "聯發光學 (okayama_filter)"},
-        {"key": "okayama_electroplate", "name": "振鑫表面 (okayama_electroplate)"},
+        {"key": "okayama_electroplate", "name": "某電鍍加工廠 (okayama_electroplate)"},
         {"key": "okayama_barcode", "name": "興達包裝 (okayama_barcode)"},
         {"key": "okayama_sbir", "name": "龍圖機械 (okayama_sbir)"}
     ]

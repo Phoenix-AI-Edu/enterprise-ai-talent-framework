@@ -130,7 +130,7 @@ def main():
         {"key": "okayama_heat", "file": "scripts/proposal_okayama_heat.md", "name": "PHX-022 高強度熱處理離線廠 (宏達熱處理)"},
         {"key": "okayama_cbam", "file": "scripts/proposal_okayama_cbam.md", "name": "PHX-023 航太扣件歐盟CBAM (吉翔航太)"},
         {"key": "okayama_filter", "file": "scripts/proposal_okayama_filter.md", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
-        {"key": "okayama_electroplate", "file": "scripts/proposal_okayama_electroplate.md", "name": "PHX-025 電鍍配方環保排污 (振鑫表面)"},
+        {"key": "okayama_electroplate", "file": "scripts/proposal_okayama_electroplate.md", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
         {"key": "luzhu_coldheading", "file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 路竹冷鐓停機預警 (龍門冷鐓)"},
         {"key": "okayama_barcode", "file": "scripts/proposal_okayama_barcode.md", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
         {"key": "okayama_sbir", "file": "scripts/proposal_okayama_sbir.md", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}

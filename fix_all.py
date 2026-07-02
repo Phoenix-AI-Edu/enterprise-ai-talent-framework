@@ -128,7 +128,7 @@ NAME_MAP = {
     "宏達熱處理": "CLIENT_HEAT", "宏達": "CLIENT_HEAT",
     "吉翔航太": "CLIENT_CBAM", "吉翔": "CLIENT_CBAM",
     "聯發光學": "CLIENT_FILTER", "聯發": "CLIENT_FILTER",
-    "振鑫表面": "CLIENT_PLATE", "振鑫": "CLIENT_PLATE",
+    "某電鍍加工廠": "CLIENT_PLATE", "某電鍍": "CLIENT_PLATE",
     "龍門冷鐓": "CLIENT_COLDHEAD", "龍門": "CLIENT_COLDHEAD",
     "興達包裝": "CLIENT_BARCODE", "興達": "CLIENT_BARCODE",
     "龍圖機械": "CLIENT_SBIR", "龍圖": "CLIENT_SBIR",
