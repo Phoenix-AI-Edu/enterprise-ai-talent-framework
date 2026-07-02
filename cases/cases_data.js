@@ -276,7 +276,7 @@ const PHOENIX_CASES_DB = [
       "建立四道合規防線，規避行銷 IP 與 Google 一星公關風險"
     ],
     "detail_url": "./cases/html/retail_03_yuepin_ai.html"
-  }
+  },
 
   {
     "id": "PHX-CASE-2026-041",
