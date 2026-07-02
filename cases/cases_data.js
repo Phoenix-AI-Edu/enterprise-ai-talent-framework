@@ -302,4 +302,30 @@ const PHOENIX_CASES_DB = [
     ],
     "detail_url": "./cases/html/manufacturing_07_dingsheng_voice_ai.html"
   }
+
+  {
+    "id": "PHX-CASE-2026-042",
+    "title": "恆達精密扣件｜AI 語音報修、瑕疵分流與預測維護合規落地案",
+    "industry": "manufacturing",
+    "industry_name": "精密機械與傳統製造",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "冷鍛產線噪音達 85 分貝以上，師傅雙手沾油無法操作設備，傳統報修延遲達 45 分鐘，停機損失高。",
+      "德國光學篩選機假警報率 15%，品保肉眼覆檢疲勞，國際車廠百萬索賠風險。",
+      "沖頭崩裂導致單線停機 3 天，缺乏預測維護機制，交期延誤賠償頻傳。"
+    ],
+    "solutions": [
+      "邊緣語音報修 (Copilot)：85-95 分貝高噪音環境 ASR，AI 草擬報修單，師傅一鍵確認。",
+      "AI 瑕疵分流 (Validator)：85% 假警報濾除，人眼雙簽覆核致命缺陷與模糊邊界。",
+      "預測維護 + HITL：AI 告警剩餘壽命低於安全閾值，老師傅 100% 保留停機換模決定權。"
+    ],
+    "roi": [
+      "假警報濾除率 ≥85%，釋放品保 60% 覆檢人手",
+      "預防 75% 非計畫性突發停機，模具壽命延長 25%",
+      "CBAM 碳申報工時從 10 天降至 <4 小時，一次到位"
+    ],
+    "detail_url": "./cases/html/manufacturing_08_henda_ai.html"
+  }
+
 ];

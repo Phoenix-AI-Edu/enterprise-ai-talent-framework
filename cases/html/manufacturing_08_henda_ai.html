@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHX-CASE-2026-042：恆達精密扣件｜AI 語音報修、瑕疵分流與預測維護合規落地案</title>
+  <style>
+    :root { --bg:#F6F8FB; --text:#1f2937; --text-secondary:#52607a; --border:#e5e7eb; --shadow: 0 4px 10px rgba(0,0,0,0.06); --accent-ben:#1e8a73; --accent-note:#7898b0; --accent-gold:#E9B239; --glass-bg:rgba(255,255,255,0.7); --glass-border:rgba(16,28,50,0.08); }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{font-family:"Inter","Noto Sans TC","PingFang TC",system-ui,sans-serif;background:radial-gradient(circle at 80% -10%,#e8f0f7 0%,#f6f8fb 55%) fixed;color:var(--text);margin:0} a{color:inherit;text-decoration:none} .wrap{max-width:1100px;margin:0 auto;padding:28px 24px 80px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:28px} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:all .2s ease;cursor:pointer;border:1px solid transparent} .btn-primary{background:linear-gradient(135deg,var(--accent-ben),#177a66);color:#fff;border-color:rgba(255,255,255,0.15)} .btn-secondary{background:rgba(255,255,255,0.6);color:#22303d;border-color:var(--glass-border)} .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,138,115,0.25)} .btn-secondary:hover{border-color:rgba(16,28,50,0.18)}
+    .page-header{margin-bottom:26px} .id-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px} .id-pill{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--accent-gold);background:rgba(233,178,57,0.1);padding:5px 10px;border-radius:8px;border:1px dashed rgba(233,178,57,0.35)} .tag{font-size:12px;font-weight:700;color:var(--accent-ben);background:rgba(30,138,115,0.08);padding:5px 10px;border-radius:999px;border:1px solid rgba(30,138,115,0.18)} h1{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:clamp(22px,2.4vw,30px);font-weight:800;line-height:1.25;margin:6px 0 10px;color:#0B1220} .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.7;max-width:860px}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:8px} @media (max-width: 900px){ .grid{grid-template-columns:1fr} } .card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:18px;padding:22px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)} .card h2{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:16px;font-weight:700;color:#0B1220;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+    .list{padding-left:0;margin:0;display:flex;flex-direction:column;gap:10px} .list-item{position:relative;padding-left:22px;font-size:14.5px;color:#2a3344;line-height:1.65} .list-item::before{content:"✦";position:absolute;left:0;top:0;color:var(--accent-ben);font-size:12px} .list-item.tick::before{content:"✔";color:#2f9e6a}
+    .roi-box{background:linear-gradient(135deg,rgba(233,178,57,0.08),rgba(233,178,57,0.02));border:1px dashed rgba(233,178,57,0.35);border-radius:16px;padding:18px} .roi-title{font-size:13px;font-weight:800;color:var(--accent-gold);margin-bottom:8px;display:flex;align-items:center;gap:8px;letter-spacing:.3px} .roi-item{position:relative;padding-left:22px;font-size:14px;color:#2a3344;line-height:1.6} .roi-item::before{content:"🏆";position:absolute;left:0;top:0;font-size:12px}
+    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px} .kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center} .kpi strong{display:block;font-size:18px;color:#0B1220} .kpi span{font-size:12px;color:var(--text-secondary)}
+    .disclaimer{margin-top:24px;padding:14px 16px;border-radius:14px;background:#eef2f7;border:1px solid #dde3ea;color:#55718a;font-size:12px;line-height:1.7} .back{margin-top:18px;display:inline-flex;align-items:center;gap:8px;color:#38618a;font-weight:600} .back:hover{color:#12243a}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="btn btn-secondary" href="../index.html#cases">← 返回案例櫥窗</a>
+      <a class="btn btn-primary" href="./index.html#pricing">索取企業現況快診</a>
+    </div>
+    <div class="page-header">
+      <div class="id-row">
+        <span class="id-pill">PHX-CASE-2026-042</span>
+        <span class="tag">精密機械與傳統製造</span>
+        <span class="tag">方案 B 企業工作坊</span>
+      </div>
+      <h1>恆達精密扣件 — AI 語音報修、瑕疵分流與預測維護合規落地案</h1>
+      <p class="subtitle">本案例聚焦車規扣件廠的 <strong>高噪音語音報修</strong>、<strong>光篩影像瑕疵分流</strong>、<strong>預測維護</strong> 三大場景，以 <strong>邊緣 ASR + HITL</strong> 與 <strong>DLP 合規網關</strong> 建立董事會敢放行的 AI-Native 智慧工廠。</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>🛑 業務痛點</h2>
+          <ul class="list">
+            <li class="list-item">冷鍛產線噪音達 85 分貝以上，師傅雙沾油無法操作設備，傳統報修延遲達 45 分鐘，停機損失高。</li>
+            <li class="list-item">德國光學篩選機假警報率 15%，品保肉眼覆檢疲勞，國際車廠百萬索賠風險。</li>
+            <li class="list-item">沖頭崩裂導致單線停機 3 天，缺乏預測維護機制，交期延誤賠償頻傳。</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>⚡ 顧問解法</h2>
+          <ul class="list">
+            <li class="list-item tick">邊緣語音報修 (Copilot)：85-95 分貝高噪音環境 ASR，AI 草擬報修單，師傅一鍵確認。</li>
+            <li class="list-item tick">AI 瑕疵分流 (Validator)：85% 假警報濾除，人眼雙簽覆核致命缺陷與模糊邊界。</li>
+            <li class="list-item tick">預測維護 + HITL：AI 告警剩餘壽命低於安全閾值，老師傅 100% 保留停機換模決定權。</li>
+          </ul>
+        </div>
+        <div class="roi-box">
+          <div class="roi-title">📈 量化落地成效 (ROI)</div>
+          <ul class="list" style="margin-top:6px">
+            <li class="roi-item">假警報濾除率 ≥85%，釋放品保 <strong>60%</strong> 覆檢人手</li>
+            <li class="roi-item">預防 <strong>75%</strong> 非計畫性突發停機，模具壽命延長 <strong>25%</strong></li>
+            <li class="roi-item">CBAM 碳申報工時從 <strong>10 天</strong> 降至 <strong>&lt;4 小時</strong>，一次到位</li>
+          </ul>
+        </div>
+        <p class="disclaimer">本案例數據僅供參考，以客戶最終驗證數據與正式顧問簽署報告為準。<br>本頁已依據中華民國《個資法》與 B2B 保密協定進行去識別化處理，不含可識別客戶與個資內容。</p>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>📌 本案重點數據</h2>
+          <div class="kpi-row">
+            <div class="kpi"><strong>85%</strong><span>假警報濾除率</span></div>
+            <div class="kpi"><strong>75%</strong><span>非計畫停機降低</span></div>
+            <div class="kpi"><strong>4 小時</strong><span>CBAM 申報工時</span></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>🔗 相關資源</h2>
+          <ul class="list">
+            <li class="list-item tick">方案 B：企業 AI 一頁式戰略畫布實戰工作坊</li>
+            <li class="list-item tick">扣件製造業語音報修與瑕疵分流工作坊</li>
+            <li class="list-item tick">ISO 42001 與 CBAM 歐盟碳合規研習</li>
+          </ul>
+        </div>
+        <a class="back" href="../index.html#cases">返回案例櫥窗</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
