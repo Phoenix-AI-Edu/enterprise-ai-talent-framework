@@ -301,7 +301,7 @@ const PHOENIX_CASES_DB = [
       "人心轉換為核心，AI 定位從『取代威脅』改為『省力幫手』"
     ],
     "detail_url": "./cases/html/manufacturing_07_dingsheng_voice_ai.html"
-  }
+  },
 
   {
     "id": "PHX-CASE-2026-042",
