@@ -277,4 +277,29 @@ const PHOENIX_CASES_DB = [
     ],
     "detail_url": "./cases/html/retail_03_yuepin_ai.html"
   }
+
+  {
+    "id": "PHX-CASE-2026-041",
+    "title": "某精密機械廠｜AI 語音報修、瑕疵分流與預測維護合規落地案",
+    "industry": "manufacturing",
+    "industry_name": "精密機械與傳統製造",
+    "tag": "🔌 進階系統設計組",
+    "scheme": "方案 B 企業工作坊",
+    "pain_points": [
+      "一線員工對 AI 新技術排斥，導入阻力大，傳統訓練無法降低被取代恐懼。",
+      "特許監管與品質紅線緊，技術導入須兼顧 ISO/NIST 與資安合規。",
+      "高噪音現場溝通困難，語音辨識失敗率高，現場資訊無法即時回傳。"
+    ],
+    "solutions": [
+      "Voice AI POC + 人機雙簽：低風險場景驗證，AI 建議由現場主管覆核後才執行。",
+      "DLP 網關 + API 財務熔斷：遮罩敏感數據，並設定算力預算上限。",
+      "變革五部曲：定位、培訓、心理緩衝、獎勵與 KPI 重塑，讓 AI 成為省力幫手。"
+    ],
+    "roi": [
+      "POC 階段以低風險場景降低導入震盪，建立組織信任",
+      "建立 ISO/NIST 對齊的合規與資安防線",
+      "人心轉換為核心，AI 定位從『取代威脅』改為『省力幫手』"
+    ],
+    "detail_url": "./cases/html/manufacturing_07_dingsheng_voice_ai.html"
+  }
 ];
