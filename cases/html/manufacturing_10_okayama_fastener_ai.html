@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHX-CASE-2026-045：某精密扣件廠｜AI 資料治理、人機雙簽與調機知識傳承合規落地案</title>
+  <style>
+    :root { --bg:#F6F8FB; --text:#1f2937; --text-secondary:#52607a; --border:#e5e7eb; --shadow: 0 4px 10px rgba(0,0,0,0.06); --accent-ben:#1e8a73; --accent-note:#7898b0; --accent-gold:#E9B239; --glass-bg:rgba(255,255,255,0.7); --glass-border:rgba(16,28,50,0.08); }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{font-family:"Inter","Noto Sans TC","PingFang TC",system-ui,sans-serif;background:radial-gradient(circle at 80% -10%,#e8f0f7 0%,#f6f8fb 55%) fixed;color:var(--text);margin:0} a{color:inherit;text-decoration:none} .wrap{max-width:1100px;margin:0 auto;padding:28px 24px 80px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:28px} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:all .2s ease;cursor:pointer;border:1px solid transparent} .btn-primary{background:linear-gradient(135deg,var(--accent-ben),#177a66);color:#fff;border-color:rgba(255,255,255,0.15)} .btn-secondary{background:rgba(255,255,255,0.6);color:#22303d;border-color:var(--glass-border)} .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,138,115,0.25)} .btn-secondary:hover{border-color:rgba(16,28,50,0.18)}
+    .page-header{margin-bottom:26px} .id-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px} .id-pill{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--accent-gold);background:rgba(233,178,57,0.1);padding:5px 10px;border-radius:8px;border:1px dashed rgba(233,178,57,0.35)} .tag{font-size:12px;font-weight:700;color:var(--accent-ben);background:rgba(30,138,115,0.08);padding:5px 10px;border-radius:999px;border:1px solid rgba(30,138,115,0.18)} h1{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:clamp(22px,2.4vw,30px);font-weight:800;line-height:1.25;margin:6px 0 10px;color:#0B1220} .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.7;max-width:860px}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:8px} @media (max-width: 900px){ .grid{grid-template-columns:1fr} } .card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:18px;padding:22px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)} .card h2{font-family:"Outfit","Noto Sans TC",sans-serif;font-size:16px;font-weight:700;color:#0B1220;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+    .list{padding-left:0;margin:0;display:flex;flex-direction:column;gap:10px} .list-item{position:relative;padding-left:22px;font-size:14.5px;color:#2a3344;line-height:1.65} .list-item::before{content:"✦";position:absolute;left:0;top:0;color:var(--accent-ben);font-size:12px} .list-item.tick::before{content:"✔";color:#2f9e6a}
+    .roi-box{background:linear-gradient(135deg,rgba(233,178,57,0.08),rgba(233,178,57,0.02));border:1px dashed rgba(233,178,57,0.35);border-radius:16px;padding:18px} .roi-title{font-size:13px;font-weight:800;color:var(--accent-gold);margin-bottom:8px;display:flex;align-items:center;gap:8px;letter-spacing:.3px} .roi-item{position:relative;padding-left:22px;font-size:14px;color:#2a3344;line-height:1.6} .roi-item::before{content:"🏆",position:absolute;left:0;top:0;font-size:12px}
+    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px} .kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center} .kpi strong{display:block;font-size:18px;color:#0B1220} .kpi span{font-size:12px;color:var(--text-secondary)}
+    .disclaimer{margin-top:24px;padding:14px 16px;border-radius:14px;background:#eef2f7;border:1px solid #dde3ea;color:#55718a;font-size:12px;line-height:1.7} .back{margin-top:18px;display:inline-flex;align-items:center;gap:8px;color:#38618a;font-weight:600} .back:hover{color:#12243a}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="btn btn-secondary" href="../index.html#cases">← 返回案例櫥窗</a>
+      <a class="btn btn-primary" href="./index.html#pricing">索取企業現況快診</a>
+    </div>
+    <div class="page-header">
+      <div class="id-row">
+        <span class="id-pill">PHX-CASE-2026-045</span>
+        <span class="tag">精密機械與傳統製造</span>
+        <span class="tag">方案 B 企業工作坊</span>
+      </div>
+      <h1>某精密扣件廠 — AI 資料治理、人機雙簽與調機知識傳承合規落地案</h1>
+      <p class="subtitle">本案例針對精密扣件廠的 RAG 幻覺問題與調機知識流失，以 <strong>資料治理</strong>、<strong>HITL 人機雙簽</strong> 與 <strong>變革五部曲</strong>，建立可信任的 AI 知識傳承系統。</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>🛑 業務痛點</h2>
+          <ul class="list">
+            <li class="list-item">現行 RAG 系統每年維護成本高且資料混亂，導致 AI 頻繁出現幻覺，專家信心不足。</li>
+            <li class="list-item">資深調機師傅擔心 AI 取代專業技能，現場導入阻力大，影響整體效能提升。</li>
+            <li class="list-item">特許監管要求責任可追溯，缺乏數位化簽核與知識傳承，人才流失等同技術流失。</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>⚡ 顧問解法</h2>
+          <ul class="list">
+            <li class="list-item tick">AI 資料治理 + 模型訓練：清洗與整合資料，建立可信任的小樣本模型，降低維護成本。</li>
+            <li class="list-item tick">人機雙簽工作流：每次 AI 建議必須經現場師傅確認簽章，強化專家信任感。</li>
+            <li class="list-item tick">變革五部曲：定位 AI 為省力工具、培訓、心理緩衝、獎勵與 KPI 重塑。</li>
+          </ul>
+        </div>
+        <div class="roi-box">
+          <div class="roi-title">📈 量化落地成效 (ROI)</div>
+          <ul class="list" style="margin-top:6px">
+            <li class="roi-item">幻覺率與每年新台幣 50 萬元維護成本顯著降低，知識資產數位化留存</li>
+            <li class="roi-item">調機師傅參與度提升，AI 定位為省力工具而非取代威脅，導入阻力降低</li>
+            <li class="roi-item">合規簽核機制留下完整審計軌跡，符合特許監管責任可追溯要求</li>
+          </ul>
+        </div>
+        <p class="disclaimer">本案例數據僅供參考，以客戶最終驗證數據與正式顧問簽署報告為準。<br>本頁已依據中華民國《個資法》與 B2B 保密協定進行去識別化處理，不含可識別客戶與個資內容。</p>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>📌 本案重點數據</h2>
+          <div class="kpi-row">
+            <div class="kpi"><strong>資料治理</strong><span>降低幻覺率</span></div>
+            <div class="kpi"><strong>50 萬/年</strong><span>維護成本</span></div>
+            <div class="kpi"><strong>HITL</strong><span>人機雙簽</span></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:22px">
+          <h2>🔗 相關資源</h2>
+          <ul class="list">
+            <li class="list-item tick">方案 B：企業 AI 一頁式戰略畫布實戰工作坊</li>
+            <li class="list-item tick">精密扣件廠 AI 資料治理工作坊</li>
+            <li class="list-item tick">GMP 與特許監管合規研習</li>
+          </ul>
+        </div>
+        <a class="back" href="../index.html#cases">返回案例櫥窗</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
