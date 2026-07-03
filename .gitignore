@@ -85,4 +85,5 @@ scripts/slides_config_*.json
 
 
 marketing_drafts/raw/
+marketing_drafts/analysis/
 *.bak
