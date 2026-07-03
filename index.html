@@ -4327,11 +4327,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (!window.dataLayer && !window.gtag) {
           console.debug('[GA4 fallback]', payload);
         }
+        // Direct GA4 measurement protocol fallback (independent of GTM container) 
+        if (typeof window !== 'undefined' && typeof window.__sendGA4 === 'function') {
+          const qs = new URLSearchParams({ case_id: payload.case_id, case_title: payload.case_title, cta_href: payload.cta_href });
+          window.__sendGA4('case_cta_click', Object.fromEntries(qs));
+        }
       };
       document.addEventListener('click', (e) => {
         const target = e.target.closest('[data-ga]');
         if (target) send(target);
       });
+    })();
+  </script>
+  <script>
+    // ─── GA4 Direct Sender (Measurement Protocol v2) ───
+    (function() {
+      const GA4_TID = 'G-MPT80VJN31';
+      const GA4_ENDPOINT = 'https://www.google-analytics.com/g/collect';
+      const getClientId = () => {
+        try {
+          const cookies = document.cookie.split('; ').reduce((acc, c) => {
+            const [k, ...v] = c.split('=');
+            acc[decodeURIComponent(k)] = decodeURIComponent(v.join('='));
+            return acc;
+          }, {});
+          const ga = cookies['_ga'];
+          if (!ga) return undefined;
+          const parts = ga.split('.');
+          return parts.length >= 4 ? parts.slice(2).join('.') : undefined;
+        } catch (e) { return undefined; }
+      };
+      const sendGA4 = (eventName, params = {}) => {
+        const payload = new URLSearchParams({v:'2', tid:GA4_TID, cid:getClientId()||'555', t:'event', en:eventName, ...params});
+        let sent = false;
+        if (navigator.sendBeacon && typeof navigator.sendBeacon === 'function') {
+          sent = navigator.sendBeacon(GA4_ENDPOINT, payload);
+        }
+        if (!sent) {
+          fetch(GA4_ENDPOINT, {method:'POST', body:payload, keepalive:true}).catch(()=>{});
+        }
+      };
+      window.__sendGA4 = sendGA4;
     })();
   </script>
 </body>
