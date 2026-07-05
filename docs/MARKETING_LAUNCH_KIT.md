@@ -2,6 +2,14 @@
 
 此文件包含對外宣傳、社群貼文、影片腳本與業務開發（BD）信件的標準範本。所有文案皆以「示範型解決方案 (Pilot-ready)」為核心定位，強調技術可行性與商業價值方向。
 
+
+> **⚠️ Compliance Note & 使用提醒**
+> 1. **佔位符替換**：使用本素材前，請務必替換所有方括號中的個人化欄位（如 `[聯絡人姓名]`、`[您的名字]`、`[公司名稱]`），不得直接原樣發送。
+> 2. **合規限制**：
+>    - 不得自行加入真實客戶名稱。
+>    - 不得加入未經我們團隊驗證的百分比、金額、ROI。
+>    - 不得承諾已完成真實 ERP/POS 串接（目前維持 Pilot-ready 與 Sandbox Preview 定位）。
+
 ---
 
 ## 1. 社群媒體貼文草稿
@@ -17,7 +25,7 @@
 > 更重要的是，我們提供 ERP/POS Sandbox Payload Preview 機制，讓您的 IT 團隊在無需真實連線的情況下，就能提早驗證 API 規格。
 > 
 > 讓 AI 成為總部的超級大腦，有效收斂門市回報，降低溝通成本。
-> 🔗 立即點擊體驗互動 Demo，了解方案適合對象：[填寫申請連結]
+> 🔗 立即點擊體驗互動 Demo，了解方案適合對象：https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform
 > 
 > #數位轉型 #AI #中央廚房 #連鎖餐飲 #ERP #系統整合
 
@@ -30,7 +38,7 @@
 > 當門市回報異常，AI 會自動分類、生成標準化 Payload；但遇到關鍵決策（如大額退貨、設備報修），系統會自動暫停並指派給總部對應主管覆核。這是一套安全、可控、專為連鎖營運設計的示範環境。
 > 
 > 歡迎各品牌 IT 與營運主管預約諮詢，探索專屬您的自動化潛力。
-> 🔗 預約顧問諮詢：[填寫申請連結]
+> 🔗 預約顧問諮詢：https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform
 > 
 > #AI營運 #餐飲科技 #鳳凰AI顧問 #風險管理
 
@@ -44,24 +52,24 @@
 > ✅ 系統端：直接產生可對接現有系統的標準格式！
 > 
 > 現在就來試試我們的線上互動 Demo，看看未來的總部可以多有效率 👇
-> 🔗 申請體驗：[填寫申請連結]
+> 🔗 申請體驗：https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform
 
 **貼文 2：痛點解方**
 > 開分店很容易，但管理卻越來越難？當門市超過 5 間，跨店溝通與總部審核往往成為最大瓶頸。
 > 我們打造了專屬連鎖品牌的「AI 營運大腦」示範模組。不論是生鮮食材叫貨、臨時報修，AI 都能瞬間讀懂門市需求，並提供「高風險阻斷」機制，讓總店長擁有最終決定權！
 > 
 > 這是一個隨時可上線測試的 Pilot-ready 解決方案，想了解它能為您的品牌帶來什麼改變嗎？
-> 🔗 馬上了解方案詳情：[填寫申請連結]
+> 🔗 馬上了解方案詳情：https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform
 
 ### Threads (鎖定短節奏、話題性討論)
 **貼文 1**
 > 餐飲業痛點：前線忙到沒空打字，後勤忙著確認那些沒打清楚的字 😩
 > 試試用 AI 當中間人？語音直傳 -> AI 解析 -> 總部一鍵確認 -> 自動生成系統 Payload。
-> 我們的「中央廚房 AI 助理」Pilot 方案上線啦，懂技術的來看看 Sandbox API 規格，懂營運的來玩玩看流程！🔗 [連結]
+> 我們的「中央廚房 AI 助理」Pilot 方案上線啦，懂技術的來看看 Sandbox API 規格，懂營運的來玩玩看流程！🔗 /experience/index.html
 
 **貼文 2**
 > 以為導入 AI 就要打掉重練現有的 ERP 嗎？錯了！
-> 我們的示範方案主打「Sandbox Payload 預覽」，先用模擬器對齊 API 欄位，不用動真實系統也能驗證效益。穩紮穩打才是真的數位轉型。🔗 [連結]
+> 我們的示範方案主打「Sandbox Payload 預覽」，先用模擬器對齊 API 欄位，不用動真實系統也能驗證效益。穩紮穩打才是真的數位轉型。🔗 /experience/central-kitchen-ai-agent/index.html
 
 ---
 
@@ -96,7 +104,7 @@
 
 這是一個不需動用真實系統資料即可體驗的互動 Demo。希望能邀請您與貴司的營運/IT團隊，花 5 分鐘時間進行線上體驗，看看這套架構能為 [公司名稱] 帶來哪些商業價值。
 
-👉 **[申請互動體驗帳號]** (附上連結)
+👉 **[申請互動體驗帳號]** (https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)
 
 期待您的回覆，若您近期有 15 分鐘的空檔，我也非常樂意為您進行快速的線上導覽。
 
