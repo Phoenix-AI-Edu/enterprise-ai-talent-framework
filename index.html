@@ -1413,6 +1413,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: translateX(2px);
     }
 
+    .experience-entry-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      color: var(--phoenix-accent);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .experience-entry-link:hover {
+      background: rgba(var(--phoenix-accent-rgb), 0.18);
+      border-color: rgba(var(--phoenix-accent-rgb), 0.55);
+      transform: translateY(-1px);
+      color: var(--white);
+    }
+
     .footer-bottom {
       border-top: 1px solid rgba(255, 255, 255, 0.04);
       padding-top: 30px;
@@ -3822,7 +3842,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="footer-link-item"><a href="#diagnostic">線上成熟度快測</a></li>
           <li class="footer-link-item"><a href="#deliverables">成果交付物預覽</a></li>
           <li class="footer-link-item"><a href="#team">專家顧問介紹</a></li>
-          <li class="footer-link-item"><a href="#pricing">企業導入方案</a></li>
+          <li class="footer-link-item experience-entry-item"><a href="/experience/index.html" class="experience-entry-link">前往 AI 解決方案體驗區</a></li>
         </ul>
       </div>
 
@@ -4341,6 +4361,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const target = e.target.closest('[data-ga]');
         if (target) send(target);
       });
+    })();
+  </script>
+  <script>
+    // ─── Experience Entry CTA Analytics ───
+    (function() {
+      const link = document.querySelector('.experience-entry-link');
+      if (!link) return;
+
+      function fireEntryEvent() {
+        const href = link.getAttribute('href') || '';
+        const payloadBase = {
+          event: 'experience_cta_click',
+          event_category: 'experience_cta',
+          event_label: 'experience_entry_click',
+          cta_href: href,
+          source_section: 'footer'
+        };
+
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(payloadBase);
+        } catch (err) {
+          // suppress static-page analytics errors
+        }
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'experience_entry_click', payloadBase);
+        }
+
+        if (typeof window.__sendGA4 === 'function') {
+          const params = new URLSearchParams({
+            event_category: payloadBase.event_category,
+            event_label: payloadBase.event_label,
+            source_section: payloadBase.source_section,
+            cta_href: payloadBase.cta_href
+          });
+          window.__sendGA4('experience_cta_click', Object.fromEntries(params));
+        }
+      }
+
+      if (typeof link.addEventListener === 'function') {
+        link.addEventListener('click', fireEntryEvent);
+      }
     })();
   </script>
   <script>

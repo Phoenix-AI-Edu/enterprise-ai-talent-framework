@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中央廚房 AI 營運助理｜鳳凰 AI 顧問</title>
+  <meta name="description" content="中央廚房 AI 營運助理：降低門市重複查詢、建立總部審核流程、產生標準化 API Payload。Interactive Demo / Pilot Ready。">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NB4699JG');</script>
+  <!-- End Google Tag Manager -->
+
+  <style>
+    :root {
+      --phoenix-dark: #0B0B16;
+      --phoenix-mid: #121226;
+      --phoenix-accent: #E94560;
+      --phoenix-accent-rgb: 233, 69, 96;
+      --phoenix-teal: #00F2FE;
+      --phoenix-gold: #F5A623;
+      --white: #FFFFFF;
+      --gray-300: #DDE2E5;
+      --gray-400: #A5B1B8;
+      --gray-600: #5A6A75;
+      --glass-bg: rgba(18, 18, 38, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+      --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background-color: var(--phoenix-dark);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% -20%, #201a35 0%, #0b0b16 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; transition: all 0.25s ease; }
+    img, svg { max-width: 100%; height: auto; vertical-align: middle; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─── */
+    .page-header {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-link {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+    .back-link:hover { color: var(--white); }
+    .page-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-mark {
+      color: var(--phoenix-accent);
+      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.4px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      color: var(--phoenix-accent);
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--phoenix-accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.1) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      color: var(--phoenix-teal);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 50px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--gray-400);
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── Section Commons ─── */
+    .section {
+      padding: 30px 0 40px;
+    }
+    .section:last-of-type {
+      padding-bottom: 50px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(var(--phoenix-accent-rgb), 0.15);
+      color: var(--phoenix-accent);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* ─── Summary Box ─── */
+    .summary-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      backdrop-filter: blur(12px);
+    }
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .summary-item {
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .summary-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gray-600);
+      font-weight: 700;
+    }
+    .summary-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-300);
+    }
+
+    /* ─── Flow Diagram ─── */
+    .flow-wrap {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      padding: 20px 10px;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      flex: 1 1 120px;
+      max-width: 180px;
+    }
+    .flow-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.15), rgba(var(--phoenix-accent-rgb), 0.05));
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+    .flow-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--phoenix-accent);
+      font-size: 22px;
+      flex: 0 0 auto;
+      padding: 0 6px;
+      padding-bottom: 28px;
+      opacity: 0.8;
+      letter-spacing: -2px;
+    }
+    .flow-caption {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── Feature Cards ─── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: var(--glass-hover);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .feature-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ─── CTA ─── */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.12) 0%, rgba(var(--phoenix-accent-rgb), 0.04) 100%);
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      border-radius: 18px;
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      box-shadow: 0 6px 22px rgba(var(--phoenix-accent-rgb), 0.32);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(var(--phoenix-accent-rgb), 0.45);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+    }
+    .consent-text {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+    .consent-text a { color: #0ea5e9; text-decoration: underline; }
+    .consent-text a:hover { color: var(--phoenix-teal); }
+
+    /* ─── Footer ─── */
+    .page-footer {
+      margin-top: auto;
+      padding: 36px 0 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+    .footer-link {
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+    .footer-link:hover { color: var(--white); text-decoration: none; }
+    .footer-copy { font-size: 12px; color: var(--gray-600); }
+    .footer-consent {
+      max-width: 820px;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+    }
+    .footer-consent a { color: #0ea5e9; text-decoration: underline; }
+    .footer-consent a:hover { color: var(--phoenix-teal); }
+
+    @media (max-width: 720px) {
+      .hero-title { font-size: 32px; }
+      .cta-title { font-size: 22px; }
+      .flow-diagram { flex-direction: column; gap: 12px; }
+      .flow-arrow { transform: rotate(90deg); padding: 0; padding-bottom: 0; }
+      .cta-actions { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NB4699JG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
+      <div class="page-header-right">
+        <div class="status-badge" data-ga="experience_cta" data-ga-event="solution_view" data-ga-solution-id="central_kitchen_ai_agent">
+          <span class="status-dot"></span>
+          Interactive Demo / Pilot Ready
+        </div>
+        <span class="logo-mark">鳳凰 AI</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-tag">Food &amp; Retail · AI Operations</div>
+        <h1 class="hero-title">中央廚房 AI 營運助理</h1>
+        <p class="hero-desc">降低門市重複查詢、建立總部審核流程、產生標準化 API Payload。協助餐飲連鎖與中央廚房總部以同一套 AI 工作流，將每日進貨、備料、出勤與異常通報串聯自動化。</p>
+      </div>
+    </section>
+
+    <!-- 1. Solution Summary -->
+    <section class="section">
+      <div class="summary-box">
+        <div class="summary-row">
+          <div class="summary-item">
+            <div class="summary-label">適用產業</div>
+            <div class="summary-value">餐飲連鎖 / 中央廚房 / 零售連鎖</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">方案狀態</div>
+            <div class="summary-value">Interactive Demo / Pilot Ready</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">上線模式</div>
+            <div class="summary-value">互動式 Pilot · 最小資料蒐集 · 去識別化場景</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">外部系統接軌</div>
+            <div class="summary-value">ERP / POS / HRM — API Payload Preview</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Highlights -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">1</span>
+        解決方案亮點
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <div class="feature-title">總部多門市集中監控</div>
+          <div class="feature-desc">營收、耗損、溫層異常、結帳高峰與異動告警一目瞭然，減少層層口頭回報。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">💬</span>
+          <div class="feature-title">門市端自然語言提報</div>
+          <div class="feature-desc">LINE 文字/語音直通總部，自動轉譯為工單與追蹤任務，免安裝独立 APP。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <div class="feature-title">高風險意圖阻斷 + HITL</div>
+          <div class="feature-desc">系統先行偵測高資安任務並阻斷，再由 Human-in-the-loop 人工確認後才放行。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔐</span>
+          <div class="feature-title">RBAC 角色權限控管</div>
+          <div class="feature-desc">總經理、區域主管、門市店長、品保各有存取邊界，敏感資料分層保護。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔌</span>
+          <div class="feature-title">ERP/POS Payload Preview</div>
+          <div class="feature-desc">在無真實系統連線前提早驗證 API 接規格，上線前先確認格式與欄位對齊。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📋</span>
+          <div class="feature-title">標準化作業指令</div>
+          <div class="feature-desc">將營運指令統一為標準 API Payload，消除各門市自行解讀造成的誤差與延遲。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Flow Diagram -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">2</span>
+        典型營運流程示意
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-diagram" role="img" aria-label="門市通報到總部審核的標準化作業流程示意圖">
+          <div class="flow-step">
+            <div class="flow-icon">🏪</div>
+            <div class="flow-label">門市通報</div>
+            <div class="flow-sub">LINE 文字/語音<br>自動轉譯工單</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🤖</div>
+            <div class="flow-label">AI 意圖解析</div>
+            <div class="flow-sub">任務分類<br>自動派單</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🛡️</div>
+            <div class="flow-label">風險分流</div>
+            <div class="flow-sub">高風險意圖阻斷<br>Human-in-the-loop</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🏢</div>
+            <div class="flow-label">總部戰情室</div>
+            <div class="flow-sub">KPI 監控<br>審核與覆核</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🔌</div>
+            <div class="flow-label">ERP/POS 輸出</div>
+            <div class="flow-sub">標準 API Payload<br>格式驗證 Preview</div>
+          </div>
+        </div>
+        <div class="flow-caption">示意畫面 | 實際系統畫面會因客戶 ERP/POS 規格而異。所有展示場景皆為去識別化模擬，不涉及任何真實品牌或系統。</div>
+      </div>
+    </section>
+
+    <!-- 4. CTA -->
+    <section class="section">
+      <div class="cta-box">
+        <div class="cta-title">申請互動體驗帳號</div>
+        <div class="cta-desc">進入 Pilot Demo，親身體驗門市通報、總部戰情室與 ERP/POS API Payload Preview 的完整流程。</div>
+        <div class="cta-actions" id="demo-actions">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-primary" id="btn-demo-request">申請互動體驗帳號</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-secondary" id="btn-demo-request-2">前往互動 Demo</a>
+        </div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="page-footer">
+    <div class="container footer-inner">
+      <div class="footer-consent">
+        點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">回首頁</a>
+        <a href="../privacy.html" class="footer-link">隱私權政策</a>
+      </div>
+      <div class="footer-copy">© 2026 鳳凰 AI 顧問團隊。著作權所有。</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // solution page view
+      var solutionId = 'central_kitchen_ai_agent';
+      var solutionTitle = '中央廚房 AI 營運助理';
+
+      function track(eventName, params) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(Object.assign({ event: eventName }, params));
+        } catch (err) {
+          // suppress analytics errors on static pages
+        }
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params);
+        }
+      }
+
+      // page view: event_category=experience_cta, event_label=solution_view
+      track('experience_solution_view', {
+        event_category: 'experience_cta',
+        event_label: 'solution_view',
+        solution_id: solutionId,
+        solution_title: solutionTitle
+      });
+
+      // CTA click handler: event_category=experience_cta, event_label=demo_request_click
+      var demoActions = document.getElementById('demo-actions');
+      if (demoActions) {
+        demoActions.addEventListener('click', function (e) {
+          var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
+          if (!target) return;
+          track('demo_request_click', {
+            event_category: 'experience_cta',
+            event_label: 'demo_request_click',
+            solution_id: solutionId,
+            solution_title: solutionTitle,
+            cta_href: target.getAttribute('href')
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

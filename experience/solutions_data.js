@@ -16,7 +16,7 @@ window.EXPERIENCE_SOLUTIONS = [
     compliance_note: "所有展示場景均為去識別化模擬，不涉及任何真實品牌或ERP/POS系統。",
 
     cta_text: "預覽互動 Demo",
-    cta_href: "#experience/central-kitchen-ai-agent",
+    cta_href: "/experience/central-kitchen-ai-agent/index.html",
     pilot_program_text: "申請參與 Pilot 計畫",
     pilot_program_href: "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
 
@@ -40,7 +40,7 @@ window.EXPERIENCE_SOLUTIONS = [
     form_intent: "high",
     source_section: "solution_detail",
 
-    consent_text: "點擊提交表單即表示您已詳閱並同意<a href='./privacy.html'>《個人資料保護與隱私權政策告知書》</a>"
+    consent_text: "點擊提交表單即表示您已詳閱並同意<a href='../privacy.html'>《個人資料保護與隱私權政策告知書》</a>"
   }
 ];
 
