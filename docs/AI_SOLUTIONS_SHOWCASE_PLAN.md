@@ -54,7 +54,7 @@ AI_Talent/
   - 沙盒 ERP/POS Payload Preview (外部串接預覽)
 - **🚫 避險文案規範**：
   - 絕不提及「已替某客戶省下多少成本」或「已上線某知名品牌」。
-  - 絕不聲稱「已完成真實 ERP/POS 系統串接」，而是強調「已具備完美對接 ERP/POS 的 API Payload 產生能力」。
+  - 絕不聲稱「已完成真實系統串接」，而是強調「已具備完美對接 ERP/POS 的 API Payload 產生能力」。
 
 ---
 
