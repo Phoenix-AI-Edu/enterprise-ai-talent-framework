@@ -12,10 +12,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鳳凰 AI 顧問｜企業專屬 AI 人才與營運大腦</title>
-  <meta name="description" content="提供企業專屬 AI 人才與數位轉型顧問服務，協助導入 AI 營運助理，打造安全、可控、高效率的示範型解決方案 (Pilot-ready)。">
-  <meta property="og:title" content="鳳凰 AI 顧問｜企業專屬 AI 人才與營運大腦">
-  <meta property="og:description" content="提供企業專屬 AI 人才與數位轉型顧問服務，協助導入 AI 營運助理，打造安全、可控、高效率的示範型解決方案 (Pilot-ready)。">
+  <title>鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦</title>
+  <meta name="description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房 AI 營運助理到 Pilot-ready 示範流程，協助企業安全驗證 AI 落地路徑。">
+  <meta property="og:title" content="鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦">
+  <meta property="og:description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房 AI 營運助理到 Pilot-ready 示範流程，協助企業安全驗證 AI 落地路徑。">
   <meta property="og:type" content="website">
 
   <!-- ─── Google Fonts ─── -->
@@ -398,6 +398,192 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 13.5px;
       color: var(--gray-400);
       line-height: 1.6;
+    }
+
+    /* ─── 旗艦 AI 系統展示 ─── */
+    .flagship-system-section {
+      padding: 96px 0;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0, 242, 254, 0.04) 0%, rgba(11, 11, 22, 0) 72%),
+        radial-gradient(circle at 82% 18%, rgba(245, 166, 35, 0.12) 0%, rgba(245, 166, 35, 0) 34%);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .flagship-system-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .flagship-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 166, 35, 0.28);
+      background: rgba(245, 166, 35, 0.07);
+      color: var(--phoenix-gold);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .flagship-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      line-height: 1.25;
+      font-weight: 850;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .flagship-desc {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--gray-300);
+      margin-bottom: 28px;
+      max-width: 680px;
+    }
+
+    .flagship-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .flagship-proof {
+      min-height: 98px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .flagship-proof-title {
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .flagship-proof-text {
+      color: var(--gray-400);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .flagship-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .flagship-note {
+      width: 100%;
+      color: var(--gray-600);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .system-preview {
+      position: relative;
+      border: 1px solid rgba(0, 242, 254, 0.18);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(18, 18, 38, 0.92), rgba(7, 9, 19, 0.96));
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+      overflow: hidden;
+    }
+
+    .system-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .system-preview-title {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .system-preview-status {
+      color: var(--phoenix-teal);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .system-preview-body {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .system-panel {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .system-panel-kicker {
+      color: var(--phoenix-gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .system-panel-title {
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .system-panel-copy {
+      color: var(--gray-400);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .system-flow-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .system-flow-step {
+      min-height: 78px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(0, 242, 254, 0.055);
+      border: 1px solid rgba(0, 242, 254, 0.12);
+    }
+
+    .system-flow-step strong {
+      display: block;
+      color: var(--white);
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .system-flow-step span {
+      display: block;
+      color: var(--gray-400);
+      font-size: 11.5px;
+      line-height: 1.45;
     }
 
     /* ─── 區段標題 ─── */
@@ -1488,6 +1674,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ─── 響應式排版 (RWD) ─── */
     @media (max-width: 1024px) {
       .hero-title { font-size: 42px; }
+      .flagship-system-layout { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .team-grid { grid-template-columns: 1fr; gap: 24px; }
     }
@@ -1500,6 +1687,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .hero-description { font-size: 15px; }
       .hero-ctas { flex-direction: column; gap: 12px; }
       .stats-grid { grid-template-columns: 1fr; }
+      .flagship-system-section { padding: 68px 0; }
+      .flagship-title { font-size: 30px; }
+      .flagship-desc { font-size: 15px; }
+      .flagship-proof-grid { grid-template-columns: 1fr; }
+      .system-flow-row { grid-template-columns: 1fr; }
       .diagnostic-box { padding: 24px; }
       .question-title { font-size: 18px; }
       .option-text { font-size: 14px; }
@@ -1530,6 +1722,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <nav class="nav-links">
         <a href="#home" class="nav-link">首頁</a>
         <a href="#diagnostic" class="nav-link">成熟度快測</a>
+        <a href="#flagship-system" class="nav-link">AI 系統展示</a>
         <a href="#curriculum" class="nav-link">全景課程</a>
         <a href="#commercial-modules" class="nav-link">商業實戰模組</a>
         <a href="#team" class="nav-link">顧問團隊</a>
@@ -1562,7 +1755,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </p>
       
       <div class="hero-ctas">
-        <a href="#diagnostic" class="btn btn-primary">
+        <a href="#flagship-system" class="btn btn-primary">
+          <span>查看中央廚房 AI 系統展示</span>
+        </a>
+        <a href="#diagnostic" class="btn btn-secondary">
           <span>📊 立即進行 AI 成熟度快測</span>
           <span style="font-size: 13px;">(5 題/ 2 分鐘)</span>
         </a>
@@ -1588,6 +1784,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="stat-number">3 大防線</div>
           <div class="stat-label">NIST & ISO 42001 安全框架</div>
           <div class="stat-desc">在部署中內建隱私資料遮罩、惡意提示過濾 Guardrails 防禦，提供最穩固的合規護城河。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 旗艦 AI 系統展示 ─── -->
+  <section class="flagship-system-section" id="flagship-system">
+    <div class="container flagship-system-layout">
+      <div>
+        <div class="flagship-eyebrow">Flagship AI System</div>
+        <h2 class="flagship-title">不只給顧問建議，我們把企業痛點做成可驗證的 AI 系統。</h2>
+        <p class="flagship-desc">
+          「中央廚房 AI 營運助理」是鳳凰 AI 顧問目前主打的企業 AI 系統展示。它把連鎖餐飲與中央廚房常見的門市通報、總部審核、異常分流與系統資料輸出，整理成可操作的 Pilot-ready 示範流程，讓決策者不是只看簡報，而是能直接理解 AI 如何進入日常營運。
+        </p>
+
+        <div class="flagship-proof-grid">
+          <div class="flagship-proof">
+            <div class="flagship-proof-title">門市通報轉工單</div>
+            <div class="flagship-proof-text">將一線文字回報轉成結構化任務，協助總部快速判斷問題類型與處理優先順序。</div>
+          </div>
+          <div class="flagship-proof">
+            <div class="flagship-proof-title">總部戰情室監控</div>
+            <div class="flagship-proof-text">用儀表板思維呈現待處理事件、風險狀態與跨門市營運節奏。</div>
+          </div>
+          <div class="flagship-proof">
+            <div class="flagship-proof-title">高風險決策阻斷</div>
+            <div class="flagship-proof-text">把人機協作與審核節點放進流程，避免 AI 自動執行敏感或高風險動作。</div>
+          </div>
+          <div class="flagship-proof">
+            <div class="flagship-proof-title">ERP/POS Payload Preview</div>
+            <div class="flagship-proof-text">以沙盒預覽方式展示資料格式與對接邏輯，方便 IT 團隊先討論規格。</div>
+          </div>
+        </div>
+
+        <div class="flagship-actions">
+          <a href="./experience/central-kitchen-ai-agent/" class="btn btn-primary">查看中央廚房 AI 系統</a>
+          <a href="./experience/index.html" class="btn btn-secondary">瀏覽 AI 解決方案體驗區</a>
+          <div class="flagship-note">目前展示維持 Gated / Sandbox / Pilot-ready 定位；ERP/POS Payload 為模擬預覽，未串接任何客戶真實後台系統。</div>
+        </div>
+      </div>
+
+      <div class="system-preview" aria-label="中央廚房 AI 營運助理示意">
+        <div class="system-preview-header">
+          <div class="system-preview-title">中央廚房 AI 營運助理</div>
+          <div class="system-preview-status">Pilot-ready Sandbox</div>
+        </div>
+        <div class="system-preview-body">
+          <div class="system-panel">
+            <div class="system-panel-kicker">Store Signal</div>
+            <div class="system-panel-title">門市回報：補貨、客訴、異常事件</div>
+            <div class="system-panel-copy">AI 先把自然語言訊息整理成任務欄位，再交由總部確認處理路徑。</div>
+          </div>
+          <div class="system-flow-row">
+            <div class="system-flow-step">
+              <strong>分類</strong>
+              <span>辨識事件類型與急迫性</span>
+            </div>
+            <div class="system-flow-step">
+              <strong>審核</strong>
+              <span>高風險動作交由人員確認</span>
+            </div>
+            <div class="system-flow-step">
+              <strong>輸出</strong>
+              <span>產生沙盒 Payload Preview</span>
+            </div>
+          </div>
+          <div class="system-panel">
+            <div class="system-panel-kicker">HQ Control Room</div>
+            <div class="system-panel-title">總部掌握跨門市營運節奏</div>
+            <div class="system-panel-copy">讓營運主管、IT 與顧問團隊能在同一個情境中討論流程、資料欄位與治理邊界。</div>
+          </div>
         </div>
       </div>
     </div>
