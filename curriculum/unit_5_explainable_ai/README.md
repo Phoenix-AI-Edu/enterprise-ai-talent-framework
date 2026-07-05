@@ -30,4 +30,5 @@
 
 ✉️ **合作與諮詢對接**：
 * 登記索取 Notion 資料庫協作模板工具包：**[📥 免費登記索取表單](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](../../privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 * 預約 30 分鐘專家線上快診諮詢或 B2B 內訓提案，請來信官方服務信箱：**allmyway2007@gmail.com**

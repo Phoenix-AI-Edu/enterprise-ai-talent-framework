@@ -21,7 +21,9 @@
     "detail_url": "./cases/html/manufacturing_03_bicycle_rag.html",
     "consultation_type": "advanced_system",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-002",
@@ -44,7 +46,9 @@
     "detail_url": "./cases/html/accounting_01_ledger.html",
     "consultation_type": "advanced_system",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-003",
@@ -67,7 +71,9 @@
     "detail_url": "./cases/html/law_firm_01_contract.html",
     "consultation_type": "advanced_system",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-004",
@@ -92,7 +98,9 @@
     "detail_url": "./cases/html/manufacturing_01_steel_defect.html",
     "consultation_type": "hr_change",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-005",
@@ -115,7 +123,9 @@
     "detail_url": "./cases/html/medical_02_dental_clinic.html",
     "consultation_type": "advanced_system",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-010",
@@ -139,7 +149,9 @@
     "detail_url": "./cases/html/medical_01_health_chat.html",
     "consultation_type": "compliance",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-012",
@@ -163,7 +175,9 @@
     "detail_url": "./cases/html/ecommerce_01_guardrails.html",
     "consultation_type": "advanced_system",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   },
   {
     "id": "PHX-CASE-2026-027",
@@ -187,6 +201,8 @@
     "detail_url": "./cases/html/manufacturing_02_screw_packing.html",
     "consultation_type": "hr_change",
     "cta_primary": "🔍 免費預約企業 AI 現況快診",
-    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform"
+    "cta_href": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
+    "cta_consent": "送出表單前，請先詳閱並同意《個人資料保護與隱私權政策告知書》；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。",
+    "privacy_url": "./privacy.html"
   }
 ]

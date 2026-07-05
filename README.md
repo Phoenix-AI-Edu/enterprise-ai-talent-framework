@@ -40,6 +40,7 @@
 >   2. **【政府補助與核銷實戰手冊】**：內含盤點表、匹配矩陣、計畫書骨架、月度執行追蹤及核銷自評等 5 大保命工作表。👉 **[📥 點此直接下載政府補助與核銷實戰手冊 Excel](./curriculum/unit_8_grants/phoenix_ai_grants_handbook.xlsx)**
 > * **Google 試算表 (雲端互動版) & Notion 協作模板 (填表登記索取)**：
 >   👉 **[📥 立即點此填寫表單免費登記索取「雲端試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 > *(本登記表單符合個人資料保護法告知義務。填寫表單即代表您同意我們依個人資料保護法蒐集、處理及利用您的資料以進行工具包發送與後續專家快診諮詢對接。)*
 
 ---
@@ -74,6 +75,7 @@
 > ⚠️ **每季限量 8 件，均由兩位顧問親自評估**，確保輸出品質。
 >
 > 👉 **[🔍 點此填寫表單預約申請「企業 AI 落地與補助可行性前置診斷」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
 
@@ -178,6 +180,7 @@
 7. **【外銷必備】國際安全與出口合規旗艦套餐 (M11 + M13)** ── *公開班 NT$ 9,980/人 ｜ 內訓 NT$ 160,000/場*
 
 > 👉 **[📥 立即點此填寫表單預約「企業內訓與公開班模組洽詢」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
 
@@ -238,6 +241,7 @@
 > 3. **B/C 級客戶自動賦能**：未達快診標準之名單，我們將寄送鳳凰 AI 轉型參考資源包，或提供開源教材以利團隊自行研習。
 >
 > 👉 **[📊 立即點此填寫表單預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 >
 > ✉️ 任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**allmyway2007@gmail.com**
 

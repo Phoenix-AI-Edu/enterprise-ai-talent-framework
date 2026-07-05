@@ -120,6 +120,7 @@ AI 落地不是單純的技術升級，而是**「權利與習慣的重新分配
 > * **5 年 TCO 財務精算 Excel 模板 (直接下載)**：包含硬體折舊、API 調用量成長、工程維運工時與 Token 通膨係數的專業試算表。👉 **[📥 點此直接免留資料下載 5年 TCO 估算 Excel 模板](./phoenix_ai_tco_estimator.xlsx)**。
 > * **Google 試算表互動版（含 ROI 自動計算） & Notion 協作模板**：
 >   👉 **[📥 立即點此填寫表單登記索取「互動試算表與 Notion 協作模板工具包」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](../../privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 >   *(本登記表單蒐集之個人資料僅用於工具包發送與服務推廣。填寫即代表您同意依中華民國個人資料保護法第 8 條規定蒐集、處理及利用您的個人資料。)*
 
 ### 📋 主表一：企業 AI 場景盤點畫布 (Scenario Discovery Canvas)
@@ -239,6 +240,7 @@ $$\text{Priority Score} = w_{\text{value}} \cdot \text{Business Value} + w_{\tex
 若您的企業需要首席顧問 **孟淑慧** 與策略長 **陳文家** 的深度輔導，或希望引入 **4+1 戰略畫布實戰工作坊**，請遵循以下數據導向的預約機制，以確保每次對話都能為您的組織帶來實質價值：
 
 1. **預約前置諮詢**：請點選下方連結，填寫 **[📊 立即點此預約「企業 AI 導入與成熟度診斷前置諮詢」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**，留下您的企業背景與核心轉型痛點。
+> 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](../../privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 2. **A 級客戶收費快診**：經問卷與前置背景評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘付費「AI 戰略快診診斷案」（收費 NTD 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
 3. **專業商務聯絡**：任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**allmyway2007@gmail.com**
 
