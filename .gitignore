@@ -38,8 +38,18 @@ __pycache__/
 # VitePress compile directories
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+
+# Node/Frontend builds
 node_modules/
 dist/
+build/
+.next/
+
+# Backend and DB
+.env
+*.db
+*.log
+.venv/
 
 # Private B2B Advisor & Ops Management Directory (Never push to GitHub)
 internal_admin/
