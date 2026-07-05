@@ -436,6 +436,21 @@ a {
   margin-top: 32px;
 }
 
+.form-consent {
+  margin-top: 12px;
+  color: var(--gray-400);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.form-consent a {
+  color: var(--phoenix-gold);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 @media (max-width: 600px) {
   .cta-group {
     grid-template-columns: 1fr;
