@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A 公司 AI 落地戰略評估與「售後問答模組」RAG 工作流設計報告 ｜ 企業範例說明</title>
+    <title>某製造商 AI 落地戰略評估與「售後問答模組」RAG 工作流設計報告 ｜ 企業範例說明</title>
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -259,17 +259,17 @@
     </div>
 
     <!-- Hidden Raw Markdown Data -->
-    <script type="text/markdown" id="rawMarkdown"># 📊 A 公司 AI 落地戰略評估與「售後問答模組」RAG 工作流設計報告
+    <script type="text/markdown" id="rawMarkdown"># 📊 某製造商 AI 落地戰略評估與「售後問答模組」RAG 工作流設計報告
 > **Enterprise AI Case Study Report & Technical Design Spec (v2026)**  
-> **委託單位**：A 公司（跨國自行車零件製造商）  
+> **委託單位**：某製造商（跨國自行車零件製造商）  
 > **規劃團隊**：鳳凰 AI 顧問小組  
 > **設計標準**：對齊 ISO/IEC 42001（人工智慧管理）與 NIST AI RMF（風險管理框架）  
 
 ---
 
-## 🎯 一、 A 公司 3 大 AI 應用模組挑選與導入評估
+## 🎯 一、 某製造商 3 大 AI 應用模組挑選與導入評估
 
-針對 A 公司目前的業務痛點，對照單元二之「十大企業級 AI 應用模組」，我們為其挑選以下三個最合適的 AI 應用模組，並進行優先級加權評分（權重配置：商業價值 $w_{\text{value}} = 0.5$、技術可行性 $w_{\text{feasibility}} = 0.3$、落地風險 $w_{\text{risk}} = 0.2$）：
+針對 某製造商目前的業務痛點，對照單元二之「十大企業級 AI 應用模組」，我們為其挑選以下三個最合適的 AI 應用模組，並進行優先級加權評分（權重配置：商業價值 $w_{\text{value}} = 0.5$、技術可行性 $w_{\text{feasibility}} = 0.3$、落地風險 $w_{\text{risk}} = 0.2$）：
 
 | 業務痛點描述 | 挑選之 AI 應用模組 | 基礎 AI 任務 | 評估指標評分 (1~5) | 優先級得分 & 決策象限 | 預期商業價值 (ROI) |
 | :--- | :--- | :---: | :---: | :---: | :--- |
@@ -278,13 +278,13 @@
 | **痛點 3**：採購合約散落各地，法務因漏看「自動續約與漲價條款」每年損失數百萬元。 | **智慧法務與合約審查系統** | Summarization (摘要) | **V: 4, D: 4, R: 2**<br>(合約格式標準) | **3.8**<br>⭐ **第二象限 (Strategic Bets)** | 合約初審效率提升 5 倍；**100% 提前預警**自動續約與漲價紅線，避免每年數百萬的沉沒成本。 |
 
 > [!NOTE]
-> **落地戰略建議**：A 公司應將 **「RAG 企業知識庫問答系統」** 列為 **第一波 Quick-Win 試點專案**，因為其數據就緒度高（已有現成 PDF 手冊），能在 30 天內快速見效，建立團隊變革士氣；「烤漆產線瑕疵檢測」與「合約審查」則編列為中長期專案，待首波成功後逐步推進。
+> **落地戰略建議**：某製造商應將 **「RAG 企業知識庫問答系統」** 列為 **第一波 Quick-Win 試點專案**，因為其數據就緒度高（已有現成 PDF 手冊），能在 30 天內快速見效，建立團隊變革士氣；「烤漆產線瑕疵檢測」與「合約審查」則編列為中長期專案，待首波成功後逐步推進。
 
 ---
 
 ## 🔄 二、「售後服務問答模組」RAG 核心工作流設計
 
-為了確保 RAG 系統能精確檢索複雜的自行車零件規格（例如專有名詞與型號），我們為 A 公司設計了以下**進階混合檢索與雙層分塊工作流**：
+為了確保 RAG 系統能精確檢索複雜的自行車零件規格（例如專有名詞與型號），我們為 某製造商設計了以下**進階混合檢索與雙層分塊工作流**：
 
 ### 1. 核心工作流 Mermaid 流程圖
 
@@ -380,9 +380,9 @@ graph TD
 
 ## 📈 四、 顧問團隊落地小結
 
-本報告所規劃的 A 公司 AI 落地戰略，其核心的優先級評估與 TCO 財務考量，已同步對齊於我們的 [4+1 企業 AI 戰略畫布 Excel 模板](file:///g:/我的雲端硬碟/AI_Talent/curriculum/unit_7_strategy/phoenix_ai_canvas_4plus1.xlsx) 中。
+本報告所規劃的 某製造商 AI 落地戰略，其核心的優先級評估與 TCO 財務考量，已同步對齊於我們的 [4+1 企業 AI 戰略畫布 Excel 模板](file:///g:/我的雲端硬碟/AI_Talent/curriculum/unit_7_strategy/phoenix_ai_canvas_4plus1.xlsx) 中。
 
-A 公司可在第一階段順利上線「售後 RAG 系統」後，收集真實的 Token 調用數據與一線阻力回報，再行調整合約審查系統之 `Legal Tech` 提示詞紅線，最終達成**「讓 AI 真正為企業創造複利」**的長期 Operating Model。
+某製造商可在第一階段順利上線「售後 RAG 系統」後，收集真實的 Token 調用數據與一線阻力回報，再行調整合約審查系統之 `Legal Tech` 提示詞紅線，最終達成**「讓 AI 真正為企業創造複利」**的長期 Operating Model。
 </script>
 
     <script>
