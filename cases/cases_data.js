@@ -14,8 +14,8 @@ const PHOENIX_CASES_DB = [
       "混合檢索與意圖路由：偵測型號提問並調低 Alpha 權重至 0.2，以 BM25 關鍵字匹配為主，並導入 RAG 三元組（RAG Triad）在後台評估真實性以防範幻覺。"
     ],
     "roi": [
-      "客服查閱回覆時間自 作業時間大幅縮減以內",
-      "檢索召回率與型號精準度達 9偏高比例 以上",
+      "客服查閱回覆時間作業時間大幅縮減",
+      "檢索召回率與型號精準度達 極高比例 以上",
       "有效規避 AI 客服幻覺造成的錯誤規格與承諾風險"
     ],
     "detail_url": "./cases/html/manufacturing_03_bicycle_rag.html"
@@ -48,7 +48,7 @@ const PHOENIX_CASES_DB = [
     "tag": "🔌 進階系統設計組",
     "scheme": "方案 B 企業工作坊",
     "pain_points": [
-      "律師事務所日常面對大量標準合約初審，耗費初階律師 顯著比例時間，且在訴訟判例檢索上面臨關鍵字侷限漏檢的風險。"
+      "律師事務所日常面對大量標準合約初審，耗費初階律師 大量時間，且在訴訟判例檢索上面臨關鍵字侷限漏檢的風險。"
     ],
     "solutions": [
       "提示詞紅線工程與判例 RAG 系統：策略長規劃「合約紅線指引（Legal Redlines）」結合大模型自動初審與標註風險；同時建立判例向量庫，以混合檢索（Alpha = 0.5）突破傳統檢索漏洞。"
@@ -78,7 +78,7 @@ const PHOENIX_CASES_DB = [
     "roi": [
       "鋼材表面缺陷漏檢率大幅下降，客訴歸零",
       "現場一線 AI 標記效率顯著提升",
-      "每年挽回之退貨賠償與重工損失達 可觀成本"
+      "每年挽回之退貨賠償與重工損失大幅降低"
     ],
     "detail_url": "./cases/html/manufacturing_01_steel_defect.html"
   },
@@ -117,7 +117,7 @@ const PHOENIX_CASES_DB = [
       "雙向屏蔽與雙簽：在 Line 前端架設個資去識別化隔離 Pipeline；配置「醫護雙簽覆核（RACI）流程」，AI 僅整理草稿，回覆出站必須經專業人員確認。"
     ],
     "roi": [
-      "健檢報告摘要整理工時自 作業時間大幅縮短 (效率顯著提升)",
+      "健檢報告摘要整理工時作業時間大幅縮短 (效率顯著提升)",
       "Line 客服滿意度顯著提升，健檢回診率大幅增加",
       "有效規避敏感病歷個資訴訟與合規漏洞"
     ],
@@ -161,7 +161,7 @@ const PHOENIX_CASES_DB = [
     "roi": [
       "出貨條碼貼錯與混料退貨率顯著下降 接近零失誤",
       "出貨包裝速度顯著提升",
-      "因退貨索賠與重工包裝成本每年省下達 大量退貨索賠成本"
+      "因退貨索賠與重工包裝成本每年省下大量退貨成本"
     ],
     "detail_url": "./cases/html/manufacturing_02_screw_packing.html"
   },
@@ -184,7 +184,7 @@ const PHOENIX_CASES_DB = [
       "SaaS 分攤模式降低加盟主初期投資與總部推廣阻力",
       "人機雙簽工作流確保品質與合規紅線，降低總部管控風險"
     ],
-    "detail_url": "./cases/html/retail_02_chain_tea_tea_ai.html"
+    "detail_url": "./cases/html/retail_02_mingchadao_tea_ai.html"
   },
   {
     "id": "PHX-CASE-2026-037",
@@ -194,7 +194,7 @@ const PHOENIX_CASES_DB = [
     "tag": "🔌 進階系統設計組",
     "scheme": "方案 B 企業工作坊",
     "pain_points": [
-      "位於高雄南部的電鍍加工廠年營收新台幣 億元級元，專為美國與歐洲汽車大廠提供底盤螺栓防鏽/鋅鎳合金電鍍，卻長期卡在『良率越高、排污越重』的兩難，過去因廢水重金屬濃度偏高屢遭高額環保裁罰，年改善預算高達 顯著成本元。",
+      "位於高雄南部的電鍍加工廠年營收新台幣 億元級，專為美國與歐洲汽車大廠提供底盤螺栓防鏽/鋅鎳合金電鍍，卻長期卡在『良率越高、排污越重』的兩難，過去因廢水重金屬濃度偏高屢遭高額環保裁罰，年改善預算高達 高昂成本。",
       "首席化學研發工程師擔心『獨門配方透明化』而故意登錄偏差或殘缺的 pH 與化驗日誌，導致預測模型無法收斂，改善方案始終無法落地。",
       "國際車廠與環保稽核要求可追溯審核鏈，但現僅有零散紙本 log，法規風險持續升溫。"
     ],
@@ -205,8 +205,8 @@ const PHOENIX_CASES_DB = [
       "DLP 個資網閘與 API Token 熔斷：在配方與排放數據出站前完成機密遮罩，防止配方外洩；同時設定算力預算硬上限，阻絕成本失控。"
     ],
     "roi": [
-      "電鍍良率自 極高比例 提升至 98.偏高比例，且廢水排放 全面 符合環保法規，一次兼顧品質與合規。",
-      "徹底規避年新台幣 顯著成本元之環保裁罰與改善預算，合規紅線全面內嵌系統。",
+      "電鍍良率顯著提升至 極高水準，且廢水排放 全面 符合環保法規，一次兼顧品質與合規。",
+      "徹底規避年新台幣 高昂成本之環保裁罰與改善預算，合規紅線全面內嵌系統。",
       "大師傅 16 年經驗沉澱為地端可追溯資產，人機雙簽建立完整審計軌跡；並可合法申請研發租稅抵減 部分。"
     ],
     "detail_url": "./cases/html/manufacturing_04_electroplate_ai.html"
@@ -270,14 +270,14 @@ const PHOENIX_CASES_DB = [
     "solutions": [
       "邊緣 ASR 語音排障 + RAG 知識庫：降低一線訓練負擔，尖峰收銀效率提升。",
       "情緒熔斷與人機雙簽：AI 建議由真人客服或店長最終拍板，杜絕退款與公關災難。",
-      "智慧排班 ML + HITL：AI 提出建議班表，店長保留 全面 修改權，降低人力成本 5–部分。"
+      "智慧排班 ML + HITL：AI 提出建議班表，店長保留 完整修改權，降低人力成本 顯著比例。"
     ],
     "roi": [
       "尖峰客流收銀效率顯著提升，新人完訓上崗有效縮短",
-      "降低門店無效人力成本 5–部分，全面 阻斷勞基法開罰風險",
+      "降低門店無效人力成本 顯著比例，有效阻斷勞基法開罰風險",
       "建立四道合規防線，規避行銷 IP 與 Google 一星公關風險"
     ],
-    "detail_url": "./cases/html/retail_03_chain_retail_ai.html"
+    "detail_url": "./cases/html/retail_03_yuepin_ai.html"
   },
   {
     "id": "PHX-CASE-2026-041",
@@ -317,15 +317,15 @@ const PHOENIX_CASES_DB = [
     ],
     "solutions": [
       "邊緣語音報修 (Copilot)：85-95 分貝高噪音環境 ASR，AI 草擬報修單，師傅一鍵確認。",
-      "AI 瑕疵分流 (Validator)：極高比例 假警報濾除，人眼雙簽覆核致命缺陷與模糊邊界。",
+      "AI 瑕疵分流 (Validator)：大幅濾除假警報，人眼雙簽覆核致命缺陷與模糊邊界。",
       "預測維護 + HITL：AI 告警剩餘壽命低於安全閾值，老師傅 全面 保留停機換模決定權。"
     ],
     "roi": [
-      "假警報濾除率 ≥極高比例，釋放品保 多數 覆檢人手",
+      "假警報濾除率顯著提升，釋放品保 多數 覆檢人手",
       "預防 顯著比例 非計畫性突發停機，模具壽命延長 25%",
       "CBAM 碳申報工時從 10 天降至 <數小時，一次到位"
     ],
-    "detail_url": "./cases/html/manufacturing_08_auto_parts_ai.html"
+    "detail_url": "./cases/html/manufacturing_08_henda_ai.html"
   },
   {
     "id": "PHX-CASE-2026-043",
@@ -349,7 +349,7 @@ const PHOENIX_CASES_DB = [
       "合規二審自動禁忌詞過濾，金管會問責機制完整留下審計軌跡",
       "地端部署百分之百不出防火牆，與 RAG 隱私遮罩雙重保護機敏客戶資料"
     ],
-    "detail_url": "./cases/html/finance_01_securities_ai.html"
+    "detail_url": "./cases/html/finance_01_dingtai_ai.html"
   },
   {
     "id": "PHX-CASE-2026-044",
@@ -374,7 +374,7 @@ const PHOENIX_CASES_DB = [
       "運維人員接受度提升，AI 定位為免責保護傘",
       "合規簽核機制成為特許監管下的責任歸屬與免責證據"
     ],
-    "detail_url": "./cases/html/manufacturing_09_south_tw_coldheading_ai.html"
+    "detail_url": "./cases/html/manufacturing_09_luzhu_coldheading_ai.html"
   },
   {
     "id": "PHX-CASE-2026-045",
@@ -399,7 +399,7 @@ const PHOENIX_CASES_DB = [
       "調機師傅參與度提升，AI 定位為省力工具而非取代威脅，導入阻力降低",
       "合規簽核機制留下完整審計軌跡，符合特許監管責任可追溯要求"
     ],
-    "detail_url": "./cases/html/manufacturing_10_south_tw_fastener_ai.html"
+    "detail_url": "./cases/html/manufacturing_10_okayama_fastener_ai.html"
   },
   {
     "id": "PHX-CASE-2026-046",
@@ -425,7 +425,7 @@ const PHOENIX_CASES_DB = [
       "ERP 數據品質提升，語音報工大幅降低登錄人為錯誤",
       "研發費用合法稅抵減 部分，降低 AI 導入總成本"
     ],
-    "detail_url": "./cases/html/manufacturing_11_south_tw_forge_ai.html"
+    "detail_url": "./cases/html/manufacturing_11_okayama_forge_ai.html"
   },
   {
     "id": "PHX-CASE-2026-047",
@@ -450,7 +450,7 @@ const PHOENIX_CASES_DB = [
       "唯讀 ERP + DLP 車間符合 ISO/IEC 42001 安全治理要求，國際合約風險下降",
       "SBIR 補助與研發稅抵減，大幅壓低轉型總成本"
     ],
-    "detail_url": "./cases/html/manufacturing_12_south_tw_sbir_ai.html"
+    "detail_url": "./cases/html/manufacturing_12_okayama_sbir_ai.html"
   },
   {
     "id": "PHX-CASE-2026-048",
@@ -474,7 +474,7 @@ const PHOENIX_CASES_DB = [
       "熱處理知識資產數位化，人員流動不再等於技術流失",
       "溫控與能耗合規紀錄完整，能源成本優化可驗證可追溯"
     ],
-    "detail_url": "./cases/html/manufacturing_13_south_tw_heat_treatment.html"
+    "detail_url": "./cases/html/manufacturing_13_okayama_heat_treatment.html"
   },
   {
     "id": "PHX-CASE-2026-049",
@@ -499,7 +499,7 @@ const PHOENIX_CASES_DB = [
       "中高龄員工接受度高，原本停擺的 AI 視覺檢測專案成功重啟",
       "客戶索賠風險下降，包裝合規紀錄可追溯，品牌信譽同步提升"
     ],
-    "detail_url": "./cases/html/manufacturing_14_south_tw_barcode.html"
+    "detail_url": "./cases/html/manufacturing_14_okayama_barcode.html"
   },
   {
     "id": "PHX-CASE-2026-050",
@@ -524,7 +524,7 @@ const PHOENIX_CASES_DB = [
       "業務團隊支持度提高，歐洲航太供應鏈合約競爭力回升",
       "綠色合規出貨激勵與研發稅抵減，降低 TCO"
     ],
-    "detail_url": "./cases/html/manufacturing_15_south_tw_cbam.html"
+    "detail_url": "./cases/html/manufacturing_15_okayama_cbam.html"
   },
   {
     "id": "PHX-CASE-2026-051",
@@ -549,6 +549,6 @@ const PHOENIX_CASES_DB = [
       "品管團隊從抵制轉為參與，AI 系統穩定運作",
       "稅務抵減與 TCO 控制，提升投資效益"
     ],
-    "detail_url": "./cases/html/manufacturing_16_south_tw_filter.html"
+    "detail_url": "./cases/html/manufacturing_16_okayama_filter.html"
   }
 ];
