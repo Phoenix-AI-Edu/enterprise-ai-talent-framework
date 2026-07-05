@@ -27,7 +27,7 @@ AI_Talent/
 
 ### 互動系統的外部部署
 真正的系統 (如 FastAPI 引擎與 SQLite DB) 將獨立部署於外部平台：
-- **示範網址**：`https://demo-central-kitchen.xxx` (部署於 Cloud Run / Render 等)
+- **示範網址**：`https://demo.ai-talent.example` (部署於 Cloud Run / Render 等)
 - **銜接方式**：訪客在 `central-kitchen-ai-agent/index.html` 閱讀完產品簡介後，點擊「前往互動體驗」，才跳轉至外部的 Demo App。
 
 ### 商業層指標追蹤 (Business Metrics)

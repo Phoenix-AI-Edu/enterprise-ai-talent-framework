@@ -1413,6 +1413,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: translateX(2px);
     }
 
+    .experience-entry-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      color: var(--phoenix-accent);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .experience-entry-link:hover {
+      background: rgba(var(--phoenix-accent-rgb), 0.18);
+      border-color: rgba(var(--phoenix-accent-rgb), 0.55);
+      transform: translateY(-1px);
+      color: var(--white);
+    }
+
     .footer-bottom {
       border-top: 1px solid rgba(255, 255, 255, 0.04);
       padding-top: 30px;
@@ -1497,6 +1517,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="#team" class="nav-link">顧問團隊</a>
         <a href="#pricing" class="nav-link">服務方案</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="nav-cta">索取 Notion 工具包</a>
+        <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:8px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
       </nav>
       <button class="menu-toggle" id="mobile-menu-toggle" aria-label="切換選單">
         <span></span>
@@ -1530,6 +1551,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary">
           <span>📥 索取 Notion + Excel 工具包</span>
         </a>
+        <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:10px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
       </div>
 
       <!-- 數據指標 -->
@@ -1733,6 +1755,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" target="_blank" class="btn result-cta-lead" id="result-form-btn">
               🎯 搶先登記預約「90 分鐘企業 AI 成熟度專家快診」(NT$ 29,800，可全額折抵後續工作坊費)
             </a>
+            <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:10px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
             <span class="result-compliance">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
           </div>
         </div>
@@ -2886,6 +2909,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary" style="padding: 12px 24px; font-size: 13.5px; width: 100%; font-weight: 600; text-align: center;">
             📥 下載製造業實戰案例 PDF
           </a>
+          <p style="font-size:12px;color:var(--gray-600);text-align:right;margin-top:8px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
         </div>
       </div>
     </div>
@@ -3818,7 +3842,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="footer-link-item"><a href="#diagnostic">線上成熟度快測</a></li>
           <li class="footer-link-item"><a href="#deliverables">成果交付物預覽</a></li>
           <li class="footer-link-item"><a href="#team">專家顧問介紹</a></li>
-          <li class="footer-link-item"><a href="#pricing">企業導入方案</a></li>
+          <li class="footer-link-item experience-entry-item"><a href="/experience/index.html" class="experience-entry-link">前往 AI 解決方案體驗區</a></li>
         </ul>
       </div>
 
@@ -4337,6 +4361,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const target = e.target.closest('[data-ga]');
         if (target) send(target);
       });
+    })();
+  </script>
+  <script>
+    // ─── Experience Entry CTA Analytics ───
+    (function() {
+      const link = document.querySelector('.experience-entry-link');
+      if (!link) return;
+
+      function fireEntryEvent() {
+        const href = link.getAttribute('href') || '';
+        const payloadBase = {
+          event: 'experience_cta_click',
+          event_category: 'experience_cta',
+          event_label: 'experience_entry_click',
+          cta_href: href,
+          source_section: 'footer'
+        };
+
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(payloadBase);
+        } catch (err) {
+          // suppress static-page analytics errors
+        }
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'experience_entry_click', payloadBase);
+        }
+
+        if (typeof window.__sendGA4 === 'function') {
+          const params = new URLSearchParams({
+            event_category: payloadBase.event_category,
+            event_label: payloadBase.event_label,
+            source_section: payloadBase.source_section,
+            cta_href: payloadBase.cta_href
+          });
+          window.__sendGA4('experience_cta_click', Object.fromEntries(params));
+        }
+      }
+
+      if (typeof link.addEventListener === 'function') {
+        link.addEventListener('click', fireEntryEvent);
+      }
     })();
   </script>
   <script>
