@@ -444,7 +444,7 @@
     <header class="page-header">
       <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
       <div class="page-header-right">
-        <div class="status-badge" data-ga="experience_cta" data-ga-event="solution_view" data-ga-solution-id="central_kitchen_ai_agent">
+        <div class="status-badge" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="central_kitchen_ai_agent">
           <span class="status-dot"></span>
           Interactive Demo / Pilot Ready
         </div>
@@ -576,7 +576,7 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-primary" id="btn-demo-request">申請互動體驗帳號</a>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-secondary" id="btn-demo-request-2">前往互動 Demo</a>
         </div>
-        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>
       </div>
     </section>
   </div>
@@ -584,11 +584,11 @@
   <footer class="page-footer">
     <div class="container footer-inner">
       <div class="footer-consent">
-        點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a>
+        點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>
       </div>
       <div class="footer-links">
         <a href="../index.html" class="footer-link">回首頁</a>
-        <a href="../privacy.html" class="footer-link">隱私權政策</a>
+        <a href="../../privacy.html" class="footer-link">隱私權政策</a>
       </div>
       <div class="footer-copy">© 2026 鳳凰 AI 顧問團隊。著作權所有。</div>
     </div>
@@ -612,23 +612,23 @@
         }
       }
 
-      // page view: event_category=experience_cta, event_label=solution_view
+      // page view: event_category=experience_cta, event_label=experience_solution_view
       track('experience_solution_view', {
         event_category: 'experience_cta',
-        event_label: 'solution_view',
+        event_label: 'experience_solution_view',
         solution_id: solutionId,
         solution_title: solutionTitle
       });
 
-      // CTA click handler: event_category=experience_cta, event_label=demo_request_click
+      // CTA click handler: event_category=experience_cta, event_label=experience_demo_request_click
       var demoActions = document.getElementById('demo-actions');
       if (demoActions) {
         demoActions.addEventListener('click', function (e) {
           var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
           if (!target) return;
-          track('demo_request_click', {
+          track('experience_demo_request_click', {
             event_category: 'experience_cta',
-            event_label: 'demo_request_click',
+            event_label: 'experience_demo_request_click',
             solution_id: solutionId,
             solution_title: solutionTitle,
             cta_href: target.getAttribute('href')

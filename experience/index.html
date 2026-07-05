@@ -378,9 +378,9 @@
         window.dataLayer.push(payload);
 
         if (typeof window.gtag === 'function') {
-          window.gtag('event', 'solution_view', {
+          window.gtag('event', 'experience_solution_view', {
             event_category: 'experience_cta',
-            event_label: 'solution_view',
+            event_label: 'experience_solution_view',
             solution_id: solution.id
           });
         }
@@ -395,7 +395,7 @@
         }).join('');
 
         card.innerHTML = '<div>' +
-          '<div class="solution-header" data-ga="experience_cta" data-ga-event="solution_view" data-ga-solution-id="' + s.id + '">' +
+          '<div class="solution-header" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="' + s.id + '">' +
             '<div class="solution-name">' + s.title + '</div>' +
             '<div class="solution-badge">' + s.status + '</div>' +
           '</div>' +
@@ -405,8 +405,8 @@
         '</div>' +
         '<div>' +
           '<div class="solution-actions">' +
-            '<a href="' + s.cta_href + '" class="btn btn-primary" data-ga="experience_cta" data-ga-event="solution_view" data-ga-solution-id="' + s.id + '">' + s.cta_text + '</a>' +
-            (s.pilot_program_href ? '<a href="' + s.pilot_program_href + '" class="btn btn-secondary" data-ga="experience_cta" data-ga-event="demo_request_click" data-ga-solution-id="' + s.id + '">' + s.pilot_program_text + '</a>' : '') +
+            '<a href="' + s.cta_href + '" class="btn btn-primary" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="' + s.id + '">' + s.cta_text + '</a>' +
+            (s.pilot_program_href ? '<a href="' + s.pilot_program_href + '" class="btn btn-secondary" data-ga="experience_cta" data-ga-event="experience_demo_request_click" data-ga-solution-id="' + s.id + '">' + s.pilot_program_text + '</a>' : '') +
           '</div>' +
           '<div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>' +
         '</div>';

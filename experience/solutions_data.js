@@ -36,7 +36,7 @@ window.EXPERIENCE_SOLUTIONS = [
     roi_statement: "預期協助企業壓縮營運指令錯誤率、縮短跨層通報時程，並降低紙本與口頭通報造成的人為疏漏。",
 
     contact_category: "experience_cta",
-    contact_label: "solution_view",
+    contact_label: "experience_solution_view",
     form_intent: "high",
     source_section: "solution_detail",
 
