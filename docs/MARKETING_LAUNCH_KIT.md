@@ -135,3 +135,21 @@
 **版塊 4：適合對象與下一步 (Who & Next Steps)**
 - **適合對象**：具備 5 家以上門市、欲推動自動化的餐飲/零售總部與中央廚房。
 - **下一步**：掃描 QR Code 或點擊連結，立即索取互動 Demo 體驗帳號，開啟數位轉型第一步！
+
+---
+
+
+
+ ## 5. 中央廚房行銷 CTA 策略（Marketing Launch v0.2.0 Addendum）
+
+ - Primary CTA URL：
+ `https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/experience/central-kitchen-ai-agent/`
+ - Secondary CTA（第二層轉換）：landing page 內才導 Google Form，不得於文宣中直接導表單。
+ - 行銷 UTM：
+ - `utm_source=linkedin` / `facebook` / `threads` / `bd_dm`
+ - `utm_medium=social` / `direct` / `email` / `print`
+ - `utm_campaign=v020_central_kitchen_ai`
+
+ 注意事項：
+ - 本素材僅應以“草稿”形式產出；所有草稿不得直接發布。
+ - 文案內不得出現未經驗證的百分比、金額、ROI、真實客戶名稱，或任何已完成實體 ERP/POS 串接的宣稱。
