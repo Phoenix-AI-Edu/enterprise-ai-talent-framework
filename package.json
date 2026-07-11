@@ -1,0 +1,24 @@
+{
+  "name": "ai_talent",
+  "version": "1.0.0",
+  "description": "Enterprise AI Talent Framework & Operating Model (v2026)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "slides:sqlite3": "node scripts/make_sqlite_slides.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework/issues"
+  },
+  "homepage": "https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework#readme",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}
