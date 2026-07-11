@@ -97,3 +97,6 @@ scripts/slides_config_*.json
 marketing_drafts/raw/
 marketing_drafts/analysis/
 *.bak
+
+# Private commercial prospect lists (never push to GitHub)
+private-commercial/
