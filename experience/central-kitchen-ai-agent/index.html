@@ -118,6 +118,7 @@
       padding: 60px 0 50px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
     .hero-glow {
       position: absolute;
@@ -158,6 +159,13 @@
       max-width: 780px;
       margin: 0 auto;
       line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
     }
 
     /* ─── Section Commons ─── */
@@ -328,6 +336,22 @@
       line-height: 1.6;
     }
 
+    .video-wrap {
+      background: #05050b;
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+    .flow-video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05050b; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .boundary-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; }
+    .boundary-card h3 { font-family: var(--font-display); font-size: 16px; margin-bottom: 10px; }
+    .boundary-card ul { padding-left: 18px; color: var(--gray-400); font-size: 13px; line-height: 1.8; }
+    .boundary-card--now { border-color: rgba(0, 242, 254, 0.25); }
+    .boundary-card--poc { border-color: rgba(245, 166, 35, 0.3); }
+    .boundary-card--assessment { border-color: rgba(var(--phoenix-accent-rgb), 0.3); }
+
     /* ─── CTA ─── */
     .cta-box {
       background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.12) 0%, rgba(var(--phoenix-accent-rgb), 0.04) 100%);
@@ -432,7 +456,8 @@
       .cta-title { font-size: 22px; }
       .flow-diagram { flex-direction: column; gap: 12px; }
       .flow-arrow { transform: rotate(90deg); padding: 0; padding-bottom: 0; }
-      .cta-actions { flex-direction: column; align-items: stretch; }
+      .cta-actions, .hero-actions { flex-direction: column; align-items: stretch; }
+      .boundary-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -449,7 +474,7 @@
       <div class="page-header-right">
         <div class="status-badge" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="central_kitchen_ai_agent">
           <span class="status-dot"></span>
-          Interactive Demo / Pilot Ready
+          公開沙盒示範
         </div>
         <span class="logo-mark">鳳凰 AI</span>
       </div>
@@ -459,8 +484,12 @@
       <div class="hero-glow"></div>
       <div class="hero-content">
         <div class="hero-tag">Food &amp; Retail · AI Operations</div>
-        <h1 class="hero-title">中央廚房 AI 營運助理</h1>
-        <p class="hero-desc">降低門市重複查詢、建立總部審核流程、產生標準化 API Payload。協助餐飲連鎖與中央廚房總部以同一套 AI 工作流，將每日進貨、備料、出勤與異常通報串聯自動化。</p>
+        <h1 class="hero-title">中央廚房營運防護台</h1>
+        <p class="hero-desc">門市自助查詢、高風險自動攔截、總部集中審核；ERP／POS 先沙盒預覽，不寫入正式系統。</p>
+        <div class="hero-actions" id="hero-actions">
+          <a href="#flow-video" class="btn btn-primary" id="btn-video-start">看 75 秒流程</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-secondary" id="btn-demo-request-2">申請操作 Demo</a>
+        </div>
       </div>
     </section>
 
@@ -474,15 +503,15 @@
           </div>
           <div class="summary-item">
             <div class="summary-label">方案狀態</div>
-            <div class="summary-value">Interactive Demo / Pilot Ready</div>
+            <div class="summary-value">公開沙盒示範／可申請操作 Demo</div>
           </div>
           <div class="summary-item">
             <div class="summary-label">上線模式</div>
-            <div class="summary-value">互動式 Pilot · 最小資料蒐集 · 去識別化場景</div>
+            <div class="summary-value">去識別化場景 · 正式導入前先驗證流程</div>
           </div>
           <div class="summary-item">
             <div class="summary-label">外部系統接軌</div>
-            <div class="summary-value">ERP / POS / HRM — API Payload Preview</div>
+            <div class="summary-value">ERP / POS — sandbox payload 預覽</div>
           </div>
         </div>
       </div>
@@ -492,38 +521,28 @@
     <section class="section">
       <div class="section-title">
         <span class="section-title-num">1</span>
-        解決方案亮點
+        現可驗證的流程
       </div>
       <div class="feature-grid">
         <div class="feature-card">
           <span class="feature-icon">📊</span>
-          <div class="feature-title">總部多門市集中監控</div>
-          <div class="feature-desc">營收、耗損、溫層異常、結帳高峰與異動告警一目瞭然，減少層層口頭回報。</div>
+          <div class="feature-title">門市自助查詢</div>
+          <div class="feature-desc">用自然語言查詢訂單與庫存，減少總部電話與群組往返。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">💬</span>
-          <div class="feature-title">門市端自然語言提報</div>
-          <div class="feature-desc">LINE 文字/語音直通總部，自動轉譯為工單與追蹤任務，免安裝独立 APP。</div>
+          <div class="feature-title">高風險操作攔截</div>
+          <div class="feature-desc">報廢、取消等操作先建立審核單；門市無法自行越權核准。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">🛡️</span>
-          <div class="feature-title">高風險意圖阻斷 + HITL</div>
-          <div class="feature-desc">系統先行偵測高資安任務並阻斷，再由 Human-in-the-loop 人工確認後才放行。</div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🔐</span>
-          <div class="feature-title">RBAC 角色權限控管</div>
-          <div class="feature-desc">總經理、區域主管、門市店長、品保各有存取邊界，敏感資料分層保護。</div>
+          <div class="feature-title">總部人工審核</div>
+          <div class="feature-desc">總部可核准或拒絕申請，讓人機協作的決策節點留在正確位置。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">🔌</span>
           <div class="feature-title">ERP/POS Payload Preview</div>
-          <div class="feature-desc">在無真實系統連線前提早驗證 API 接規格，上線前先確認格式與欄位對齊。</div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">📋</span>
-          <div class="feature-title">標準化作業指令</div>
-          <div class="feature-desc">將營運指令統一為標準 API Payload，消除各門市自行解讀造成的誤差與延遲。</div>
+          <div class="feature-desc">核准後只產生帶有稽核資訊的沙盒 payload，供 IT 先確認欄位與規格。</div>
         </div>
       </div>
     </section>
@@ -532,41 +551,55 @@
     <section class="section">
       <div class="section-title">
         <span class="section-title-num">2</span>
-        典型營運流程示意
+        75 秒看懂流程
       </div>
       <div class="flow-wrap">
-        <div class="flow-diagram" role="img" aria-label="門市通報到總部審核的標準化作業流程示意圖">
+        <div class="flow-diagram" role="img" aria-label="門市查詢、高風險攔截、總部審核與沙盒預覽的流程示意圖">
           <div class="flow-step">
             <div class="flow-icon">🏪</div>
-            <div class="flow-label">門市通報</div>
-            <div class="flow-sub">LINE 文字/語音<br>自動轉譯工單</div>
+            <div class="flow-label">查</div>
+            <div class="flow-sub">查訂單<br>查庫存</div>
           </div>
           <div class="flow-arrow">›</div>
           <div class="flow-step">
             <div class="flow-icon">🤖</div>
-            <div class="flow-label">AI 意圖解析</div>
-            <div class="flow-sub">任務分類<br>自動派單</div>
+            <div class="flow-label">擋</div>
+            <div class="flow-sub">報廢、取消<br>先行攔截</div>
           </div>
           <div class="flow-arrow">›</div>
           <div class="flow-step">
             <div class="flow-icon">🛡️</div>
-            <div class="flow-label">風險分流</div>
-            <div class="flow-sub">高風險意圖阻斷<br>Human-in-the-loop</div>
+            <div class="flow-label">核</div>
+            <div class="flow-sub">總部核准<br>或拒絕</div>
           </div>
           <div class="flow-arrow">›</div>
           <div class="flow-step">
             <div class="flow-icon">🏢</div>
-            <div class="flow-label">總部戰情室</div>
-            <div class="flow-sub">KPI 監控<br>審核與覆核</div>
-          </div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">
-            <div class="flow-icon">🔌</div>
-            <div class="flow-label">ERP/POS 輸出</div>
-            <div class="flow-sub">標準 API Payload<br>格式驗證 Preview</div>
+            <div class="flow-label">預覽</div>
+            <div class="flow-sub">sandbox<br>payload</div>
           </div>
         </div>
-        <div class="flow-caption">示意畫面 | 實際系統畫面會因客戶 ERP/POS 規格而異。所有展示場景皆為去識別化模擬，不涉及任何真實品牌或系統。</div>
+        <div class="flow-caption">可公開驗證的示範流程。ERP／POS payload 為 sandbox 預覽，不會寫入任何正式系統。</div>
+      </div>
+    </section>
+
+    <section class="section" id="flow-video">
+      <div class="section-title"><span class="section-title-num">3</span>實機流程影片</div>
+      <div class="video-wrap">
+        <video class="flow-video" controls preload="metadata" poster="./assets/main-a-v3-poster.jpg">
+          <source src="./assets/main-a-v3.mp4" type="video/mp4">
+          您的瀏覽器不支援影片播放；請申請操作 Demo。
+        </video>
+      </div>
+      <div class="flow-caption">影片展示：查詢、攔截、總部核准與 sandbox payload 預覽。</div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><span class="section-title-num">4</span>能力邊界</div>
+      <div class="boundary-grid">
+        <article class="boundary-card boundary-card--now"><h3>現可操作</h3><ul><li>網頁查詢與戰情室</li><li>高風險攔截與人工審核</li><li>ERP/POS sandbox payload 預覽</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>PoC 可配置</h3><ul><li>一家門市的流程與審核規則</li><li>LINE 門市連動</li></ul></article>
+        <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>正式 ERP/POS 寫入</li><li>企業 SSO、地端部署與進階稽核</li></ul></article>
       </div>
     </section>
 
@@ -574,24 +607,24 @@
     <!-- Target Audience -->
     <section class="section" id="target-audience">
       <div class="section-title">
-        <span class="section-title-num">3</span>
+        <span class="section-title-num">5</span>
         方案適合對象與導入前提
       </div>
       <div class="feature-grid">
         <div class="feature-card">
           <span class="feature-icon">🏪</span>
           <div class="feature-title">連鎖門市與中央廚房</div>
-          <div class="feature-desc">具備至少 5 間以上門市，每日皆有訂貨、退貨、設備異常回報需求，且高度依賴 LINE 或電話溝通。</div>
+          <div class="feature-desc">有門市查單、查庫存或高風險異常提報流程，且希望降低電話、群組與口頭交接的連鎖餐飲組織。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">⚙️</span>
-          <div class="feature-title">尋求自動化轉型之總部</div>
-          <div class="feature-desc">希望減少總部內勤人員每日人工登打 ERP/POS 訂單的痛點，建立自動化初審與分流機制。</div>
+          <div class="feature-title">需要可控流程的總部</div>
+          <div class="feature-desc">希望將報廢、取消等高風險提報改成可追蹤、可審核的工作流。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">🧪</span>
           <div class="feature-title">具備沙盒測試概念之 IT 團隊</div>
-          <div class="feature-desc">理解本方案為 Pilot-ready 示範環境，上線前可先透過 Sandbox Payload 預覽確認 API 欄位規格，確保與現有 ERP 安全對接。</div>
+          <div class="feature-desc">願意先用 sandbox payload 確認欄位與流程，再決定是否進行正式系統串接。</div>
         </div>
       </div>
     </section>
@@ -599,12 +632,11 @@
     <!-- 4. CTA -->
     <section class="section">
       <div class="cta-box">
-        <div class="cta-title">申請互動體驗帳號</div>
-        <div class="cta-desc">進入 Pilot Demo，親身體驗門市通報、總部戰情室與 ERP/POS API Payload Preview 的完整流程。</div>
+        <div class="cta-title">先確認流程對不對，再談 LINE 或 ERP。</div>
+        <div class="cta-desc">兩週、一家店的 PoC，驗證門市提報是否改走審核單、總部是否完成審核，以及查詢是否改走系統。</div>
         <div class="cta-actions" id="demo-actions">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-primary" id="btn-demo-request">申請互動 Demo</a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-secondary" id="btn-consult-request">預約顧問諮詢</a>
-          <a href="#target-audience" class="btn btn-secondary" id="btn-audience-info">查看方案適合對象</a>
+          <a href="#flow-video" class="btn btn-primary" id="btn-video-start-2">看 75 秒流程</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" class="btn btn-secondary" id="btn-demo-request">申請操作 Demo</a>
         </div>
         <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>
       </div>
@@ -628,7 +660,7 @@
     (function () {
       // solution page view
       var solutionId = 'central_kitchen_ai_agent';
-      var solutionTitle = '中央廚房 AI 營運助理';
+      var solutionTitle = '中央廚房營運防護台';
 
       function track(eventName, params) {
         try {
@@ -654,7 +686,7 @@
       var demoActions = document.getElementById('demo-actions');
       if (demoActions) {
         demoActions.addEventListener('click', function (e) {
-          var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
+        var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
           if (!target) return;
           track('experience_demo_request_click', {
             event_category: 'experience_cta',
@@ -662,6 +694,27 @@
             solution_id: solutionId,
             solution_title: solutionTitle,
             cta_href: target.getAttribute('href')
+          });
+        });
+      }
+
+      var video = document.querySelector('.flow-video');
+      var videoTracked = false;
+      if (video) {
+        video.addEventListener('play', function () {
+          if (videoTracked) return;
+          videoTracked = true;
+          track('experience_video_start', {
+            event_category: 'experience_cta',
+            event_label: 'central_kitchen_main_video',
+            solution_id: solutionId
+          });
+        });
+        video.addEventListener('ended', function () {
+          track('experience_video_complete', {
+            event_category: 'experience_cta',
+            event_label: 'central_kitchen_main_video',
+            solution_id: solutionId
           });
         });
       }

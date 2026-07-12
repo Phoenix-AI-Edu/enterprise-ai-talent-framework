@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "validate:tools": "python scripts/validate_tool_manifest.py experience/tools",
     "slides:sqlite3": "node scripts/make_sqlite_slides.mjs"
   },
   "repository": {

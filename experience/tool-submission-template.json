@@ -1,0 +1,18 @@
+{
+  "$schema": "./tool-manifest.schema.json",
+  "id": "unique_tool_id",
+  "slug": "tool-url-slug",
+  "title": "工具對外名稱",
+  "status": "公開沙盒示範",
+  "positioning": "一句話說清楚它幫誰處理什麼流程",
+  "audience": ["主要使用者"],
+  "available_now": ["可公開驗證的功能"],
+  "poc_configurable": ["PoC 期間可配置的功能"],
+  "implementation_assessment": ["需另案評估的能力"],
+  "demo_url": "https://example.com/demo-or-video",
+  "primary_cta": { "label": "看流程影片", "url": "https://example.com/demo-or-video" },
+  "secondary_cta": { "label": "申請操作 Demo", "url": "https://example.com/form" },
+  "poc_success_criteria": ["可衡量的成功條件"],
+  "owner": "工具負責人",
+  "last_verified": "YYYY-MM-DD"
+}
