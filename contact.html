@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯絡我們｜鳳凰 AI 顧問</title>
+  <meta name="description" content="預約企業 AI 診斷、Pilot 計畫或內訓諮詢。鳳凰 AI 顧問團隊將於 1-2 個工作天內回覆。">
+  <meta property="og:title" content="聯絡我們｜鳳凰 AI 顧問">
+  <meta property="og:description" content="預約企業 AI 診斷、Pilot 計畫或內訓諮詢。">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --phoenix-bg: #0a0a0f;
+      --phoenix-mid: #121226;
+      --phoenix-text: #e8e8f0;
+      --phoenix-sub: #a0a0bb;
+      --phoenix-border: rgba(255, 255, 255, 0.08);
+      --phoenix-accent: #E94560;
+      --phoenix-accent-rgb: 233, 69, 96;
+      --phoenix-teal: #17c3b2;
+      --phoenix-gold: #f6c944;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans TC", "Inter", sans-serif;
+      background: var(--phoenix-bg);
+      color: var(--phoenix-text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+      background: linear-gradient(135deg, #fff 0%, var(--phoenix-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--phoenix-sub);
+      font-size: 16px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--phoenix-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 720px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      color: var(--phoenix-sub);
+      margin-bottom: 8px;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--phoenix-border);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--phoenix-accent);
+      box-shadow: 0 0 0 3px rgba(var(--phoenix-accent-rgb), 0.15);
+    }
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--phoenix-sub);
+    }
+    .check input {
+      margin-top: 4px;
+    }
+    .check a {
+      color: var(--phoenix-accent);
+      text-decoration: none;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      border: none;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      box-shadow: 0 8px 24px rgba(var(--phoenix-accent-rgb), 0.35);
+    }
+    .btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--phoenix-sub);
+    }
+
+    .data-notice {
+      margin: 4px 0 20px;
+      padding: 16px 18px;
+      border: 1px solid rgba(23, 195, 178, 0.22);
+      border-radius: 12px;
+      background: rgba(23, 195, 178, 0.055);
+      color: var(--phoenix-sub);
+      font-size: 13px;
+    }
+    .data-notice strong { color: var(--phoenix-text); }
+    .data-notice ul { margin: 8px 0 0; padding-left: 20px; }
+    .data-notice a { color: var(--phoenix-teal); }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .success .icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .success h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .success p {
+      color: var(--phoenix-sub);
+      margin: 0;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--phoenix-sub);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back:hover { color: #fff; }
+
+    header.site-header {
+      border-bottom: 1px solid var(--phoenix-border);
+      background: rgba(18,18,38,0.7);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #fff;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .logo span { color: var(--phoenix-accent); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="./index.html">PHOENIX<span>.</span>AI</a>
+    <a class="btn" style="padding:10px 16px;font-size:13px;border-radius:12px;" href="./index.html">回首頁</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>與鳳凰 AI 顧問聯繫</h1>
+    <p>請留下您的需求，我們將由策略長親自評估，並於 1–2 個工作天內與您聯繫。</p>
+  </section>
+
+  <div class="card" id="contactCard">
+    <iframe name="googleFormSink" id="googleFormSink" title="表單提交結果" style="display:none"></iframe>
+    <form id="contactForm" class="form" action="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/formResponse" method="POST" target="googleFormSink" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="name">聯絡人姓名 *</label>
+          <input id="name" name="entry.272408360" placeholder="例如：王小明" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="org">企業 / 單位名稱 *</label>
+          <input id="org" name="entry.65542742" placeholder="例如：XX 餐飲集團" autocomplete="organization" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="email">聯絡信箱 *</label>
+          <input id="email" name="emailAddress" type="email" placeholder="you@company.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="phone">聯絡電話 *</label>
+          <input id="phone" name="entry.2019468206" type="tel" placeholder="例如：0912-345-678" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="title">部門與職稱 *</label>
+          <input id="title" name="entry.1392641830" placeholder="例如：營運部經理" autocomplete="organization-title" required>
+        </div>
+        <div class="field">
+          <label for="type">需求類型 *</label>
+          <select id="type" required>
+            <option value="">請選擇</option>
+            <option value="diagnosis">企業 AI 成熟度診斷</option>
+            <option value="diagnostic_demo">診斷工作台 Demo</option>
+            <option value="central_kitchen_demo">中央廚房營運防護台 Demo</option>
+            <option value="pilot">Pilot 計畫與沙盒建置</option>
+            <option value="workshop">內訓 / 工作坊</option>
+            <option value="strategy">AI 策略規劃</option>
+            <option value="other">其他洽談</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="budget">預估導入預算與預期時程 *</label>
+        <select id="budget" name="entry.1233297346" required>
+          <option value="">請選擇</option>
+          <option value="已有明確預算與時程 (預計 3 個月內啟動)">已有明確預算與時程（預計 3 個月內啟動）</option>
+          <option value="已有初步評估預算 (預計 6 個月內啟動)">已有初步評估預算（預計 6 個月內啟動）</option>
+          <option value="目前無明確預算，以概念學習與內部研習為主">目前無明確預算，以概念學習與內部研習為主</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="msg">需求說明 *</label>
+        <textarea id="msg" placeholder="請簡單描述目前最核心的問題、預計時程，或想先驗證的場景。" required></textarea>
+      </div>
+
+      <input type="hidden" id="googlePainPoint" name="entry.2002297629">
+      <input type="hidden" name="entry.613425073" value="本人同意此表單蒐集之個人資料僅用於前置評估與服務推廣，並同意貴司依中華民國個人資料保護法第 8 條規定蒐集、處理及利用本人之個人資料。">
+
+      <div class="data-notice">
+        <strong>資料提交與保存說明</strong>
+        <ul>
+          <li>本頁資料將提交至鳳凰 AI 顧問管理的 Google Forms，供 Demo 安排、需求評估與後續聯絡使用。</li>
+          <li>蒐集欄位包含姓名、公司、職稱、Email、電話、需求類型、預算時程、需求說明及來源追蹤參數。</li>
+          <li>資料於上述目的存續期間保存；您可透過本表單或 <a href="mailto:allmyway2007@gmail.com">allmyway2007@gmail.com</a> 請求查詢、更正、停止利用或刪除。</li>
+          <li>本表單不要求填寫投資偏好、帳戶、信用卡或其他敏感金融資料。</li>
+        </ul>
+      </div>
+
+      <div class="field">
+        <label class="check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>我同意鳳凰 AI 顧問團隊依據《<a href="./privacy.html" target="_blank">個人資料保護與隱私權政策告知書</a>》處理本次表單資料，並了解我可隨時請求查詢或刪除。</span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">送出需求表單</button>
+        <span class="note">* 必填欄位</span>
+      </div>
+    </form>
+
+    <div class="success" id="successView">
+      <div class="icon">✅</div>
+      <h2>表單已送出</h2>
+      <p>感謝您留下需求，資料已送達顧問團隊，我們將於 1–2 個工作天內回覆。</p>
+      <a class="back" href="./index.html">← 返回官網</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('successView');
+  const sink = document.getElementById('googleFormSink');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const params = new URLSearchParams(window.location.search);
+  let submissionStarted = false;
+
+  const intentLabels = {
+    diagnosis: '企業 AI 成熟度診斷',
+    diagnostic_demo: '診斷工作台 Demo',
+    central_kitchen_demo: '中央廚房營運防護台 Demo',
+    pilot: 'Pilot 計畫與沙盒建置',
+    workshop: '內訓 / 工作坊',
+    strategy: 'AI 策略規劃',
+    other: '其他洽談'
+  };
+
+  const campaignIntent = {
+    diagnostic_demo: 'diagnostic_demo',
+    diagnostic_workbench: 'diagnostic_demo',
+    central_kitchen_demo: 'central_kitchen_demo'
+  };
+
+  const campaign = params.get('utm_campaign');
+  if (campaign && campaignIntent[campaign]) {
+    document.getElementById('type').value = campaignIntent[campaign];
+  }
+
+  form.addEventListener('submit', function(e) {
+    if (!form.checkValidity()) {
+      e.preventDefault();
+      form.reportValidity();
+      return;
+    }
+
+    const intent = document.getElementById('type').value;
+    const tracking = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+      .map(key => `${key}: ${params.get(key) || '(not set)'}`)
+      .join('\n');
+    document.getElementById('googlePainPoint').value = [
+      `需求類型：${intentLabels[intent] || intent}`,
+      '',
+      '需求說明：',
+      document.getElementById('msg').value.trim(),
+      '',
+      `來源頁：${document.referrer || window.location.href.split('?')[0]}`,
+      tracking
+    ].join('\n');
+
+    submissionStarted = true;
+    submitButton.disabled = true;
+    submitButton.textContent = '送出中…';
+  });
+
+  sink.addEventListener('load', function() {
+    if (!submissionStarted) return;
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

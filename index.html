@@ -13,9 +13,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦</title>
-  <meta name="description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房 AI 營運助理到 Pilot-ready 示範流程，協助企業安全驗證 AI 落地路徑。">
+  <meta name="description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房營運防護台到企業診斷工作台，協助企業安全驗證 AI 落地路徑。">
   <meta property="og:title" content="鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦">
-  <meta property="og:description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房 AI 營運助理到 Pilot-ready 示範流程，協助企業安全驗證 AI 落地路徑。">
+  <meta property="og:description" content="從營運例外治理到企業診斷交付，探索鳳凰 AI 可驗證、可討論、可進入 Pilot 的旗艦系統。">
   <meta property="og:type" content="website">
 
   <!-- ─── Google Fonts ─── -->
@@ -584,6 +584,102 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color: var(--gray-400);
       font-size: 11.5px;
       line-height: 1.45;
+    }
+
+    .flagship-systems-header {
+      max-width: 860px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .flagship-systems-header .flagship-desc { margin: 0 auto; }
+
+    .flagship-systems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .flagship-system-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(18, 18, 38, 0.94), rgba(7, 9, 19, 0.96));
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.26);
+    }
+
+    .flagship-system-card:nth-child(2) { border-color: rgba(245, 166, 35, 0.22); }
+
+    .system-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .system-card-chip {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 242, 254, 0.16);
+      color: var(--phoenix-teal);
+      background: rgba(0, 242, 254, 0.05);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .system-card-title {
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 25px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .system-card-summary {
+      color: var(--gray-300);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .system-card-proofs {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 22px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .system-card-proofs li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--gray-400);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .system-card-proofs li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--phoenix-gold);
+      font-weight: 900;
+    }
+
+    .system-card-actions { margin-top: auto; }
+    .system-card-actions .flagship-actions { margin-bottom: 14px; }
+
+    .systems-catalog-link {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .flagship-systems-grid { grid-template-columns: 1fr; }
+      .flagship-system-card { padding: 24px; }
     }
 
     /* ─── 區段標題 ─── */
@@ -1723,6 +1819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="#home" class="nav-link">首頁</a>
         <a href="#diagnostic" class="nav-link">成熟度快測</a>
         <a href="#flagship-system" class="nav-link">AI 系統展示</a>
+        <a href="./diagnostic-workbench/index.html" class="nav-link">診斷工作台</a>
         <a href="#curriculum" class="nav-link">全景課程</a>
         <a href="#commercial-modules" class="nav-link">商業實戰模組</a>
         <a href="#team" class="nav-link">顧問團隊</a>
@@ -1756,7 +1853,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
       <div class="hero-ctas">
         <a href="#flagship-system" class="btn btn-primary">
-          <span>查看中央廚房 AI 系統展示</span>
+          <span>查看旗艦 AI 系統</span>
         </a>
         <a href="#diagnostic" class="btn btn-secondary">
           <span>📊 立即進行 AI 成熟度快測</span>
@@ -1789,77 +1886,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- ─── 旗艦 AI 系統展示 ─── -->
+  <!-- ─── 可擴充的旗艦 AI 系統展示 ─── -->
   <section class="flagship-system-section" id="flagship-system">
-    <div class="container flagship-system-layout">
-      <div>
-        <div class="flagship-eyebrow">Flagship AI System</div>
-        <h2 class="flagship-title">不只給顧問建議，我們把企業痛點做成可驗證的 AI 系統。</h2>
-        <p class="flagship-desc">
-          「中央廚房營運防護台」是鳳凰 AI 顧問的可公開旗艦示範案例。它將門市查詢、高風險攔截、總部審核與 ERP/POS 沙盒預覽整理成可驗證流程，讓決策者不只看簡報，也能理解人機協作如何進入日常營運。
-        </p>
-
-        <div class="flagship-proof-grid">
-          <div class="flagship-proof">
-            <div class="flagship-proof-title">門市自助查詢</div>
-            <div class="flagship-proof-text">用自然語言查訂單與庫存，減少電話與群組往返。</div>
-          </div>
-          <div class="flagship-proof">
-            <div class="flagship-proof-title">高風險先攔截</div>
-            <div class="flagship-proof-text">報廢、取消等高風險操作先建立審核單，門市無法自行越權核准。</div>
-          </div>
-          <div class="flagship-proof">
-            <div class="flagship-proof-title">總部集中審核</div>
-            <div class="flagship-proof-text">將人機協作與審核節點放進流程，由總部核准或拒絕。</div>
-          </div>
-          <div class="flagship-proof">
-            <div class="flagship-proof-title">ERP/POS Payload Preview</div>
-            <div class="flagship-proof-text">以沙盒預覽方式展示資料格式與對接邏輯，方便 IT 團隊先討論規格。</div>
-          </div>
-        </div>
-
-        <div class="flagship-actions">
-          <a href="./experience/central-kitchen-ai-agent/index.html#flow-video" class="btn btn-primary">看 75 秒流程</a>
-          <a href="./experience/central-kitchen-ai-agent/index.html" class="btn btn-secondary">查看系統與申請 Demo</a>
-          <a href="./experience/index.html" class="btn btn-secondary">瀏覽 AI 解決方案體驗區</a>
-          <div class="flagship-note">公開展示為 Sandbox Demo；ERP/POS payload 僅為模擬預覽，不會寫入任何客戶正式後台系統。</div>
-        </div>
+    <div class="container">
+      <div class="flagship-systems-header">
+        <div class="flagship-eyebrow">Flagship AI Systems</div>
+        <h2 class="flagship-title">不只給顧問建議，我們把企業問題做成可驗證的系統。</h2>
+        <p class="flagship-desc">從第一線營運例外到企業決策交付，每套系統都公開說明工作流、成熟度與能力邊界。首頁只呈現精選旗艦，完整系統持續收錄於系統總覽。</p>
       </div>
-
-      <div class="system-preview" aria-label="中央廚房 AI 營運助理示意">
-        <div class="system-preview-header">
-          <div class="system-preview-title">中央廚房營運防護台</div>
-          <div class="system-preview-status">公開 Sandbox Demo</div>
-        </div>
-        <div class="system-preview-body">
-          <div class="system-panel">
-            <div class="system-panel-kicker">Store Signal</div>
-            <div class="system-panel-title">門市回報：補貨、客訴、異常事件</div>
-            <div class="system-panel-copy">AI 先把自然語言訊息整理成任務欄位，再交由總部確認處理路徑。</div>
-          </div>
-          <div class="system-flow-row">
-            <div class="system-flow-step">
-              <strong>分類</strong>
-              <span>辨識事件類型與急迫性</span>
-            </div>
-            <div class="system-flow-step">
-              <strong>審核</strong>
-              <span>高風險動作交由人員確認</span>
-            </div>
-            <div class="system-flow-step">
-              <strong>輸出</strong>
-              <span>產生沙盒 Payload Preview</span>
-            </div>
-          </div>
-          <div class="system-panel">
-            <div class="system-panel-kicker">HQ Control Room</div>
-            <div class="system-panel-title">總部掌握跨門市營運節奏</div>
-            <div class="system-panel-copy">讓營運主管、IT 與顧問團隊能在同一個情境中討論流程、資料欄位與治理邊界。</div>
-          </div>
-        </div>
-      </div>
+      <div class="flagship-systems-grid" id="featured-systems-grid" aria-live="polite"></div>
+      <noscript><p class="flagship-note">請啟用 JavaScript 以查看精選系統，或直接前往 AI 系統與解決方案總覽。</p></noscript>
+      <div class="systems-catalog-link"><a href="./experience/index.html" class="btn btn-secondary">查看全部 AI 系統與解決方案</a></div>
     </div>
   </section>
+  <script src="./experience/solutions_data.js"></script>
+  <script>
+    (function () {
+      var grid = document.getElementById('featured-systems-grid');
+      if (!grid) return;
+      var systems = (window.EXPERIENCE_SOLUTIONS || [])
+        .filter(function (system) { return system.featured; })
+        .sort(function (a, b) { return (a.featured_order || 99) - (b.featured_order || 99); })
+        .slice(0, 3);
+      systems.forEach(function (system) {
+        var card = document.createElement('article');
+        card.className = 'flagship-system-card';
+        var chips = [system.status, system.demo_duration].filter(Boolean).map(function (item) {
+          return '<span class="system-card-chip">' + item + '</span>';
+        }).join('');
+        var proofs = (system.highlights || []).slice(0, 3).map(function (item) {
+          return '<li>' + item + '</li>';
+        }).join('');
+        card.innerHTML = '<div class="system-card-meta">' + chips + '</div>' +
+          '<h3 class="system-card-title">' + system.title + '</h3>' +
+          '<p class="system-card-summary">' + system.subtitle + '</p>' +
+          '<ul class="system-card-proofs">' + proofs + '</ul>' +
+          '<div class="system-card-actions"><div class="flagship-actions">' +
+          '<a class="btn btn-primary" href="' + system.cta_href + '">' + system.cta_text + '</a>' +
+          '<a class="btn btn-secondary" href="' + system.pilot_program_href + '">' + system.pilot_program_text + '</a>' +
+          '</div><div class="flagship-note">' + system.compliance_note + '</div></div>';
+        grid.appendChild(card);
+      });
+    })();
+  </script>
 
   <!-- ─── ⚡ 互動式診斷器 (Interactive Diagnostic Widget) ─── -->
   <section class="diagnostic-section" id="diagnostic">
@@ -4133,14 +4202,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="footer-link-item"><a href="#diagnostic">線上成熟度快測</a></li>
           <li class="footer-link-item"><a href="#deliverables">成果交付物預覽</a></li>
           <li class="footer-link-item"><a href="#team">專家顧問介紹</a></li>
-          <li class="footer-link-item experience-entry-item"><a href="./experience/index.html" class="experience-entry-link">前往 AI 解決方案體驗區</a></li>
+          <li class="footer-link-item experience-entry-item"><a href="./experience/index.html" class="experience-entry-link">前往 AI 系統與解決方案</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="footer-title">商務聯絡與個資防線</h4>
         <ul class="footer-links">
-          <li class="footer-link-item">📧 B2B 服務信箱：<br><a href="mailto:allmyway2007@gmail.com" style="color: var(--phoenix-accent); font-weight: 600;">allmyway2007@gmail.com</a></li>
+          <li class="footer-link-item">📧 B2B 服務信箱：<br><a href="./contact.html" class="footer-link" style="color: var(--phoenix-accent); font-weight: 600;">請透過聯絡表單與我們聯繫</a></li>
           <li class="footer-link-item">🛡️ 企業安全防禦：<br>全面簽署標準 NDA，發票開立與商務簽約對接在地專業記帳事務所（統編法人資訊準備中，待合約啟動）。</li>
           <li class="footer-link-item">📄 開源許可協定：<br>MIT License (可自由下載與使用)</li>
         </ul>

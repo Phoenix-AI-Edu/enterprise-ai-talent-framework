@@ -243,7 +243,7 @@
 > 👉 **[📊 立即點此填寫表單預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 >
-> ✉️ 任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**allmyway2007@gmail.com**
+> ✉️ 任何商務聯絡或合作洽談，請透過 **[官方聯絡表單](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?utm_source=github&utm_medium=readme&utm_campaign=b2b_contact)**。
 
 ---
 

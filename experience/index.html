@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 體驗區總覽｜鳳凰 AI 顧問</title>
-  <meta name="description" content="探索多個產業情境的 AI 互動體驗，了解如何透過 AI 降低營運成本、提升決策效率，包含中央廚房、零售、製造等示範案例 (Pilot-ready)。">
-  <meta property="og:title" content="AI 體驗區總覽｜鳳凰 AI 顧問">
-  <meta property="og:description" content="探索多個產業情境的 AI 互動體驗，了解如何透過 AI 降低營運成本、提升決策效率，包含中央廚房、零售、製造等示範案例 (Pilot-ready)。">
+  <title>AI 系統與解決方案｜鳳凰 AI 顧問</title>
+  <meta name="description" content="探索鳳凰 AI 的可驗證系統：營運例外治理、企業診斷交付，以及持續上架的跨產業 Pilot-ready 解決方案。">
+  <meta property="og:title" content="AI 系統與解決方案｜鳳凰 AI 顧問">
+  <meta property="og:description" content="從公開流程沙盒到受控 Pilot，依產業、問題與成熟度探索可驗證的企業 AI 系統。">
   <meta property="og:type" content="website">
 
   <!-- Google Tag Manager -->
@@ -336,8 +336,8 @@
       <div class="hero-glow-1"></div>
       <div class="hero-glow-2"></div>
       <div class="hero-content">
-        <h1 class="hero-title">AI 解決方案體驗區</h1>
-        <p class="hero-desc">我們提供最小資料蒐集的互動式 Pilot Demo，協助企業在安全可控的環境中驗證 AI 落地架構與執行節奏。所有展示場景皆為去識別化設計，未揭露任何真正的客戶名字或系統規格。</p>
+        <h1 class="hero-title">AI 系統與解決方案</h1>
+        <p class="hero-desc">這裡收錄鳳凰 AI 所有可驗證系統。每套系統都清楚標示適用情境、成熟度、體驗方式與能力邊界；新系統將持續加入，不讓首頁隨數量無限延長。</p>
       </div>
     </section>
 
@@ -408,8 +408,8 @@
         '</div>' +
         '<div>' +
           '<div class="solution-actions">' +
-            '<a href="' + s.cta_href + '" class="btn btn-primary" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="' + s.id + '">' + s.cta_text + '</a>' +
-            (s.pilot_program_href ? '<a href="' + s.pilot_program_href + '" class="btn btn-secondary" data-ga="experience_cta" data-ga-event="experience_demo_request_click" data-ga-solution-id="' + s.id + '">' + s.pilot_program_text + '</a>' : '') +
+            '<a href="' + (s.catalog_cta_href || s.cta_href) + '" class="btn btn-primary" data-ga="experience_cta" data-ga-event="experience_solution_view" data-ga-solution-id="' + s.id + '">' + s.cta_text + '</a>' +
+            (s.pilot_program_href ? '<a href="' + (s.catalog_pilot_program_href || s.pilot_program_href) + '" class="btn btn-secondary" data-ga="experience_cta" data-ga-event="experience_demo_request_click" data-ga-solution-id="' + s.id + '">' + s.pilot_program_text + '</a>' : '') +
           '</div>' +
           '<div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>' +
         '</div>';
