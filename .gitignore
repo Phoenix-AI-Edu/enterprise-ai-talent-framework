@@ -41,6 +41,9 @@ docs/.vitepress/cache/
 
 # Node/Frontend builds
 node_modules/
+# REPO_MAP isolation guard: product-system assets must never enter the website repo
+ai-diagnostic-workbench/
+ai-diagnostic-system/
 dist/
 build/
 .next/
