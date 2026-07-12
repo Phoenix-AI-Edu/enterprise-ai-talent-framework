@@ -7,33 +7,32 @@ window.EXPERIENCE_SOLUTIONS = [
   {
     id: "central_kitchen_ai_agent",
     slug: "central-kitchen-ai-agent",
-    title: "中央廚房 AI 營運助理",
-    subtitle: "餐飲連鎖與零售通路統一營運指揮中心",
-    status: "Interactive Demo / Pilot Ready",
+    title: "中央廚房營運防護台",
+    subtitle: "門市自助查詢、高風險攔截、總部集中審核",
+    status: "公開沙盒示範",
     gated_demo: true,
     industries: ["餐飲連鎖", "中央廚房", "零售連鎖"],
-    maturity: "Pilot Ready",
+    maturity: "Sandbox Demo / Pilot",
     compliance_note: "所有展示場景均為去識別化模擬，不涉及任何真實品牌或ERP/POS系統。",
 
-    cta_text: "預覽互動 Demo",
-    cta_href: "/experience/central-kitchen-ai-agent/index.html",
-    pilot_program_text: "申請參與 Pilot 計畫",
+    cta_text: "看 75 秒流程",
+    cta_href: "./central-kitchen-ai-agent/index.html#flow-video",
+    pilot_program_text: "申請操作 Demo",
     pilot_program_href: "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform",
 
     overview: [
-      "總部與門市之間的營運指令傳遞，通常耗時且容易失真。本方案以統一語言層與任務拆解引擎，把每日進貨、備料、出勤與異常通報串聯為自動化工作流。",
-      "訪客可進入互動式 Demo，體驗 LINE 門市通報、總部戰情室 KPI 監控、高風險意圖阻斷，以及沙盒 ERP/POS Payload Preview 的對話流程。"
+      "這是鳳凰 AI 顧問的可公開旗艦示範案例，用來驗證門市與總部之間的可控營運流程。",
+      "公開展示包含查詢、高風險攔截、人工審核與 ERP/POS 沙盒預覽；正式串接屬後續導入專案。"
     ],
 
     highlights: [
-      "總部多門市指標集中監控：營收、耗損、溫層異常、結帳高峰與異動告警",
-      "門市端 LINE 自然語言提報：免下載 APP，文字/語音直通總部與自動化工單",
-      "高風險意圖阻斷：系統先行偵測，再以 Human-in-the-loop 確認高資安任務",
-      "RBAC 角色控管：總經理、區域主管、門市店長、品保各有存取邊界",
-      "沙盒 ERP/POS Payload Preview：在無真實系統連線前提早驗證接規格"
+      "門市查詢訂單與庫存，減少電話與群組往返",
+      "報廢、取消等高風險操作先攔截並建立審核單",
+      "總部核准或拒絕，保留人機協作的決策節點",
+      "核准後產生 ERP/POS 沙盒 payload 預覽，不寫入正式系統"
     ],
 
-    roi_statement: "預期協助企業壓縮營運指令錯誤率、縮短跨層通報時程，並降低紙本與口頭通報造成的人為疏漏。",
+    roi_statement: "PoC 將以門市查詢改走系統、高風險提報改走審核、總部每週完成至少一筆審核作為驗證標準。",
 
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",

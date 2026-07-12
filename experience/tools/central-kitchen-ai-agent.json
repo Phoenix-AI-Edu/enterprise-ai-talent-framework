@@ -1,0 +1,27 @@
+{
+  "$schema": "../tool-manifest.schema.json",
+  "id": "central_kitchen_ai_agent",
+  "slug": "central-kitchen-ai-agent",
+  "title": "中央廚房營運防護台",
+  "status": "公開沙盒示範",
+  "positioning": "讓餐飲連鎖門市查得到、報廢等高風險操作擋得住，並由總部集中審核。",
+  "audience": ["餐飲連鎖營運主管", "中央廚房管理者", "資訊與稽核團隊"],
+  "available_now": [
+    "門市查詢訂單與庫存",
+    "高風險操作攔截並建立審核單",
+    "總部核准或拒絕審核單",
+    "ERP/POS 沙盒 payload 預覽"
+  ],
+  "poc_configurable": ["單一門市的流程與審核規則設定", "LINE 門市連動"],
+  "implementation_assessment": ["正式 ERP/POS 寫入", "企業 SSO", "地端部署與進階稽核"],
+  "demo_url": "./central-kitchen-ai-agent/index.html#flow-video",
+  "primary_cta": { "label": "看 75 秒流程", "url": "./central-kitchen-ai-agent/index.html#flow-video" },
+  "secondary_cta": { "label": "申請操作 Demo", "url": "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform" },
+  "poc_success_criteria": [
+    "報廢類提報改走審核單",
+    "總部每週至少完成一筆核准或拒絕",
+    "門市查單或查庫存改走系統並可回報次數"
+  ],
+  "owner": "中央廚房工具負責人",
+  "last_verified": "2026-07-12"
+}
