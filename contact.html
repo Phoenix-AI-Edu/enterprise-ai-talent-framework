@@ -234,8 +234,8 @@
 
 <div class="wrap">
   <section class="hero">
-    <h1>與鳳凰 AI 顧問聯繫</h1>
-    <p>請留下您的需求，我們將由策略長親自評估，並於 1–2 個工作天內與您聯繫。</p>
+    <h1 id="contactTitle">與鳳凰 AI 顧問聯繫</h1>
+    <p id="contactIntro">請留下您的需求，我們將由策略長親自評估，並於 1–2 個工作天內與您聯繫。</p>
   </section>
 
   <div class="card" id="contactCard">
@@ -294,7 +294,7 @@
       </div>
 
       <div class="field">
-        <label for="msg">需求說明 *</label>
+        <label for="msg" id="messageLabel">需求說明 *</label>
         <textarea id="msg" placeholder="請簡單描述目前最核心的問題、預計時程，或想先驗證的場景。" required></textarea>
       </div>
 
@@ -319,15 +319,15 @@
       </div>
 
       <div class="actions">
-        <button type="submit" class="btn">送出需求表單</button>
+        <button type="submit" class="btn" id="submitContact">送出需求表單</button>
         <span class="note">* 必填欄位</span>
       </div>
     </form>
 
     <div class="success" id="successView">
       <div class="icon">✅</div>
-      <h2>表單已送出</h2>
-      <p>感謝您留下需求，資料已送達顧問團隊，我們將於 1–2 個工作天內回覆。</p>
+      <h2 id="successTitle">表單已送出</h2>
+      <p id="successMessage">感謝您留下需求，資料已送達顧問團隊，我們將於 1–2 個工作天內回覆。</p>
       <a class="back" href="./index.html">← 返回官網</a>
     </div>
   </div>
@@ -357,10 +357,66 @@
     central_kitchen_demo: 'central_kitchen_demo'
   };
 
-  const campaign = params.get('utm_campaign');
-  if (campaign && campaignIntent[campaign]) {
-    document.getElementById('type').value = campaignIntent[campaign];
+  const intentPageCopy = {
+    central_kitchen_demo: {
+      title: '預約中央廚房營運防護台 Demo',
+      intro: '用 15 分鐘確認「履約事件 → 門市開單 → 總部治理」是否適合先以兩週／一家店驗證。',
+      messageLabel: '想驗證的門市營運場景 *',
+      messagePlaceholder: '請描述門市數、目前最常見的履約／客訴例外，以及現有 POS、ERP 或 LINE 使用情況；不需要提供帳號或敏感資料。',
+      organizationPlaceholder: '例如：XX 餐飲集團／連鎖品牌',
+      submitText: '預約 15 分鐘 Demo',
+      successTitle: '中央廚房 Demo 預約已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 15 分鐘 Demo 時段。'
+    },
+    diagnostic_demo: {
+      title: '預約企業問題診斷工作台 Demo',
+      intro: '請用一個具體企業問題開始，我們將安排 30–45 分鐘受控展示。',
+      messageLabel: '想診斷的企業問題 *',
+      messagePlaceholder: '請描述目前最需要釐清的企業問題、已嘗試作法，以及希望形成的決策材料。',
+      organizationPlaceholder: '例如：XX 製造／科技公司',
+      submitText: '預約診斷工作台 Demo',
+      successTitle: '診斷工作台 Demo 預約已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 Demo 問題與時段。'
+    }
+  };
+
+  const defaultPageCopy = {
+    title: '與鳳凰 AI 顧問聯繫',
+    intro: '請留下您的需求，我們將由策略長親自評估，並於 1–2 個工作天內與您聯繫。',
+    messageLabel: '需求說明 *',
+    messagePlaceholder: '請簡單描述目前最核心的問題、預計時程，或想先驗證的場景。',
+    organizationPlaceholder: '例如：XX 餐飲集團',
+    submitText: '送出需求表單',
+    successTitle: '表單已送出',
+    successMessage: '感謝您留下需求，資料已送達顧問團隊，我們將於 1–2 個工作天內回覆。'
+  };
+
+  function applyIntentPage(intent) {
+    const copy = intentPageCopy[intent] || defaultPageCopy;
+    document.title = `${copy.title}｜鳳凰 AI 顧問`;
+    document.getElementById('contactTitle').textContent = copy.title;
+    document.getElementById('contactIntro').textContent = copy.intro;
+    document.getElementById('messageLabel').textContent = copy.messageLabel;
+    document.getElementById('msg').placeholder = copy.messagePlaceholder;
+    document.getElementById('org').placeholder = copy.organizationPlaceholder;
+    submitButton.textContent = copy.submitText;
+    document.getElementById('successTitle').textContent = copy.successTitle;
+    document.getElementById('successMessage').textContent = copy.successMessage;
   }
+
+  const campaign = params.get('utm_campaign');
+  const requestedIntent = params.get('request_type');
+  const initialIntent = intentLabels[requestedIntent]
+    ? requestedIntent
+    : (campaign && campaignIntent[campaign] ? campaignIntent[campaign] : '');
+  if (initialIntent) {
+    document.getElementById('type').value = initialIntent;
+    applyIntentPage(initialIntent);
+  }
+
+  document.getElementById('type').addEventListener('change', function() {
+    applyIntentPage(this.value);
+  });
 
   form.addEventListener('submit', function(e) {
     if (!form.checkValidity()) {
