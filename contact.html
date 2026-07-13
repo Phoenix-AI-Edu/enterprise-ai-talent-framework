@@ -247,7 +247,7 @@
           <input id="name" name="entry.272408360" placeholder="例如：王小明" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="org">企業 / 單位名稱 *</label>
+          <label for="org" id="organizationLabel">企業 / 單位名稱 *</label>
           <input id="org" name="entry.65542742" placeholder="例如：XX 餐飲集團" autocomplete="organization" required>
         </div>
       </div>
@@ -278,12 +278,14 @@
             <option value="pilot">Pilot 計畫與沙盒建置</option>
             <option value="workshop">內訓 / 工作坊</option>
             <option value="strategy">AI 策略規劃</option>
+            <option value="compliance">AI 治理 / 合規導入</option>
+            <option value="privacy_request">個資查詢 / 更正 / 刪除申請</option>
             <option value="other">其他洽談</option>
           </select>
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" id="budgetField">
         <label for="budget">預估導入預算與預期時程 *</label>
         <select id="budget" name="entry.1233297346" required>
           <option value="">請選擇</option>
@@ -306,7 +308,7 @@
         <ul>
           <li>本頁資料將提交至鳳凰 AI 顧問管理的 Google Forms，供 Demo 安排、需求評估與後續聯絡使用。</li>
           <li>蒐集欄位包含姓名、公司、職稱、Email、電話、需求類型、預算時程、需求說明及來源追蹤參數。</li>
-          <li>資料於上述目的存續期間保存；您可透過本表單或 <a href="mailto:allmyway2007@gmail.com">allmyway2007@gmail.com</a> 請求查詢、更正、停止利用或刪除。</li>
+          <li>資料於上述目的存續期間保存；您可在需求類型選擇「個資查詢／更正／刪除申請」，提出查詢、更正、停止利用或刪除要求。</li>
           <li>本表單不要求填寫投資偏好、帳戶、信用卡或其他敏感金融資料。</li>
         </ul>
       </div>
@@ -348,6 +350,8 @@
     pilot: 'Pilot 計畫與沙盒建置',
     workshop: '內訓 / 工作坊',
     strategy: 'AI 策略規劃',
+    compliance: 'AI 治理 / 合規導入',
+    privacy_request: '個資查詢 / 更正 / 刪除申請',
     other: '其他洽談'
   };
 
@@ -377,6 +381,27 @@
       submitText: '預約診斷工作台 Demo',
       successTitle: '診斷工作台 Demo 預約已送出',
       successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 Demo 問題與時段。'
+    },
+    compliance: {
+      title: '洽詢 AI 治理與合規導入',
+      intro: '請描述需要評估的治理、ISO/IEC 42001 或法規遵循範圍，我們將於 1–2 個工作天內回覆。',
+      messageLabel: '治理／合規需求說明 *',
+      messagePlaceholder: '請描述適用產業、既有治理制度、預計處理的合規範圍與時程。',
+      organizationPlaceholder: '例如：XX 製造／科技公司',
+      submitText: '送出合規導入需求',
+      successTitle: '合規導入需求已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內回覆。'
+    },
+    privacy_request: {
+      title: '提出個資權利申請',
+      intro: '您可透過本頁提出個資查詢、更正、停止利用或刪除申請，我們將於收到後 3 個工作天內回覆處理結果。',
+      messageLabel: '申請內容 *',
+      messagePlaceholder: '請說明要查詢、更正、停止利用或刪除的資料，以及可協助辨識原始提交紀錄的資訊。請勿提供密碼或金融資料。',
+      organizationLabel: '企業 / 單位名稱（個人申請可填「個人」）*',
+      organizationPlaceholder: '企業名稱；個人申請請填「個人」',
+      submitText: '送出個資權利申請',
+      successTitle: '個資權利申請已送出',
+      successMessage: '申請已送達負責團隊，我們將於收到後 3 個工作天內回覆處理結果。'
     }
   };
 
@@ -386,10 +411,16 @@
     messageLabel: '需求說明 *',
     messagePlaceholder: '請簡單描述目前最核心的問題、預計時程，或想先驗證的場景。',
     organizationPlaceholder: '例如：XX 餐飲集團',
+    organizationLabel: '企業 / 單位名稱 *',
     submitText: '送出需求表單',
     successTitle: '表單已送出',
     successMessage: '感謝您留下需求，資料已送達顧問團隊，我們將於 1–2 個工作天內回覆。'
   };
+
+  const budgetField = document.getElementById('budgetField');
+  const budgetSelect = document.getElementById('budget');
+  const privacyBudgetValue = '目前無明確預算，以概念學習與內部研習為主';
+  let privacyBudgetApplied = false;
 
   function applyIntentPage(intent) {
     const copy = intentPageCopy[intent] || defaultPageCopy;
@@ -398,10 +429,21 @@
     document.getElementById('contactIntro').textContent = copy.intro;
     document.getElementById('messageLabel').textContent = copy.messageLabel;
     document.getElementById('msg').placeholder = copy.messagePlaceholder;
+    document.getElementById('organizationLabel').textContent = copy.organizationLabel || defaultPageCopy.organizationLabel;
     document.getElementById('org').placeholder = copy.organizationPlaceholder;
     submitButton.textContent = copy.submitText;
     document.getElementById('successTitle').textContent = copy.successTitle;
     document.getElementById('successMessage').textContent = copy.successMessage;
+    const isPrivacyRequest = intent === 'privacy_request';
+    budgetField.hidden = isPrivacyRequest;
+    budgetSelect.required = !isPrivacyRequest;
+    if (isPrivacyRequest && !budgetSelect.value) {
+      budgetSelect.value = privacyBudgetValue;
+      privacyBudgetApplied = true;
+    } else if (!isPrivacyRequest && privacyBudgetApplied) {
+      budgetSelect.value = '';
+      privacyBudgetApplied = false;
+    }
   }
 
   const campaign = params.get('utm_campaign');

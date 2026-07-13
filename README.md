@@ -74,7 +74,7 @@
 
 > ⚠️ **每季限量 8 件，均由兩位顧問親自評估**，確保輸出品質。
 >
-> 👉 **[🔍 點此填寫表單預約申請「企業 AI 落地與補助可行性前置診斷」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 👉 **[🔍 點此預約申請「企業 AI 落地與補助可行性前置診斷」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=feasibility)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
@@ -179,7 +179,7 @@
 6. **【行銷專屬】行銷視覺與著作權合規套餐 (M07 + M02)** ── *公開班 NT$ 4,980/人 ｜ 內訓 NT$ 70,000/場*
 7. **【外銷必備】國際安全與出口合規旗艦套餐 (M11 + M13)** ── *公開班 NT$ 9,980/人 ｜ 內訓 NT$ 160,000/場*
 
-> 👉 **[📥 立即點此填寫表單預約「企業內訓與公開班模組洽詢」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 👉 **[📥 立即洽詢「企業內訓與公開班模組」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=workshop&utm_source=github&utm_medium=readme&utm_campaign=training_consultation&utm_content=modules)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
@@ -240,7 +240,7 @@
 > 2. **A 級客戶收費快診**：經評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘「AI 導入戰略快診案」（收費 NT$ 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
 > 3. **B/C 級客戶自動賦能**：未達快診標準之名單，我們將寄送鳳凰 AI 轉型參考資源包，或提供開源教材以利團隊自行研習。
 >
-> 👉 **[📊 立即點此填寫表單預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**
+> 👉 **[📊 立即預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=maturity)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 >
 > ✉️ 任何商務聯絡或合作洽談，請透過 **[官方聯絡表單](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?utm_source=github&utm_medium=readme&utm_campaign=b2b_contact)**。
