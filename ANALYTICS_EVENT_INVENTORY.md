@@ -135,3 +135,19 @@ experience 事件 **明令拒絕** 以下欄位：
 ---
 
 _止於盤點，未修改任何檔案。_
+
+---
+
+## 5. Phoenix Auditable AI Workflow 展示事件（2026-07-13）
+
+詳情頁：`experience/phoenix-auditable-ai-workflow/index.html`
+
+| 事件 | 用途 | 允許參數 |
+| --- | --- | --- |
+| `experience_solution_view` | 詳情頁曝光 | `solution_id`, `source_section` |
+| `experience_demo_request_click` | 導入診斷／工作坊 CTA | `solution_id`, `source_section`, `target_type` |
+| `experience_github_click` | GitHub 與治理文件外連 | `solution_id`, `source_section`, `target_type` |
+| `experience_release_click` | Release 與 CI 證據外連 | `solution_id`, `source_section`, `release_version` |
+| `experience_video_progress` | 互動導覽 0／25／50／75／100 進度 | `solution_id`, `source_section`, `progress_percent` |
+
+本頁事件不傳送姓名、Email、電話、公司、問題內容或表單輸入值。

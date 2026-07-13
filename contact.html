@@ -274,6 +274,7 @@
             <option value="">請選擇</option>
             <option value="diagnosis">企業 AI 成熟度診斷</option>
             <option value="diagnostic_demo">診斷工作台 Demo</option>
+            <option value="auditable_ai_demo">可稽核 AI 工作流 Demo</option>
             <option value="central_kitchen_demo">中央廚房營運防護台 Demo</option>
             <option value="pilot">Pilot 計畫與沙盒建置</option>
             <option value="workshop">內訓 / 工作坊</option>
@@ -346,6 +347,7 @@
   const intentLabels = {
     diagnosis: '企業 AI 成熟度診斷',
     diagnostic_demo: '診斷工作台 Demo',
+    auditable_ai_demo: '可稽核 AI 工作流 Demo',
     central_kitchen_demo: '中央廚房營運防護台 Demo',
     pilot: 'Pilot 計畫與沙盒建置',
     workshop: '內訓 / 工作坊',
@@ -358,6 +360,7 @@
   const campaignIntent = {
     diagnostic_demo: 'diagnostic_demo',
     diagnostic_workbench: 'diagnostic_demo',
+    phoenix_auditable_ai_flow: 'auditable_ai_demo',
     central_kitchen_demo: 'central_kitchen_demo'
   };
 
@@ -381,6 +384,16 @@
       submitText: '預約診斷工作台 Demo',
       successTitle: '診斷工作台 Demo 預約已送出',
       successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 Demo 問題與時段。'
+    },
+    auditable_ai_demo: {
+      title: '預約可稽核 AI 工作流 Demo',
+      intro: '請用一個具體治理或工作流問題開始，我們將安排公開版證據導覽與企業導入需求評估。',
+      messageLabel: '想驗證的 AI 治理或工作流問題 *',
+      messagePlaceholder: '請描述目前的 AI 使用場景、政策或人工審查需求，以及希望留下哪些決策證據；不需要提供機敏資料。',
+      organizationPlaceholder: '例如：XX 製造／科技／顧問公司',
+      submitText: '預約可稽核工作流 Demo',
+      successTitle: '可稽核工作流 Demo 預約已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 Demo 範圍與時段。'
     },
     compliance: {
       title: '洽詢 AI 治理與合規導入',

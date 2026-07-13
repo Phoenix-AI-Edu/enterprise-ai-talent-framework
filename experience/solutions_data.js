@@ -71,6 +71,40 @@ window.EXPERIENCE_SOLUTIONS = [
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
     updated_at: "2026-07-13"
+  },
+  {
+    id: "phoenix_auditable_ai_workflow",
+    slug: "phoenix-auditable-ai-workflow",
+    title: "Phoenix 可稽核 AI 工作流",
+    short_title: "開源工作流",
+    subtitle: "把政策防護、引用證據、人工覆核與稽核事件組成可檢驗的企業 AI 參考架構",
+    status: "Open Source v0.1.0",
+    maturity: "Open Source Reference",
+    access_type: "Public GitHub / Local Reference",
+    featured: true,
+    featured_order: 3,
+    category: ["AI 治理", "開源參考架構"],
+    industries: ["資訊與稽核", "企業治理", "跨產業"],
+    page_variant: "governance-reference",
+    showcase_type: "open-source-showcase",
+    demo_duration: "60–90 秒",
+    highlights: [
+      "Input 與 Output Policy 規則核對",
+      "政策衝突攔截與 Human-in-the-loop 人工覆核",
+      "Markdown 引用驗證與可查詢的 SQLite 稽核事件"
+    ],
+    sections: ["portfolio-chain", "workflow", "evidence", "service-boundary", "audience", "limitations", "pilot-cta"],
+    compliance_note: "本機 Mock-first 參考架構；使用合成資料，非生產環境認證，稽核事件不具密碼學不可竄改保證。",
+    cta_text: "查看開源系統展示",
+    cta_href: "./experience/phoenix-auditable-ai-workflow/index.html",
+    catalog_cta_href: "./phoenix-auditable-ai-workflow/index.html",
+    pilot_program_text: "預約 AI 治理與導入診斷",
+    pilot_program_href: "./contact.html?request_type=auditable_ai_demo&utm_source=site&utm_medium=open_source_showcase&utm_campaign=phoenix_auditable_ai_flow&utm_content=homepage_card",
+    catalog_pilot_program_href: "../contact.html?request_type=auditable_ai_demo&utm_source=site&utm_medium=open_source_showcase&utm_campaign=phoenix_auditable_ai_flow&utm_content=systems_catalog",
+    primary_action: "pilot",
+    contact_category: "experience_cta",
+    contact_label: "experience_solution_view",
+    updated_at: "2026-07-13"
   }
 ];
 
