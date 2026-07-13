@@ -5,6 +5,8 @@
 - Executor: Codex（網站實作與技術驗證）
 - Planned website executor: 小 G
 - Status: `W2 IMPLEMENTED / W3 TECHNICAL PASS / DEPLOYMENT PENDING OWNER APPROVAL`
+- Draft PR: <https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework/pull/2>
+- PR validation: `Markdown Lint CI = success`
 
 ## Implemented
 
