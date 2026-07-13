@@ -1,0 +1,40 @@
+{
+  "$schema": "../tool-manifest.schema.json",
+  "id": "phoenix_auditable_ai_workflow",
+  "slug": "phoenix-auditable-ai-workflow",
+  "title": "Phoenix 可稽核 AI 工作流",
+  "status": "公開沙盒示範",
+  "positioning": "Phoenix v0.1.0 把政策防護、引用證據、人工覆核與稽核事件組成可被技術檢驗的企業 AI 參考架構。",
+  "audience": ["企業資訊主管 (CIO/CTO)", "AI 與資訊治理團隊", "顧問與培訓夥伴"],
+  "available_now": [
+    "Input 與 Output Policy 規則核對",
+    "政策衝突攔截與人工審查分派 (HITL)",
+    "Markdown 合成規章檢索、引用驗證與本機 SQLite 稽核事件紀錄",
+    "v0.1.0 自動化測試套件 (59 項測試通過)"
+  ],
+  "poc_configurable": [
+    "企業自訂政策規則導入與本機驗證",
+    "審批判定狀態機自訂流轉"
+  ],
+  "implementation_assessment": [
+    "正式資料遮蔽與敏感防護",
+    "SSO 與企業權限系統 RBAC 整合",
+    "正式稽核儲存與企業治理導入"
+  ],
+  "demo_url": "./phoenix-auditable-ai-workflow/index.html#guided-demo",
+  "primary_cta": {
+    "label": "預約 AI 治理與導入診斷",
+    "url": "../../contact.html?request_type=auditable_ai_demo&utm_source=site&utm_medium=open_source_showcase&utm_campaign=phoenix_auditable_ai_flow&utm_content=tool_manifest"
+  },
+  "secondary_cta": {
+    "label": "查看 GitHub 開源專案",
+    "url": "https://github.com/Phoenix-AI-Edu/phoenix-auditable-ai-flow"
+  },
+  "poc_success_criteria": [
+    "本機安裝與 v0.1.0 的 59 項測試全部通過",
+    "模擬政策衝突可正常攔截並建立人工覆核",
+    "可依 request_id 查詢本機 SQLite 稽核事件軌跡"
+  ],
+  "owner": "Phoenix AI",
+  "last_verified": "2026-07-13"
+}
