@@ -4,9 +4,13 @@
 - Branch: `codex/open-source-showcase`
 - Executor: Codex（網站實作與技術驗證）
 - Planned website executor: 小 G
-- Status: `W2 IMPLEMENTED / W3 TECHNICAL PASS / DEPLOYMENT PENDING OWNER APPROVAL`
-- Draft PR: <https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework/pull/2>
-- PR validation: `Markdown Lint CI = success`
+- Status: `W4 PASS / DEPLOYED`
+- Pull request: <https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework/pull/2> (`MERGED`)
+- Production merge: `838eebf13c3327be19b9b513c5fb0f8907b2aeda`
+- PR and main validation: `Markdown Lint CI = success`
+- GitHub Pages deployment: <https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework/actions/runs/29237336577> (`success`)
+- Public homepage: <https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/index.html>
+- Public detail page: <https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/experience/phoenix-auditable-ai-workflow/>
 
 ## Implemented
 
@@ -38,14 +42,19 @@
 | Consent | not preselected |
 | Browser console | 0 error or warning entries during contact verification |
 | Private-reference scan | no private repository path, internal IP, API key or prohibited executor alias in new public files |
+| Production homepage | HTTP 200; third flagship card rendered with the expected detail and CTA links |
+| Production detail page | HTTP 200; open-source and paid-service boundaries rendered; five commercial CTAs present |
+| Production contact intent | `auditable_ai_demo` selected; privacy consent remained unchecked |
 
 ## Honest limitations
 
 - No real Google Forms submission was performed in this round, avoiding production lead pollution. Existing form action and prior end-to-end integration remain unchanged.
 - The W2 page uses an accessible interactive walkthrough instead of a new MP4. A marketing video may be added later after separate asset review.
-- The page is not yet deployed. Owner preview approval is required before merging to `main` and publishing GitHub Pages.
+- The production verification did not submit the Google Form, avoiding a synthetic lead in the live response sheet.
 - The public reference architecture remains local, Mock-first and not production certified.
 
-## Deployment decision point
+## Deployment decision
 
-Recommended status: `READY FOR OWNER PREVIEW AND W4 DEPLOYMENT APPROVAL`.
+Owner approved W4 deployment on 2026-07-13. Pull request #2 was converted from draft, squash-merged to `main`, deployed through GitHub Pages, and verified against the public URLs above.
+
+Final status: `W4 PASS / DEPLOYED`.
