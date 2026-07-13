@@ -22,7 +22,7 @@ window.EXPERIENCE_SOLUTIONS = [
     demo_duration: "15 分鐘",
     highlights: [
       "履約訊號進入門市今日必做，顧客不必登入系統",
-      "結構化動作卡依規則自決，或送總部審核例外",
+      "結構化動作卡經規則評分；Pro 可自決或送總部審核",
       "核准後產出對客文案與 ERP／POS 沙盒預覽"
     ],
     sections: ["event-flow", "dual-workbench", "tier-ladder", "boundaries", "pilot-cta"],
@@ -32,6 +32,7 @@ window.EXPERIENCE_SOLUTIONS = [
     catalog_cta_href: "./central-kitchen-ai-agent/index.html",
     pilot_program_text: "預約 15 分鐘 Demo",
     pilot_program_href: "https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform?utm_source=site&utm_medium=flagship&utm_campaign=central_kitchen_demo",
+    primary_action: "pilot",
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
     updated_at: "2026-07-13"
@@ -53,9 +54,9 @@ window.EXPERIENCE_SOLUTIONS = [
     showcase_type: "report-workflow",
     demo_duration: "30–45 分鐘",
     highlights: [
-      "從問題定義到決策矩陣，完整流程留在系統內",
-      "AI 加速章節草稿，最終策略判斷由顧問負責",
-      "定稿洞見回寫知識模式，讓後續診斷更快對準"
+      "從雜亂經營痛點到結構化診斷章節與決策矩陣",
+      "知識匹配保留統計與可解釋理由，顧問負責判斷",
+      "正式報告、評估與知識回寫形成完整交付閉環"
     ],
     sections: ["workflow", "report-preview", "knowledge-loop", "boundaries", "pilot-cta"],
     compliance_note: "示範與 Pilot 使用匿名或受控案件資料；公開網站不展示真實客戶內容。",
@@ -63,8 +64,9 @@ window.EXPERIENCE_SOLUTIONS = [
     cta_href: "./diagnostic-workbench/index.html",
     catalog_cta_href: "../diagnostic-workbench/index.html",
     pilot_program_text: "預約 30–45 分鐘 Demo",
-    pilot_program_href: "./contact.html?utm_source=site&utm_medium=flagship&utm_campaign=diagnostic_workbench",
-    catalog_pilot_program_href: "../contact.html?utm_source=site&utm_medium=systems_catalog&utm_campaign=diagnostic_workbench",
+    pilot_program_href: "./contact.html?utm_source=site&utm_medium=workbench&utm_campaign=diagnostic_demo&utm_content=flagship",
+    catalog_pilot_program_href: "../contact.html?utm_source=site&utm_medium=workbench&utm_campaign=diagnostic_demo&utm_content=systems_catalog",
+    primary_action: "detail",
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
     updated_at: "2026-07-13"

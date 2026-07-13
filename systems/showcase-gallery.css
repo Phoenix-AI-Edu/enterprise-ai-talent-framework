@@ -1,0 +1,50 @@
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-actions .btn { color: var(--text); }
+
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.screenshot-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.screenshot-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.screenshot-card figcaption {
+  padding: 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.screenshot-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text);
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .screenshot-grid { grid-template-columns: 1fr; }
+  .footer-actions { align-items: flex-start; }
+}

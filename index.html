@@ -12,10 +12,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦</title>
-  <meta name="description" content="提供企業專屬 AI 系統展示與數位轉型顧問服務，從中央廚房營運防護台到企業診斷工作台，協助企業安全驗證 AI 落地路徑。">
-  <meta property="og:title" content="鳳凰 AI 顧問｜企業專屬 AI 系統與營運大腦">
-  <meta property="og:description" content="從營運例外治理到企業診斷交付，探索鳳凰 AI 可驗證、可討論、可進入 Pilot 的旗艦系統。">
+  <title>鳳凰 AI 顧問｜企業診斷決策工作台與營運 AI 系統</title>
+  <meta name="description" content="Phoenix Diagnostic Workbench 把企業問題結構化為診斷流程，搭配中央廚房營運 AI，提供從問題定義、AI 草稿到顧問決策交付的 Pilot-ready 系統展示。">
+  <meta property="og:title" content="鳳凰 AI 顧問｜企業診斷決策工作台與營運 AI 系統">
+  <meta property="og:description" content="從中央廚房履約治理到企業問題診斷交付，探索可驗證、可討論、可進入 Pilot 的旗艦 AI 系統。">
   <meta property="og:type" content="website">
 
   <!-- ─── Google Fonts ─── -->
@@ -285,10 +285,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .hero-ctas {
       display: flex;
+      flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
       margin-bottom: 64px;
     }
+
+    .hero-tertiary-wrap { flex-basis: 100%; text-align: center; }
+    .hero-tertiary-link { color: var(--gray-400); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+    .hero-tertiary-link:hover { color: var(--white); }
 
     .btn {
       display: inline-flex;
@@ -1859,9 +1864,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span>📊 立即進行 AI 成熟度快測</span>
           <span style="font-size: 13px;">(5 題/ 2 分鐘)</span>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="btn btn-secondary">
-          <span>📥 索取 Notion + Excel 工具包</span>
-        </a>
+        <div class="hero-tertiary-wrap"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="hero-tertiary-link">📥 索取 Notion + Excel 工具包</a></div>
         <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:10px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
       </div>
 
@@ -1917,13 +1920,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var proofs = (system.highlights || []).slice(0, 3).map(function (item) {
           return '<li>' + item + '</li>';
         }).join('');
+        var primaryIsPilot = system.primary_action === 'pilot';
+        var primaryHref = primaryIsPilot ? system.pilot_program_href : system.cta_href;
+        var primaryText = primaryIsPilot ? system.pilot_program_text : system.cta_text;
+        var secondaryHref = primaryIsPilot ? system.cta_href : system.pilot_program_href;
+        var secondaryText = primaryIsPilot ? system.cta_text : system.pilot_program_text;
         card.innerHTML = '<div class="system-card-meta">' + chips + '</div>' +
           '<h3 class="system-card-title">' + system.title + '</h3>' +
           '<p class="system-card-summary">' + system.subtitle + '</p>' +
           '<ul class="system-card-proofs">' + proofs + '</ul>' +
           '<div class="system-card-actions"><div class="flagship-actions">' +
-          '<a class="btn btn-primary" href="' + system.cta_href + '">' + system.cta_text + '</a>' +
-          '<a class="btn btn-secondary" href="' + system.pilot_program_href + '">' + system.pilot_program_text + '</a>' +
+          '<a class="btn btn-primary" href="' + primaryHref + '">' + primaryText + '</a>' +
+          '<a class="btn btn-secondary" href="' + secondaryHref + '">' + secondaryText + '</a>' +
           '</div><div class="flagship-note">' + system.compliance_note + '</div></div>';
         grid.appendChild(card);
       });
