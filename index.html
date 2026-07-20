@@ -996,14 +996,282 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     .result-compliance {
-      font-size: 12px;
-      color: var(--gray-600);
-      margin-top: 12px;
-      max-width: 600px;
-      line-height: 1.5;
-    }
+          font-size: 12px;
+          color: var(--gray-600);
+          margin-top: 12px;
+          max-width: 600px;
+          line-height: 1.5;
+        }
 
-    /* ─── 全景課程展區 (Curriculum Section) ─── */
+        /* ─── HARD V1 結果漏斗 ─── */
+        .result-headline {
+          font-size: 22px;
+          font-weight: 800;
+          color: var(--white);
+          margin: 0 0 8px;
+          letter-spacing: 0.5px;
+        }
+
+        .result-score-line {
+          font-size: 15px;
+          color: var(--gray-300);
+          margin-bottom: 20px;
+        }
+
+        .result-disclaimer {
+          max-width: 720px;
+          margin: 0 auto 20px;
+          padding: 14px 16px;
+          border-radius: 10px;
+          border: 1px solid rgba(245, 166, 35, 0.35);
+          background: rgba(245, 166, 35, 0.08);
+          color: var(--gray-200);
+          font-size: 13px;
+          line-height: 1.7;
+          text-align: left;
+        }
+
+        .result-primary-pitch {
+          max-width: 720px;
+          margin: 0 auto 16px;
+          padding: 18px 18px 16px;
+          border-radius: 12px;
+          border: 1px solid rgba(0, 242, 254, 0.25);
+          background: rgba(0, 242, 254, 0.06);
+          color: var(--gray-100);
+          font-size: 14px;
+          line-height: 1.75;
+          text-align: left;
+          white-space: pre-line;
+        }
+
+        .result-primary-pitch strong {
+          color: var(--phoenix-teal);
+          font-size: 15px;
+        }
+
+        .result-warning {
+          max-width: 720px;
+          margin: 0 auto 12px;
+          padding: 12px 14px;
+          border-radius: 10px;
+          border: 1px solid rgba(233, 69, 96, 0.4);
+          background: rgba(233, 69, 96, 0.1);
+          color: #ffc9d2;
+          font-size: 13px;
+          line-height: 1.65;
+          text-align: left;
+          display: none;
+        }
+
+        .result-warning.is-visible {
+          display: block;
+        }
+
+        .result-next-step {
+          max-width: 720px;
+          margin: 24px auto 0;
+          text-align: left;
+        }
+
+        .result-next-step-hint {
+          font-size: 13px;
+          color: var(--gray-300);
+          line-height: 1.65;
+          margin-bottom: 12px;
+        }
+
+        .next-step-options {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .next-step-option {
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
+          padding: 12px 14px;
+          border-radius: 10px;
+          border: 1px solid var(--glass-border);
+          background: rgba(255, 255, 255, 0.03);
+          cursor: pointer;
+          transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .next-step-option:hover {
+          border-color: rgba(0, 242, 254, 0.35);
+        }
+
+        .next-step-option.is-selected {
+          border-color: rgba(245, 166, 35, 0.7);
+          background: rgba(245, 166, 35, 0.08);
+        }
+
+        .next-step-option input {
+          margin-top: 3px;
+          accent-color: var(--phoenix-gold);
+          flex-shrink: 0;
+        }
+
+        .next-step-option span {
+          font-size: 14px;
+          color: var(--gray-100);
+          line-height: 1.55;
+        }
+
+        .quiz-lead-form {
+          max-width: 720px;
+          margin: 22px auto 0;
+          text-align: left;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px 16px;
+        }
+
+        .quiz-lead-form .field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .quiz-lead-form .field-full {
+          grid-column: 1 / -1;
+        }
+
+        .quiz-lead-form label {
+          font-size: 13px;
+          color: var(--gray-300);
+          font-weight: 600;
+        }
+
+        .quiz-lead-form input,
+        .quiz-lead-form select {
+          width: 100%;
+          border-radius: 8px;
+          border: 1px solid var(--glass-border);
+          background: rgba(0, 0, 0, 0.35);
+          color: var(--white);
+          padding: 11px 12px;
+          font-size: 14px;
+          font-family: inherit;
+        }
+
+        .quiz-lead-form input:focus,
+        .quiz-lead-form select:focus {
+          outline: 2px solid rgba(0, 242, 254, 0.35);
+          border-color: rgba(0, 242, 254, 0.5);
+        }
+
+        .quiz-lead-form .check {
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+          font-size: 13px;
+          color: var(--gray-300);
+          line-height: 1.55;
+          cursor: pointer;
+        }
+
+        .quiz-lead-form .check input {
+          width: auto;
+          margin-top: 3px;
+          accent-color: var(--phoenix-gold);
+        }
+
+        .quiz-form-error {
+          grid-column: 1 / -1;
+          display: none;
+          padding: 10px 12px;
+          border-radius: 8px;
+          border: 1px solid rgba(233, 69, 96, 0.55);
+          background: rgba(233, 69, 96, 0.12);
+          color: #ffc9d2;
+          font-size: 13px;
+          line-height: 1.5;
+        }
+
+        .quiz-form-error.is-visible {
+          display: block;
+        }
+
+        .quiz-submit-btn {
+          grid-column: 1 / -1;
+          width: 100%;
+          border: none;
+          cursor: pointer;
+          background: linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%);
+          color: var(--white);
+          padding: 16px 24px;
+          font-weight: 700;
+          border-radius: 8px;
+          font-size: 16px;
+          box-shadow: 0 8px 30px rgba(245, 166, 35, 0.25);
+          font-family: inherit;
+        }
+
+        .quiz-submit-btn:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 35px rgba(245, 166, 35, 0.35);
+        }
+
+        .quiz-submit-btn:disabled {
+          opacity: 0.65;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .quiz-thankyou {
+          display: none;
+          max-width: 720px;
+          margin: 12px auto 0;
+          padding: 28px 22px;
+          border-radius: 14px;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          background: rgba(0, 242, 254, 0.07);
+          text-align: center;
+        }
+
+        .quiz-thankyou.is-visible {
+          display: block;
+        }
+
+        .quiz-thankyou h4 {
+          margin: 0 0 10px;
+          font-size: 20px;
+          color: var(--phoenix-teal);
+        }
+
+        .quiz-thankyou p {
+          margin: 0;
+          font-size: 14px;
+          color: var(--gray-200);
+          line-height: 1.7;
+        }
+
+        .quiz-thankyou .kit-secondary {
+          display: inline-block;
+          margin-top: 16px;
+          font-size: 13px;
+          color: var(--phoenix-gold);
+          text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+          .quiz-lead-form {
+            grid-template-columns: 1fr;
+          }
+
+          .next-step-option span {
+            font-size: 13px;
+          }
+
+          .result-headline {
+            font-size: 18px;
+          }
+        }
+
+        /* ─── 全景課程展區 (Curriculum Section) ─── */
     .curriculum-section {
       padding: 100px 0;
       background: rgba(11, 11, 22, 0.4);
@@ -2092,36 +2360,123 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-        <!-- 結果卡片 -->
-        <div class="result-card" id="quiz-result">
-          <div class="result-score-circle">
-            <span class="result-score-num" id="quiz-score-val">0</span>
-            <span class="result-score-total">總得分 / 滿分 20</span>
-          </div>
-          <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
-          <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
-          
-          <!-- 雷達圖可視化 -->
-          <div class="result-chart-container" style="max-width: 420px; margin: 30px auto; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.3);">
-            <canvas id="radar-chart"></canvas>
-          </div>
-          
-          <div class="result-level-desc">
-            <p id="quiz-level-text">詳細評估分析載入中...</p>
-            <div class="result-suggestion" id="quiz-suggestion-box">
-              <span style="font-size: 16px;">💡</span>
-              <span id="quiz-suggestion-text">建議行動指引載入中...</span>
-            </div>
-          </div>
+        <!-- 結果卡片（HARD V1 商業漏斗） -->
+                <div class="result-card" id="quiz-result">
+                  <h3 class="result-headline">您的企業 AI 成熟度快測結果</h3>
+                  <div class="result-score-circle">
+                    <span class="result-score-num" id="quiz-score-val">0</span>
+                    <span class="result-score-total">總得分 / 滿分 20</span>
+                  </div>
+                  <p class="result-score-line" id="quiz-score-line">分數載入中</p>
+                  <div class="result-badge" id="quiz-level-badge">評級定位載入中</div>
+                  <h3 class="result-level-title" id="quiz-level-title">成熟度階段載入中</h3>
 
-          <div class="result-ctas">
-            <a href="./contact.html?request_type=diagnosis&amp;utm_source=site&amp;utm_medium=consulting&amp;utm_campaign=ai_diagnosis&amp;utm_content=quiz_result" class="btn result-cta-lead" id="result-form-btn">
-              🎯 搶先登記預約「90 分鐘企業 AI 成熟度專家快診」(NT$ 29,800，可全額折抵後續工作坊費)
-            </a>
-            <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:10px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
-            <span class="result-compliance">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
-          </div>
-        </div>
+                  <!-- 雷達圖可視化 -->
+                  <div class="result-chart-container" style="max-width: 420px; margin: 30px auto; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; box-shadow: inset 0 0 20px rgba(0,0,0,0.3);">
+                    <canvas id="radar-chart"></canvas>
+                  </div>
+
+                  <div class="result-disclaimer" id="quiz-disclaimer">
+                    本結果依五個組織維度快速定位，供選擇後續服務參考。
+                    不構成單一專案投資核准、ROI 保證或「必須導入 AI」之結論。
+                    若需對特定流程做成可稽核的撥款／延後／拒絕決策，請選擇 Capital Decision Sprint。
+                  </div>
+
+                  <div class="result-level-desc">
+                    <p id="quiz-level-text">詳細評估分析載入中...</p>
+                  </div>
+
+                  <div class="result-primary-pitch" id="quiz-primary-pitch">主推說明載入中...</div>
+                  <div class="result-warning" id="quiz-governance-warning" role="status"></div>
+                  <div class="result-warning" id="quiz-foundation-warning" role="status"></div>
+
+                  <div class="result-ctas" id="quiz-funnel-panel">
+                    <div class="result-next-step">
+                      <p class="result-next-step-hint">
+                        請選擇一項我們將為您安排的下一步（必選）。未選擇無法送出。<br>
+                        每一項皆由鳳凰 AI 顧問團隊承接；我們不會在未確認範圍前逕行收費或進場。
+                      </p>
+                      <div class="next-step-options" id="next-step-options" role="radiogroup" aria-label="下一步服務">
+                        <label class="next-step-option" data-step="1">
+                          <input type="radio" name="next_step" value="1">
+                          <span><strong>1.</strong> 索取 Notion＋Excel 工具包，並依我的結果寄送對應文字指引</span>
+                        </label>
+                        <label class="next-step-option" data-step="2">
+                          <input type="radio" name="next_step" value="2">
+                          <span><strong>2.</strong> 預約專家初診（NT$12,800，可全額折抵後續方案）</span>
+                        </label>
+                        <label class="next-step-option" data-step="3">
+                          <input type="radio" name="next_step" value="3">
+                          <span><strong>3.</strong> 預約 90 分鐘企業 AI 成熟度專家快診（NT$29,800，可折抵工作坊）</span>
+                        </label>
+                        <label class="next-step-option" data-step="4">
+                          <input type="radio" name="next_step" value="4">
+                          <span><strong>4.</strong> 洽詢戰略畫布／場景工作坊（90 天路線圖與跨部門共識）</span>
+                        </label>
+                        <label class="next-step-option" data-step="5">
+                          <input type="radio" name="next_step" value="5">
+                          <span><strong>5.</strong> 洽詢 Capital Decision Sprint（AI 預算／流程投資決策，可稽核決策包）</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <iframe name="quizGoogleFormSink" id="quizGoogleFormSink" title="快測表單提交結果" style="display:none"></iframe>
+                    <form id="quiz-lead-form" class="quiz-lead-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/formResponse" method="POST" target="quizGoogleFormSink" novalidate>
+                      <div class="field">
+                        <label for="quiz-company">公司名稱 *</label>
+                        <input id="quiz-company" name="entry.65542742" autocomplete="organization" required>
+                      </div>
+                      <div class="field">
+                        <label for="quiz-name">姓名 *</label>
+                        <input id="quiz-name" name="entry.272408360" autocomplete="name" required>
+                      </div>
+                      <div class="field">
+                        <label for="quiz-role">角色 *</label>
+                        <select id="quiz-role" required>
+                          <option value="">請選擇</option>
+                          <option value="企業主/總經理">企業主/總經理</option>
+                          <option value="COO">COO</option>
+                          <option value="CFO">CFO</option>
+                          <option value="CIO/IT">CIO/IT</option>
+                          <option value="轉型/CDO">轉型/CDO</option>
+                          <option value="客服或營運主管">客服或營運主管</option>
+                          <option value="其他">其他</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <label for="quiz-email">工作 Email *</label>
+                        <input id="quiz-email" name="emailAddress" type="email" autocomplete="email" required>
+                      </div>
+                      <div class="field field-full">
+                        <label for="quiz-phone">電話 *</label>
+                        <input id="quiz-phone" name="entry.2019468206" type="tel" autocomplete="tel" required>
+                      </div>
+
+                      <!-- Google Form 對應隱藏欄：職稱／預算／需求說明／個資同意 -->
+                      <input type="hidden" id="quiz-title-hidden" name="entry.1392641830" value="">
+                      <input type="hidden" id="quiz-budget-hidden" name="entry.1233297346" value="">
+                      <input type="hidden" id="quiz-painpoint-hidden" name="entry.2002297629" value="">
+                      <input type="hidden" name="entry.613425073" value="本人同意此表單蒐集之個人資料僅用於前置評估與服務推廣，並同意貴司依中華民國個人資料保護法第 8 條規定蒐集、處理及利用本人之個人資料。">
+
+                      <div class="field field-full">
+                        <label class="check">
+                          <input type="checkbox" id="quiz-privacy" required>
+                          <span>我已詳閱並同意<a href="./privacy.html" target="_blank" rel="noopener">《個人資料保護與隱私權政策告知書》</a>，並了解可隨時請求查詢或刪除資料。</span>
+                        </label>
+                      </div>
+
+                      <div class="quiz-form-error" id="quiz-form-error" role="alert"></div>
+                      <button type="submit" class="quiz-submit-btn" id="quiz-submit-btn">送出下一步安排</button>
+                      <span class="result-compliance field-full">※ 本表單及後續諮詢嚴格遵循《中華民國個人資料保護法》第 8 條規定。您填寫之所有企業機敏資訊將由孟淑慧顧問與陳文家策略長親自研析，並受保密合約保護。</span>
+                    </form>
+                  </div>
+
+                  <div class="quiz-thankyou" id="quiz-thankyou" aria-live="polite">
+                    <h4 id="quiz-thankyou-title">已送出</h4>
+                    <p id="quiz-thankyou-body">感謝您留下需求。</p>
+                    <a id="quiz-kit-secondary" class="kit-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" rel="noopener" style="display:none;">若需再填一次工具包表單可點此開啟</a>
+                  </div>
+                </div>
 
         <!-- 控制欄 -->
         <div class="quiz-navigation" id="quiz-controls">
@@ -4238,260 +4593,549 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </footer>
 
-  <!-- ─── ⚡ 互動式診斷器 JS 邏輯 ─── -->
-  <script>
-    // 題庫與計分狀態
-    let currentStep = 1;
-    const totalSteps = 5;
-    const scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    
-    const dimensions = {
-      1: "商業驅動與戰略對齊",
-      2: "數據基礎與技術可行性",
-      3: "變革管理與變更適應",
-      4: "風險治理與合規安全",
-      5: "執行決策與年度預算"
-    };
+  <!-- ─── ⚡ 互動式診斷器 JS 邏輯（HARD V1 漏斗） ─── -->
+    <script>
+      // 題庫與計分狀態
+      let currentStep = 1;
+      const totalSteps = 5;
+      const scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      const answers = { 1: '', 2: '', 3: '', 4: '', 5: '' };
+      const SCORE_TO_LETTER = { 1: 'A', 2: 'B', 3: 'C', 4: 'D' };
+      const STEP_CODES = { 1: 'kit', 2: 'dx_lite', 3: 'dx_90', 4: 'ws', 5: 'sprint' };
+      const KIT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform';
 
-    // DOM 元素快取
-    const quizCards = document.querySelectorAll('.quiz-card');
-    const progressBarFill = document.getElementById('quiz-progress-bar');
-    const stepIndicator = document.getElementById('quiz-step-indicator');
-    const percentageIndicator = document.getElementById('quiz-percentage');
-    const btnPrev = document.getElementById('quiz-btn-prev');
-    const btnNext = document.getElementById('quiz-btn-next');
-    const quizControls = document.getElementById('quiz-controls');
-    const resultCard = document.getElementById('quiz-result');
+      const dimensions = {
+        1: '商業驅動與戰略對齊',
+        2: '數據基礎與技術可行性',
+        3: '變革管理與變更適應',
+        4: '風險治理與合規安全',
+        5: '執行決策與年度預算'
+      };
 
-    // 點擊選項事件
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const card = this.closest('.quiz-card');
-        const step = parseInt(card.getAttribute('data-step'));
-        const score = parseInt(this.getAttribute('data-score'));
-        
-        // 清除該題其他選項的選取狀態
-        card.querySelectorAll('.option-btn').forEach(o => o.classList.remove('selected'));
-        // 選取當前選項
-        this.classList.add('selected');
-        
-        // 紀錄分數
-        scores[step] = score;
-        
-        // 啟用「下一題」按鈕，並更新文字
-        btnNext.disabled = false;
-        if (step === totalSteps) {
-          btnNext.textContent = '生成診斷結果 →';
+      const BAND_META = {
+        explore: {
+          code: 'explore',
+          label: '探索期',
+          badge: '探索期 (5–8 分)',
+          title: '組織 AI 成熟度：探索期',
+          text: '整體仍偏前期觀察。建議先建立共同語言與盤點節奏，避免條件未成熟就進入高成本 PoC。'
+        },
+        start: {
+          code: 'start',
+          label: '起步期',
+          badge: '起步期 (9–12 分)',
+          title: '組織 AI 成熟度：起步期',
+          text: '已有單點訊號，但仍需收斂範圍、治理與執行節奏。適合以初診／快診對焦優先場景。'
+        },
+        execute: {
+          code: 'execute',
+          label: '推進期',
+          badge: '推進期 (13–16 分)',
+          title: '組織 AI 成熟度：推進期',
+          text: '具備推進條件。適合用快診或工作坊形成 90 天路線與跨部門共識。'
+        },
+        operate: {
+          code: 'operate',
+          label: '制度化期',
+          badge: '制度化期 (17–20 分)',
+          title: '組織 AI 成熟度：制度化期',
+          text: '成熟度較高。若需對具體流程做成可稽核的撥款／延後／拒絕決策，可評估 Capital Decision Sprint。'
+        }
+      };
+
+      const PITCH_COPY = {
+        1: '建議為您安排：① 工具包與文字指引\n\n以您目前的預算節奏與準備度，最適合先建立內部共同語言與自助盤點，\n避免條件未成熟就進入高成本 PoC。\n請於下方確認選項 1，或改選付費診斷／工作坊／Capital Decision Sprint。',
+        2: '建議為您安排：② 專家初診（NT$12,800，可全額折抵後續方案）\n\n您已出現值得收斂的問題訊號，但範圍、時程或治理條件仍需對焦。\n初診由顧問研析後交付精簡報告與路徑建議，並安排短視訊確認下一步。\n請確認選項 2，或改選其他服務。',
+        3: '建議為您安排：③ 90 分鐘成熟度專家快診（NT$29,800，可折抵工作坊）\n\n您具備一定急迫或預算條件，適合用深度快診收斂優先場景、風險與 90 天方向。\n請確認選項 3，或改選其他服務。',
+        4: '建議為您安排：④ 戰略畫布／場景工作坊\n\n您的執行與預算帶適合進入跨部門共識與 90 天路線圖。\n工作坊產出董事會可用的優先級與路徑；若需對具體流程做成撥款級決策紀錄，\n請改選 ⑤ Capital Decision Sprint。\n請確認選項 4。',
+        5: '建議為您安排：⑤ Capital Decision Sprint（AI 資本決策）\n\n您呈現較高急迫與預算條件，適合進入可追溯證據與風險閘門的資本決策流程，\n產出委員會級決策包（Decision Snapshot／Committee Pack）。\n結論可能是探索投入、基礎修復、延後或拒絕 AI——服務費用不因結論方向改變。\n正式執行於範圍與資料條件確認後，由顧問以受控流程進行\n（非本頁自動產出最終投資決定）。\n請確認選項 5，或改選快診／工作坊若您尚未準備好決策會議。'
+      };
+
+      const THANKYOU_COPY = {
+        1: {
+          title: '已為您登記工具包',
+          body: '我們將於約定工作日內寄送 Notion＋Excel 工具包與對應文字指引。若需升級診斷，請來信或再次於網站預約。'
+        },
+        2: {
+          title: '已為您登記專家初診',
+          body: '我們將與您確認時段、請款方式與資料清單。初診費用 NT$12,800，可依官網規則全額折抵後續方案。'
+        },
+        3: {
+          title: '已為您登記 90 分鐘快診',
+          body: '我們將與您確認時段與請款方式。費用 NT$29,800，可依官網規則折抵工作坊。'
+        },
+        4: {
+          title: '已為您登記工作坊洽詢',
+          body: '我們將提供範圍說明、報價區間與可排檔期，再與您確認是否啟動。'
+        },
+        5: {
+          title: '已為您登記 Capital Decision Sprint 洽詢',
+          body: '我們將提供服務範圍、資料最小化清單、時程與訂金說明。確認後始進入受控診斷流程；本頁成熟度分數不作最終投資決定。'
+        }
+      };
+
+      const GOVERNANCE_WARNING_TEXT =
+        '治理提示：您目前對生成式 AI 使用與合規防線偏弱。\n我們建議先透過初診／快診對齊使用規範與風險底線，再擴大 PoC 或撥款決策，\n以降低資安與個資暴露。';
+
+      const FOUNDATION_WARNING_TEXT =
+        '資料基礎提示：核心資料偏離散時，後續正式診斷較常先指向「基礎修復／探索」，\n而非直接 Fund PoC。這是為了降低失敗 PoC，不是拒絕服務。';
+
+      let quizState = {
+        totalScore: 0,
+        maturityBand: 'explore',
+        defaultChecked: 1,
+        primaryRecommended: 'kit',
+        governanceWarning: false,
+        foundationWarningBase: false,
+        radarChart: null
+      };
+      let quizSubmissionStarted = false;
+      let quizSubmittedNextStep = null;
+
+      // DOM 元素快取
+      const quizCards = document.querySelectorAll('.quiz-card');
+      const progressBarFill = document.getElementById('quiz-progress-bar');
+      const stepIndicator = document.getElementById('quiz-step-indicator');
+      const percentageIndicator = document.getElementById('quiz-percentage');
+      const btnPrev = document.getElementById('quiz-btn-prev');
+      const btnNext = document.getElementById('quiz-btn-next');
+      const quizControls = document.getElementById('quiz-controls');
+      const resultCard = document.getElementById('quiz-result');
+      const primaryPitchEl = document.getElementById('quiz-primary-pitch');
+      const governanceWarningEl = document.getElementById('quiz-governance-warning');
+      const foundationWarningEl = document.getElementById('quiz-foundation-warning');
+      const quizLeadForm = document.getElementById('quiz-lead-form');
+      const quizFormError = document.getElementById('quiz-form-error');
+      const quizSubmitBtn = document.getElementById('quiz-submit-btn');
+      const quizFunnelPanel = document.getElementById('quiz-funnel-panel');
+      const quizThankyou = document.getElementById('quiz-thankyou');
+      const quizSink = document.getElementById('quizGoogleFormSink');
+
+      function getSelectedNextStep() {
+        const checked = document.querySelector('input[name="next_step"]:checked');
+        return checked ? parseInt(checked.value, 10) : null;
+      }
+
+      function getMaturityBand(total) {
+        if (total <= 8) return BAND_META.explore;
+        if (total <= 12) return BAND_META.start;
+        if (total <= 16) return BAND_META.execute;
+        return BAND_META.operate;
+      }
+
+      // §5 預選演算法
+      function computeDefaultChecked(q4, q5, totalScore) {
+        let governanceWarning = false;
+        let defaultChecked;
+
+        if (q4 === 'A' && (q5 === 'C' || q5 === 'D')) {
+          defaultChecked = 2;
+          governanceWarning = true;
+        } else if (q5 === 'A') {
+          defaultChecked = 1;
+        } else if (q5 === 'B') {
+          if (totalScore <= 8) defaultChecked = 1;
+          else if (totalScore <= 12) defaultChecked = 2;
+          else defaultChecked = 3;
+        } else if (q5 === 'C') {
+          if (totalScore <= 8) defaultChecked = 2;
+          else if (totalScore <= 12) defaultChecked = 3;
+          else defaultChecked = 4;
         } else {
-          btnNext.textContent = '下一題 →';
+          // Q5 === 'D'
+          if (totalScore <= 12) defaultChecked = 3;
+          else defaultChecked = 5;
+        }
+
+        return { defaultChecked, governanceWarning };
+      }
+
+      function updatePitchAndWarnings(selectedStep) {
+        const step = selectedStep || quizState.defaultChecked;
+        primaryPitchEl.textContent = PITCH_COPY[step] || PITCH_COPY[quizState.defaultChecked];
+
+        if (quizState.governanceWarning) {
+          governanceWarningEl.textContent = GOVERNANCE_WARNING_TEXT;
+          governanceWarningEl.classList.add('is-visible');
+        } else {
+          governanceWarningEl.textContent = '';
+          governanceWarningEl.classList.remove('is-visible');
+        }
+
+        const showFoundation =
+          answers[2] === 'A' && (step === 3 || step === 4 || step === 5);
+        if (showFoundation) {
+          foundationWarningEl.textContent = FOUNDATION_WARNING_TEXT;
+          foundationWarningEl.classList.add('is-visible');
+        } else {
+          foundationWarningEl.textContent = '';
+          foundationWarningEl.classList.remove('is-visible');
+        }
+      }
+
+      function setNextStepSelection(step) {
+        document.querySelectorAll('input[name="next_step"]').forEach(function (input) {
+          const selected = parseInt(input.value, 10) === step;
+          input.checked = selected;
+          input.closest('.next-step-option').classList.toggle('is-selected', selected);
+        });
+        updatePitchAndWarnings(step);
+      }
+
+      function showFormError(message) {
+        quizFormError.textContent = message;
+        quizFormError.classList.add('is-visible');
+      }
+
+      function clearFormError() {
+        quizFormError.textContent = '';
+        quizFormError.classList.remove('is-visible');
+      }
+
+      function mapBudgetByNextStep(step) {
+        if (step === 1) return '目前無明確預算，以概念學習與內部研習為主';
+        if (step === 2 || step === 3) return '已有初步評估預算 (預計 6 個月內啟動)';
+        return '已有明確預算與時程 (預計 3 個月內啟動)';
+      }
+
+      function mapRequestTypeLabel(step) {
+        if (step === 1) return '工具包索取（成熟度快測）';
+        if (step === 2) return '專家初診 NT$12,800（成熟度快測）';
+        if (step === 3) return '90 分鐘快診 NT$29,800（成熟度快測）';
+        if (step === 4) return '戰略畫布／場景工作坊洽詢（成熟度快測）';
+        return 'Capital Decision Sprint 洽詢（成熟度快測）';
+      }
+
+      function getUtmParam(key, fallback) {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          return params.get(key) || fallback || '';
+        } catch (e) {
+          return fallback || '';
+        }
+      }
+
+      function buildPayloadSummary(nextStep) {
+        const utmSource = getUtmParam('utm_source', 'site');
+        const utmMedium = getUtmParam('utm_medium', 'consulting');
+        const utmCampaign = getUtmParam('utm_campaign', 'ai_diagnosis');
+        const utmContent = getUtmParam('utm_content', 'quiz_result_hard_v1') || 'quiz_result_hard_v1';
+        const foundationNow =
+          answers[2] === 'A' && (nextStep === 3 || nextStep === 4 || nextStep === 5);
+
+        return [
+          '【官網成熟度快測 HARD V1】',
+          '需求類型：' + mapRequestTypeLabel(nextStep),
+          '',
+          'total_score: ' + quizState.totalScore,
+          'maturity_band: ' + quizState.maturityBand,
+          'q1: ' + answers[1],
+          'q2: ' + answers[2],
+          'q3: ' + answers[3],
+          'q4: ' + answers[4],
+          'q5: ' + answers[5],
+          'primary_recommended: ' + quizState.primaryRecommended,
+          'default_checked: ' + quizState.defaultChecked,
+          'next_step: ' + nextStep,
+          'next_step_code: ' + (STEP_CODES[nextStep] || ''),
+          'governance_warning: ' + (quizState.governanceWarning ? 'true' : 'false'),
+          'foundation_warning: ' + (foundationNow ? 'true' : 'false'),
+          'utm_source: ' + utmSource,
+          'utm_medium: ' + utmMedium,
+          'utm_campaign: ' + utmCampaign,
+          'utm_content: ' + utmContent,
+          '來源頁: ' + window.location.href.split('?')[0] + '#diagnostic'
+        ].join('\n');
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // 點擊選項事件
+      document.querySelectorAll('.option-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const card = this.closest('.quiz-card');
+          const step = parseInt(card.getAttribute('data-step'), 10);
+          const score = parseInt(this.getAttribute('data-score'), 10);
+
+          card.querySelectorAll('.option-btn').forEach(function (o) {
+            o.classList.remove('selected');
+          });
+          this.classList.add('selected');
+
+          scores[step] = score;
+          answers[step] = SCORE_TO_LETTER[score] || '';
+
+          btnNext.disabled = false;
+          if (step === totalSteps) {
+            btnNext.textContent = '生成診斷結果 →';
+          } else {
+            btnNext.textContent = '下一題 →';
+          }
+        });
+      });
+
+      // 點擊「下一題」
+      btnNext.addEventListener('click', function () {
+        if (currentStep < totalSteps) {
+          quizCards[currentStep - 1].classList.remove('active');
+          currentStep++;
+          quizCards[currentStep - 1].classList.add('active');
+          updateQuizUI();
+        } else {
+          showDiagnosticResult();
         }
       });
-    });
 
-    // 點擊「下一題」
-    btnNext.addEventListener('click', function() {
-      if (currentStep < totalSteps) {
-        // 隱藏目前題卡，顯示下一張
-        quizCards[currentStep - 1].classList.remove('active');
-        currentStep++;
-        quizCards[currentStep - 1].classList.add('active');
-        
-        // 更新進度條與控制按鈕
-        updateQuizUI();
-      } else {
-        // 已到最後一題，點選生成結果
-        showDiagnosticResult();
-      }
-    });
+      // 點擊「上一題」
+      btnPrev.addEventListener('click', function () {
+        if (currentStep > 1) {
+          quizCards[currentStep - 1].classList.remove('active');
+          currentStep--;
+          quizCards[currentStep - 1].classList.add('active');
+          updateQuizUI();
+        }
+      });
 
-    // 點擊「上一題」
-    btnPrev.addEventListener('click', function() {
-      if (currentStep > 1) {
-        quizCards[currentStep - 1].classList.remove('active');
-        currentStep--;
-        quizCards[currentStep - 1].classList.add('active');
-        
-        updateQuizUI();
-      }
-    });
+      function updateQuizUI() {
+        const progressPercent = (currentStep / totalSteps) * 100;
+        progressBarFill.style.width = progressPercent + '%';
+        stepIndicator.textContent = '第 ' + currentStep + ' 題 / 共 ' + totalSteps + ' 題';
+        percentageIndicator.textContent = progressPercent + '%';
 
-    // 更新診斷器 UI 狀態
-    function updateQuizUI() {
-      // 1. 更新進度條與比例標註
-      const progressPercent = (currentStep / totalSteps) * 100;
-      progressBarFill.style.width = `${progressPercent}%`;
-      stepIndicator.textContent = `第 ${currentStep} 題 / 共 ${totalSteps} 題`;
-      percentageIndicator.textContent = `${progressPercent}%`;
-      
-      // 2. 上一題按鈕狀態
-      btnPrev.disabled = currentStep === 1;
-      
-      // 3. 下一題按鈕狀態 (如果目前題型已選取過答案，則啟用)
-      if (scores[currentStep] > 0) {
-        btnNext.disabled = false;
-        if (currentStep === totalSteps) {
-          btnNext.textContent = '生成診斷結果 →';
+        btnPrev.disabled = currentStep === 1;
+
+        if (scores[currentStep] > 0) {
+          btnNext.disabled = false;
+          if (currentStep === totalSteps) {
+            btnNext.textContent = '生成診斷結果 →';
+          } else {
+            btnNext.textContent = '下一題 →';
+          }
         } else {
-          btnNext.textContent = '下一題 →';
-        }
-      } else {
-        btnNext.disabled = true;
-        btnNext.textContent = '請先選擇答案';
-      }
-    }
-
-    // 計算分數並展示診斷結果
-    function showDiagnosticResult() {
-      // 隱藏所有題卡與控制按鈕
-      quizCards.forEach(c => c.classList.remove('active'));
-      quizControls.style.display = 'none';
-      document.querySelector('.quiz-progress').style.display = 'none';
-      
-      // 計算總得分
-      let totalScore = 0;
-      let minScore = 5;
-      let lowestDimension = "";
-      
-      for (let s = 1; s <= totalSteps; s++) {
-        totalScore += scores[s];
-        if (scores[s] < minScore) {
-          minScore = scores[s];
-          lowestDimension = dimensions[s];
+          btnNext.disabled = true;
+          btnNext.textContent = '請先選擇答案';
         }
       }
 
-      // 對應 B2B 評級、定位與點評
-      let levelBadge = "";
-      let levelTitle = "";
-      let levelText = "";
-      let suggestionText = "";
-      let formBtnText = "";
+      // radio 變更：更新主推與 selected 樣式
+      document.querySelectorAll('input[name="next_step"]').forEach(function (input) {
+        input.addEventListener('change', function () {
+          const step = parseInt(this.value, 10);
+          document.querySelectorAll('.next-step-option').forEach(function (label) {
+            label.classList.toggle(
+              'is-selected',
+              parseInt(label.getAttribute('data-step'), 10) === step
+            );
+          });
+          updatePitchAndWarnings(step);
+          clearFormError();
+        });
+      });
 
-      if (totalScore >= 5 && totalScore <= 9) {
-        levelBadge = "C 級名單 (成熟度 25% ~ 45%)";
-        levelTitle = "階段一：AI 萌芽期 (Ad-hoc) — 缺乏明確 ROI 與數據基底";
-        levelText = `貴司目前在「${lowestDimension}」維度上得分較低。這意味著企業內部尚未建立成熟的數位化流程，部門數據孤島嚴重，且缺乏高層實質預算編列。此時盲目採購外部高價 AI 系統或進行模型自研（Build）將面臨極高的 POC 死亡風險。`;
-        suggestionText = "強烈建議先不要花大錢！請先下載我們的「一頁式戰略畫布」與 Notion 管理模板，帶領跨部門主管釐清業務痛點（Quick-Win），利用 Excel 精算首期 ROI 成本。";
-        formBtnText = "📥 點此免費登記索取「Notion 協作模板與 Excel 互動試算表工具包」";
-      } 
-      else if (totalScore >= 10 && totalScore <= 13) {
-        levelBadge = "B 級名單 (成熟度 50% ~ 65%)";
-        levelTitle = "階段二：特定場景探索期 (Exploring) — 單點痛點有感，但缺乏系統化中台";
-        levelText = `貴司在「${lowestDimension}」維度上存在明顯缺口。雖然內部已有數位化基礎，且有特定部門（如行銷或IT）自發探索 AI 工具，但尚未形成跨部門的 CoE 專責組織，也缺乏嚴謹的安全合規與 DLP 資料遮罩防線。`;
-        suggestionText = "建議您的團隊進行一次系統化的現況盤點。由孟淑慧顧問與陳文家策略長為您設計一場 15 小時的「企業 AI 菁英培訓專班」，或導入方案 B 工作坊，在 90 天內快速鎖定 3 個高 ROI 試點專案。";
-        formBtnText = "📊 預約 30 分鐘免費顧問線上初診，獲取 90 天 Quick-Win 落地指南";
-      } 
-      else if (totalScore >= 14 && totalScore <= 17) {
-        levelBadge = "A 級黃金名單 (成熟度 70% ~ 85%)";
-        levelTitle = "階段三：系統化導入期 (Systematic) — 主管高度支持，正在尋找最佳落地架構";
-        levelText = `貴司具備非常優異的轉型潛力！但在「${lowestDimension}」上仍有精進空間。高階主管對 AI 轉型有強烈共識且已編列相關預算。目前最緊迫的任務是接軌國際 <strong>ISO/IEC 42001</strong> 安全稽核規範，避免因資料外洩、Prompt Injection 或模型幻覺出錯導致轉型功虧一簣。`;
-        suggestionText = "這是一個非常關鍵的黃金窗口！建議立即預約我們專屬的「NT$ 29,800 企業 AI 導入戰略快診案」（費用可全額折抵後續工作坊），由陳策略長與孟顧問在 5 個工作天內為您產出 8–12 頁的頂級 PDF 診斷報告，為董事會決策提供量化決策依據。";
-        formBtnText = "🎯 搶先申請「企業 AI 導入戰略快診」 (NT$ 29,800，可全額折抵後續服務費)";
-      } 
-      else {
-        levelBadge = "S 級超級名單 (成熟度 90% 以上)";
-        levelTitle = "階段四：AI 驅動變革期 (Optimized) — 預算充足、技術領先，追求全面變革複利";
-        levelText = `貴司是極為罕見且傑出的 AI 先行者！在各維度表現均衡且優異。您目前的核心痛點是將 AI 與全員績效指標（KPI）深度綁定，並建立可持續維運的 MLOps/LLMOps 系統架構，對接國際 Model Context Protocol (MCP) 標準，構築同業無法超越的智能運營護城河。`;
-        suggestionText = "對於 S 級企業，我們將由陳策略長與孟顧問親自出馬，直接提供客製化 B2B 合約與 NDA，推動高客單價的「90天/180天 數位轉型實質導入陪跑案」，提供頂級的專家陪跑支援。";
-        formBtnText = "🔥 直接聯絡策略長與首席顧問，預約專屬 NDA 集團陪跑案洽談";
-      }
+      function showDiagnosticResult() {
+        quizCards.forEach(function (c) {
+          c.classList.remove('active');
+        });
+        quizControls.style.display = 'none';
+        document.querySelector('.quiz-progress').style.display = 'none';
 
-      // 渲染結果卡片
-      document.getElementById('quiz-score-val').textContent = totalScore;
-      document.getElementById('quiz-level-badge').textContent = levelBadge;
-      document.getElementById('quiz-level-title').textContent = levelTitle;
-      document.getElementById('quiz-level-text').innerHTML = levelText;
-      document.getElementById('quiz-suggestion-text').textContent = suggestionText;
-      
-      const formBtn = document.getElementById('result-form-btn');
-      formBtn.textContent = formBtnText;
-      
-      // 如果是 C 級名單，按鈕直接導向工具包索取表單；如果是 B/A/S 級，導向診斷前置諮詢表單
-      if (totalScore <= 9) {
-        formBtn.href = "https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform";
-        formBtn.style.background = "linear-gradient(135deg, var(--phoenix-teal) 0%, #009eb4 100%)";
-        formBtn.style.boxShadow = "0 8px 30px rgba(0, 242, 254, 0.25)";
-      } else {
-        formBtn.href = "./contact.html?request_type=diagnosis&utm_source=site&utm_medium=consulting&utm_campaign=ai_diagnosis&utm_content=quiz_result";
-        formBtn.style.background = "linear-gradient(135deg, var(--phoenix-accent) 0%, var(--phoenix-gold) 100%)";
-        formBtn.style.boxShadow = "0 8px 30px rgba(245, 166, 35, 0.25)";
-      }
+        let totalScore = 0;
+        let minScore = 5;
+        let lowestDimension = '';
 
-      // 初始化或更新雷達圖
-      const ctx = document.getElementById('radar-chart').getContext('2d');
-      new Chart(ctx, {
-        type: 'radar',
-        data: {
-          labels: ['戰略對齊', '技術就緒', '變革適應', '安全合規', '決策預算'],
-          datasets: [{
-            label: '成熟度得分 (%)',
-            data: [
-              scores[1] * 25,
-              scores[2] * 25,
-              scores[3] * 25,
-              scores[4] * 25,
-              scores[5] * 25
-            ],
-            backgroundColor: 'rgba(233, 69, 96, 0.25)',
-            borderColor: 'rgba(233, 69, 96, 1)',
-            borderWidth: 2,
-            pointBackgroundColor: 'rgba(0, 242, 254, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(233, 69, 96, 1)',
-            pointRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            r: {
-              angleLines: {
-                color: 'rgba(255, 255, 255, 0.1)'
-              },
-              grid: {
-                color: 'rgba(255, 255, 255, 0.1)'
-              },
-              pointLabels: {
-                color: 'rgba(255, 255, 255, 0.8)',
-                font: {
-                  family: "'Inter', 'Noto Sans TC', sans-serif",
-                  size: 13,
-                  weight: '600'
-                }
-              },
-              ticks: {
-                backdropColor: 'transparent',
-                color: 'rgba(255, 255, 255, 0.5)',
-                stepSize: 25,
-                callback: function(value) {
-                  return value + '%';
-                }
-              },
-              min: 0,
-              max: 100
-            }
+        for (let s = 1; s <= totalSteps; s++) {
+          totalScore += scores[s];
+          if (scores[s] < minScore) {
+            minScore = scores[s];
+            lowestDimension = dimensions[s];
+          }
+        }
+
+        const band = getMaturityBand(totalScore);
+        const q4 = answers[4];
+        const q5 = answers[5];
+        const rec = computeDefaultChecked(q4, q5, totalScore);
+
+        quizState.totalScore = totalScore;
+        quizState.maturityBand = band.code;
+        quizState.defaultChecked = rec.defaultChecked;
+        quizState.primaryRecommended = STEP_CODES[rec.defaultChecked];
+        quizState.governanceWarning = rec.governanceWarning;
+        quizState.foundationWarningBase =
+          answers[2] === 'A' &&
+          (rec.defaultChecked === 3 ||
+            rec.defaultChecked === 4 ||
+            rec.defaultChecked === 5);
+
+        document.getElementById('quiz-score-val').textContent = totalScore;
+        document.getElementById('quiz-score-line').textContent =
+          totalScore + '/20 ｜ 定位：' + band.label;
+        document.getElementById('quiz-level-badge').textContent = band.badge;
+        document.getElementById('quiz-level-title').textContent = band.title;
+
+        let levelText = band.text;
+        if (lowestDimension) {
+          levelText +=
+            ' 目前相對較弱的維度為「' +
+            lowestDimension +
+            '」，後續服務將一併納入對焦。';
+        }
+        document.getElementById('quiz-level-text').textContent = levelText;
+
+        setNextStepSelection(rec.defaultChecked);
+        clearFormError();
+        quizSubmissionStarted = false;
+        quizSubmittedNextStep = null;
+        quizFunnelPanel.style.display = '';
+        quizThankyou.classList.remove('is-visible');
+        document.getElementById('quiz-kit-secondary').style.display = 'none';
+
+        // 雷達圖
+        const ctx = document.getElementById('radar-chart').getContext('2d');
+        if (quizState.radarChart) {
+          quizState.radarChart.destroy();
+        }
+        quizState.radarChart = new Chart(ctx, {
+          type: 'radar',
+          data: {
+            labels: ['戰略對齊', '技術就緒', '變革適應', '安全合規', '決策預算'],
+            datasets: [
+              {
+                label: '成熟度得分 (%)',
+                data: [
+                  scores[1] * 25,
+                  scores[2] * 25,
+                  scores[3] * 25,
+                  scores[4] * 25,
+                  scores[5] * 25
+                ],
+                backgroundColor: 'rgba(233, 69, 96, 0.25)',
+                borderColor: 'rgba(233, 69, 96, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(0, 242, 254, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(233, 69, 96, 1)',
+                pointRadius: 4
+              }
+            ]
           },
-          plugins: {
-            legend: {
-              labels: {
-                color: 'rgba(255, 255, 255, 0.8)',
-                font: {
-                  family: "'Inter', 'Noto Sans TC', sans-serif",
-                  size: 12,
-                  weight: '500'
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                pointLabels: {
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  font: {
+                    family: "'Inter', 'Noto Sans TC', sans-serif",
+                    size: 13,
+                    weight: '600'
+                  }
+                },
+                ticks: {
+                  backdropColor: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.5)',
+                  stepSize: 25,
+                  callback: function (value) {
+                    return value + '%';
+                  }
+                },
+                min: 0,
+                max: 100
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  font: {
+                    family: "'Inter', 'Noto Sans TC', sans-serif",
+                    size: 12,
+                    weight: '500'
+                  }
                 }
               }
             }
           }
+        });
+
+        resultCard.style.display = 'block';
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // 表單送出校驗 + payload
+      quizLeadForm.addEventListener('submit', function (e) {
+        clearFormError();
+        const nextStep = getSelectedNextStep();
+        const company = document.getElementById('quiz-company').value.trim();
+        const name = document.getElementById('quiz-name').value.trim();
+        const role = document.getElementById('quiz-role').value;
+        const email = document.getElementById('quiz-email').value.trim();
+        const phone = document.getElementById('quiz-phone').value.trim();
+        const privacy = document.getElementById('quiz-privacy').checked;
+
+        if (![1, 2, 3, 4, 5].includes(nextStep)) {
+          e.preventDefault();
+          showFormError('請先勾選一項下一步服務（工具包／初診／快診／工作坊／Capital Decision Sprint）。');
+          return;
         }
+        if (!company || !name || !role || !email || !phone) {
+          e.preventDefault();
+          showFormError('請完整填寫公司名稱、姓名、角色、工作 Email 與電話。');
+          return;
+        }
+        if (!isValidEmail(email)) {
+          e.preventDefault();
+          showFormError('請填寫有效的工作 Email。');
+          return;
+        }
+        if (!privacy) {
+          e.preventDefault();
+          showFormError('請勾選同意個人資料保護與隱私權政策後再送出。');
+          return;
+        }
+
+        document.getElementById('quiz-title-hidden').value = role;
+        document.getElementById('quiz-budget-hidden').value = mapBudgetByNextStep(nextStep);
+        document.getElementById('quiz-painpoint-hidden').value = buildPayloadSummary(nextStep);
+
+        quizSubmissionStarted = true;
+        quizSubmittedNextStep = nextStep;
+        quizSubmitBtn.disabled = true;
+        quizSubmitBtn.textContent = '送出中…';
       });
 
-      // 展示結果卡片
-      resultCard.style.display = 'block';
-    }
-  </script>
+      quizSink.addEventListener('load', function () {
+        if (!quizSubmissionStarted) return;
+        const step = quizSubmittedNextStep || getSelectedNextStep() || quizState.defaultChecked;
+        const copy = THANKYOU_COPY[step] || THANKYOU_COPY[1];
+        quizFunnelPanel.style.display = 'none';
+        document.getElementById('quiz-thankyou-title').textContent = copy.title;
+        document.getElementById('quiz-thankyou-body').textContent = copy.body;
+        const kitLink = document.getElementById('quiz-kit-secondary');
+        if (step === 1) {
+          kitLink.style.display = 'inline-block';
+          kitLink.href = KIT_FORM_URL;
+        } else {
+          kitLink.style.display = 'none';
+        }
+        quizThankyou.classList.add('is-visible');
+        quizThankyou.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      // 暴露給 T1–T13 自測（不影響正式流程）
+      window.__quizHardV1 = {
+        computeDefaultChecked: computeDefaultChecked,
+        getMaturityBand: getMaturityBand,
+        SCORE_TO_LETTER: SCORE_TO_LETTER,
+        STEP_CODES: STEP_CODES
+      };
+    </script>
 
   <!-- ─── 課程卡片摺疊收合 JS 邏輯 ─── -->
   <script>
