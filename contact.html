@@ -273,15 +273,17 @@
           <select id="type" required>
             <option value="">請選擇</option>
             <option value="diagnosis">企業 AI 成熟度診斷</option>
-            <option value="diagnostic_demo">診斷工作台 Demo</option>
-            <option value="auditable_ai_demo">可稽核 AI 工作流 Demo</option>
-            <option value="central_kitchen_demo">中央廚房營運防護台 Demo</option>
-            <option value="pilot">Pilot 計畫與沙盒建置</option>
-            <option value="workshop">內訓 / 工作坊</option>
-            <option value="strategy">AI 策略規劃</option>
-            <option value="compliance">AI 治理 / 合規導入</option>
-            <option value="privacy_request">個資查詢 / 更正 / 刪除申請</option>
-            <option value="other">其他洽談</option>
+                        <option value="diagnostic_demo">診斷工作台 Demo</option>
+                        <option value="auditable_ai_demo">可稽核 AI 工作流 Demo</option>
+                        <option value="central_kitchen_demo">中央廚房營運防護台 Demo</option>
+                        <option value="pilot">Pilot 計畫與沙盒建置</option>
+                        <option value="workshop">內訓 / 工作坊</option>
+                        <option value="strategy">AI 策略規劃</option>
+                        <option value="capital_decision_sprint">Capital Decision Sprint</option>
+                        <option value="kit">工具包索取</option>
+                        <option value="compliance">AI 治理 / 合規導入</option>
+                        <option value="privacy_request">個資查詢 / 更正 / 刪除申請</option>
+                        <option value="other">其他洽談</option>
           </select>
         </div>
       </div>
@@ -345,17 +347,19 @@
   let submissionStarted = false;
 
   const intentLabels = {
-    diagnosis: '企業 AI 成熟度診斷',
-    diagnostic_demo: '診斷工作台 Demo',
-    auditable_ai_demo: '可稽核 AI 工作流 Demo',
-    central_kitchen_demo: '中央廚房營運防護台 Demo',
-    pilot: 'Pilot 計畫與沙盒建置',
-    workshop: '內訓 / 工作坊',
-    strategy: 'AI 策略規劃',
-    compliance: 'AI 治理 / 合規導入',
-    privacy_request: '個資查詢 / 更正 / 刪除申請',
-    other: '其他洽談'
-  };
+      diagnosis: '企業 AI 成熟度診斷',
+      diagnostic_demo: '診斷工作台 Demo',
+      auditable_ai_demo: '可稽核 AI 工作流 Demo',
+      central_kitchen_demo: '中央廚房營運防護台 Demo',
+      pilot: 'Pilot 計畫與沙盒建置',
+      workshop: '內訓 / 工作坊',
+      strategy: 'AI 策略規劃',
+      capital_decision_sprint: 'Capital Decision Sprint',
+      kit: '工具包索取',
+      compliance: 'AI 治理 / 合規導入',
+      privacy_request: '個資查詢 / 更正 / 刪除申請',
+      other: '其他洽談'
+    };
 
   const campaignIntent = {
     diagnostic_demo: 'diagnostic_demo',
@@ -460,18 +464,65 @@
   }
 
   const campaign = params.get('utm_campaign');
-  const requestedIntent = params.get('request_type');
-  const initialIntent = intentLabels[requestedIntent]
-    ? requestedIntent
-    : (campaign && campaignIntent[campaign] ? campaignIntent[campaign] : '');
-  if (initialIntent) {
-    document.getElementById('type').value = initialIntent;
-    applyIntentPage(initialIntent);
-  }
+    const requestedIntent = params.get('request_type');
+    const nextStepParam = params.get('next_step');
+    const nextStepToIntent = {
+      '1': 'kit',
+      '2': 'diagnosis',
+      '3': 'diagnosis',
+      '4': 'workshop',
+      '5': 'capital_decision_sprint'
+    };
+    const initialIntent = intentLabels[requestedIntent]
+      ? requestedIntent
+      : (nextStepToIntent[nextStepParam]
+        ? nextStepToIntent[nextStepParam]
+        : (campaign && campaignIntent[campaign] ? campaignIntent[campaign] : ''));
+    if (initialIntent) {
+      document.getElementById('type').value = initialIntent;
+      applyIntentPage(initialIntent);
+    }
 
-  document.getElementById('type').addEventListener('change', function() {
-    applyIntentPage(this.value);
-  });
+    // HARD V1：若自快測結果帶入 quiz payload，預填可見欄與需求說明
+    (function prefillQuizHardV1() {
+      const company = params.get('company') || params.get('org');
+      const name = params.get('name');
+      const role = params.get('role') || params.get('title');
+      const email = params.get('email');
+      const phone = params.get('phone');
+      if (company) document.getElementById('org').value = company;
+      if (name) document.getElementById('name').value = name;
+      if (role) document.getElementById('title').value = role;
+      if (email) document.getElementById('email').value = email;
+      if (phone) document.getElementById('phone').value = phone;
+
+      const quizKeys = [
+        'total_score', 'maturity_band', 'q1', 'q2', 'q3', 'q4', 'q5',
+        'primary_recommended', 'default_checked', 'next_step',
+        'foundation_warning', 'governance_warning'
+      ];
+      const hasQuiz = quizKeys.some(function (k) { return params.get(k); });
+      if (!hasQuiz && !params.get('utm_content')) return;
+
+      const lines = ['【官網成熟度快測 HARD V1 轉介】'];
+      quizKeys.forEach(function (k) {
+        const v = params.get(k);
+        if (v) lines.push(k + ': ' + v);
+      });
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) {
+        const v = params.get(k);
+        if (v) lines.push(k + ': ' + v);
+      });
+      if (params.get('utm_content') === 'quiz_result_hard_v1' || hasQuiz) {
+        const msg = document.getElementById('msg');
+        const existing = msg.value.trim();
+        msg.value = existing ? (existing + '\n\n' + lines.join('\n')) : lines.join('\n');
+      }
+    })();
+
+    document.getElementById('type').addEventListener('change', function() {
+      applyIntentPage(this.value);
+    });
 
   form.addEventListener('submit', function(e) {
     if (!form.checkValidity()) {
