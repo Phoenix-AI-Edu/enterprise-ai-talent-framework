@@ -2092,6 +2092,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="#home" class="nav-link">首頁</a>
         <a href="#diagnostic" class="nav-link">成熟度快測</a>
         <a href="#flagship-system" class="nav-link">AI 系統展示</a>
+        <a href="./services/enterprise-rag-foundation.html" class="nav-link">企業 RAG</a>
         <a href="./diagnostic-workbench/index.html" class="nav-link">診斷工作台</a>
         <a href="#curriculum" class="nav-link">全景課程</a>
         <a href="#commercial-modules" class="nav-link">商業實戰模組</a>
@@ -2170,7 +2171,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="systems-catalog-link"><a href="./experience/index.html" class="btn btn-secondary">查看全部 AI 系統與解決方案</a></div>
     </div>
   </section>
-  <script src="./experience/solutions_data.js?v=20260713-5"></script>
+  <script src="./experience/solutions_data.js?v=20260727-rag1"></script>
   <script>
     (function () {
       var grid = document.getElementById('featured-systems-grid');
@@ -2178,7 +2179,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var systems = (window.EXPERIENCE_SOLUTIONS || [])
         .filter(function (system) { return system.featured; })
         .sort(function (a, b) { return (a.featured_order || 99) - (b.featured_order || 99); })
-        .slice(0, 3);
+        .slice(0, 4);
       systems.forEach(function (system) {
         var card = document.createElement('article');
         card.className = 'flagship-system-card';

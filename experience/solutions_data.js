@@ -105,6 +105,40 @@ window.EXPERIENCE_SOLUTIONS = [
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
     updated_at: "2026-07-13"
+  },
+  {
+    id: "enterprise_rag_foundation",
+    slug: "enterprise-rag-foundation",
+    title: "Enterprise RAG Foundation",
+    short_title: "RAG Foundation",
+    subtitle: "每企業隔離、可引用、可拒答的私有 RAG 工程基底——先證明能力，再受控導入您的資料",
+    status: "Foundation 1.0.0 Reference",
+    maturity: "Synthetic Reference",
+    access_type: "Private GitHub / Local Reference",
+    featured: true,
+    featured_order: 4,
+    category: ["知識治理", "RAG", "客服草稿"],
+    industries: ["製造業", "售後服務", "跨產業知識庫"],
+    page_variant: "rag-foundation",
+    showcase_type: "foundation-reference",
+    demo_duration: "10 分鐘",
+    highlights: [
+      "一企業一 runtime，請求不可切換租戶",
+      "引用可追溯；證據不足則拒答或轉人工",
+      "空白模板 fail-closed；預設不自動對外發送"
+    ],
+    sections: ["hero", "capabilities", "boundaries", "t1-t3", "checklist", "pilot-cta"],
+    compliance_note: "Synthetic／reference 基線（v1.0.0）；非客戶 production、非企業 SSO 已完成、非零幻覺保證。",
+    cta_text: "查看服務說明",
+    cta_href: "./services/enterprise-rag-foundation.html",
+    catalog_cta_href: "../services/enterprise-rag-foundation.html",
+    pilot_program_text: "預約 10 分鐘示範",
+    pilot_program_href: "./contact.html?request_type=rag_foundation_demo&utm_source=site&utm_medium=rag_foundation&utm_campaign=rag_foundation_v1&utm_content=flagship",
+    catalog_pilot_program_href: "../contact.html?request_type=rag_foundation_demo&utm_source=site&utm_medium=rag_foundation&utm_campaign=rag_foundation_v1&utm_content=systems_catalog",
+    primary_action: "detail",
+    contact_category: "experience_cta",
+    contact_label: "experience_solution_view",
+    updated_at: "2026-07-27"
   }
 ];
 
