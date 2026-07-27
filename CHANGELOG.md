@@ -4,6 +4,24 @@
 
 ---
 
+## [Unreleased] - 2026-07-27
+
+### Added
+- **Enterprise RAG Foundation 官網上架（Phase 1）**
+  - 規劃：`docs/RAG_FOUNDATION_SITE_INTEGRATION_PLAN.md`
+  - 服務落地頁：`services/enterprise-rag-foundation.html`
+  - 新企業交付檢查表：`services/enterprise-delivery-checklist.html`
+  - 體驗詳情：`experience/enterprise-rag-foundation/index.html`
+  - 旗艦註冊：`experience/solutions_data.js` 第 4 項
+  - contact：`rag_foundation_demo` / `rag_foundation_assessment`
+  - 首頁導覽「企業 RAG」；旗艦區顯示最多 4 卡；M05 導流至服務頁
+- 文案與能力邊界對齊 Private 產品庫 Foundation **1.0.0**（synthetic；非客戶 production）
+
+### Notes
+- 未將 RAG 執行時／後端／客戶資料納入本靜態站（符合 EXPERIENCE_BOUNDARY）
+
+---
+
 ## [1.3.0] - 2026-05-31
 
 ### 🚀 新增 (Added)

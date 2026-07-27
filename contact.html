@@ -276,6 +276,8 @@
                         <option value="diagnostic_demo">診斷工作台 Demo</option>
                         <option value="auditable_ai_demo">可稽核 AI 工作流 Demo</option>
                         <option value="central_kitchen_demo">中央廚房營運防護台 Demo</option>
+                        <option value="rag_foundation_demo">Enterprise RAG Foundation 示範</option>
+                        <option value="rag_foundation_assessment">企業 RAG／知識治理評估</option>
                         <option value="pilot">Pilot 計畫與沙盒建置</option>
                         <option value="workshop">內訓 / 工作坊</option>
                         <option value="strategy">AI 策略規劃</option>
@@ -351,6 +353,8 @@
       diagnostic_demo: '診斷工作台 Demo',
       auditable_ai_demo: '可稽核 AI 工作流 Demo',
       central_kitchen_demo: '中央廚房營運防護台 Demo',
+      rag_foundation_demo: 'Enterprise RAG Foundation 示範',
+      rag_foundation_assessment: '企業 RAG／知識治理評估',
       pilot: 'Pilot 計畫與沙盒建置',
       workshop: '內訓 / 工作坊',
       strategy: 'AI 策略規劃',
@@ -365,7 +369,9 @@
     diagnostic_demo: 'diagnostic_demo',
     diagnostic_workbench: 'diagnostic_demo',
     phoenix_auditable_ai_flow: 'auditable_ai_demo',
-    central_kitchen_demo: 'central_kitchen_demo'
+    central_kitchen_demo: 'central_kitchen_demo',
+    rag_foundation_v1: 'rag_foundation_demo',
+    enterprise_rag_foundation: 'rag_foundation_demo'
   };
 
   const intentPageCopy = {
@@ -398,6 +404,26 @@
       submitText: '預約可稽核工作流 Demo',
       successTitle: '可稽核工作流 Demo 預約已送出',
       successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認 Demo 範圍與時段。'
+    },
+    rag_foundation_demo: {
+      title: '預約 Enterprise RAG Foundation 示範',
+      intro: '用約 10 分鐘了解引用／拒答、租戶隔離與空白模板 fail-closed（synthetic 示範，不需上傳企業機密檔）。',
+      messageLabel: '想驗證的知識檢索或客服草稿場景 *',
+      messagePlaceholder: '請描述文件類型（如手冊／FAQ）、查詢角色（客服／內部）、是否在意多廠區／多客戶隔離；請勿貼上機密全文或帳密。',
+      organizationPlaceholder: '例如：XX 製造／售後／科技公司',
+      submitText: '預約 10 分鐘 RAG 示範',
+      successTitle: 'RAG Foundation 示範預約已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內聯繫並確認示範時段與範圍。'
+    },
+    rag_foundation_assessment: {
+      title: '預約企業知識治理／RAG 評估（30 分鐘）',
+      intro: '釐清文件範圍、資料邊界與是否適合進入 Foundation 示範或 T2 離線驗證。',
+      messageLabel: '知識治理或 RAG 導入需求 *',
+      messagePlaceholder: '請描述知識域範圍、文件現況、是否已有 AI 嘗試、期望時程與合規顧慮；不需要提供機敏附件。',
+      organizationPlaceholder: '例如：XX 集團／事業部',
+      submitText: '預約 30 分鐘評估',
+      successTitle: '知識治理評估預約已送出',
+      successMessage: '需求已送達顧問團隊，我們將於 1–2 個工作天內回覆並約定時段。'
     },
     compliance: {
       title: '洽詢 AI 治理與合規導入',

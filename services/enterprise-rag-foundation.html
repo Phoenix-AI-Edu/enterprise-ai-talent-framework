@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Enterprise RAG Foundation 導入服務｜鳳凰 AI 顧問</title>
+  <meta name="description" content="Enterprise RAG Foundation 1.0.0：可本地部署、可引用、可拒答、每企業隔離的 RAG 工程基底。先以 synthetic 驗證，再受控導入。非 SaaS 自動客服，非客戶上線實績。">
+  <link rel="canonical" href="https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/services/enterprise-rag-foundation.html">
+  <meta property="og:title" content="Enterprise RAG Foundation 1.0.0｜鳳凰 AI">
+  <meta property="og:description" content="先以可驗證的本地 RAG 工程基底證明能力，再依您的資料與合規邊界受控導入。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../systems/system-page.css">
+  <style>
+    .disclaimer{margin-top:14px;font-size:12px;color:var(--muted)}
+    .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .cap-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+    .cap-card h3{margin:0 0 8px;font-size:15px}
+    .cap-card p{margin:0;font-size:13px;color:var(--muted)}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .faq details{padding:14px 0;border-bottom:1px solid var(--line)}
+    .faq summary{cursor:pointer;font-weight:800}
+    .faq p{margin:10px 0 0;color:var(--muted);font-size:14px}
+    .checklist-banner{padding:22px;border:1px solid rgba(23,195,178,.3);border-radius:14px;background:rgba(23,195,178,.06)}
+    @media(max-width:900px){.cap-grid,.two-col{grid-template-columns:1fr}}
+  </style>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NB4699JG');</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NB4699JG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<header class="site-nav"><div class="shell nav-inner">
+  <a class="brand" href="../index.html">🔥 鳳凰 AI 顧問</a>
+  <nav class="nav-links" aria-label="主要導覽">
+    <a href="../experience/index.html">全部系統</a>
+    <a href="./enterprise-delivery-checklist.html">交付檢查表</a>
+    <a class="btn btn-primary" href="../contact.html?request_type=rag_foundation_assessment&amp;utm_source=site&amp;utm_medium=rag_foundation&amp;utm_campaign=rag_foundation_v1&amp;utm_content=nav">預約評估</a>
+  </nav>
+</div></header>
+<main>
+  <!-- S1 Hero -->
+  <section class="hero"><div class="shell">
+    <span class="eyebrow">Enterprise RAG Foundation 1.0.0 × 導入服務</span>
+    <h1>Phoenix 企業 RAG Foundation 導入服務</h1>
+    <p class="hero-copy"><strong>先以可驗證的本地 RAG 工程基底證明能力，再依您的資料與合規邊界，受控導入企業知識檢索與客服草稿。</strong></p>
+    <p class="hero-copy">我們提供 <strong>Enterprise RAG Foundation 1.0.0</strong>——可本地或私有環境部署的企業知識檢索與客服<strong>草稿</strong>系統，強調引用、拒答、版本治理與<strong>每企業獨立 runtime</strong>。它不是現成 SaaS，也不自動對外回覆；已用 synthetic 完成可重現驗證並發布 Private 參考基線，真實企業資料須另案核准後導入。</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="../contact.html?request_type=rag_foundation_assessment&amp;utm_source=site&amp;utm_medium=rag_foundation&amp;utm_campaign=rag_foundation_v1&amp;utm_content=hero_primary">預約 30 分鐘企業知識治理評估</a>
+      <a class="btn btn-secondary" href="../contact.html?request_type=rag_foundation_demo&amp;utm_source=site&amp;utm_medium=rag_foundation&amp;utm_campaign=rag_foundation_v1&amp;utm_content=hero_secondary">申請 10 分鐘本地 RAG 示範</a>
+      <a class="btn btn-secondary" href="./enterprise-delivery-checklist.html">查看新企業交付檢查表</a>
+    </div>
+    <p class="disclaimer">市場服務名稱 provisional，非最終品牌鎖定。能力以 synthetic reference 與 Foundation 1.0.0 為基礎，<strong>非</strong>客戶 production 就緒。</p>
+  </div></section>
+
+  <!-- S2 Problems -->
+  <section class="section alt" id="problems"><div class="shell">
+    <div class="section-head"><span class="eyebrow">您是否面臨這些狀況</span>
+      <h2>知識散落在多版本文檔，客服卻靠人工查找</h2>
+      <p class="section-intro">具大量版本化產品、技術或售後文件的企業，常見知識散落在 PDF、掃描件與多版本文檔；錯版本與無依據承諾風險高。我們先以不匯入您資料的 Foundation 示範工程與治理能力，再進入資料邊界討論。</p>
+    </div>
+    <div class="grid grid-2">
+      <article class="card"><h3>場景 A</h3><p>售後手冊多版次、型號眾多，人工查答耗時。</p></article>
+      <article class="card"><h3>場景 B</h3><p>技術文件散落掃描件與 PDF，版本對齊困難。</p></article>
+      <article class="card"><h3>場景 C</h3><p>內部查詢需可審計、可撤回，不能黑箱。</p></article>
+      <article class="card"><h3>場景 D</h3><p>多事業單位／多客戶知識庫，擔心資料混用。</p></article>
+    </div>
+    <p class="disclaimer">常見情境假設；客群規模未經證實。高風險產業（如醫材）須另備合規方案。</p>
+  </div></section>
+
+  <!-- S3 How -->
+  <section class="section" id="how"><div class="shell">
+    <div class="section-head"><span class="eyebrow">怎麼運作</span>
+      <h2>先 Foundation（synthetic），再企業導入</h2>
+      <p class="section-intro">軌道 A 以 synthetic 建立可展示、可測試、可治理的 Foundation；軌道 B 在企業確認委託與資料邊界後，以核准文件與合規需求受控導入。</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="card step"><div class="step-no">1</div><h3>示範</h3><p>以 Foundation 1.0.0 展示引用、拒答與租戶隔離。</p></article>
+      <article class="card step"><div class="step-no">2</div><h3>邊界</h3><p>確認資料 owner、分類與合規（見交付檢查表）。</p></article>
+      <article class="card step"><div class="step-no">3</div><h3>導入</h3><p>受控導入、離線驗證與試點（T2／T3 proposed）。</p></article>
+    </div>
+    <p class="disclaimer">本頁不宣稱任何企業已上線；示範 profile 不是客戶案例。</p>
+  </div></section>
+
+  <!-- S4 Capabilities -->
+  <section class="section alt" id="capabilities"><div class="shell">
+    <div class="section-head"><span class="eyebrow">已驗證基線（synthetic）</span>
+      <h2>Foundation 1.0.0 已通過可重現驗證並發布</h2>
+      <p class="section-intro">Private 發布 <strong>v1.0.0</strong>。在不使用企業真實資料的前提下，可展示引用草稿、拒答／升級、雙通道、版本治理、稽核與備份、每 tenant 隔離、空白模板 fail-closed。</p>
+    </div>
+    <div class="cap-grid">
+      <article class="cap-card"><h3>引用可追溯</h3><p>可回答附來源；證據不足拒答。非零幻覺保證。（CAP-02）</p></article>
+      <article class="cap-card"><h3>高風險升級人工</h3><p>固定詞表觸發（如扭力／保固）。非語意安全分類器。（CAP-03）</p></article>
+      <article class="cap-card"><h3>雙通道控管</h3><p>客服草稿與對內查詢分流。非企業 SSO。（CAP-04）</p></article>
+      <article class="cap-card"><h3>稽核與備份</h3><p>PII 遮罩稽核鏈、備份還原可驗證。（CAP-06）</p></article>
+      <article class="cap-card"><h3>一企業一 runtime</h3><p>請求不可切換租戶；非共享 SaaS 資料面。（CAP-07）</p></article>
+      <article class="cap-card"><h3>空白模板 fail-closed</h3><p>無核准語料不得當已上線知識庫。（CAP-08）</p></article>
+    </div>
+    <p class="disclaimer">可選說明：synthetic 嚴格安全集 12/12 為示範規則集，非全面品質保證。禁止將 60/100 作為首頁式保證數字。</p>
+  </div></section>
+
+  <!-- S5 Method -->
+  <section class="section" id="method"><div class="shell">
+    <div class="section-head"><span class="eyebrow">為什麼這樣導入</span>
+      <h2>把治理做進同一條可追溯鏈</h2>
+      <p class="section-intro">文件盤點、權責、資料邊界、評估契約、引用／拒答、租戶隔離、稽核與復原——同一方法，而不是只交一個聊天框。</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="card"><h3>盤點與權責</h3><p>誰擁有、誰可改、誰可查。</p></article>
+      <article class="card"><h3>資料邊界</h3><p>分類、去識別、審查外連。</p></article>
+      <article class="card"><h3>評估契約</h3><p>synthetic 與企業結果分開標示。</p></article>
+      <article class="card"><h3>引用／拒答</h3><p>高風險寧可拒答，不硬掰規格。</p></article>
+      <article class="card"><h3>租戶隔離</h3><p>一客戶一環境，知識不串味。</p></article>
+      <article class="card"><h3>稽核復原</h3><p>可驗證索引與備份路徑。</p></article>
+    </div>
+  </div></section>
+
+  <!-- S6 T1-T3 -->
+  <section class="section alt" id="tiers"><div class="shell">
+    <div class="section-head"><span class="eyebrow">導入深度（proposed，非價目）</span>
+      <h2>三層框架，依風險逐步深入</h2>
+    </div>
+    <div class="grid grid-3">
+      <article class="card"><h3>T1 能力示範</h3><p>Foundation synthetic 展示引用／拒答／隔離。不含企業資料。</p></article>
+      <article class="card"><h3>T2 離線驗證</h3><p>核准文件子集＋評估集＋SME。未齊備不承諾企業準確率報告。</p></article>
+      <article class="card"><h3>T3 受控試點</h3><p>少量使用者＋人工覆核＋回滾。若需 SSO／DLP 未完成前不開始 Pilot。</p></article>
+    </div>
+    <p class="disclaimer">T1～T3 為 proposed delivery framework：不標價、不保證 ROI、不承諾 SLA 或上線日。</p>
+  </div></section>
+
+  <!-- S7 Honesty -->
+  <section class="section" id="honesty"><div class="shell">
+    <div class="limitation boundary">
+      <span class="boundary-label">誠實邊界</span>
+      <strong>我們展示的是可驗證基線，不是您的上線捷徑。</strong>
+      <p>示範與多數數字來自 synthetic。產業示意 profile（含製造業情境）不代表客戶委託。系統<strong>不自動對外發送</strong>。1.0.0 是可複製工程基底，不是「接上資料就 production」。</p>
+    </div>
+  </div></section>
+
+  <!-- S8 Controls -->
+  <section class="section alt" id="controls"><div class="shell">
+    <div class="section-head"><span class="eyebrow">控制清單</span><h2>已具備 vs 待企業導入</h2></div>
+    <div class="two-col">
+      <article class="card">
+        <h3>已具備（1.0.0 / synthetic）</h3>
+        <p>雙通道與分類、固定風險詞升級、常見 PII 遮罩、稽核鏈與備份、tenant 隔離與空白模板 fail-closed、可私有部署、預設不自動外送。</p>
+      </article>
+      <article class="card">
+        <h3>待企業導入</h3>
+        <p>IdP／SSO／正式 RBAC、DLP、WORM、SIEM、企業 gold set、加密與保留天數企業參數、對外發送或寫回正式系統（預設不做）。</p>
+      </article>
+    </div>
+    <p class="disclaimer">本地部署 ≠ 資料一定不出域；LLM／embedding／OCR／監控須逐項審查。</p>
+  </div></section>
+
+  <!-- S9 FAQ -->
+  <section class="section" id="faq"><div class="shell">
+    <div class="section-head"><h2>FAQ</h2></div>
+    <div class="faq">
+      <details open><summary>Q1：這是 SaaS 還是導入服務？</summary><p>導入服務＋可部署的 Foundation 基線，不是託管 SaaS，也不自動對外回覆。</p></details>
+      <details><summary>Q2：資料是否一定不離開企業？</summary><p>可部署於企業控制環境；預設不自動外送，但實際資料流須依整合逐項審查，不能保證零外傳。</p></details>
+      <details><summary>Q3：能否保證回答完全正確？</summary><p>不能。可回答附引用以降低無依據風險；這不是零幻覺保證。</p></details>
+      <details><summary>Q4：是否可自動對外回覆？</summary><p>否。預設只產生內部草稿／拒答。</p></details>
+      <details><summary>Q5：能否直接使用企業文件？</summary><p>須完成資料邊界、owner、分類與核准導入。請先看「新企業交付檢查表」。</p></details>
+      <details><summary>Q6：T1／T2／T3 是什麼？</summary><p>示範 → 離線驗證 → 受控試點的 proposed 框架，不是價目或實績。</p></details>
+      <details><summary>Q7：是否已有客戶上線？</summary><p>否。示範 profile 不是客戶案例；目前無具名上線實績。</p></details>
+      <details><summary>Q8：是否已有企業 SSO／DLP／SIEM？</summary><p>尚未。1.0.0 有 verified-subject 介面與角色模型，不取代企業身分與 DLP。</p></details>
+    </div>
+  </div></section>
+
+  <!-- S10 CTA + checklist banner -->
+  <section class="section alt" id="next"><div class="shell">
+    <div class="checklist-banner" style="margin-bottom:28px">
+      <strong>建議先看：新企業交付檢查表（1 頁）</strong>
+      <p class="section-intro" style="margin:8px 0 14px">我們交付什麼、您要準備什麼、如何開始——用一頁降低決策摩擦。</p>
+      <a class="btn btn-secondary" href="./enterprise-delivery-checklist.html">開啟交付檢查表</a>
+    </div>
+    <div class="cta-panel">
+      <span class="eyebrow">下一步</span>
+      <h2>從評估、示範或檢查表開始</h2>
+      <p>若您評估企業知識治理與本地 RAG，可先建立共同語言，再談資料邊界。</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="../contact.html?request_type=rag_foundation_assessment&amp;utm_source=site&amp;utm_medium=rag_foundation&amp;utm_campaign=rag_foundation_v1&amp;utm_content=footer_primary">預約 30 分鐘評估</a>
+        <a class="btn btn-secondary" href="../contact.html?request_type=rag_foundation_demo&amp;utm_source=site&amp;utm_medium=rag_foundation&amp;utm_campaign=rag_foundation_v1&amp;utm_content=footer_secondary">申請 10 分鐘示範</a>
+        <a class="btn btn-secondary" href="../experience/enterprise-rag-foundation/index.html">系統展示頁</a>
+      </div>
+      <p class="honesty">表單僅用於 Demo 安排、需求評估與聯絡。詳見隱私權政策。Private 產品庫：enterprise-rag-foundation（非公開客戶資料庫）。</p>
+    </div>
+  </div></section>
+</main>
+<footer class="site-footer"><div class="shell footer-row">
+  <span>© 2026 鳳凰 AI 顧問｜Enterprise RAG Foundation 1.0.0 reference（synthetic）</span>
+  <span><a href="../index.html">首頁</a> · <a href="../privacy.html">隱私權政策</a></span>
+</div></footer>
+</body>
+</html>
