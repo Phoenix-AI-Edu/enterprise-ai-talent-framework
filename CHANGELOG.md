@@ -17,6 +17,9 @@
   - 首頁導覽「企業 RAG」；旗艦區顯示最多 4 卡；M05 導流至服務頁
 - 文案與能力邊界對齊 Private 產品庫 Foundation **1.0.0**（synthetic；非客戶 production）
 
+### Changed
+- **DEC-021 套用**：服務名鎖定「**鳳凰企業 RAG Foundation 導入服務**」；移除 provisional；主 CTA 統一「預約 30 分鐘評估」；明確不公開標價；旗艦 pilot 指向 assessment。
+
 ### Notes
 - 未將 RAG 執行時／後端／客戶資料納入本靜態站（符合 EXPERIENCE_BOUNDARY）
 
