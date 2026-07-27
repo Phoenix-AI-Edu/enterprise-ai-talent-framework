@@ -1,10 +1,11 @@
 # Enterprise RAG Foundation × 官網整合計畫
 
-- 狀態：`phase1_implemented`（靜態骨架已落地；上站／PR 依官網流程）
+- 狀態：`live`（Phase 1 已上站；DEC-021 服務名／CTA／定價閘門已鎖定）
 - 日期：2026-07-27
 - 官網 repo：`AI_Talent`（`enterprise-ai-talent-framework`）
 - 產品 repo：`RAG_Bicycle`（`enterprise-rag-foundation` Private）
 - 產品版本：Foundation **1.0.0** / tag `v1.0.0`
+- 服務名（鎖定）：**鳳凰企業 RAG Foundation 導入服務**
 - enterprise_binding：`false`
 
 ## 1. 目標
@@ -47,15 +48,16 @@ contact.html 收 lead           不可上傳客戶 PDF 到官網
 | `contact.html` | `rag_foundation_demo` / `rag_foundation_assessment` |
 | `CHANGELOG.md` | 記錄上架 |
 
-## 5. CTA 與 request_type
+## 5. CTA 與 request_type（DEC-021）
 
 | 意圖 | request_type | 用途 |
 |---|---|---|
-| 10 分鐘示範 | `rag_foundation_demo` | 技術信任 |
-| 30 分鐘評估 | `rag_foundation_assessment` | 顧問漏斗 |
+| **30 分鐘評估（主閘門）** | `rag_foundation_assessment` | 商業入口 |
+| 10 分鐘示範（次要） | `rag_foundation_demo` | 技術信任 |
 | 檢查表 | 站內頁，無需 Form | 自助理解 |
 
-UTM 建議：`utm_campaign=rag_foundation_v1`；`utm_content` 標 section。
+- **不**另建專屬表單；**不**加公開定價區。  
+- UTM：`utm_campaign=rag_foundation_v1`；`utm_content` 標 section。
 
 ## 6. 禁用宣稱（上站檢查）
 
