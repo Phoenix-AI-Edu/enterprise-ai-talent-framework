@@ -609,7 +609,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .flagship-systems-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
 
@@ -2179,7 +2179,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="systems-catalog-link"><a href="./experience/index.html" class="btn btn-secondary">查看全部 AI 系統與解決方案</a></div>
     </div>
   </section>
-  <script src="./experience/solutions_data.js?v=20260727-rag2"></script>
+<script src="./experience/solutions_data.js?v=20260809-1"></script>
+
   <script>
     (function () {
       var grid = document.getElementById('featured-systems-grid');
@@ -2187,7 +2188,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var systems = (window.EXPERIENCE_SOLUTIONS || [])
         .filter(function (system) { return system.featured; })
         .sort(function (a, b) { return (a.featured_order || 99) - (b.featured_order || 99); })
-        .slice(0, 4);
+        .slice(0, 6);
       systems.forEach(function (system) {
         var card = document.createElement('article');
         card.className = 'flagship-system-card';

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Allocation OS 企業 AI 投資決策工作台｜鳳凰 AI 顧問</title>
+  <meta name="description" content="AI Allocation OS 企業 AI 投資決策工作台。Sandbox Demo／顧問服務展示，能力邊界公開。">
+  <meta property="og:title" content="AI Allocation OS 企業 AI 投資決策工作台｜鳳凰 AI 顧問">
+  <meta property="og:description" content="可驗證的 AI 系統展示，能力邊界公開。">
+  <meta property="og:type" content="website">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NB4699JG');</script>
+  <!-- End Google Tag Manager -->
+
+  <style>
+    :root {
+      --phoenix-dark: #0B0B16;
+      --phoenix-mid: #121226;
+      --phoenix-accent: #E94560;
+      --phoenix-accent-rgb: 233, 69, 96;
+      --phoenix-teal: #00F2FE;
+      --phoenix-gold: #F5A623;
+      --white: #FFFFFF;
+      --gray-300: #DDE2E5;
+      --gray-400: #A5B1B8;
+      --gray-600: #5A6A75;
+      --glass-bg: rgba(18, 18, 38, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+      --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background-color: var(--phoenix-dark);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% -20%, #201a35 0%, #0b0b16 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; transition: all 0.25s ease; }
+    img, svg { max-width: 100%; height: auto; vertical-align: middle; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─── */
+    .page-header {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-link {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+    .back-link:hover { color: var(--white); }
+    .page-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-mark {
+      color: var(--phoenix-accent);
+      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.4px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      color: var(--phoenix-accent);
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--phoenix-accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.1) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      color: var(--phoenix-teal);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 50px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--gray-400);
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    /* ─── Section Commons ─── */
+    .section {
+      padding: 30px 0 40px;
+    }
+    .section:last-of-type {
+      padding-bottom: 50px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(var(--phoenix-accent-rgb), 0.15);
+      color: var(--phoenix-accent);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* ─── Summary Box ─── */
+    .summary-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      backdrop-filter: blur(12px);
+    }
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .summary-item {
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .summary-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gray-600);
+      font-weight: 700;
+    }
+    .summary-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-300);
+    }
+
+    /* ─── Flow Diagram ─── */
+    .flow-wrap {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      padding: 20px 10px;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      flex: 1 1 120px;
+      max-width: 180px;
+    }
+    .flow-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.15), rgba(var(--phoenix-accent-rgb), 0.05));
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+    .flow-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--phoenix-accent);
+      font-size: 22px;
+      flex: 0 0 auto;
+      padding: 0 6px;
+      padding-bottom: 28px;
+      opacity: 0.8;
+      letter-spacing: -2px;
+    }
+    .flow-caption {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── Feature Cards ─── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: var(--glass-hover);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .feature-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .video-wrap {
+      background: #05050b;
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+    .flow-video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05050b; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .boundary-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; }
+    .boundary-card h3 { font-family: var(--font-display); font-size: 16px; margin-bottom: 10px; }
+    .boundary-card ul { padding-left: 18px; color: var(--gray-400); font-size: 13px; line-height: 1.8; }
+    .boundary-card--now { border-color: rgba(0, 242, 254, 0.25); }
+    .boundary-card--poc { border-color: rgba(245, 166, 35, 0.3); }
+    .boundary-card--assessment { border-color: rgba(var(--phoenix-accent-rgb), 0.3); }
+
+    /* ─── CTA ─── */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.12) 0%, rgba(var(--phoenix-accent-rgb), 0.04) 100%);
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      border-radius: 18px;
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      box-shadow: 0 6px 22px rgba(var(--phoenix-accent-rgb), 0.32);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(var(--phoenix-accent-rgb), 0.45);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+    }
+    .consent-text {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+    .consent-text a { color: #0ea5e9; text-decoration: underline; }
+    .consent-text a:hover { color: var(--phoenix-teal); }
+
+    /* ─── Footer ─── */
+    .page-footer {
+      margin-top: auto;
+      padding: 36px 0 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+    .footer-link {
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+    .footer-link:hover { color: var(--white); text-decoration: none; }
+    .footer-copy { font-size: 12px; color: var(--gray-600); }
+    .footer-consent {
+      max-width: 820px;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+    }
+    .footer-consent a { color: #0ea5e9; text-decoration: underline; }
+    .footer-consent a:hover { color: var(--phoenix-teal); }
+
+    @media (max-width: 720px) {
+      .hero-title { font-size: 32px; }
+      .cta-title { font-size: 22px; }
+      .flow-diagram { flex-direction: column; gap: 12px; }
+      .flow-arrow { transform: rotate(90deg); padding: 0; padding-bottom: 0; }
+      .cta-actions, .hero-actions { flex-direction: column; align-items: stretch; }
+      .boundary-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NB4699JG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
+      <div class="page-header-right">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          Consulting Offer
+        </div>
+        <span class="logo-mark">鳳凰 AI</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-tag">AI Investment Decision · Consulting Sprint</div>
+        <h1 class="hero-title">AI Allocation OS 企業 AI 投資決策工作台</h1>
+        <p class="hero-desc">AI 提案很多、預算有限——該投哪個、該修哪個、該延後哪個？我們以 Capital Decision Sprint 顧問服務，用版本化規則、可追溯證據與預先定義的風險 Gate，把決策過程收成可稽核的決策包。這是顧問服務，不是賣軟體：把「怎麼決定」變成可檢討、可重現的流程。</p>
+        <div class="hero-actions" id="hero-actions">
+          <a href="../../contact.html?request_type=capital_sprint_info&amp;utm_source=site&amp;utm_medium=ai_allocation_os&amp;utm_campaign=capital_sprint&amp;utm_content=hero" class="btn btn-primary" id="btn-demo-request-2">預約 30–45 分鐘說明</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Solution Summary -->
+    <section class="section">
+      <div class="summary-box">
+        <div class="summary-row">
+          <div class="summary-item">
+            <div class="summary-label">適用產業</div>
+            <div class="summary-value">零售／電商／B2C 服務業（客服營運）</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">方案狀態</div>
+            <div class="summary-value">Consulting Offer｜開放預約</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">交付模式</div>
+            <div class="summary-value">顧問 Sprint（非軟體授權）</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">服務時程</div>
+            <div class="summary-value">kickoff 後 10 個工作日內完成</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Highlights -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">1</span>
+        AI 投資決策為何難以檢討
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <div class="feature-title">提案多、標準不一</div>
+          <div class="feature-desc">AI 提案逐年增加，各提案用不同標準評估；Fund、Repair、Defer、Reject 常靠會議感覺，事後難以回溯理由。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🧩</span>
+          <div class="feature-title">理由沒版本、沒證據</div>
+          <div class="feature-desc">決策理由沒有版本化、沒有證據連結；幾個月後回頭看，已無法重現「當時為什麼這樣決定」。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⚖️</span>
+          <div class="feature-title">評分容易受立場影響</div>
+          <div class="feature-desc">提案方、供應商與決策者各有立場；缺少中立、且可留下紀錄的決策流程。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">決策後缺乏追蹤</div>
+          <div class="feature-desc">沒有 baseline 與 30／60／90 天回報機制，投入之後無法驗證當初假設是否成立。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Flow Diagram -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">2</span>
+        Capital Decision Sprint 內容
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-diagram" role="img" aria-label="候選篩選、深度 Underwriting、三軸決策、風險 Gate 與 Committee Pack 交付的流程示意圖">
+          <div class="flow-step">
+            <div class="flow-icon">🔍</div>
+            <div class="flow-label">候選篩選</div>
+            <div class="flow-sub">最多 5 個<br>客服分類候選</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">📋</div>
+            <div class="flow-label">Underwriting</div>
+            <div class="flow-sub">3 個深度評估<br>附證據理由</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🧭</div>
+            <div class="flow-label">三軸決策</div>
+            <div class="flow-sub">Fund／Repair<br>／Defer／Reject</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🛡️</div>
+            <div class="flow-label">風險 Gate</div>
+            <div class="flow-sub">Funding／Repair<br>／Reassessment</div>
+          </div>
+        </div>
+        <div class="flow-caption">決策快照 T0／T1／T2 全程留痕；LLM 只負責抽取、解釋與草擬，不直接決定分數。最終決策權與責任由客戶承擔。</div>
+      </div>
+    </section>
+
+    <!-- 4. Boundary -->
+    <section class="section">
+      <div class="section-title"><span class="section-title-num">3</span>能力邊界</div>
+      <div class="boundary-grid">
+        <article class="boundary-card boundary-card--now"><h3>本服務範圍</h3><ul><li>決策支援與分析（顧問 Sprint）</li><li>候選篩選、Underwriting、三軸決策與風險 Gate</li><li>Committee Pack、Decision Record 與 action log</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>不包含</h3><ul><li>實際 AI 系統開發、PoC 或導入執行（可另行報價）</li><li>法律、財務、稅務、合規或證券投資專業意見</li><li>保證 ROI、投資成功或特定決策結果</li></ul></article>
+        <article class="boundary-card boundary-card--assessment"><h3>中立性與資料最小化</h3><ul><li>Sprint 費用不因決策結果改變；後續承接與決策紀錄分離</li><li>僅收聚合流程量、KPI baseline、欄位字典與 metadata</li><li>樣本 50–100 筆去識別化且須先核准；benchmark 獨立 opt-in</li></ul></article>
+      </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="section" id="target-audience">
+      <div class="section-title">
+        <span class="section-title-num">4</span>
+        方案適合對象與導入前提
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🛒</span>
+          <div class="feature-title">零售／電商／B2C 服務業</div>
+          <div class="feature-desc">客服案件分類／分流流程，每月案件量約 1,000 件以上，且 30–60 天內可建立或量測 baseline。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📈</span>
+          <div class="feature-title">可量測 KPI 的營運團隊</div>
+          <div class="feature-desc">至少一項可量測指標（平均處理時間、首次回應時間、轉人工率），量不出就不做。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">👥</span>
+          <div class="feature-title">具名決策者與 process owner</div>
+          <div class="feature-desc">願意提供可驗證的歷史聚合資料；受高度監管產業需另備具名 compliance／risk sponsor。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Investment -->
+    <section class="section">
+      <div class="cta-box">
+        <div class="cta-title">專案投資金額</div>
+        <div class="cta-desc"><strong>Capital Decision Sprint：NT$280,000 起（含稅）</strong>。實際投資金額依企業規模、候選流程數量與資料準備狀況進行增減，於正式提案中確認。訂金 NT$80,000、尾款 NT$200,000（會議結束後 7 天內）。</div>
+        <div class="cta-actions" id="demo-actions">
+          <a href="../../contact.html?request_type=capital_sprint_info&amp;utm_source=site&amp;utm_medium=ai_allocation_os&amp;utm_campaign=capital_sprint&amp;utm_content=footer_cta" class="btn btn-primary" id="btn-demo-request">預約 30–45 分鐘說明</a>
+        </div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a></div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <div class="container footer-inner">
+      <div class="footer-consent">
+        點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">回首頁</a>
+        <a href="../../privacy.html" class="footer-link">隱私權政策</a>
+      </div>
+      <div class="footer-copy">© 2026 鳳凰 AI 顧問團隊。著作權所有。</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // solution page view
+      var solutionId = 'ai_allocation_os';
+      var solutionTitle = 'AI Allocation OS 企業 AI 投資決策工作台';
+
+      function track(eventName, params) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(Object.assign({ event: eventName }, params));
+        } catch (err) {
+          // suppress analytics errors on static pages
+        }
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params);
+        }
+      }
+
+      // page view: event_category=experience_cta, event_label=experience_solution_view
+      track('experience_solution_view', {
+        event_category: 'experience_cta',
+        event_label: 'experience_solution_view',
+        solution_id: solutionId,
+        solution_title: solutionTitle
+      });
+
+      // CTA click handler: event_category=experience_cta, event_label=experience_demo_request_click
+      var demoActions = document.getElementById('demo-actions');
+      if (demoActions) {
+        demoActions.addEventListener('click', function (e) {
+        var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
+          if (!target) return;
+          track('experience_demo_request_click', {
+            event_category: 'experience_cta',
+            event_label: 'experience_demo_request_click',
+            solution_id: solutionId,
+            solution_title: solutionTitle,
+            cta_href: target.getAttribute('href')
+          });
+        });
+      }
+
+      var video = document.querySelector('.flow-video');
+      var videoTracked = false;
+      if (video) {
+        video.addEventListener('play', function () {
+          if (videoTracked) return;
+          videoTracked = true;
+          track('experience_video_start', {
+            event_category: 'experience_cta',
+            event_label: 'ai_allocation_os_demo_video',
+            solution_id: solutionId
+          });
+        });
+        video.addEventListener('ended', function () {
+          track('experience_video_complete', {
+            event_category: 'experience_cta',
+            event_label: 'ai_allocation_os_demo_video',
+            solution_id: solutionId
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

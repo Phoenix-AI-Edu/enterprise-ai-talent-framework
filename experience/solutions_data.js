@@ -107,6 +107,7 @@ window.EXPERIENCE_SOLUTIONS = [
     updated_at: "2026-07-13"
   },
   {
+
     id: "enterprise_rag_foundation",
     slug: "enterprise-rag-foundation",
     title: "Enterprise RAG Foundation",
@@ -139,7 +140,74 @@ window.EXPERIENCE_SOLUTIONS = [
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
     updated_at: "2026-07-27"
-  }
+  },
+  {
+    id: "ledger_assist",
+    slug: "ledger-assist",
+    title: "Ledger-Assist 發票收件與檢核系統",
+    short_title: "憑證檢核系統",
+    subtitle: "客戶 LINE 上傳發票、事務所 LINE 內檢核修正；每所獨立私有部署，正式憑證與稽核記錄留在事務所。",
+    status: "Sandbox Demo",
+    maturity: "Sandbox Demo Ready",
+    access_type: "合成展示／預約體驗",
+    featured: true,
+    featured_order: 4,
+    category: ["憑證檢核", "會計事務所"],
+    industries: ["會計師事務所", "記帳士事務所", "稅務服務"],
+    page_variant: "line-invoice-workflow",
+    showcase_type: "synthetic-demo",
+    demo_duration: "15 分鐘",
+    highlights: [
+      "客戶用 LINE 上傳發票，事務所在 LINE 內檢核、修正與確認",
+      "AI 只產出可覆核候選，Pilot 期間不自動核准，人工確認後才匯出",
+      "每家事務所獨立私有部署，正式憑證、覆核狀態與稽核記錄留在事務所控制環境"
+    ],
+    sections: ["line-flow", "review-workflow", "private-deployment", "boundaries", "pilot-cta"],
+    compliance_note: "Sandbox Demo：展示使用合成資料，不含真實客戶憑證；正式部署為每家事務所獨立私有部署。",
+    cta_text: "查看 Ledger-Assist 展示",
+    cta_href: "./experience/ledger-assist/index.html",
+    catalog_cta_href: "./ledger-assist/index.html",
+    pilot_program_text: "預約 15 分鐘 Demo",
+    pilot_program_href: "./contact.html?request_type=ledger_assist_demo&utm_source=site&utm_medium=ledger_assist&utm_campaign=ledger_assist_demo&utm_content=flagship",
+    catalog_pilot_program_href: "../contact.html?request_type=ledger_assist_demo&utm_source=site&utm_medium=ledger_assist&utm_campaign=ledger_assist_demo&utm_content=systems_catalog",
+    primary_action: "pilot",
+    contact_category: "experience_cta",
+    contact_label: "experience_solution_view",
+    updated_at: "2026-08-09"
+  },
+  {
+    id: "ai_allocation_os",
+    slug: "ai-allocation-os",
+    title: "AI Allocation OS 企業 AI 投資決策工作台",
+    short_title: "投資決策工作台",
+    subtitle: "以 Capital Decision Sprint 顧問服務，把 AI 投資決策收成可稽核決策包：候選篩選、深度 Underwriting、風險 Gate 與決策紀錄，全程留痕。",
+    status: "Consulting Offer｜開放預約",
+    maturity: "Offer v1.1",
+    access_type: "預約 Capital Decision Sprint",
+    featured: true,
+    featured_order: 5,
+    category: ["AI 投資決策", "顧問服務"],
+    industries: ["零售／電商", "B2C 服務業", "客服營運"],
+    page_variant: "capital-decision",
+    showcase_type: "decision-sprint",
+    demo_duration: "30–45 分鐘",
+    highlights: [
+      "最多 5 個候選案篩選、3 個深度 Underwriting，每案產出三軸決策與理由",
+      "Funding／Repair／Reassessment Gate 與 T0/T1/T2 決策快照，決策理由版本化留痕",
+      "Committee Pack 與決策紀錄版本化交付；評分不因 Phoenix 是否承接後續實作而改變"
+    ],
+    sections: ["sprint-flow", "gate-model", "deliverables", "boundaries", "pilot-cta"],
+    compliance_note: "顧問服務：提供決策支援與分析，不保證 ROI 或投資結果；案例均去識別化，最終決策權與責任由客戶承擔。",
+    cta_text: "查看決策工作台",
+    cta_href: "./experience/ai-allocation-os/index.html",
+    catalog_cta_href: "./ai-allocation-os/index.html",
+    pilot_program_text: "預約 30–45 分鐘說明",
+    pilot_program_href: "./contact.html?request_type=capital_sprint_info&utm_source=site&utm_medium=ai_allocation_os&utm_campaign=capital_sprint&utm_content=flagship",
+    catalog_pilot_program_href: "../contact.html?request_type=capital_sprint_info&utm_source=site&utm_medium=ai_allocation_os&utm_campaign=capital_sprint&utm_content=systems_catalog",
+    primary_action: "pilot",
+    contact_category: "experience_cta",
+    contact_label: "experience_solution_view",
+    updated_at: "2026-08-09"  }
 ];
 
 if (typeof module !== "undefined" && module.exports) {
