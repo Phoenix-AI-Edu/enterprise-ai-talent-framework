@@ -17,6 +17,13 @@
   - 首頁導覽「企業 RAG」；旗艦區顯示最多 4 卡；M05 導流至服務頁
 - 文案與能力邊界對齊 Private 產品庫 Foundation **1.0.0**（synthetic；非客戶 production）
 
+### Added
+- **SEO meta 統一指向 03king.com（PR #7）**
+  - 12 個公開頁面注入 canonical + og:url/og:image + twitter:card(summary_large_image)
+  - 清除 phoenix-ai-edu.github.io 殘留引用 4 處（experience/phoenix-auditable-ai-workflow、services/enterprise-rag-foundation）
+  - 新增 1200x630 品牌分享圖 `assets/og-image.png`（03king.com/assets/og-image.png）
+  - 注入器置於 repo 外 `~/scripts/seo_meta_inject.py`（dry-run 先行、逐檔 .bak-seo 備份）
+
 ### Changed
 - **DEC-021 套用**：服務名鎖定「**鳳凰企業 RAG Foundation 導入服務**」；移除 provisional；主 CTA 統一「預約 30 分鐘評估」；明確不公開標價；旗艦 pilot 指向 assessment。
 
