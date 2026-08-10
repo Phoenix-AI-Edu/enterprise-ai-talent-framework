@@ -6,6 +6,12 @@
 
 ## [Unreleased] - 2026-07-27
 
+### Fixed
+- **修正全站分享圖 `assets/og-image.png` 中文亂碼（2026-08-10）**
+  - 根因：8/5 SEO 統一時以 AI 生成品牌圖，AI 將繁體中文烤成亂碼：主標題「鳳凰」變「鳳龍」、tagline「企業 AI 落地・診斷・治理」變「企業 AI 癥応・診務・詰詛」、英文 Phoenix 被切斷。
+  - 修法：保留左側金色鳳凰圖案，以微軟正黑體 + PIL 程式重繪右側文字區（鳳凰 AI 顧問 / Phoenix AI Consulting / 企業 AI 落地・診斷・治理）；背景依原圖漸層逐欄重建，無色塊接縫。
+  - 驗證：vision 逐行文字正確、鳳凰完整、無殘留舊字、無色差（全站 og:image / twitter:image 共用此檔，一併修正）。
+
 ### Added
 - **Enterprise RAG Foundation 官網上架（Phase 1）**
   - 規劃：`docs/RAG_FOUNDATION_SITE_INTEGRATION_PLAN.md`
