@@ -1,0 +1,18 @@
+{
+    "schema_version": 1,
+    "system_id": "SYS-03",
+    "repository": "AI_Talent",
+    "repository_path": "C:\\Users\\m1016\\Documents\\AI_Talent",
+    "governance_center": "C:\\Users\\m1016\\Documents\\Obsidian",
+    "project_index": "10_Projects/Project-AI-Talent.md",
+    "sync_contract": "99_MOC/Repo-Governance-Sync.md",
+    "canonical_hashes": {
+        "AGENTS.md": "1e4edc7a16556e95cfa4c7b1c38daba30e233a02f43da93ceb38a9c422d31314",
+        "99_MOC/README.md": "5bb48e52119503b966a8c0c1abb7f205f052fa17fdcbfaa0a611364fc4a34839",
+        "99_MOC/Governance-Rules.md": "55a3269c74fcda6036f00bafa875ee093a5b40b79f4a3d9a7ee5f31bc13d727f",
+        "99_MOC/System-MOC.md": "21047a57733a6ab9760cacde395d0a09d962df098ba980bcdd8f025c35a48ba6",
+        "99_MOC/System-Registry.md": "2866ec95b95064b06b2d4be11ec0ce97d12ee36d6378237e5a675b83b43b5cdf",
+        "99_MOC/Repo-Governance-Sync.md": "dd320e452f472e6422f879a845d84ef87d7264ef4ea4f992f88e89fa626283e0",
+        "10_Projects/Project-AI-Talent.md": "20e505b243a881e3e947e0fa1d7737ea6a8c51834ef722eddef0d3f1a1232ca5"
+    }
+}
