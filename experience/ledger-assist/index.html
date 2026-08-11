@@ -510,7 +510,7 @@
           </div>
           <div class="summary-item">
             <div class="summary-label">外部系統接軌</div>
-            <div class="summary-value">正式會計軟體／ERP — 導入階段評估</div>
+            <div class="summary-value">正式會計軟體／ERP — 依事務所環境整合設計</div>
           </div>
         </div>
       </div>
@@ -578,7 +578,7 @@
             <div class="flow-sub">Pilot 全程人工<br>核准後才匯出</div>
           </div>
         </div>
-        <div class="flow-caption">合成資料 Sandbox Demo 可完整展示此流程。未完成綁定的使用者，系統不下載原圖、不 OCR、不建立案件；正式憑證與稽核記錄留在事務所私有環境。操作畫面於 Demo 時提供。</div>
+        <div class="flow-caption">合成資料 Sandbox Demo 可完整展示此流程。系統先驗證使用者綁定與權限；驗證通過後才下載原圖、執行 OCR 並建立案件，正式憑證與稽核記錄留在事務所私有環境。操作畫面於 Demo 時提供。</div>
       </div>
     </section>
 
@@ -587,8 +587,8 @@
       <div class="section-title"><span class="section-title-num">3</span>能力邊界</div>
       <div class="boundary-grid">
         <article class="boundary-card boundary-card--now"><h3>現可驗證（Sandbox Demo）</h3><ul><li>LINE 上傳 → 收件確認 → QR／OCR 辨識候選</li><li>LINE 內檢核修正 → 覆核 → 匯出預覽</li><li>全程稽核軌跡與唯讀 auditor 身分</li></ul></article>
-        <article class="boundary-card boundary-card--poc"><h3>Pilot 可配置</h3><ul><li>1 家設計夥伴事務所；簽署 DPA 後才匯入真實資料</li><li>Pilot 強制 MFA（OIDC）、自動核准關閉</li><li>用途與保存政策確認後才正式使用</li></ul></article>
-        <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>正式會計軟體／ERP adapter</li><li>本地模型、備份還原演練與 SLA</li><li>GA 後才逐租戶、分類型開放自動核准</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>Pilot 設計原則</h3><ul><li>以單一事務所、明確資料責任與最小範圍設計；簽署 DPA 並完成權限驗收後，才於受控環境匯入核准資料</li><li>Pilot 強制 MFA（OIDC）、自動核准關閉</li><li>用途與保存政策確認後才正式使用</li></ul></article>
+        <article class="boundary-card boundary-card--assessment"><h3>企業整合路線</h3><ul><li>正式會計軟體／ERP adapter（導入階段設計與驗收）</li><li>本地模型、備份還原演練與 SLA（導入階段驗收）</li><li>自動核准依 GA、租戶與憑證類型分階段開放</li></ul></article>
       </div>
     </section>
 
