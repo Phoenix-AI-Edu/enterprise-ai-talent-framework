@@ -11,7 +11,7 @@
 ## cases\html\ecommerce_01_guardrails.html
 - Claim risk found: 50%, 0%
 
-## cases\html\finance_01_dingtai_ai.html
+## cases\html\finance_01_securities_rag_ai.html
 - Claim risk found: 0%
 
 ## cases\html\law_firm_01_contract.html
@@ -35,34 +35,34 @@
 ## cases\html\manufacturing_06_ai_visual_inspection.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_07_dingsheng_voice_ai.html
+## cases\html\manufacturing_07_voice_repair_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_08_henda_ai.html
+## cases\html\manufacturing_08_predictive_maintenance_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_09_luzhu_coldheading_ai.html
+## cases\html\manufacturing_09_cold_heading_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_10_okayama_fastener_ai.html
+## cases\html\manufacturing_10_fastener_knowledge_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_11_okayama_forge_ai.html
+## cases\html\manufacturing_11_forging_yield_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_12_okayama_sbir_ai.html
+## cases\html\manufacturing_12_digital_twin_sbir_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_13_okayama_heat_treatment.html
+## cases\html\manufacturing_13_heat_treatment_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_14_okayama_barcode.html
+## cases\html\manufacturing_14_barcode_trace_ai.html
 - Claim risk found: 0%
 
-## cases\html\manufacturing_15_okayama_cbam.html
+## cases\html\manufacturing_15_cbam_reporting_ai.html
 - Claim risk found: 7%, 0%
 
-## cases\html\manufacturing_16_okayama_filter.html
+## cases\html\manufacturing_16_filter_inspection_ai.html
 - Claim risk found: 0%
 
 ## cases\html\medical_01_health_chat.html
@@ -71,10 +71,10 @@
 ## cases\html\medical_02_dental_clinic.html
 - Claim risk found: 50%, 0%
 
-## cases\html\retail_02_mingchadao_tea_ai.html
+## cases\html\retail_02_tea_chain_ops_ai.html
 - Claim risk found: 0%
 
-## cases\html\retail_03_yuepin_ai.html
+## cases\html\retail_03_restaurant_ops_ai.html
 - Claim risk found: 0%
 
 ## cases\markdown\accounting_01_ledger.md

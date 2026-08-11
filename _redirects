@@ -1,0 +1,14 @@
+# 2026-08-11 案例頁檔名去識別化遷移（EVT-191）；舊網址 301 保留
+/cases/html/finance_01_dingtai_ai.html /cases/html/finance_01_securities_rag_ai.html 301
+/cases/html/manufacturing_07_dingsheng_voice_ai.html /cases/html/manufacturing_07_voice_repair_ai.html 301
+/cases/html/manufacturing_08_henda_ai.html /cases/html/manufacturing_08_predictive_maintenance_ai.html 301
+/cases/html/manufacturing_09_luzhu_coldheading_ai.html /cases/html/manufacturing_09_cold_heading_ai.html 301
+/cases/html/manufacturing_10_okayama_fastener_ai.html /cases/html/manufacturing_10_fastener_knowledge_ai.html 301
+/cases/html/manufacturing_11_okayama_forge_ai.html /cases/html/manufacturing_11_forging_yield_ai.html 301
+/cases/html/manufacturing_12_okayama_sbir_ai.html /cases/html/manufacturing_12_digital_twin_sbir_ai.html 301
+/cases/html/manufacturing_13_okayama_heat_treatment.html /cases/html/manufacturing_13_heat_treatment_ai.html 301
+/cases/html/manufacturing_14_okayama_barcode.html /cases/html/manufacturing_14_barcode_trace_ai.html 301
+/cases/html/manufacturing_15_okayama_cbam.html /cases/html/manufacturing_15_cbam_reporting_ai.html 301
+/cases/html/manufacturing_16_okayama_filter.html /cases/html/manufacturing_16_filter_inspection_ai.html 301
+/cases/html/retail_02_mingchadao_tea_ai.html /cases/html/retail_02_tea_chain_ops_ai.html 301
+/cases/html/retail_03_yuepin_ai.html /cases/html/retail_03_restaurant_ops_ai.html 301

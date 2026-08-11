@@ -1,5 +1,7 @@
 # Cases De-identification & Claim Risk Audit Report
 
+> **檔名遷移註記（2026-08-11, EVT-191）**：本報告引用之 13 個含地名/品牌拼音的案例檔名（dingtai、dingsheng、henda、okayama、luzhu、mingchadao、yuepin）已遷移為中性檔名（如 manufacturing_10_fastener_knowledge_ai.html），舊網址以 301 轉址。本報告保留舊名作為稽核證據，對照表見 Obsidian `00_Inbox/CHANGELOG.md` EVT-191。
+
 ## Executive Summary
 本報告為 R2/R3 合規專案的第一階段盤點，旨在針對系統中現有的行銷案例進行風險分級與審查，確保行銷文案無潛在的真實客戶洩密（De-identification）或過度承諾（Claim）風險。
 
