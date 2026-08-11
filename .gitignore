@@ -100,6 +100,7 @@ scripts/slides_config_*.json
 
 marketing_drafts/raw/
 marketing_drafts/analysis/
+marketing_drafts/
 *.bak
 
 # Private commercial prospect lists (never push to GitHub)
@@ -108,3 +109,4 @@ private-commercial/
 # Allow tutorial slide assets under slides/
 !slides/python_sqlite3_tutorial/
 !slides/python_sqlite3_tutorial/*
+*岡山九校聯播*.csv

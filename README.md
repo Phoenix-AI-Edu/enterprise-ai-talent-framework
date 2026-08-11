@@ -15,9 +15,9 @@
 
 ## 💡 為什麼 80% 的企業 AI 專案難以越過 POC 階段？
 
-根據 **Gartner 2026 年最新調查指出**，僅有 **27%** 的企業高階主管已制定出完整的企業級 AI 策略，且僅有 **20%** 認為員工已具備足夠的 AI 準備度（AI Readiness）。Gartner 同時預警，到 2027 年，缺乏「以人為中心」AI 導入與人才策略的企業，將面臨流失 50% 頂尖 AI 人才的風險。
+根據 **Gartner 於 2026 年 5 月發布的研究**，一項 2025 年 12 月、涵蓋 197 名 CxO 與資深企業主管的調查中，僅有 **27%** 表示組織具備完整的企業級 AI 策略，且僅有 **20%** 認為員工已真正做好 AI 準備（AI Readiness）。Gartner 另預測，到 2027 年，缺乏完整 AI 人才策略的企業，將有一半可能流失頂尖 AI 人才。（來源：Gartner，2026-05-13）
 
-與此同時，**McKinsey 的實務統計也表明**，高達 **70% 至 80% 的企業 AI 專案最終死於概念驗證（POC）階段**。這類失敗通常並非源於演算法不足，而是由於以下三大痛點：
+與此同時，多項產業研究亦顯示，企業常難以將 AI 從試驗或概念驗證階段，擴展至可量化、可持續的正式營運。這類失敗通常並非源於演算法不足，而是由於以下三大痛點：
 1. **盲目追求大模型導致營運成本（TCO）失控**：未經精算即開展自研，忽略了長期 API 耗費、Token 激增與維運（LLMOps）成本。
 2. **忽視資安監管與治理合規**：系統缺乏個資遮罩、DLP（資料外洩防護）與防注入防禦，難以通過稽核。
 3. **缺乏一線員工的「變革管理」引導**：管理者單向強推系統，卻未重塑人機協作流程與考核機制，導致系統上線後遭員工心理抵制或冷落。
@@ -58,7 +58,7 @@
 
 **企業客製初診服務: NT$ 12,800（開始前必知）**
 
-大多數企業在評估高額顧問服務時，最大的障礙是「我這家公司適不適合導入 AI？我們是否符合政府 100-1000 萬的補助資格？」。
+大多數企業在評估高額顧問服務時，最大的障礙是「我這家公司適不適合導入 AI？我們能申請哪些政府補助、額度大約多少？」。
 
 我們設計了一個**先診斷、再投入**的專家前置評估機制：
 
@@ -74,14 +74,14 @@
 
 > ⚠️ **每季限量 8 件，均由兩位顧問親自評估**，確保輸出品質。
 >
-> 👉 **[🔍 點此預約申請「企業 AI 落地與補助可行性前置診斷」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=feasibility)**
+> 👉 **[🔍 點此預約申請「企業 AI 落地與補助可行性前置診斷」](https://03king.com/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=feasibility)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
 
 ### 🎓 方案 A：企業專屬 AI 內訓與培育專班
 * **對象**：中小企業、轉型主管、人力資源（HR）主管。
-* **特色**：**對接「115 年度企業專區 AI 人才培育輔導計畫」標準。**
+* **特色**：**對接「115 年度中小企業網路大學校計畫－企業專區 AI 人才培育輔導計畫」（經濟部中小及新創企業署）。**
 * **分軌分組授課**：劃分為「C-Suite 戰略組」與「全員通用與變革適應組」，非技術同仁無痛上手，降低 HR 培訓推動阻力。
 * **交付成果**：輔導企業完成 15 小時實體或線上專班、協助取得官方完訓證書，並輔導上架至少 1 門企業自製教材。👉 **[詳情與大綱：點此檢視 15 小時菁英培訓專班執行大綱與提案模版](./curriculum/option_a_elite_training_syllabus.md)**
 * **建議費用與補助說明**：本方案教材內容對齊產發署公版標準，企業如需申請政府培訓補助，可自行洽詢中企署服務專線 0800-023-800。
@@ -163,14 +163,14 @@
 | **M09** | **TCO 成本失控與 Token 網閘防護** | Unit 7 | CFO / 財務長 / IT主管 | NT$ 2,980/人 | NT$ 35,000-50,000 |
 | **M10** | **消除員工取代恐懼之變革 5 部曲** | Unit 7 | HR長 / 總經理 / 工會代表 | NT$ 3,980/人 | NT$ 50,000-80,000 |
 | **M11** | **ISO/IEC 42001 認證前期內部現況研習** | Unit 3 | CISO / 資安長 / 法務長 | NT$ 4,980/人 | NT$ 80,000-120,000 |
-| **M12** | **政府 460 億 AI 補助匹配與申請** | Unit 8 | CEO / CFO / 研發長 | NT$ 4,980/人 | NT$ 80,000-150,000 |
+| **M12** | **政府 460 億產業轉型支持資源盤點與 AI 補助申請** | Unit 8 | CEO / CFO / 研發長 | NT$ 4,980/人 | NT$ 80,000-150,000 |
 | **M13** | **歐盟 AI Act 出口合規與 CE 標章** | Unit 8 | 出口主管 / 國際業務 / 法務長 | NT$ 5,980/人 | NT$ 100,000-180,000 |
 
 ### 7 大黃金戰略組合套餐 (Up-Sell 推薦)
 
 1. **【南部旗艦】南台灣智慧製造 AI 落地套餐 (M01 + M06 + M12)**
    * *適合對象*：扣件、模具、鋼鐵、機車零件等南部製造與智慧工廠大戶。
-   * *解決痛點*：師傅手沾油無法打字 ➡️ 我們用語音解放雙手，並教您如何申請中企署/產發署政府補助（100-300 萬）來為專案買單，顧問全程輔導核銷！
+   * *解決痛點*：師傅手沾油無法打字 ➡️ 我們用語音解放雙手，並教您盤點中企署/產發署等適用補助方案來降低導入成本（實際額度依當年度公告與審查為準），顧問全程輔導核銷！
    * *企業內訓合作價*：**NT$ 180,000 起 / 案**。
 2. **【CEO 全套包】C-Suite AI 戰略與採購決策套餐 (M01 + M03 + M04)** ── *公開班 NT$ 10,000/人 ｜ 內訓 NT$ 120,000/案*
 3. **【合規入門包】安全合規與防線守則套餐 (M02 + M11)** ── *公開班 NT$ 7,000/人 ｜ 內訓 NT$ 110,000 起*
@@ -179,7 +179,7 @@
 6. **【行銷專屬】行銷視覺與著作權合規套餐 (M07 + M02)** ── *公開班 NT$ 4,980/人 ｜ 內訓 NT$ 70,000/場*
 7. **【外銷必備】國際安全與出口合規旗艦套餐 (M11 + M13)** ── *公開班 NT$ 9,980/人 ｜ 內訓 NT$ 160,000/場*
 
-> 👉 **[📥 立即洽詢「企業內訓與公開班模組」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=workshop&utm_source=github&utm_medium=readme&utm_campaign=training_consultation&utm_content=modules)**
+> 👉 **[📥 立即洽詢「企業內訓與公開班模組」](https://03king.com/contact.html?request_type=workshop&utm_source=github&utm_medium=readme&utm_campaign=training_consultation&utm_content=modules)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 
 ---
@@ -240,10 +240,10 @@
 > 2. **A 級客戶收費快診**：經評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘「AI 導入戰略快診案」（收費 NT$ 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
 > 3. **B/C 級客戶自動賦能**：未達快診標準之名單，我們將寄送鳳凰 AI 轉型參考資源包，或提供開源教材以利團隊自行研習。
 >
-> 👉 **[📊 立即預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=maturity)**
+> 👉 **[📊 立即預約「企業 AI 導入與成熟度診斷前置諮詢與規劃」](https://03king.com/contact.html?request_type=diagnosis&utm_source=github&utm_medium=readme&utm_campaign=ai_diagnosis&utm_content=maturity)**
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](./privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 >
-> ✉️ 任何商務聯絡或合作洽談，請透過 **[官方聯絡表單](https://phoenix-ai-edu.github.io/enterprise-ai-talent-framework/contact.html?utm_source=github&utm_medium=readme&utm_campaign=b2b_contact)**。
+> ✉️ 任何商務聯絡或合作洽談，請透過 **[官方聯絡表單](https://03king.com/contact.html?utm_source=github&utm_medium=readme&utm_campaign=b2b_contact)**。
 
 ---
 

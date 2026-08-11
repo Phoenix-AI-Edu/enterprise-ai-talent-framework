@@ -1718,7 +1718,7 @@ UNIT5_SLIDE_DATA = {
     },
     2: {
         "layout": "dual-grid",
-        "title": "為什麼 80% 的企業自建 RAG 專案最終死於 POC 階段？",
+        "title": "為什麼企業自建 RAG 專案常卡在 POC 階段？",
         "subtitle": "垃圾進，垃圾出 (Garbage in, Garbage out)",
         "left_badge": "FAILURE 1",
         "left_title": "數位化瓶頸",
@@ -2097,7 +2097,7 @@ UNIT6_SLIDE_DATA = {
 UNIT8_SLIDE_DATA = {
     1: {
         "layout": "cover",
-        "title": "政府 460 億 AI 補助匹配與合規實戰",
+        "title": "政府 460 億產業轉型支持資源與 AI 補助實戰",
         "subtitle": "不要讓政府撥給您的幾百萬轉型預算，因為資料夾沒放對、發票日期開錯，最終付之一炬",
         "authors": "首席顧問 孟淑慧 ｜ 策略長 陳文家"
     },
