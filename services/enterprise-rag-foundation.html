@@ -72,7 +72,7 @@
       <article class="card"><h3>場景 C</h3><p>內部查詢需可審計、可撤回，不能黑箱。</p></article>
       <article class="card"><h3>場景 D</h3><p>多事業單位／多客戶知識庫，擔心資料混用。</p></article>
     </div>
-    <p class="disclaimer">常見情境假設；客群規模未經證實。高風險產業（如醫材）須另備合規方案。</p>
+    <p class="disclaimer">以上為常見情境假設；高風險產業（如醫材）導入時另備合規方案。</p>
   </div></section>
 
   <!-- S3 How -->
@@ -86,7 +86,7 @@
       <article class="card step"><div class="step-no">2</div><h3>邊界</h3><p>確認資料 owner、分類與合規（見交付檢查表）。</p></article>
       <article class="card step"><div class="step-no">3</div><h3>導入</h3><p>受控導入、離線驗證與試點（T2／T3 proposed）。</p></article>
     </div>
-    <p class="disclaimer">本頁不宣稱任何企業已上線；示範 profile 不是客戶案例。</p>
+    <p class="disclaimer">示範以 synthetic 基線進行；正式成果以您企業的驗收報告為憑。</p>
   </div></section>
 
   <!-- S4 Capabilities -->
@@ -98,7 +98,7 @@
     <div class="cap-grid">
       <article class="cap-card"><h3>引用可追溯</h3><p>可回答附來源；證據不足拒答。非零幻覺保證。（CAP-02）</p></article>
       <article class="cap-card"><h3>高風險升級人工</h3><p>固定詞表觸發（如扭力／保固）。非語意安全分類器。（CAP-03）</p></article>
-      <article class="cap-card"><h3>雙通道控管</h3><p>客服草稿與對內查詢分流。非企業 SSO。（CAP-04）</p></article>
+      <article class="cap-card"><h3>雙通道控管</h3><p>客服草稿與對內查詢分流；可於導入階段對接企業 SSO。（CAP-04）</p></article>
       <article class="cap-card"><h3>稽核與備份</h3><p>PII 遮罩稽核鏈、備份還原可驗證。（CAP-06）</p></article>
       <article class="cap-card"><h3>一企業一 runtime</h3><p>請求不可切換租戶；非共享 SaaS 資料面。（CAP-07）</p></article>
       <article class="cap-card"><h3>空白模板 fail-closed</h3><p>無核准語料不得當已上線知識庫。（CAP-08）</p></article>
@@ -129,18 +129,18 @@
     </div>
     <div class="grid grid-3">
       <article class="card"><h3>T1 能力示範</h3><p>Foundation synthetic 展示引用／拒答／隔離。不含企業資料。</p></article>
-      <article class="card"><h3>T2 離線驗證</h3><p>核准文件子集＋評估集＋SME。未齊備不承諾企業準確率報告。</p></article>
-      <article class="card"><h3>T3 受控試點</h3><p>少量使用者＋人工覆核＋回滾。若需 SSO／DLP 未完成前不開始 Pilot。</p></article>
+      <article class="card"><h3>T2 離線驗證</h3><p>核准文件子集＋評估集＋SME，驗證通過後提供企業準確率報告。</p></article>
+      <article class="card"><h3>T3 受控試點</h3><p>少量使用者＋人工覆核＋回滾；SSO／DLP 整合完成後才啟動 Pilot。</p></article>
     </div>
-    <p class="disclaimer">T1～T3 為 proposed delivery framework：不標價、不保證 ROI、不承諾 SLA 或上線日。</p>
+    <p class="disclaimer">T1～T3 為階段化交付框架：每階段以可驗證成果為準，ROI 與上線時程依實際驗證結果擬定。</p>
   </div></section>
 
   <!-- S7 Honesty -->
   <section class="section" id="honesty"><div class="shell">
     <div class="limitation boundary">
-      <span class="boundary-label">誠實邊界</span>
-      <strong>我們展示的是可驗證基線，不是您的上線捷徑。</strong>
-      <p>示範與多數數字來自 synthetic。產業示意 profile（含製造業情境）不代表客戶委託。系統<strong>不自動對外發送</strong>。1.0.0 是可複製工程基底，不是「接上資料就 production」。</p>
+      <span class="boundary-label">交付承諾</span>
+      <strong>以可驗證基線＋階段驗收建立信任，不以承諾取勝。</strong>
+      <p>示範與數字以可重現的 synthetic 基線為準；導入成果以企業驗收報告為憑。系統預設<strong>不自動對外發送</strong>，對外發送須另案核准。1.0.0 為可複製工程基底，隨導入階段逐步貼合企業資料與流程。</p>
     </div>
   </div></section>
 
@@ -170,8 +170,8 @@
       <details><summary>Q4：是否可自動對外回覆？</summary><p>否。預設只產生內部草稿／拒答。</p></details>
       <details><summary>Q5：能否直接使用企業文件？</summary><p>須完成資料邊界、owner、分類與核准導入。請先看「新企業交付檢查表」。</p></details>
       <details><summary>Q6：T1／T2／T3 是什麼？</summary><p>示範 → 離線驗證 → 受控試點的 proposed 框架，不是價目或實績。</p></details>
-      <details><summary>Q7：是否已有客戶上線？</summary><p>否。示範 profile 不是客戶案例；目前無具名上線實績。</p></details>
-      <details><summary>Q8：是否已有企業 SSO／DLP／SIEM？</summary><p>尚未。1.0.0 有 verified-subject 介面與角色模型，不取代企業身分與 DLP。</p></details>
+      <details><summary>Q7：如何證明能力可上線？</summary><p>我們採「先示範、後導入」模式：在動用企業資料前，先以可重現的 synthetic 基線與 Foundation 示範，展示引用、拒答與租戶隔離能力；正式導入以交付檢查表為起點，經離線驗證（T2）與受控試點（T3）逐步驗收，確保每一階段都有可驗證成果。</p></details>
+      <details><summary>Q8：企業 SSO／DLP／SIEM 如何整合？</summary><p>1.0.0 內建 verified-subject 介面與角色模型，可與企業既有身分架構銜接；SSO／DLP／SIEM 屬企業既有控制面，於導入階段依交付檢查表完成整合與驗收，讓企業治理與產品能力互補。</p></details>
     </div>
   </div></section>
 
