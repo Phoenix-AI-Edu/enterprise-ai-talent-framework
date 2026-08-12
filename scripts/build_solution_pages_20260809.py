@@ -159,7 +159,7 @@ ledger_container = """    <header class="page-header">
       <div class="boundary-grid">
         <article class="boundary-card boundary-card--now"><h3>現可驗證（Sandbox Demo）</h3><ul><li>LINE 上傳 → 收件確認 → QR／OCR 辨識候選</li><li>LINE 內檢核修正 → 覆核 → 匯出預覽</li><li>全程稽核軌跡與唯讀 auditor 身分</li></ul></article>
         <article class="boundary-card boundary-card--poc"><h3>Pilot 可配置</h3><ul><li>1 家設計夥伴事務所；簽署 DPA 後才匯入真實資料</li><li>Pilot 強制 MFA（OIDC）、自動核准關閉</li><li>用途與保存政策確認後才正式使用</li></ul></article>
-        <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>正式會計軟體／ERP adapter</li><li>本地模型、備份還原演練與 SLA</li><li>GA 後才逐租戶、分類型開放自動核准</li></ul></article>
+        <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>正式會計軟體／ERP adapter</li><li>本地模型、備份還原演練與 SLA</li><li>自動化範圍與覆核政策於導入階段評估；正式覆核與匯出權限保留於事務所</li></ul></article>
       </div>
     </section>
 

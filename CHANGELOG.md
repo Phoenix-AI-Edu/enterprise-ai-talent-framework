@@ -7,6 +7,15 @@
 ## [Unreleased] - 2026-07-27
 
 ### Fixed
+- **官網敘事一致性修正（EVT-194，2026-08-12，CEO 授權）**
+  - 來源：雙主戰線草案審查（Social 發現官網與產品憲章/草案禁語衝突）
+  - `experience/solutions_data.js`：AI 律師工作台 subtitle「期限不漏」→「期限紅線集中管理」；status「PoC Reference」→「Synthetic Demo」；maturity「Synthetic Reference」→「Synthetic Demo Ready」；compliance_note 自曝語句改為「展示採合成案件／流程；正式導入依客戶環境、權限與驗收規格完成。AI 草稿須經律師覆核；不宣稱勝訴率或零錯誤保證，不取代律師最終法律判斷。」
+  - `experience/ledger-assist/index.html`＋`scripts/build_solution_pages_20260809.py`（生成腳本同步）：「自動核准依 GA、租戶與憑證類型分階段開放」→「自動化範圍與覆核政策於導入階段評估；正式覆核與匯出權限保留於事務所」（與人工覆核常數對齊）
+  - 驗證：`node --check experience/solutions_data.js` PASS；公開頁無「期限不漏」「PoC Reference」「開放自動核准」殘留
+  - 治理：Owner 裁決紀錄 → `Obsidian/00_Inbox/Phoenix-AI-Dual-Front-Strategy-REVIEW-2026-08-12.md`；同步狀態標 `sync_pending` 待 Obsidian CHANGELOG 回寫
+
+
+### Fixed
 - **修正全站分享圖 `assets/og-image.png` 中文亂碼（2026-08-10）**
   - 根因：8/5 SEO 統一時以 AI 生成品牌圖，AI 將繁體中文烤成亂碼：主標題「鳳凰」變「鳳龍」、tagline「企業 AI 落地・診斷・治理」變「企業 AI 癥応・診務・詰詛」、英文 Phoenix 被切斷。
   - 修法：保留左側金色鳳凰圖案，以微軟正黑體 + PIL 程式重繪右側文字區（鳳凰 AI 顧問 / Phoenix AI Consulting / 企業 AI 落地・診斷・治理）；背景依原圖漸層逐欄重建，無色塊接縫。
