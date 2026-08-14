@@ -1,100 +1,720 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <link rel="canonical" href="https://03king.com/experience/ai-lawyer-workbench/">
-  <meta property="og:url" content="https://03king.com/experience/ai-lawyer-workbench/">
+  <link rel="canonical" href="https://03king.com/experience/central-kitchen-ai-agent/">
+  <meta property="og:url" content="https://03king.com/experience/central-kitchen-ai-agent/">
   <meta property="og:image" content="https://03king.com/assets/og-image.png?v=20260810">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI 律師工作台｜鳳凰 AI 系統展示">
-  <meta name="twitter:description" content="AI 律師工作台（Matter OS）展示：多案並行、期限提醒、人機雙簽。以 synthetic reference 展示案件、期限與雙簽流程；正式導入依事務所流程與驗收為準。">
+  <meta name="twitter:title" content="中央廚房營運防護台｜鳳凰 AI 顧問">
+  <meta name="twitter:description" content="把履約事件、門市動作卡、規則自決與總部例外治理收成可驗證閉環；對客文案與 ERP／POS 僅作沙盒預覽。">
   <meta name="twitter:image" content="https://03king.com/assets/og-image.png?v=20260810">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AI 律師工作台｜鳳凰 AI 系統展示</title>
-  <meta name="description" content="AI 律師工作台（Matter OS）系統展示：案件圖譜、程序狀態機、雙軌期限引擎、人機雙簽。以 synthetic reference 展示案件、期限與雙簽流程；正式導入依事務所流程與驗收為準。">
-  <link rel="stylesheet" href="../../systems/system-page.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 律師工作台｜鳳凰 AI 顧問｜鳳凰 AI 顧問</title>
+  <meta name="description" content="AI 律師工作台｜鳳凰 AI 顧問。Sandbox Demo／顧問服務展示，能力邊界公開。">
+  <meta property="og:title" content="AI 律師工作台｜鳳凰 AI 顧問｜鳳凰 AI 顧問">
+  <meta property="og:description" content="可驗證的 AI 系統展示，能力邊界公開。">
+  <meta property="og:type" content="website">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NB4699JG');</script>
+  <!-- End Google Tag Manager -->
+
   <style>
-    .boundary{border-left:4px solid var(--gold);padding:20px;background:rgba(246,201,68,.06);border-radius:10px;color:var(--muted)}
-    .boundary strong{color:var(--text)}
+    :root {
+      --phoenix-dark: #0B0B16;
+      --phoenix-mid: #121226;
+      --phoenix-accent: #E94560;
+      --phoenix-accent-rgb: 233, 69, 96;
+      --phoenix-teal: #00F2FE;
+      --phoenix-gold: #F5A623;
+      --white: #FFFFFF;
+      --gray-300: #DDE2E5;
+      --gray-400: #A5B1B8;
+      --gray-600: #5A6A75;
+      --glass-bg: rgba(18, 18, 38, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
+      --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background-color: var(--phoenix-dark);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% -20%, #201a35 0%, #0b0b16 60%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; transition: all 0.25s ease; }
+    img, svg { max-width: 100%; height: auto; vertical-align: middle; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─── */
+    .page-header {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-link {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+    .back-link:hover { color: var(--white); }
+    .page-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-mark {
+      color: var(--phoenix-accent);
+      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.4px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      background: rgba(var(--phoenix-accent-rgb), 0.08);
+      color: var(--phoenix-accent);
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--phoenix-accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(var(--phoenix-accent-rgb), 0.1) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      color: var(--phoenix-teal);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 50px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--gray-400);
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    /* ─── Section Commons ─── */
+    .section {
+      padding: 30px 0 40px;
+    }
+    .section:last-of-type {
+      padding-bottom: 50px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(var(--phoenix-accent-rgb), 0.15);
+      color: var(--phoenix-accent);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* ─── Summary Box ─── */
+    .summary-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      backdrop-filter: blur(12px);
+    }
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .summary-item {
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .summary-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gray-600);
+      font-weight: 700;
+    }
+    .summary-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-300);
+    }
+
+    /* ─── Flow Diagram ─── */
+    .flow-wrap {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      padding: 20px 10px;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      flex: 1 1 120px;
+      max-width: 180px;
+    }
+    .flow-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.15), rgba(var(--phoenix-accent-rgb), 0.05));
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+    .flow-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--phoenix-accent);
+      font-size: 22px;
+      flex: 0 0 auto;
+      padding: 0 6px;
+      padding-bottom: 28px;
+      opacity: 0.8;
+      letter-spacing: -2px;
+    }
+    .flow-caption {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── Feature Cards ─── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: var(--glass-hover);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .feature-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .video-wrap {
+      background: #05050b;
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+    .flow-video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05050b; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .boundary-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; }
+    .boundary-card h3 { font-family: var(--font-display); font-size: 16px; margin-bottom: 10px; }
+    .boundary-card ul { padding-left: 18px; color: var(--gray-400); font-size: 13px; line-height: 1.8; }
+    .boundary-card--now { border-color: rgba(0, 242, 254, 0.25); }
+    .boundary-card--poc { border-color: rgba(245, 166, 35, 0.3); }
+    .boundary-card--assessment { border-color: rgba(var(--phoenix-accent-rgb), 0.3); }
+
+    /* ─── CTA ─── */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(var(--phoenix-accent-rgb), 0.12) 0%, rgba(var(--phoenix-accent-rgb), 0.04) 100%);
+      border: 1px solid rgba(var(--phoenix-accent-rgb), 0.25);
+      border-radius: 18px;
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--phoenix-accent) 0%, #c02d48 100%);
+      color: var(--white);
+      box-shadow: 0 6px 22px rgba(var(--phoenix-accent-rgb), 0.32);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(var(--phoenix-accent-rgb), 0.45);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+    }
+    .consent-text {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+    .consent-text a { color: #0ea5e9; text-decoration: underline; }
+    .consent-text a:hover { color: var(--phoenix-teal); }
+
+    /* ─── Footer ─── */
+    .page-footer {
+      margin-top: auto;
+      padding: 36px 0 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+    .footer-link {
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+    .footer-link:hover { color: var(--white); text-decoration: none; }
+    .footer-copy { font-size: 12px; color: var(--gray-600); }
+    .footer-consent {
+      max-width: 820px;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+    }
+    .footer-consent a { color: #0ea5e9; text-decoration: underline; }
+    .footer-consent a:hover { color: var(--phoenix-teal); }
+
+    @media (max-width: 720px) {
+      .hero-title { font-size: 32px; }
+      .cta-title { font-size: 22px; }
+      .flow-diagram { flex-direction: column; gap: 12px; }
+      .flow-arrow { transform: rotate(90deg); padding: 0; padding-bottom: 0; }
+      .cta-actions, .hero-actions { flex-direction: column; align-items: stretch; }
+      .boundary-grid { grid-template-columns: 1fr; }
+    }
   </style>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NB4699JG');</script>
 </head>
 <body>
-<header class="site-nav"><div class="shell nav-inner">
-  <a class="brand" href="../../index.html">🔥 鳳凰 AI 顧問</a>
-  <nav class="nav-links">
-    <a href="../index.html">全部系統</a>
-    <a class="btn btn-primary" href="../../contact.html?request_type=ai_lawyer_demo&amp;utm_source=site&amp;utm_medium=ai_lawyer&amp;utm_campaign=ai_lawyer_v1&amp;utm_content=exp_nav">預約示範</a>
-  </nav>
-</div></header>
-<main>
-  <section class="hero"><div class="shell">
-    <span class="eyebrow">AI 律師工作台 Reference · Synthetic</span>
-    <h1>AI 律師工作台（Matter OS）</h1>
-    <p class="hero-copy">對應服務：<strong>鳳凰 AI 律師工作台導入服務</strong>。給台灣律師事務所的 Matter-centric AI 工作台——每一案一個可控的 AI 助理團隊，輸出必經律師簽核，引用必能點回法源。先證明能力，再受控導入您的案件——不是法律聊天機器人，也不是取代律師的工具。</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="../../contact.html?request_type=ai_lawyer_assessment&amp;utm_source=site&amp;utm_medium=ai_lawyer&amp;utm_campaign=ai_lawyer_v1&amp;utm_content=exp_hero">預約 30 分鐘評估</a>
-      <a class="btn btn-secondary" href="../../contact.html?request_type=ai_lawyer_demo&amp;utm_source=site&amp;utm_medium=ai_lawyer&amp;utm_campaign=ai_lawyer_v1&amp;utm_content=exp_hero_demo">申請 10 分鐘示範</a>
-      <a class="btn btn-secondary" href="../index.html">返回系統總覽</a>
-    </div>
-    <p class="honesty" style="margin-top:16px">本頁以 synthetic／reference 基線展示案件、期限與雙簽流程；正式導入依事務所權限、案件類型與驗收為準。AI 提供行政輔助，最終法律判斷由律師負責；勝訴率與零錯誤不作保證。預約評估後確認方案。</p>
-  </div></section>
 
-  <section class="section alt"><div class="shell">
-    <div class="section-head"><span class="eyebrow">展示重點</span><h2>三個律師事務所最常問的工程邊界</h2></div>
-    <div class="grid grid-3">
-      <article class="card"><h3>一案一世界</h3><p>案件圖譜＋程序狀態機：多案並行不串案；收案即自動檢查利益衝突（律師倫理 §31），衝突硬阻擋。</p></article>
-      <article class="card"><h3>期限提醒</h3><p>雙軌期限引擎：上訴 20 日等不變期間為紅線、系統不可改；法院指定期間為黃線可調整；T-14/7/3 自動提醒。提醒機制輔助，最終期限確認仍由律師負責。</p></article>
-      <article class="card"><h3>人機雙簽</h3><p>AI 只做草稿與大綱；書狀類文件強制雙人覆核（ALW-02/03 分級政策）；引用必附卷宗頁碼，錯誤標 STALE。</p></article>
-    </div>
-  </div></section>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NB4699JG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-  <section class="section"><div class="shell">
-    <div class="section-head"><span class="eyebrow">Demo 方式</span><h2>預約制安全 Demo</h2>
-      <p class="section-intro">依 Experience 邊界：主站只放靜態說明。示範採預約制（顧問以 synthetic 案件本機展示）或後續獨立沙盒，避免客戶案件資料進 GitHub Pages。</p>
-    </div>
-    <div class="grid grid-2">
-      <article class="card"><h3>公開免費／可讀</h3><p>能力邊界、流程展示（收案→爭點→大綱→雙簽→期限）、合規敘事。</p></article>
-      <article class="card"><h3>付費／預約交付</h3><p>對您事務所流程的評估、資料邊界設計、試點導入與治理陪跑。</p></article>
-    </div>
-  </div></section>
-
-  <section class="section alt"><div class="shell">
-    <div class="section-head"><span class="eyebrow">流程展示</span><h2>合成案件六步流程</h2></div>
-    <div class="grid grid-3">
-      <article class="card"><h3>① 收案閘門</h3><p>利益衝突檢核（§31）：同一訟爭事件兩造不得同時受任；衝突即硬阻擋，不發案號。</p></article>
-      <article class="card"><h3>② Matter 建立</h3><p>案件圖譜：程序別×審級×當事人側三維結構，多案並行互不干擾。</p></article>
-      <article class="card"><h3>③ AI 爭點表</h3><p>事實／法律／證據三類爭點自動整理；每一點附卷宗頁碼引用，可點回原文。</p></article>
-      <article class="card"><h3>④ AI 書狀大綱</h3><p>給大綱不給成品：三段結構（事實→證據→請求），完整書狀由律師撰寫。</p></article>
-      <article class="card"><h3>⑤ 人機雙簽</h3><p>書狀類強制雙人覆核；行政文件分級自核准；法院文件保留實體用印路徑。</p></article>
-      <article class="card"><h3>⑥ 期限紅線</h3><p>判決送達自動起算上訴 20 日（§440）；四層演算法與法院實務一致；紅線不可改。</p></article>
-    </div>
-  </div></section>
-
-  <section class="section alt"><div class="shell">
-    <div class="boundary">
-      <strong>能力與責任邊界：</strong>
-      本頁以 synthetic reference 說明能力；正式導入依事務所流程、案件類型、權限與規範完成評估。本網站不索引客戶案件文件；AI 定位為行政輔助，最終法律判斷由律師承擔，勝訴率與零錯誤不作保證。
-    </div>
-  </div></section>
-
-  <section class="section"><div class="shell">
-    <div class="cta-panel">
-      <span class="eyebrow">下一步</span>
-      <h2>帶一個真實工作場景，先確認是否值得導入</h2>
-      <p>我們會先釐清案件流程、期限管理痛點與決策責任，再決定示範、評估或受控試點。</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="../../contact.html?request_type=ai_lawyer_assessment&amp;utm_source=site&amp;utm_medium=ai_lawyer&amp;utm_campaign=ai_lawyer_v1&amp;utm_content=exp_cta">預約評估</a>
-        <a class="btn btn-secondary" href="../../contact.html?request_type=ai_lawyer_demo&amp;utm_source=site&amp;utm_medium=ai_lawyer&amp;utm_campaign=ai_lawyer_v1&amp;utm_content=exp_cta_demo">預約示範</a>
-        <a class="btn btn-secondary" href="../index.html">返回系統總覽</a>
+  <div class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
+      <div class="page-header-right">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          Sandbox Demo
+        </div>
+        <span class="logo-mark">鳳凰 AI</span>
       </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-tag">Legal Practice · Matter Workflow</div>
+        <h1 class="hero-title">AI 律師工作台</h1>
+        <p class="hero-desc">以「案件（Matter）→ 程序（Proceeding）→ 狀態（State）」狀態機管理民事案件，搭配紅線／黃線法條期限引擎、AI 草稿與雙人覆核。每所律師事務所獨立私有部署；未取得當事人書面同意前，系統預設使用 synthetic／本地配置，不對外送出案件資料。正式導入依事務所權限、案件類型與驗收為準。</p>
+        <div class="hero-actions" id="hero-actions">
+          <a href="../../contact.html?request_type=ai_lawyer_assessment&amp;utm_source=site&amp;utm_medium=ai_lawyer_workbench&amp;utm_campaign=ai_lawyer_v2&amp;utm_content=hero" class="btn btn-primary" id="btn-demo-request-2">預約私有工作流程評估</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Solution Summary -->
+    <section class="section">
+      <div class="summary-box">
+        <div class="summary-row">
+          <div class="summary-item">
+            <div class="summary-label">適用產業</div>
+            <div class="summary-value">律師事務所（民事案件管理）</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">方案狀態</div>
+            <div class="summary-value">Sandbox Demo（合成資料）</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">部署模式</div>
+            <div class="summary-value">每所獨立私有部署（非 SaaS）</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">LLM 設定</div>
+            <div class="summary-value">synthetic 預設／本地／外部需當事人書面同意</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Highlights -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">1</span>
+        律師事務所的案件與期限管理為何需要數位化
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🗓️</span>
+          <div class="feature-title">期限分散在行事曆與紙本</div>
+          <div class="feature-desc">民事案件的法院法定期間分散在行事曆、Excel 與紙本卷宗；律師同時處理多案時，漏期風險與確認成本同步上升。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✍️</span>
+          <div class="feature-title">書狀草稿反覆修改</div>
+          <div class="feature-desc">AI 草稿可依案件狀態與引用來源產生初稿，但仍需律師覆核、補強與最終署名；不是無人覆核的全自動流程。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <div class="feature-title">律師保密與個資敏感</div>
+          <div class="feature-desc">案件涉及律師業務秘密與當事人個資；獨立私有部署、權限隔離與雙人覆核，是導入時的基本要求。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔄</span>
+          <div class="feature-title">狀態與覆核可追蹤</div>
+          <div class="feature-desc">Matter→Proceeding→State 狀態機、倫理牆與稽核軌跡，讓每個案件從開案到結案的關鍵動作都有紀錄。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Flow Diagram -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-title-num">2</span>
+        案件狀態機與雙軌期限引擎
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-diagram" role="img" aria-label="開案、程序狀態推進、紅線黃線期限計算、AI 草稿與雙人覆核、匯出的流程示意圖">
+          <div class="flow-step">
+            <div class="flow-icon">📂</div>
+            <div class="flow-label">開案</div>
+            <div class="flow-sub">衝突檢核<br>建立 Matter</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">⚙️</div>
+            <div class="flow-label">狀態推進</div>
+            <div class="flow-sub">Proceeding<br>→ State</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">⏰</div>
+            <div class="flow-label">期限引擎</div>
+            <div class="flow-sub">紅線／黃線<br>法條期限</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-icon">🛡️</div>
+            <div class="flow-label">雙人覆核</div>
+            <div class="flow-sub">書狀／意見<br>雙簽後匯出</div>
+          </div>
+        </div>
+        <div class="flow-caption">本系統提供期限紀錄與提醒之輔助管理功能，律師及事務所仍負有獨立核對法院法定期間與送達證書之最終責任。AI 草稿僅為輔助，最終法律判斷與署名由律師負責。</div>
+      </div>
+    </section>
+
+    <!-- 4. Boundary -->
+    <section class="section">
+      <div class="section-title"><span class="section-title-num">3</span>能力邊界</div>
+      <div class="boundary-grid">
+        <article class="boundary-card boundary-card--now"><h3>現可驗證（Sandbox Demo）</h3><ul><li>Matter→Proceeding→State 狀態機與 ACL 權限</li><li>紅線／黃線法條期限計算與提醒</li><li>AI 草稿（synthetic 或本地）＋citation 驗證＋雙人覆核</li><li>LOCKED 匯出與稽核軌跡</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>導入前提（受控試點）</h3><ul><li>簽署 DPA 與法顧附錄 A（當事人知情同意）後，才可啟用外部 LLM 外送</li><li>未取得同意前強制 synthetic／本地配置，不對外送出案件資料</li><li>OIDC／MFA 為選配、逐案設計，不預設為完整落地</li></ul></article>
+        <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>事務所流程、案件類型與權限政策盤點</li><li>期限規則對齊事務所慣例與法院實務</li><li>備份還原演練、監控告警與 SLA 於導入階段確認</li></ul></article>
+      </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="section" id="target-audience">
+      <div class="section-title">
+        <span class="section-title-num">4</span>
+        方案適合對象與導入前提
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🏛️</span>
+          <div class="feature-title">重視期限管理的事務所</div>
+          <div class="feature-desc">希望將案件期限、狀態與覆核變成可追蹤、可稽核流程，降低漏期風險。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔐</span>
+          <div class="feature-title">重視保密與資料控制者</div>
+          <div class="feature-desc">希望案件資料留在自己可控的私有環境，不接受集中式 SaaS 保存律師業務秘密。</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🧪</span>
+          <div class="feature-title">願意先驗證者</div>
+          <div class="feature-desc">願意先以合成資料驗證流程、簽署 DPA，並在受控範圍內確認 AI 輔助與雙人覆核政策。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Pricing + CTA -->
+    <section class="section">
+      <div class="cta-box">
+        <div class="cta-title">導入方案（每所私有部署）</div>
+        <div class="cta-desc"><strong>標準商用：首年 NT$840,000</strong>（一次性導入 NT$600,000＋年度授權/法規更新 NT$240,000；未稅）。另有小型所方案（首年 54 萬起：導入 36 萬＋年度 18 萬）與中型所方案（首年 168 萬起：導入 120 萬＋年度 48 萬）。主機、外部 LLM 用量、OIDC 整合與客製介接另計；實際導入依事務所規模、案件類型與驗收內容確認。</div>
+        <div class="cta-actions" id="demo-actions">
+          <a href="../../contact.html?request_type=ai_lawyer_assessment&amp;utm_source=site&amp;utm_medium=ai_lawyer_workbench&amp;utm_campaign=ai_lawyer_v2&amp;utm_content=footer_cta" class="btn btn-primary" id="btn-demo-request">預約私有工作流程評估</a>
+        </div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>。本系統為輔助工具，不保證勝訴率、零錯誤或期限絕對不漏；律師及事務所負最終專業責任。</div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <div class="container footer-inner">
+      <div class="footer-consent">
+        點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">回首頁</a>
+        <a href="../../privacy.html" class="footer-link">隱私權政策</a>
+      </div>
+      <div class="footer-copy">© 2026 鳳凰 AI 顧問團隊。著作權所有。</div>
     </div>
-  </div></section>
-</main>
-<footer class="site-footer"><div class="shell footer-row">
-  <span>© 2026 鳳凰 AI 顧問｜AI 律師工作台</span>
-  <span><a href="../../privacy.html">隱私權政策</a></span>
-</div></footer>
+  </footer>
+
+  <script>
+    (function () {
+      // solution page view
+      var solutionId = 'ai_lawyer_workbench';
+      var solutionTitle = 'AI 律師工作台｜鳳凰 AI 顧問';
+
+      function track(eventName, params) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(Object.assign({ event: eventName }, params));
+        } catch (err) {
+          // suppress analytics errors on static pages
+        }
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params);
+        }
+      }
+
+      // page view: event_category=experience_cta, event_label=experience_solution_view
+      track('experience_solution_view', {
+        event_category: 'experience_cta',
+        event_label: 'experience_solution_view',
+        solution_id: solutionId,
+        solution_title: solutionTitle
+      });
+
+      // CTA click handler: event_category=experience_cta, event_label=experience_demo_request_click
+      var demoActions = document.getElementById('demo-actions');
+      if (demoActions) {
+        demoActions.addEventListener('click', function (e) {
+        var target = e.target.closest('#btn-demo-request, #btn-demo-request-2');
+          if (!target) return;
+          track('experience_demo_request_click', {
+            event_category: 'experience_cta',
+            event_label: 'experience_demo_request_click',
+            solution_id: solutionId,
+            solution_title: solutionTitle,
+            cta_href: target.getAttribute('href')
+          });
+        });
+      }
+
+      var video = document.querySelector('.flow-video');
+      var videoTracked = false;
+      if (video) {
+        video.addEventListener('play', function () {
+          if (videoTracked) return;
+          videoTracked = true;
+          track('experience_video_start', {
+            event_category: 'experience_cta',
+            event_label: 'central_kitchen_main_video',
+            solution_id: solutionId
+          });
+        });
+        video.addEventListener('ended', function () {
+          track('experience_video_complete', {
+            event_category: 'experience_cta',
+            event_label: 'central_kitchen_main_video',
+            solution_id: solutionId
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
