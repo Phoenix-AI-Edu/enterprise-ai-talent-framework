@@ -1,12 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Build solution pages for ledger-assist & ai-allocation-os from the central-kitchen template."""
-import re, pathlib
+import re, pathlib, argparse
 
 BASE = pathlib.Path(r"C:/Users/m1016/Documents/AI_Talent/experience")
 
-def build(target, container_html, solution_id, solution_title, hero_tag):
+def build(target, container_html, solution_id, solution_title, hero_tag, meta_desc="可驗證的 AI 系統展示，能力邊界公開。"):
     src = (BASE / "central-kitchen-ai-agent" / "index.html").read_text(encoding="utf-8")
+    # 0) target-specific canonical/OG/Twitter（避免繼承 central-kitchen metadata）
+    canonical_url = f"https://03king.com/experience/{target}/"
+    twitter_title = f"{solution_title}｜鳳凰 AI 顧問"
+    src = re.sub(
+        r'<link rel="canonical" href="[^"]*">',
+        f'<link rel="canonical" href="{canonical_url}">',
+        src, count=1)
+    src = re.sub(
+        r'<meta property="og:url" content="[^"]*">',
+        f'<meta property="og:url" content="{canonical_url}">',
+        src, count=1)
+    src = re.sub(
+        r'<meta name="twitter:title" content="[^"]*">',
+        f'<meta name="twitter:title" content="{twitter_title}">',
+        src, count=1)
+    src = re.sub(
+        r'<meta name="twitter:description" content="[^"]*">',
+        f'<meta name="twitter:description" content="{meta_desc}">',
+        src, count=1)
     # 1) title + meta description
     src = re.sub(
         r"<title>.*?</title>",
@@ -14,7 +33,7 @@ def build(target, container_html, solution_id, solution_title, hero_tag):
         src, count=1, flags=re.S)
     src = re.sub(
         r'<meta name="description" content="[^"]*">',
-        f'<meta name="description" content="{solution_title}。Sandbox Demo／顧問服務展示，能力邊界公開。">',
+        f'<meta name="description" content="{meta_desc}">',
         src, count=1)
     src = re.sub(
         r'<meta property="og:title" content="[^"]*">',
@@ -22,7 +41,7 @@ def build(target, container_html, solution_id, solution_title, hero_tag):
         src, count=1)
     src = re.sub(
         r'<meta property="og:description" content="[^"]*">',
-        '<meta property="og:description" content="可驗證的 AI 系統展示，能力邊界公開。">',
+        f'<meta property="og:description" content="{meta_desc}">',
         src, count=1)
     # 2) status badge text
     src = src.replace("公開沙盒示範", "對外展示", 1)
@@ -158,7 +177,7 @@ ledger_container = """    <header class="page-header">
       <div class="section-title"><span class="section-title-num">3</span>能力邊界</div>
       <div class="boundary-grid">
         <article class="boundary-card boundary-card--now"><h3>現可驗證（Sandbox Demo）</h3><ul><li>LINE 上傳 → 收件確認 → QR／OCR 辨識候選</li><li>LINE 內檢核修正 → 覆核 → 匯出預覽</li><li>全程稽核軌跡與唯讀 auditor 身分</li></ul></article>
-        <article class="boundary-card boundary-card--poc"><h3>Pilot 可配置</h3><ul><li>1 家設計夥伴事務所；簽署 DPA 後才匯入真實資料</li><li>Pilot 強制 MFA（OIDC）、自動核准關閉</li><li>用途與保存政策確認後才正式使用</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>Pilot 可配置</h3><ul><li>1 家設計夥伴事務所；簽署 DPA 後才匯入真實資料</li><li>Pilot 強制 MFA（OIDC）、全程人工覆核核准</li><li>用途與保存政策確認後才正式使用</li></ul></article>
         <article class="boundary-card boundary-card--assessment"><h3>導入階段評估</h3><ul><li>正式會計軟體／ERP adapter</li><li>本地模型、備份還原演練與 SLA</li><li>自動化範圍與覆核政策於導入階段評估；正式覆核與匯出權限保留於事務所</li></ul></article>
       </div>
     </section>
@@ -183,7 +202,7 @@ ledger_container = """    <header class="page-header">
         <div class="feature-card">
           <span class="feature-icon">🧪</span>
           <div class="feature-title">願意先驗證的事務所</div>
-          <div class="feature-desc">願意先以合成資料驗證流程、簽署 DPA，並接受 Pilot 期間自動核准關閉、全程人工覆核。</div>
+          <div class="feature-desc">願意先以合成資料驗證流程、簽署 DPA，並接受 Pilot 期間全程人工覆核核准。</div>
         </div>
       </div>
     </section>
@@ -196,12 +215,10 @@ ledger_container = """    <header class="page-header">
         <div class="cta-actions" id="demo-actions">
           <a href="../../contact.html?request_type=ledger_assist_assessment&amp;utm_source=site&amp;utm_medium=ledger_assist&amp;utm_campaign=ledger_assist_v2&amp;utm_content=footer_cta" class="btn btn-primary" id="btn-demo-request">預約私有工作流程評估</a>
         </div>
-        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>。本系統僅提供發票文字 OCR 與帳務初分類輔助，最終憑證核對、帳務審核與稅務申報責任仍由專業人員承擔；不保證特定節省比例或 ROI。</div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>。本系統提供發票文字辨識與帳務初分類輔助；實際成效依憑證品質、既有流程及驗收數據評估，最終憑證核對、帳務審核及稅務申報責任由專業人員承擔。</div>
       </div>
     </section>
 """
-build("ledger-assist", ledger_container, "ledger_assist", "Ledger-Assist 發票收件與檢核系統", "Accounting · LINE Workflow")
-
 # ── AI Allocation OS ──
 aos_container = """    <header class="page-header">
       <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
@@ -363,8 +380,6 @@ aos_container = """    <header class="page-header">
       </div>
     </section>
 """
-build("ai-allocation-os", aos_container, "ai_allocation_os", "AI Allocation OS 企業 AI 投資決策工作台", "AI Investment Decision · Consulting Sprint")
-
 # ── AI 律師工作台（SYS-09，2026-08-14 納入生成器）──
 sys09_container = """    <header class="page-header">
       <a href="../index.html" class="back-link">← 返回體驗區總覽</a>
@@ -428,7 +443,7 @@ sys09_container = """    <header class="page-header">
         <div class="feature-card">
           <span class="feature-icon">✍️</span>
           <div class="feature-title">書狀草稿反覆修改</div>
-          <div class="feature-desc">AI 草稿可依案件狀態與引用來源產生初稿，但仍需律師覆核、補強與最終署名；不是無人覆核的全自動流程。</div>
+          <div class="feature-desc">AI 草稿可依案件狀態與引用來源產生初稿，仍需律師覆核、補強與最終署名；每次產出皆經律師確認後才使用。</div>
         </div>
         <div class="feature-card">
           <span class="feature-icon">🔒</span>
@@ -522,10 +537,23 @@ sys09_container = """    <header class="page-header">
         <div class="cta-actions" id="demo-actions">
           <a href="../../contact.html?request_type=ai_lawyer_assessment&amp;utm_source=site&amp;utm_medium=ai_lawyer_workbench&amp;utm_campaign=ai_lawyer_v2&amp;utm_content=footer_cta" class="btn btn-primary" id="btn-demo-request">預約私有工作流程評估</a>
         </div>
-        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>。本系統為輔助工具，不保證勝訴率、零錯誤或期限絕對不漏；律師及事務所負最終專業責任。</div>
+        <div class="consent-text">點擊提交表單即表示您已詳閱並同意<a href="../../privacy.html">《個人資料保護與隱私權政策告知書》</a>。本系統提供期限紀錄與提醒之輔助管理功能，律師及事務所仍負有獨立核對法院法定期間與送達證書之最終責任；AI 產出須經律師覆核，最終法律判斷與署名由律師負責。</div>
       </div>
     </section>
 """
-build("ai-lawyer-workbench", sys09_container, "ai_lawyer_workbench", "AI 律師工作台｜鳳凰 AI 顧問", "Legal Practice · Matter Workflow")
+def main():
+    parser = argparse.ArgumentParser(description="Build solution pages")
+    parser.add_argument("--target", action="append", choices=["ledger-assist", "ai-allocation-os", "ai-lawyer-workbench"],
+                        help="只生成指定目標（可重複）；未指定＝全生成")
+    args = parser.parse_args()
+    targets = args.target or ["ledger-assist", "ai-allocation-os", "ai-lawyer-workbench"]
+    if "ledger-assist" in targets:
+        build("ledger-assist", ledger_container, "ledger_assist", "Ledger-Assist 發票收件與檢核系統", "Accounting · LINE Workflow")
+    if "ai-allocation-os" in targets:
+        build("ai-allocation-os", aos_container, "ai_allocation_os", "AI Allocation OS 企業 AI 投資決策工作台", "AI Investment Decision · Consulting Sprint")
+    if "ai-lawyer-workbench" in targets:
+        build("ai-lawyer-workbench", sys09_container, "ai_lawyer_workbench", "AI 律師工作台", "Legal Practice · Matter Workflow")
+    print("DONE")
 
-print("DONE")
+if __name__ == "__main__":
+    main()

@@ -159,7 +159,7 @@ window.EXPERIENCE_SOLUTIONS = [
     demo_duration: "15 分鐘",
     highlights: [
       "客戶用 LINE 上傳發票，事務所在 LINE 內檢核、修正與確認",
-      "AI 只產出可覆核候選，Pilot 期間不自動核准，人工確認後才匯出",
+      "AI 只產出可覆核候選，Pilot 期間須人工核准後才匯出",
       "每家事務所獨立私有部署，正式憑證、覆核狀態與稽核記錄留在事務所控制環境"
     ],
     sections: ["line-flow", "review-workflow", "private-deployment", "boundaries", "pilot-cta"],
@@ -197,7 +197,7 @@ window.EXPERIENCE_SOLUTIONS = [
       "AI 只做爭點表與書狀大綱；書狀類文件強制雙人覆核，引用必附卷宗頁碼"
     ],
     sections: ["hero", "capabilities", "boundaries", "six-step-flow", "pilot-cta"],
-    compliance_note: "展示採合成案件／流程；正式導入依客戶環境、權限與驗收規格完成。AI 草稿須經律師覆核；不宣稱勝訴率或零錯誤保證，不取代律師最終法律判斷。",
+    compliance_note: "展示採合成案件／流程；正式導入依客戶環境、權限與驗收規格完成。AI 草稿須經律師覆核，最終法律判斷與署名由律師負責。",
     cta_text: "查看 AI 律師工作台展示",
     cta_href: "./experience/ai-lawyer-workbench/index.html",
     catalog_cta_href: "./ai-lawyer-workbench/index.html",
@@ -231,7 +231,7 @@ window.EXPERIENCE_SOLUTIONS = [
       "Committee Pack 與決策紀錄版本化交付；評分不因 Phoenix 是否承接後續實作而改變"
     ],
     sections: ["sprint-flow", "gate-model", "deliverables", "boundaries", "pilot-cta"],
-    compliance_note: "顧問服務：提供決策支援與分析，不保證 ROI 或投資結果；案例均去識別化，最終決策權與責任由客戶承擔。",
+    compliance_note: "顧問服務：提供決策支援與分析，案例均去識別化；實際成效依執行結果與驗收數據評估，最終決策權與責任由客戶承擔。",
     cta_text: "查看決策工作台",
     cta_href: "./experience/ai-allocation-os/index.html",
     catalog_cta_href: "./ai-allocation-os/index.html",
