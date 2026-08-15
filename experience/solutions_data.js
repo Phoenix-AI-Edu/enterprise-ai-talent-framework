@@ -129,7 +129,7 @@ window.EXPERIENCE_SOLUTIONS = [
       "空白模板 fail-closed；預設不自動對外發送"
     ],
     sections: ["hero", "capabilities", "boundaries", "t1-t3", "checklist", "pilot-cta"],
-    compliance_note: "Synthetic／reference 基線（v1.0.0）；非客戶 production、非企業 SSO 已完成、非零幻覺保證。",
+    compliance_note: "Synthetic／reference 基線（v1.0.0）；非客戶 production、非企業 SSO 已完成；引用可追溯、來源不足時拒答。",
     cta_text: "查看服務說明",
     cta_href: "./services/enterprise-rag-foundation.html",
     catalog_cta_href: "../services/enterprise-rag-foundation.html",

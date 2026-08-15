@@ -49,9 +49,13 @@ def build(target, container_html, solution_id, solution_title, hero_tag, meta_de
     start = src.index('<div class="container">')
     end = src.index('</div>\n\n  <footer')
     src = src[:start] + '<div class="container">\n' + container_html + '\n  </div>\n\n  <footer' + src[end + len('</div>\n\n  <footer'):]
-    # 4) analytics script ids
+    # 4) analytics script ids + 產品專屬分析標籤（避免殘留 central-kitchen）
     src = re.sub(r"var solutionId = '[^']*';", f"var solutionId = '{solution_id}';", src, count=1)
     src = re.sub(r"var solutionTitle = '[^']*';", f"var solutionTitle = '{solution_title}';", src, count=1)
+    src = re.sub(
+        r"event_label: 'central_kitchen_main_video'",
+        f"event_label: '{solution_id}_main_video'",
+        src)
     # 5) data-ga-solution-id on header badge
     src = re.sub(r'data-ga-solution-id="[^"]*"', f'data-ga-solution-id="{solution_id}"', src, count=1)
     out = BASE / target / "index.html"
@@ -338,7 +342,7 @@ aos_container = """    <header class="page-header">
       <div class="section-title"><span class="section-title-num">3</span>能力邊界</div>
       <div class="boundary-grid">
         <article class="boundary-card boundary-card--now"><h3>本服務範圍</h3><ul><li>決策支援與分析（顧問 Sprint）</li><li>候選篩選、Underwriting、三軸決策與風險 Gate</li><li>Committee Pack、Decision Record 與 action log</li></ul></article>
-        <article class="boundary-card boundary-card--poc"><h3>不包含</h3><ul><li>實際 AI 系統開發、PoC 或導入執行（可另行報價）</li><li>法律、財務、稅務、合規或證券投資專業意見</li><li>保證 ROI、投資成功或特定決策結果</li></ul></article>
+        <article class="boundary-card boundary-card--poc"><h3>不包含</h3><ul><li>實際 AI 系統開發、PoC 或導入執行（可另行報價）</li><li>法律、財務、稅務、合規或證券投資專業意見</li><li>實際成效依執行結果與驗收數據評估；最終決策權與責任由客戶承擔</li></ul></article>
         <article class="boundary-card boundary-card--assessment"><h3>中立性與資料最小化</h3><ul><li>Sprint 費用不因決策結果改變；後續承接與決策紀錄分離</li><li>僅收聚合流程量、KPI baseline、欄位字典與 metadata</li><li>樣本 50–100 筆去識別化且須先核准；benchmark 獨立 opt-in</li></ul></article>
       </div>
     </section>
@@ -544,9 +548,9 @@ sys09_container = """    <header class="page-header">
 def main():
     parser = argparse.ArgumentParser(description="Build solution pages")
     parser.add_argument("--target", action="append", choices=["ledger-assist", "ai-allocation-os", "ai-lawyer-workbench"],
-                        help="只生成指定目標（可重複）；未指定＝全生成")
+                        help="只生成指定目標（可重複）；未指定＝生成 ledger-assist＋ai-lawyer-workbench（AOS 需明示 --target，避免覆寫既有頁）")
     args = parser.parse_args()
-    targets = args.target or ["ledger-assist", "ai-allocation-os", "ai-lawyer-workbench"]
+    targets = args.target or ["ledger-assist", "ai-lawyer-workbench"]
     if "ledger-assist" in targets:
         build("ledger-assist", ledger_container, "ledger_assist", "Ledger-Assist 發票收件與檢核系統", "Accounting · LINE Workflow")
     if "ai-allocation-os" in targets:
