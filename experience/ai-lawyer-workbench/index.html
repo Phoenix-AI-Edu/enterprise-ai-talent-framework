@@ -647,31 +647,49 @@
         案件狀態機與雙軌期限引擎
       </div>
       <div class="flow-wrap">
-        <div class="flow-diagram" role="img" aria-label="開案、程序狀態推進、紅線黃線期限計算、AI 草稿與雙人覆核、匯出的流程示意圖">
-          <div class="flow-step">
-            <div class="flow-icon">📂</div>
-            <div class="flow-label">開案</div>
-            <div class="flow-sub">衝突檢核<br>建立 Matter</div>
-          </div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">
-            <div class="flow-icon">⚙️</div>
-            <div class="flow-label">狀態推進</div>
-            <div class="flow-sub">Proceeding<br>→ State</div>
-          </div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">
-            <div class="flow-icon">⏰</div>
-            <div class="flow-label">期限引擎</div>
-            <div class="flow-sub">紅線／黃線<br>法條期限</div>
-          </div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">
-            <div class="flow-icon">🛡️</div>
-            <div class="flow-label">雙人覆核</div>
-            <div class="flow-sub">書狀／意見<br>雙簽後匯出</div>
-          </div>
-        </div>
+        <svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Matter OS 三維狀態機示意圖：Matter 案件、Proceeding 程序、State 狀態三層，含雙軌期限引擎與雙人覆核" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#5A6A75"/>
+            </marker>
+          </defs>
+          <rect x="300" y="30" width="220" height="56" rx="12" fill="rgba(0,242,254,0.07)" stroke="#00F2FE" stroke-width="1.5"/>
+          <text x="410" y="54" text-anchor="middle" fill="#00F2FE" font-size="13" font-weight="700">Matter 案件</text>
+          <text x="410" y="72" text-anchor="middle" fill="#A5B1B8" font-size="11">收案 · 衝突檢核 · 開案</text>
+          <line x1="340" y1="86" x2="200" y2="176" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="410" y1="86" x2="410" y2="176" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="480" y1="86" x2="620" y2="176" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <rect x="130" y="176" width="140" height="52" rx="12" fill="rgba(245,166,35,0.07)" stroke="#F5A623" stroke-width="1.5"/>
+          <text x="200" y="200" text-anchor="middle" fill="#F5A623" font-size="13" font-weight="700">Proceeding 程序</text>
+          <text x="200" y="218" text-anchor="middle" fill="#A5B1B8" font-size="11">起訴</text>
+          <rect x="340" y="176" width="140" height="52" rx="12" fill="rgba(245,166,35,0.07)" stroke="#F5A623" stroke-width="1.5"/>
+          <text x="410" y="200" text-anchor="middle" fill="#F5A623" font-size="13" font-weight="700">Proceeding 程序</text>
+          <text x="410" y="218" text-anchor="middle" fill="#A5B1B8" font-size="11">答辯</text>
+          <rect x="550" y="176" width="140" height="52" rx="12" fill="rgba(245,166,35,0.07)" stroke="#F5A623" stroke-width="1.5"/>
+          <text x="620" y="200" text-anchor="middle" fill="#F5A623" font-size="13" font-weight="700">Proceeding 程序</text>
+          <text x="620" y="218" text-anchor="middle" fill="#A5B1B8" font-size="11">上訴</text>
+          <line x1="200" y1="228" x2="200" y2="300" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="410" y1="228" x2="410" y2="300" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="620" y1="228" x2="620" y2="300" stroke="#5A6A75" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <rect x="130" y="300" width="140" height="52" rx="12" fill="rgba(233,69,96,0.07)" stroke="#E94560" stroke-width="1.5"/>
+          <text x="200" y="324" text-anchor="middle" fill="#E94560" font-size="13" font-weight="700">State 狀態</text>
+          <text x="200" y="342" text-anchor="middle" fill="#A5B1B8" font-size="11">進行中</text>
+          <rect x="340" y="300" width="140" height="52" rx="12" fill="rgba(233,69,96,0.07)" stroke="#E94560" stroke-width="1.5"/>
+          <text x="410" y="324" text-anchor="middle" fill="#E94560" font-size="13" font-weight="700">State 狀態</text>
+          <text x="410" y="342" text-anchor="middle" fill="#A5B1B8" font-size="11">待覆核</text>
+          <rect x="550" y="300" width="140" height="52" rx="12" fill="rgba(233,69,96,0.07)" stroke="#E94560" stroke-width="1.5"/>
+          <text x="620" y="324" text-anchor="middle" fill="#E94560" font-size="13" font-weight="700">State 狀態</text>
+          <text x="620" y="342" text-anchor="middle" fill="#A5B1B8" font-size="11">已結案</text>
+          <rect x="70" y="404" width="680" height="76" rx="14" fill="rgba(18,18,38,0.8)" stroke="rgba(255,255,255,0.08)"/>
+          <text x="90" y="430" fill="#DDE2E5" font-size="12" font-weight="700">雙軌期限引擎</text>
+          <line x1="200" y1="424" x2="720" y2="424" stroke="rgba(233,69,96,.7)" stroke-width="2"/>
+          <text x="720" y="420" text-anchor="end" fill="#E94560" font-size="10">紅線 · 法定不變期間</text>
+          <line x1="200" y1="452" x2="720" y2="452" stroke="rgba(245,166,35,.7)" stroke-width="2"/>
+          <text x="720" y="448" text-anchor="end" fill="#F5A623" font-size="10">黃線 · 法院指定期間</text>
+          <text x="90" y="468" fill="#5A6A75" font-size="10">集中紀錄 · 提前提醒 · 來源可追溯</text>
+          <rect x="70" y="372" width="200" height="26" rx="13" fill="rgba(0,242,254,0.08)" stroke="rgba(0,242,254,0.25)"/>
+          <text x="170" y="389" text-anchor="middle" fill="#00F2FE" font-size="11" font-weight="700">HITL 雙人覆核</text>
+        </svg>
         <div class="flow-caption">本系統提供期限紀錄與提醒之輔助管理功能，律師及事務所仍負有獨立核對法院法定期間與送達證書之最終責任。AI 草稿僅為輔助，最終法律判斷與署名由律師負責。</div>
       </div>
     </section>
