@@ -144,7 +144,7 @@ window.EXPERIENCE_SOLUTIONS = [
   {
     id: "ledger_assist",
     slug: "ledger-assist",
-    title: "Ledger-Assist 發票收件與檢核系統",
+    title: "AI 會計工作台",
     short_title: "憑證檢核系統",
     subtitle: "客戶 LINE 上傳發票、事務所 LINE 內檢核修正；每所獨立私有部署，正式憑證與稽核記錄留在事務所。",
     status: "Sandbox Demo",
@@ -164,7 +164,7 @@ window.EXPERIENCE_SOLUTIONS = [
     ],
     sections: ["line-flow", "review-workflow", "private-deployment", "boundaries", "pilot-cta"],
     compliance_note: "Sandbox Demo：展示使用合成資料，不含真實客戶憑證；正式部署為每家事務所獨立私有部署。",
-    cta_text: "查看 Ledger-Assist 展示",
+    cta_text: "查看 AI 會計工作台 展示",
     cta_href: "./experience/ledger-assist/index.html",
     catalog_cta_href: "./ledger-assist/index.html",
     pilot_program_text: "預約私有工作流程評估",

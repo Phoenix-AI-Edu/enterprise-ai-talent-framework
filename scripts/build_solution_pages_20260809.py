@@ -78,7 +78,7 @@ ledger_container = """    <header class="page-header">
       <div class="hero-glow"></div>
       <div class="hero-content">
         <div class="hero-tag">Accounting · LINE Workflow</div>
-        <h1 class="hero-title">Ledger-Assist 發票收件與檢核系統</h1>
+        <h1 class="hero-title">AI 會計工作台</h1>
         <p class="hero-desc">客戶用 LINE 上傳發票，系統完成收件、辨識與檢核候選；事務所人員在 LINE 內修正、確認，經人工覆核核准後才匯出。正式憑證、帳務結果與稽核記錄，全部留在每家事務所獨立私有部署的環境——不是集中式帳務 SaaS。</p>
         <div class="hero-actions" id="hero-actions">
           <a href="../../contact.html?request_type=ledger_assist_assessment&amp;utm_source=site&amp;utm_medium=ledger_assist&amp;utm_campaign=ledger_assist_v2&amp;utm_content=hero" class="btn btn-primary" id="btn-demo-request-2">預約私有工作流程評估</a>
@@ -552,7 +552,7 @@ def main():
     args = parser.parse_args()
     targets = args.target or ["ledger-assist", "ai-lawyer-workbench"]
     if "ledger-assist" in targets:
-        build("ledger-assist", ledger_container, "ledger_assist", "Ledger-Assist 發票收件與檢核系統", "Accounting · LINE Workflow")
+        build("ledger-assist", ledger_container, "ledger_assist", "AI 會計工作台", "Accounting · LINE Workflow")
     if "ai-allocation-os" in targets:
         build("ai-allocation-os", aos_container, "ai_allocation_os", "AI Allocation OS 企業 AI 投資決策工作台", "AI Investment Decision · Consulting Sprint")
     if "ai-lawyer-workbench" in targets:
