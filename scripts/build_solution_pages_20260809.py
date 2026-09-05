@@ -86,6 +86,14 @@ ledger_container = """    <header class="page-header">
       </div>
     </section>
 
+    <section class="section" id="short-drama">
+      <div class="section-title">用故事看工作方式</div>
+      <p class="hero-desc">合成短劇作品集，不是客戶實績，不保證成效。正片在 YouTube，說明與目錄在作品集。</p>
+      <div class="hero-actions">
+        <a class="btn btn-secondary" href="../stories/">看全系列</a>
+      </div>
+    </section>
+
     <!-- 1. Solution Summary -->
     <section class="section">
       <div class="summary-box">
