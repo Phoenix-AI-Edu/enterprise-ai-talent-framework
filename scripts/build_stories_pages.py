@@ -138,10 +138,21 @@ SEASONS = [
         "track_label": "工廠帳實與簽收",
         "product_name": "製造現場協助",
         "product_href": "../index.html",
-        "playlist": "",
+        "playlist": "https://www.youtube.com/playlist?list=PLc-YYE4-t_ew",
         "blurb": "帳上說貨到了，架上是空的。",
-        "status": "upcoming",
-        "episodes": [],
+        "status": "youtube_partial",
+        "episodes": [
+            {
+                "n": 1,
+                "slug": "e01",
+                "title": "消失的良率",
+                "youtube_id": "A7WBo9CLv1s",
+                "scene": "良率數字漂亮，產線對不上。",
+                "stuck": "帳上達標、現場缺件，決策還在往下走。",
+                "system": "簽收與帳實例外集中標出，等人確認再往下。",
+                "not_replace": "不取代現場判斷；合成劇情不是客戶實績。",
+            },
+        ],
     },
     {
         "id": "s3",
@@ -293,7 +304,9 @@ def four(ep: dict) -> str:
 
 def write(path: Path, html: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(html.replace("\n", "\r\n"), encoding="utf-8")
+    normalized = html.replace("\r\n", "\n").replace("\r", "\n")
+    # bytes: Windows text mode would turn \r\n into \r\r\n
+    path.write_bytes(normalized.replace("\n", "\r\n").encode("utf-8"))
     print("wrote", path, path.stat().st_size)
 
 
@@ -333,7 +346,7 @@ def build_hub() -> None:
     </div>
     <h2 style="margin-top:40px">連載</h2>
     <div class="season"><b>S1</b><span>《誰在搞鬼？》／《律所裡的那隻手》 · AI 律師工作台</span><span class="ok"><a href="./s1/">YouTube 已上 E1–E10</a></span></div>
-    <div class="season"><b>S2</b><span>《決策的價格》 · 工廠帳實</span><span class="wait">籌備中</span></div>
+    <div class="season"><b>S2</b><span>《決策的價格》 · 工廠帳實</span><span class="ok"><a href="./s2/">YouTube 已上 E1；其餘未公開</a></span></div>
     <div class="season"><b>S3</b><span>《帳上的神祕通道》 · AI 會計工作台</span><span class="wait"><a href="./s3/">目錄已開，正片尚未上 YouTube</a></span></div>
     <div class="season"><b>S4+</b><span>下一季連載位</span><span class="wait">有新痛點再開季</span></div>
     <p class="note">只連短劇播放清單，不連整個頻道。頻道另有課程與評論，避免顧問點進去迷路。</p>
