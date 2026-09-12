@@ -423,7 +423,7 @@ intro_body = """
                             對齊 ISO 42001 安全數據治理與 Audit Trails 密碼日誌，應對車廠 Supplier Audit。
                         </div>
                         <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
-                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">💸 04. 政策轉化套利 ─ 百萬補助</strong>
+                            <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">💸 04. 政策資源轉化 ─ 百萬補助</strong>
                             深度對接產發署智慧製造/綠色升級補助，以政府政策紅利為企業自身研發買單。
                         </div>
                     </div>
@@ -1042,7 +1042,7 @@ module6_body = """
             </div>
             
             <div class="bottom-alert">
-                <strong>🏆 政策套利：</strong> 手把手教您如何合法自籌、實發薪資核銷，將經費核准風險壓至最低。
+                <strong>🏆 政策資源規劃：</strong> 手把手教您如何合法自籌、實發薪資核銷，將經費核准風險壓至最低。
             </div>
         </div>
     </div>

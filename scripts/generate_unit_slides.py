@@ -1093,7 +1093,7 @@ UNIT0_SLIDE_DATA = {
         "subtitle": "以最低成本，建構企業 AI 的理性安全護城河",
         "left_badge": "DIAGNOSIS (NT$ 12,800)",
         "left_title": "專家前置快診",
-        "left_desc": "• <strong>量化雷達</strong>：產出企業 AI 成熟度五維度量化雷達圖<br>• <strong>套利路徑</strong>：為貴司規劃專屬補助與租稅套利匹配矩陣<br>• <strong>成果報告</strong>：提供 8-12 頁客製化 PDF 報告，盤點場景、精算 TCO、並匹配政府補助與節稅路徑",
+        "left_desc": "• <strong>量化雷達</strong>：產出企業 AI 成熟度五維度量化雷達圖<br>• <strong>申請路徑</strong>：為貴司規劃專屬補助與租稅抵減匹配矩陣<br>• <strong>成果報告</strong>：提供 8-12 頁客製化 PDF 報告，盤點場景、精算 TCO、並匹配政府補助與節稅路徑",
         "right_badge": "RESERVATION & CTA",
         "right_title": "專屬健康檢查預約",
         "right_desc": "• <strong>全額折抵</strong>：本快診費用可 100% 全額折抵後續工作坊或陪跑專案費<br>• <strong>預約方式</strong>：掃描 QR Code 填寫問卷並上傳您的 A3 畫布，顧問團隊親自研析，5 個工作天內出具完整可行性報告"
@@ -1456,8 +1456,8 @@ UNIT2_SLIDE_DATA = {
     },
     13: {
         "layout": "steps",
-        "title": "拿政府的 460 億為您的語音 AI 專案買單",
-        "subtitle": "台灣五大補助對接與淨自籌款降至 46% 的政策套利實務",
+        "title": "用合法政策工具組合為您的語音 AI 專案降低自籌壓力",
+        "subtitle": "台灣五大補助對接與淨自籌款降至 46% 的政策資源規劃實務",
         "steps": [
             {
                 "num": "1",
@@ -1890,7 +1890,7 @@ UNIT5_SLIDE_DATA = {
         "subtitle": "預約 NTD 12,800 企業 AI 成熟度快診",
         "left_badge": "DIAGNOSIS DELIVERABLES",
         "left_title": "快診交付成果 (8-12 頁報告)",
-        "left_desc": "• 1. 企業數據就緒度與可行性自評雷達圖。<br>• 2. Buy vs. Build 財務 TCO 精算與選型路徑。<br>• 3. 台灣五大政策補助最佳匹配與核銷套利路線規劃。",
+        "left_desc": "• 1. 企業數據就緒度與可行性自評雷達圖。<br>• 2. Buy vs. Build 財務 TCO 精算與選型路徑。<br>• 3. 台灣五大政策補助最佳匹配與核銷路徑規劃。",
         "right_badge": "RESERVATION",
         "right_title": "專家諮詢費用：NTD 12,800",
         "right_desc": "• <strong>全額折抵</strong>：若後續引進工作坊或治理內訓，此快診費用可全額折抵。<br>• <strong>限額預約</strong>：每季僅限 8 家企業，請掃描 QR Code 立即預約。"
@@ -2097,7 +2097,7 @@ UNIT6_SLIDE_DATA = {
 UNIT8_SLIDE_DATA = {
     1: {
         "layout": "cover",
-        "title": "政府 460 億產業轉型支持資源與 AI 補助實戰",
+        "title": "中小微／產業轉型資源盤點與申請路徑實戰",
         "subtitle": "不要讓政府撥給您的幾百萬轉型預算，因為資料夾沒放對、發票日期開錯，最終付之一炬",
         "authors": "首席顧問 孟淑慧 ｜ 策略長 陳文家"
     },
@@ -2206,7 +2206,7 @@ UNIT8_SLIDE_DATA = {
     },
     10: {
         "layout": "dual-grid",
-        "title": "審查委員沒說出口的潛規則 2 ｜ 產學套利",
+        "title": "審查委員沒說出口的潛規則 2 ｜ 產學加分策略",
         "subtitle": "將產學加分指標與企業實質製程排障完美結合",
         "left_badge": "TRADITIONAL ACADEMIC",
         "left_title": "傳統學校產學 (行政冗長)",
@@ -2304,8 +2304,8 @@ UNIT8_SLIDE_DATA = {
     },
     17: {
         "layout": "steps",
-        "title": "高段班 CEO 的年度政策套利行事曆",
-        "subtitle": "打出跨部會政策組合拳，將同一個 AI 專案進行多層次無償套利，自籌比暴降至 46%",
+        "title": "高段班 CEO 的年度政策組合行事曆",
+        "subtitle": "打出跨部會政策組合拳，將同一個 AI 專案進行多層次合法政策工具組合，自籌比暴降至 46%",
         "steps": [
             {
                 "num": "1",
@@ -2364,11 +2364,11 @@ UNIT8_SLIDE_DATA = {
     },
     20: {
         "layout": "dual-grid",
-        "title": "鳳凰 AI 陪跑：讓 460 億為您的企業數位轉型買單",
+        "title": "鳳凰 AI 陪跑：對接產業轉型資源，降低自籌壓力（不保證核定）",
         "subtitle": "預約 NT$ 12,800 專家可行性前置快診與結語",
         "left_badge": "DIAGNOSIS",
         "left_title": "專家前置快診 (NT$ 12,800)",
-        "left_desc": "• <strong>評估雷達</strong>：產出企業 AI 成熟度五維度量化雷達圖<br>• <strong>套利路徑</strong>：為貴司規劃專屬補助與租稅套利匹配矩陣<br>• <strong>計畫書素材</strong>：提供 SBIR/SIIR 計畫書骨架與 KPI 防護欄建議",
+        "left_desc": "• <strong>評估雷達</strong>：產出企業 AI 成熟度五維度量化雷達圖<br>• <strong>申請路徑</strong>：為貴司規劃專屬補助與租稅抵減匹配矩陣<br>• <strong>計畫書素材</strong>：提供 SBIR/SIIR 計畫書骨架與 KPI 防護欄建議",
         "right_badge": "RESERVATION",
         "right_title": "專屬健康檢查預約",
         "right_desc": "• <strong>折抵機制</strong>：本項目付費款項可 100% 全額折抵後續工作坊或陪跑專案費<br>• <strong>預約方式</strong>：掃描 QR Code，顧問團隊親自研析，5 個工作天內出具 8-12 頁客製化診斷報告"

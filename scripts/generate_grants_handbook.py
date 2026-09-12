@@ -51,15 +51,15 @@ def create_handbook():
     row_alt_fill = PatternFill(fill_type="solid", start_color="F8FAFC", end_color="F8FAFC")
     
     # ---------------------------------------------------------
-    # Sheet 1: 👑 補助素材盤點與套利規畫表
+    # Sheet 1: 👑 補助素材盤點與資源匹配規劃表
     # ---------------------------------------------------------
     ws1 = wb.active
-    ws1.title = "👑 補助素材盤點與套利規畫"
+    ws1.title = "👑 補助素材盤點與資源匹配規劃"
     ws1.views.sheetView[0].showGridLines = True
     
     # Title block
     ws1.merge_cells("A1:D1")
-    ws1["A1"] = "鳳凰 AI 補助潛在素材盤點與多層次套利規劃表"
+    ws1["A1"] = "鳳凰 AI 補助潛在素材盤點與多層次政策工具組合規劃表"
     ws1["A1"].font = title_font
     ws1["A1"].fill = title_fill
     ws1["A1"].alignment = align_center
@@ -114,7 +114,7 @@ def create_handbook():
     
     # Part B Title
     ws1.merge_cells(f"A{curr_row}:D{curr_row}")
-    ws1[f"A{curr_row}"] = "【Part B：多層次政策工具組合套利（以 NT$ 800 萬智慧檢測研發專案為例）】"
+    ws1[f"A{curr_row}"] = "【Part B：多層次政策工具組合（以 NT$ 800 萬智慧檢測研發專案為例）】"
     ws1[f"A{curr_row}"].font = section_font
     ws1[f"A{curr_row}"].fill = section_fill
     ws1[f"A{curr_row}"].alignment = align_left
@@ -122,7 +122,7 @@ def create_handbook():
     curr_row += 1
     
     # Part B headers
-    headers_b = ["政策工具 / 戰略方案", "套利說明 / 效益金額", "", ""]
+    headers_b = ["政策工具 / 戰略方案", "效益說明 / 效益金額", "", ""]
     ws1.merge_cells(f"B{curr_row}:D{curr_row}")
     for col_idx, h in enumerate(headers_b[:2], start=1):
         cell = ws1.cell(row=curr_row, column=col_idx, value=h)
@@ -162,7 +162,7 @@ def create_handbook():
     # Cost summary table
     curr_row += 1
     ws1.merge_cells(f"A{curr_row}:D{curr_row}")
-    ws1[f"A{curr_row}"] = "📊 套利後實質成效精算（NT$ 800 萬專案）"
+    ws1[f"A{curr_row}"] = "📊 組合後實質成效精算（NT$ 800 萬專案）"
     ws1[f"A{curr_row}"].font = bold_regular_font
     ws1[f"A{curr_row}"].alignment = align_left
     ws1.row_dimensions[curr_row].height = 20
@@ -480,7 +480,7 @@ def create_handbook():
             "骨架 6：經費預算配比與會計科目規劃\n(Budget & Accounting)",
             "會計科目編列是否合規？有沒有將資本支出誤列為經常費用？是否規劃了稅額抵減？",
             "人事費 50-60% + 學研委外費 < 30% + 消耗性器材費 10-20% + 設備折舊與產創 10-1 租稅抵減規畫。",
-            "專案總預算編列新台幣 800 萬元。其中：(1) 研發人事費：編列 NT$ 440 萬（55%，符合人事費不超 60% 限制）；(2) 消耗性器材與材料費：編列 NT$ 80 萬（10%，用於雲端 GPU 訓練 Token 費與測試模具耗損）；(3) 學研與委外開發費：委託高科大產學合作編列 NT$ 160 萬（20%）；(4) 研發設備使用折舊費：購置地端伺服器與 Edge AI 卡編列 NT$ 120 萬（15%）。此購置設備同時向財政部申請「產業創新條例第 10 條之 1」智慧機械與 AI 系統抵減，預計可享 5% 營所稅抵減（NT$ 6 萬元），實現多重政策套利。"
+            "專案總預算編列新台幣 800 萬元。其中：(1) 研發人事費：編列 NT$ 440 萬（55%，符合人事費不超 60% 限制）；(2) 消耗性器材與材料費：編列 NT$ 80 萬（10%，用於雲端 GPU 訓練 Token 費與測試模具耗損）；(3) 學研與委外開發費：委託高科大產學合作編列 NT$ 160 萬（20%）；(4) 研發設備使用折舊費：購置地端伺服器與 Edge AI 卡編列 NT$ 120 萬（15%）。此購置設備同時向財政部申請「產業創新條例第 10 條之 1」智慧機械與 AI 系統抵減，預計可享 5% 營所稅抵減（NT$ 6 萬元），實現多重政策資源規劃。"
         ),
         (
             "骨架 7：預期效益與量化/質化 KPI 指標\n(KPIs & Safety Margins)",
