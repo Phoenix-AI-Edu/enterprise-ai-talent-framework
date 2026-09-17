@@ -241,7 +241,42 @@ window.EXPERIENCE_SOLUTIONS = [
     primary_action: "pilot",
     contact_category: "experience_cta",
     contact_label: "experience_solution_view",
-    updated_at: "2026-08-09"  }
+    updated_at: "2026-08-09"
+  },
+  {
+    id: "enterprise_ai_program_advisory",
+    slug: "ai-program-advisory",
+    title: "企業 AI 計畫諮詢",
+    short_title: "計畫諮詢",
+    subtitle: "協助企業盤點與對照目前仍開放的補助、貸款與培訓窗口；個案對照在顧問通道進行。",
+    status: "顧問服務｜現開窗口對照",
+    maturity: "Public table v0",
+    access_type: "公開清單／預約諮詢",
+    featured: false,
+    featured_order: 99,
+    category: ["顧問服務", "政策對照"],
+    industries: ["製造業", "中小微企業", "跨產業"],
+    page_variant: "program-advisory",
+    showcase_type: "open-window-table",
+    demo_duration: "30 分鐘",
+    highlights: [
+      "只列知識庫狀態為開的窗口，不列已截止或停收",
+      "本表不列額度；資格與期程以官方最新公告為準",
+      "不保證過件或核貸；個案報告書在顧問通道產出"
+    ],
+    sections: ["open-table", "boundaries", "consult-cta"],
+    compliance_note: "公開頁僅展示現開清單與諮詢能力；不收受企業評量報告。補助資格以主管機關官方最新公告為準，不保證過件或核貸。",
+    cta_text: "查看現開計畫表",
+    cta_href: "./experience/ai-program-advisory/index.html",
+    catalog_cta_href: "./ai-program-advisory/index.html",
+    pilot_program_text: "預約計畫對照諮詢",
+    pilot_program_href: "./contact.html?request_type=program_advisory&utm_source=site&utm_medium=program_advisory&utm_campaign=program_advisory_v1&utm_content=flagship",
+    catalog_pilot_program_href: "../contact.html?request_type=program_advisory&utm_source=site&utm_medium=program_advisory&utm_campaign=program_advisory_v1&utm_content=systems_catalog",
+    primary_action: "detail",
+    contact_category: "experience_cta",
+    contact_label: "experience_solution_view",
+    updated_at: "2026-09-17"
+  }
 ];
 
 if (typeof module !== "undefined" && module.exports) {
