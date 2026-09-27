@@ -110,3 +110,6 @@ private-commercial/
 !slides/python_sqlite3_tutorial/
 !slides/python_sqlite3_tutorial/*
 *岡山九校聯播*.csv
+# Instructor handbooks are private. Do not republish.
+curriculum/**/instructor_guide.html
+scripts/encrypt_instructor_guides.py

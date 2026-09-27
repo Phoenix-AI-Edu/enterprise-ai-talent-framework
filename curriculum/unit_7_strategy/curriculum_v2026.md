@@ -242,6 +242,6 @@ $$\text{Priority Score} = w_{\text{value}} \cdot \text{Business Value} + w_{\tex
 1. **預約前置諮詢**：請點選下方連結，填寫 **[📊 立即點此預約「企業 AI 導入與成熟度診斷前置諮詢」 (Google 表單)](https://docs.google.com/forms/d/e/1FAIpQLSfAUCKXkZB_ah0eOXX0Cr6EODIwQBp25LZZ1V3W_nSE8iqGrQ/viewform)**，留下您的企業背景與核心轉型痛點。
 > 個資告知：送出表單前，請先詳閱並同意[《個人資料保護與隱私權政策告知書》](../../privacy.html)；我們將僅基於報名、Demo 安排與顧問諮詢目的聯繫您。
 2. **A 級客戶收費快診**：經問卷與前置背景評估為高意圖、具備明確導入預算與時程的企業（A 級名單），我們將邀請您預約 **90分鐘付費「AI 戰略快診診斷案」（收費 NTD 29,800，可後續全額折抵工作坊或顧問服務費）**。顧問團隊將事前深入研析您的資料，並於診斷後交付專屬初評報告。
-3. **專業商務聯絡**：任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**allmyway2007@gmail.com**
+3. **專業商務聯絡**：任何商務聯絡或合作洽談，請寄信至專屬 B2B 服務信箱：**請用 https://03king.com/contact.html**
 
 

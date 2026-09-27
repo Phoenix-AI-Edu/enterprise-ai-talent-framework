@@ -1,7 +1,7 @@
 # 🚀 2026 企業級 AI 營運落地與人才培育開源框架
 > **Enterprise AI Talent Framework & Operating Model (v2026)**
 >
-> 🏛️ *由產官學三棲、教育部與經濟部雙認證之顧問團隊領軍——現任工研院、精密機械研究發展中心、多所大學之企業 AI 落地實戰講師*
+> 🏛️ *由產官學講師經歷、經濟部與教育部講師經歷之顧問團隊領軍——現任工研院、精密機械研究發展中心、多所大學之企業 AI 落地實戰講師*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Framework: AI-Native](https://img.shields.io/badge/Framework-AI--Native-blueviolet)](https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework)
@@ -9,7 +9,7 @@
 
 本專案是一個**專為現代企業高階主管、數位轉型長（CDO）及跨部門領導者打造的「AI 營運落地與變革管理開源生態系」**。
 
-我們以**經濟部 115 年度（2026年）產業 AI 人才培育公版標準**為骨幹，全面對接國際最新的 **AI 企業級運作架構（AI Operating Model）**、**ISO/IEC 42001（人工智慧管理系統標準）**與 **NIST AI RMF（風險管理框架）**，協助企業打破技術迷思，建立可持續擴展、安全合規且具備實質 ROI 的 AI 營運護城河。
+我們以企業內訓可對照的人才培育結構為骨幹（115 年度企業專區申請已截止，以後續官方公告為準），全面對接國際最新的 **AI 企業級運作架構（AI Operating Model）**、**ISO/IEC 42001（人工智慧管理系統標準）**與 **NIST AI RMF（風險管理框架）**，協助企業打破技術迷思，建立可持續擴展、安全合規且具備實質 ROI 的 AI 營運護城河。
 
 ---
 
@@ -81,7 +81,7 @@
 
 ### 🎓 方案 A：企業專屬 AI 內訓與培育專班
 * **對象**：中小企業、轉型主管、人力資源（HR）主管。
-* **特色**：**對接「115 年度中小企業網路大學校計畫－企業專區 AI 人才培育輔導計畫」（經濟部中小及新創企業署）。**
+* **特色**：**名稱對得上「115 年度中小企業網路大學校計畫－企業專區 AI 人才培育輔導計畫」（經濟部中小及新創企業署）。115 年度申請已截止，不代申請、不保證核定。**
 * **分軌分組授課**：劃分為「C-Suite 戰略組」與「全員通用與變革適應組」，非技術同仁無痛上手，降低 HR 培訓推動阻力。
 * **交付成果**：輔導企業完成 15 小時實體或線上專班、協助取得官方完訓證書，並輔導上架至少 1 門企業自製教材。👉 **[詳情與大綱：點此檢視 15 小時菁英培訓專班執行大綱與提案模版](./curriculum/option_a_elite_training_syllabus.md)**
 * **建議費用與補助說明**：本方案教材內容對齊產發署公版標準，企業如需申請政府培訓補助，可自行洽詢中企署服務專線 0800-023-800。
@@ -117,7 +117,7 @@
 * **核心重點**：**CEO 90 分鐘決策課**。以 Keynote 簡報級逐字稿，速覽 2026 模型生態（Reasoning/Agent/MCP 協定）、傳產 Voice AI 落地唯一破口，並現場實作 **A3 紙本 4+1 戰略畫布**、精算 10 倍財務成本選型（Buy vs. Build vs. Rent），完美引流至 NT$ 12,800 專家初診案。
 
 ### 📚 [單元一：AI 基礎理論與 2026 商業意涵](./curriculum/unit_1_theory/)
-* **核心重點**：從機器學習本質到 2026 模型生態與商業意義。避開技術數學細節，聚焦 GPT-5.5 Pro / Claude Fable 5 / Gemini 3.1 Pro / Gemini 3.5 Flash / Llama 4 / DeepSeek 等模型選型、Reasoning Models（推理模型）之商業決策價值與 SLM（小語言模型）本地部署之隱私防禦。
+* **核心重點**：從機器學習本質到 2026 模型生態與商業意義。避開技術數學細節，聚焦當期模型（GPT-6 家族、Anthropic 當期、Gemini 當期 Flash、Llama 開放權重、DeepSeek；型號以官方頁為準） 等模型選型、Reasoning Models（推理模型）之商業決策價值與 SLM（小語言模型）本地部署之隱私防禦。
 
 ### ⚙️ [單元二：2026 企業級 AI 應用 7 大實戰模組](./curriculum/unit_2_industries/)
 * **核心重點**：全面對接 2026 真實採購剛需。深度研習 7 大實戰模組：Agentic RAG 自我修正與工具調用、Voice AI (Realtime API) 製造業低延遲語音破口、多模態影片生成商用化與版權法律、Computer Use Agent 安全試點風險控管、合規審核、行銷素材自動化與客服分流。
@@ -126,7 +126,7 @@
 * **核心重點**：對齊 NIST AI RMF 與 ISO/IEC 42001 國際標準。實作敏感個資自動遮罩（Data Masking）、DLP 安全防禦、防 Prompt Injection 閘門 (Guardrails)、以及安全審計稽核軌跡（Audit Trails）佈署。
 
 ### 📈 [單元四：中型企業機器學習實戰應用](./curriculum/unit_4_machine_learning/)
-* **核心重點**：無 ML 資料團隊之高勝率 ML 落地指南。聚焦良率預測、庫存需求預測、設備異常檢測、客戶流失預測等 4 大場景，引進 Google Vertex AI AutoML、Azure ML Designer 等低代碼平台，以及 TimeGPT 與 Chronos 時序基礎模型實務。
+* **核心重點**：沒有專職資料團隊時的機器學習落地場景。聚焦良率預測、庫存需求預測、設備異常檢測、客戶流失預測等 4 大場景，引進 Google Vertex AI AutoML、Azure ML Designer 等低代碼平台，以及 TimeGPT 與 Chronos 時序基礎模型實務。
 
 ### 👁️ [單元五：AI 可解釋性與信任度評估](./curriculum/unit_5_explainable_ai/)
 * **核心重點**：將可解釋性 AI 重新定位為「安全防火牆與信任基礎」。深入解構 RAG 引用追溯（Citation Tracing）技術、Anthropic 機制可解釋性（Mechanistic Interpretability）、以及傳統 SHAP/LIME 在金融/醫療/法務高度合規場景下的可稽核性設計。
@@ -186,7 +186,7 @@
 
 ## 👥 專家顧問與策略團隊 (Consulting & Leadership Team)
 
-鳳凰 AI 由**產業、官方、學術三棲**的雙認證頂尖顧問團隊領軍，是台灣中南部最稀缺的「學術正統性 × 政府背書 × 業界實戰」三位一體 AI 顧問品牌：
+鳳凰 AI 由有產官學講師經歷的顧問團隊領軍，是台灣中南部最稀缺的「學術正統性 × 政府背書 × 業界實戰」三位一體 AI 顧問品牌：
 
 ### 🎓 首席顧問 Chief Advisor｜孟淑慧 (Shu-Hui Meng)
 
