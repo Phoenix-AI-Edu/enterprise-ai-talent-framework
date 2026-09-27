@@ -72,7 +72,7 @@ def migrate():
 
 ✉️ **合作與諮詢對接**：
 * 登記索取 Notion 資料庫協作模板工具包：**[📥 免費登記索取表單](https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform)**
-* 預約 30 分鐘專家線上快診諮詢或 B2B 內訓提案，請來信官方服務信箱：**allmyway2007@gmail.com**
+* 預約 30 分鐘專家線上快診諮詢或 B2B 內訓提案，請來信官方服務信箱：**請用 https://03king.com/contact.html**
 """
         with open(readme_path, "w", encoding="utf-8") as f_out:
             f_out.write(public_readme)

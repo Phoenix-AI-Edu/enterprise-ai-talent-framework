@@ -1107,7 +1107,7 @@ UNIT0_SLIDE_DATA = {
         "left_desc": "• <strong>現場互動</strong>：歡迎隨時舉手提問，解答關於模型選型、變革管理、補助申報等任何實務問題<br>• <strong>內訓洽談</strong>：歡迎來信或會後交流企業內訓合作模式",
         "right_badge": "RESERVATION",
         "right_title": "預約快診與聯絡",
-        "right_desc": "• <strong>快診表單</strong>：掃描 QR Code 填寫表單，預約專家前置診斷服務，產出專屬可行性評估<br>• <strong>聯絡信箱</strong>：allmyway2007@gmail.com ｜ 專員將在 24 小時內回覆您"
+        "right_desc": "• <strong>快診表單</strong>：掃描 QR Code 填寫表單，預約專家前置診斷服務，產出專屬可行性評估<br>• <strong>聯絡信箱</strong>：請用 https://03king.com/contact.html ｜ 專員將在 24 小時內回覆您"
     }
 }
 

@@ -131,7 +131,7 @@
   - 建立 GitHub Actions 工作流，在每次 Push 或 PR 時自動啟動 Python Container 執行 Linter 校對，確保開源教材 100% 零缺陷。
 - **GitHub 遠端儲存庫推送**:
   - 配置 `git remote` 並成功推送 `main` 分支至 GitHub Organization 官方儲存庫：`https://github.com/Phoenix-AI-Edu/enterprise-ai-talent-framework`。
-  - 使用 `git filter-branch` 重寫 commit 歷史，確保作者署名與 Email 統一為專案負責人 `陳文家 (鳳凰AI)` 及其官方帳戶 `allmyway2007@gmail.com`。
+  - 使用 `git filter-branch` 重寫 commit 歷史，確保作者署名與 Email 統一為專案負責人 `陳文家 (鳳凰AI)` 及其官方帳戶 `專案負責人 Git 帳戶（不公開個人信箱）`。
 
 ---
 
