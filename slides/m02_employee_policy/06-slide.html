@@ -494,7 +494,7 @@
         <div class="speaker-notes-overlay" id="speaker-notes">
             <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 6 (PRESS N TO TOGGLE)</div>
             <div class="notes-body">
-                <p>「這是我們提供在 [單元三教材 (curriculum_v2026.md) 中的真實 Python 生產級代碼](file:///g:/%E6%88%91%E7%9A%84%E9%9B%B2%E7%AB%AF%E7%A1%AC%E7%A2%9F/AI_Talent/curriculum/unit_3_responsible_ai/curriculum_v2026.md)。</p><p>我們的代碼不是玩具。我們同時咬合了正則表達式（Regex）與地端的 Spacy 命名實體識別大腦。</p><p>正則表達式用來百分之百精確攔截台灣的身分證字號、16位信用卡號、以及 09 開頭的手機號碼。</p><p>但如果員工提問中包含的是中文人名或地址，Regex 就會失效。這時，我們部署在地端的輕量級 NER 模型會主動接手，識別出 PERSON (人名)、GPE (地理政治實體) 與 LOC (地名)，將其自動遮蔽。</p><p>最後，我們在內網調用 <code>clear_vault()</code>，定期物理銷毀 Token Vault，這能百分之百對齊 ISO/IEC 42001 的資料過期銷毀規範，讓稽核會計師找不到任何曝險漏洞。」</p><p>---</p>
+                <p>「這是我們提供在 [單元三教材 (curriculum_v2026.md) 中的真實 Python 生產級代碼](../../curriculum/unit_3_responsible_ai/curriculum_v2026.md)。</p><p>我們的代碼不是玩具。我們同時咬合了正則表達式（Regex）與地端的 Spacy 命名實體識別大腦。</p><p>正則表達式用來攔截常見格式，例如身分證字號、16 位信用卡號、09 開頭的手機號碼。不是百分之百，改格式就可能漏。</p><p>但如果員工提問中包含的是中文人名或地址，Regex 就會失效。這時，我們部署在地端的輕量級 NER 模型會主動接手，識別出 PERSON (人名)、GPE (地理政治實體) 與 LOC (地名)，將其自動遮蔽。</p><p>最後，我們在內網調用 <code>clear_vault()</code>，定期物理銷毀 Token Vault，這是在落實資料到期刪除。不是百分之百對齊 ISO/IEC 42001，也不能說稽核一定找不到漏洞。」</p><p>---</p>
             </div>
         </div>
 

@@ -485,7 +485,7 @@
             <div class="luxury-card right-card animate-fade delay-3">
                 <span class="card-badge">GQA (OPTIMIZED)</span>
                 <h3 class="card-title">GQA 集群查詢注意力</h3>
-                <p class="card-content">• 分組共享，每兩個 Query 頭共享一組 Key/Value 頭<br>• KV Cache 頻寬消耗降低 8 倍，精度近乎零損耗，省下 70% 算力折舊</p>
+                <p class="card-content">• 分組共享，每兩個 Query 頭共享一組 Key/Value 頭<br>• 目的是降低 KV Cache 頻寬。不寫降 8 倍、零損耗，也不寫省下 70% 折舊</p>
             </div>
         </div>
 
@@ -494,7 +494,7 @@
         <div class="speaker-notes-overlay" id="speaker-notes">
             <div class="notes-header">📋 SPEAKER NOTES ｜ PAGE 7 (PRESS N TO TOGGLE)</div>
             <div class="notes-body">
-                <p><strong>陳策略長（Phoenix）：</strong><br>隨著企業開始在 RAG 中輸入 10 萬字甚至 20 萬字的超長文檔，服務端很快撞上了一堵物理牆——「KV Cache (鍵值快取) 頻寬地獄」。<br>在傳統的 MHA（多頭注意力）機制下，模型每次生成新字，都必須把前面所有歷史詞的 Key 與 Value 矩陣全部塞進顯示卡顯示記憶體（VRAM）中以備實時計算。<br>這導致當上下文變長時，KV Cache 所需的顯示記憶體容量會呈 $O(N)$ 線性暴增！您的頂級 GPU 顯示卡還沒開始算浮點數，顯示記憶體就被 KV Cache 給擠爆了，引發高昂的推論延遲與伺服器當機。</p><p><strong>孟顧問（Meng）：</strong><br>這就是資訊長最頭痛的「算力折舊與硬體部署成本」。<br>如果為了解決這個問題，把所有 Query 頭強行簡化為共享一個 Key/Value 的 MQA 單頭機制，雖然省了顯示記憶體，但 AI 會變得像喝醉酒一樣，在長文本中丟三落四、理解力嚴重下降。</p><p><strong>陳策略長（Phoenix）：</strong><br>於是，2026 年的主流模型全面引進了「GQA (集群查詢注意力)」這項救星技術。<br>GQA 採用折衷的分組共享機制：它將 Query 頭進行分組，同一分組內共享一組 Key 和 Value。<br>在 Llama 3 或者是鳳凰 AI 的實測中，GQA 成功將 KV Cache 的記憶體頻寬消耗<strong>降低了近 8 倍</strong>，但其預測精準度與原始 MHA 相比，幾乎是零損耗！</p><p>這意味著，同樣是處理 10 萬字文檔，以前您需要租用 8 張 H100 顯示卡；現在利用 GQA 模型，您只需要 1 到 2 張輕量級 GPU，就能跑出同等甚至更流暢的推論速度。這就是我們在頂層架構上，能為企業省下的驚人硬體折舊財務帳。</p><p>---</p>
+                <p><strong>陳策略長（Phoenix）：</strong><br>隨著企業開始在 RAG 中輸入 10 萬字甚至 20 萬字的超長文檔，服務端很快撞上了一堵物理牆——「KV Cache (鍵值快取) 頻寬地獄」。<br>在傳統的 MHA（多頭注意力）機制下，模型每次生成新字，都必須把前面所有歷史詞的 Key 與 Value 矩陣全部塞進顯示卡顯示記憶體（VRAM）中以備實時計算。<br>這導致當上下文變長時，KV Cache 所需的顯示記憶體容量會呈 $O(N)$ 線性暴增！您的頂級 GPU 顯示卡還沒開始算浮點數，顯示記憶體就被 KV Cache 給擠爆了，引發高昂的推論延遲與伺服器當機。</p><p><strong>孟顧問（Meng）：</strong><br>這就是資訊長最頭痛的「算力折舊與硬體部署成本」。<br>如果為了解決這個問題，把所有 Query 頭強行簡化為共享一個 Key/Value 的 MQA 單頭機制，雖然省了顯示記憶體，但 AI 會變得像喝醉酒一樣，在長文本中丟三落四、理解力嚴重下降。</p><p><strong>陳策略長（Phoenix）：</strong><br>於是，2026 年的主流模型全面引進了「GQA (集群查詢注意力)」這項救星技術。<br>GQA 採用折衷的分組共享機制：它將 Query 頭進行分組，同一分組內共享一組 Key 和 Value。<br>GQA 的用意是降低 KV Cache 的記憶體頻寬。不要對學員說這是鳳凰用 Llama 3 實測、降了近 8 倍、而且零損耗。</p><p>實際要幾張顯示卡，看模型、上下文長度與批次大小，不能從這段話推出省下固定比例的硬體折舊。</p><p>---</p>
             </div>
         </div>
 
