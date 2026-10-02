@@ -7,12 +7,12 @@
     "project_index":  "10_Projects/Project-AI-Talent.md",
     "sync_contract":  "99_MOC/Repo-Governance-Sync.md",
     "canonical_hashes":  {
-                             "AGENTS.md":  "87985d486415e0ffbc19735b7c6a7b7534881aa6556594ec6e65a56ccd4e8622",
-                             "99_MOC/README.md":  "d598cf41f21781c714a1f26a06b685ddb3db7935abf9645af09a80e22b6da45c",
-                             "99_MOC/Governance-Rules.md":  "454ab35cdbc3d2e71042b13c31c7203f0959a8c3fa1f27eadefd1eb3e4cd6b70",
-                             "99_MOC/System-MOC.md":  "bc2eb0dada05743abb28f04fefef0e9b95334a36e4a5bdeae5dc561e0915e58b",
-                             "99_MOC/System-Registry.md":  "a2d4cca1c0fe5c27c6e94550f26fa442e80a23a3fb705957502e58ebb2d73b90",
+                             "AGENTS.md":  "de8e61c6e0c410a4268bd003796a041040a381923c42d5918a7dca5e578bb9ba",
+                             "99_MOC/README.md":  "bbc55038ff97241f3f512709697a8f963fdbe0da58142bae5da2cb4e0a16321c",
+                             "99_MOC/Governance-Rules.md":  "2a77fd722b58096f97c41afb6e12d4880ffcc78f7231025c2b83d54a5bbd139c",
+                             "99_MOC/System-MOC.md":  "1297a5c19bd162d04d5bbe681f7c833279ce735a1f70e98ee87604c15758432c",
+                             "99_MOC/System-Registry.md":  "73190a9d6cb9f891397f512da5066f78bf271467f183204cee49eca9720d77c2",
                              "99_MOC/Repo-Governance-Sync.md":  "afb33f96a392361c70a58013b8d030a5c869e0d2a7a6a0dcb0d2a9e463ca1899",
-                             "10_Projects/Project-AI-Talent.md":  "3b31d2b3ffe3e6319b9cbfae4cfd10282f68741e3bc928fec2aee5d3a8d266f1"
+                             "10_Projects/Project-AI-Talent.md":  "57bfa7941c2229a925e225f44e3edb9e7b394bca0ed2636fd1d4e0bcb5bf73ee"
                          }
 }
