@@ -5,8 +5,8 @@
   <meta property="og:url" content="https://03king.com/">
   <meta property="og:image" content="https://03king.com/assets/og-image.png?v=20260810">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="鳳凰 AI 顧問｜2 分鐘短劇看懂事務所 AI｜企業診斷與工作台">
-  <meta name="twitter:description" content="律師期限對不上、會計發票重打、工廠帳實不符。用 2 分鐘短劇看懂我們幫事務所做什麼。合成作品集，不是客戶實績。">
+  <meta name="twitter:title" content="鳳凰 AI 顧問｜AI 不一樣｜企業 AI 導入與實戰培訓">
+  <meta name="twitter:description" content="先看《AI 不一樣》，認識鳳凰 AI 的企業顧問、工具導入與實戰培訓。從需求盤點到可執行的下一步，服務微型、小型到中型企業。">
   <meta name="twitter:image" content="https://03king.com/assets/og-image.png?v=20260810">
 
 <!-- Google Tag Manager -->
@@ -20,10 +20,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鳳凰 AI 顧問｜2 分鐘短劇看懂事務所 AI｜企業診斷與工作台</title>
-  <meta name="description" content="律師期限對不上、會計發票重打、工廠帳實不符。用 2 分鐘短劇看懂鳳凰 AI 幫事務所做什麼，再進工作台。合成作品集，不是客戶實績，不保證成效。">
-  <meta property="og:title" content="鳳凰 AI 顧問｜2 分鐘短劇看懂事務所 AI｜企業診斷與工作台">
-  <meta property="og:description" content="律師期限對不上、會計發票重打、工廠帳實不符。用 2 分鐘短劇看懂我們幫事務所做什麼。合成作品集，不是客戶實績。">
+  <title>鳳凰 AI 顧問｜AI 不一樣｜企業 AI 導入與實戰培訓</title>
+  <meta name="description" content="先看《AI 不一樣》，認識鳳凰 AI 的企業顧問、工具導入與實戰培訓。從需求盤點到可執行的下一步，服務微型、小型到中型企業。">
+  <meta property="og:title" content="鳳凰 AI 顧問｜AI 不一樣｜企業 AI 導入與實戰培訓">
+  <meta property="og:description" content="先看《AI 不一樣》，認識鳳凰 AI 的企業顧問、工具導入與實戰培訓。從需求盤點到可執行的下一步，服務微型、小型到中型企業。">
   <meta property="og:type" content="website">
 
   <!-- ─── Google Fonts ─── -->
@@ -2094,6 +2094,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
+    /* 首頁影音與導覽：版面與狀態分離，避免縮放後殘留 inline 樣式。 */
+    html { scroll-padding-top: 96px; }
+    .nav-container { height: 76px; gap: 28px; }
+    .logo { flex-shrink: 0; white-space: nowrap; letter-spacing: .02em; font-size: 20px; }
+    .nav-links { gap: 24px; }
+    .nav-link, .nav-cta { white-space: nowrap; }
+    .nav-cta { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; }
+    .nav-more { position: relative; }
+    .nav-more summary { cursor: pointer; list-style: none; padding: 12px 0; }
+    .nav-more summary::-webkit-details-marker { display: none; }
+    .nav-more summary::after { content: ' ▾'; }
+    .nav-more-panel { position: absolute; top: 100%; right: 0; width: 240px; padding: 10px; background: var(--phoenix-mid); border: 1px solid var(--glass-border); border-radius: 12px; box-shadow: 0 16px 48px #0008; }
+    .nav-more-panel a { display: block; padding: 12px; border-radius: 6px; color: var(--gray-300); font-size: 14px; }
+    .nav-more-panel a:hover { background: var(--glass-hover); color: var(--white); }
+    .header-nav a:focus-visible, .header-nav summary:focus-visible, .menu-toggle:focus-visible { outline: 2px solid var(--phoenix-teal); outline-offset: 5px; }
+    .menu-toggle { padding: 12px; min-width: 48px; min-height: 48px; justify-content: center; }
+    .hero { padding-top: 128px; padding-bottom: 56px; text-align: left; }
+    .hero-content { max-width: 1200px; display: grid; grid-template-columns: 1fr 1.05fr; grid-template-areas: 'kicker player' 'title player' 'description player' 'actions player' 'proof proof'; gap: 18px 48px; align-items: start; }
+    .hero-content > .badge { grid-area: kicker; justify-self: start; margin: 0; }
+    .hero-title { grid-area: title; font-size: clamp(32px, 3.5vw, 48px); margin: 0; }
+    .hero-description { grid-area: description; font-size: 17px; margin: 0; }
+    .hero-content > .hero-ctas { grid-area: actions; justify-content: flex-start; margin: 4px 0 0; gap: 12px; }
+    .hero-content > .stats-grid { grid-area: proof; margin-top: 32px; }
+    .hero-video { grid-area: player; min-width: 0; border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; background: var(--phoenix-mid); }
+    .hero-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+    .hero-video-copy { padding: 18px 22px; }
+    .hero-video-copy p { color: var(--gray-400); font-size: 14px; margin: 8px 0 12px; }
+    .hero-video-copy a { color: var(--phoenix-teal); font-size: 14px; }
+    .hero-video-label { font-size: 12px; color: var(--phoenix-gold); letter-spacing: .1em; margin-bottom: 8px; }
+    @media (max-width: 1100px) {
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; width: 100%; max-height: calc(100dvh - 76px); overflow-y: auto; flex-direction: column; align-items: stretch; gap: 4px; background: var(--phoenix-dark); padding: 20px 24px; border-bottom: 1px solid var(--glass-border); }
+      .nav-links.active { display: flex; }
+      .nav-links > .nav-link { padding: 12px; }
+      .menu-toggle { display: flex; }
+      .nav-more summary { padding: 12px; }
+      .nav-more-panel { position: static; width: 100%; box-shadow: none; }
+      .nav-cta { justify-content: center; margin-top: 8px; }
+    }
+    @media (max-width: 768px) {
+      .nav-container { height: 68px; }
+      .logo { font-size: 18px; }
+      .nav-links { top: 68px; max-height: calc(100dvh - 68px); }
+      .hero { padding-top: 96px; padding-bottom: 40px; }
+      .hero-content { grid-template-columns: 1fr; grid-template-areas: 'kicker' 'title' 'player' 'description' 'actions' 'proof'; gap: 16px; }
+      .hero-title { font-size: 30px; }
+      .hero-description { font-size: 15px; }
+      .hero-video-copy { padding: 14px 16px; }
+      .hero-content > .stats-grid { margin-top: 16px; }
+    }
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"誰在搞鬼？第一季《律所裡的那隻手》第1集 期限危機","description":"律師期限對不上、卷宗對不到。用 2 分鐘短劇看懂鳳凰 AI 怎麼幫事務所集中紀錄與覆核。合成作品集，不是客戶實績，不保證成效。","thumbnailUrl":"https://i.ytimg.com/vi/NwJ1QjsJBpI/hqdefault.jpg","embedUrl":"https://www.youtube.com/embed/NwJ1QjsJBpI","url":"https://03king.com/#stories","inLanguage":"zh-Hant"}</script>
 </head>
@@ -2112,21 +2161,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="logo-symbol">🔥</span>
         <span>鳳凰 AI 顧問</span>
       </a>
-      <nav class="nav-links">
-        <a href="#home" class="nav-link">首頁</a>
-        <a href="#stories" class="nav-link">短劇</a>
-        <a href="#diagnostic" class="nav-link">成熟度快測</a>
-        <a href="#flagship-system" class="nav-link">AI 系統展示</a>
-        <a href="./services/enterprise-rag-foundation.html" class="nav-link">企業 RAG</a>
-        <a href="./diagnostic-workbench/index.html" class="nav-link">診斷工作台</a>
-        <a href="#curriculum" class="nav-link">全景課程</a>
-        <a href="#commercial-modules" class="nav-link">商業實戰模組</a>
+      <nav class="nav-links" id="primary-navigation" aria-label="主要導覽">
+        <a href="#ai-different" class="nav-link">AI 不一樣</a>
+        <a href="#flagship-system" class="nav-link">AI 解決方案</a>
+        <a href="#curriculum" class="nav-link">企業課程</a>
         <a href="#team" class="nav-link">顧問團隊</a>
-        <a href="#pricing" class="nav-link">服務方案</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="nav-cta">索取 Notion 工具包</a>
-        <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:8px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
+        <details class="nav-more">
+          <summary class="nav-link">更多資源</summary>
+          <div class="nav-more-panel">
+            <a href="#pricing">服務方案</a>
+            <a href="#diagnostic">AI 成熟度快測</a>
+            <a href="./services/enterprise-rag-foundation.html">企業 RAG</a>
+            <a href="./diagnostic-workbench/index.html">診斷工作台</a>
+            <a href="#commercial-modules">商業實戰模組</a>
+            <a href="#stories">誰在搞鬼？短劇作品集</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" rel="noopener noreferrer">索取 Notion 工具包</a>
+          </div>
+        </details>
+        <a href="./contact.html" class="nav-cta">洽詢 AI 導入</a>
       </nav>
-      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="切換選單">
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="開啟導覽選單" aria-controls="primary-navigation" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -2140,29 +2194,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-glow-2"></div>
     <div class="container hero-content">
       <div class="badge badge-accent">
-        <span>🦅 鳳凰 AI 顧問團隊｜產官學講師經歷 × 法人培訓實戰</span>
+        <span>鳳凰 AI｜企業顧問・工具導入・實戰培訓</span>
       </div>
       <h1 class="hero-title">
-        <span class="text-gradient">30 天內完成 AI 落地盤點</span><br>
-        <span>收斂出 90 天可執行的 Quick-Win 路線圖</span>
+        <span class="text-gradient">AI 不一樣。</span><br>
+        <span>先看懂，再用對。</span>
       </h1>
+      <div class="hero-video" id="ai-different">
+        <iframe title="AI不一樣 EP07：別當神仙，當肉盾" src="https://www.youtube-nocookie.com/embed/G_k9EWTFE5w?playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="hero-video-copy">
+          <div class="hero-video-label">AI 不一樣 · EP07 · 3:20</div>
+          <h2 style="font-size:20px;line-height:1.4">別當神仙，當肉盾。</h2>
+          <p>先用一集認識我們看 AI 的角度，再一起討論你的企業該從哪一步開始。</p>
+          <a href="https://www.youtube.com/watch?v=G_k9EWTFE5w" target="_blank" rel="noopener noreferrer">在 YouTube 觀看 ↗</a>
+        </div>
+      </div>
       <p class="hero-description">
-        服務<strong>微型、小型到中型企業</strong>，也服務還沒有專職轉型長的公司。不以員工人數當入場券，依需求、準備度與預算分流。憑藉 <strong>10 餘年跨國與本土企業輔導經驗</strong>，我們協助企業精算 TCO 與 ROI、用對齊 <strong>ISO/IEC 42001</strong> 的方法做治理與變革管理，避開盲目自建 RAG，把落地做成可驗收的步驟。
+        工具很多，企業真正需要的是<strong>把問題變成可執行的下一步</strong>。從需求盤點、AI 工具導入到團隊培訓，我們陪微型、小型到中型企業，把 AI 放進日常工作，而不只停在展示。
       </p>
       
       <div class="hero-ctas">
-        <a href="#stories" class="btn btn-primary">
-          <span>2 分鐘看我們在做什麼</span>
+        <a href="#ai-different" class="btn btn-primary">
+          <span>先看《AI 不一樣》</span>
         </a>
         <a href="#flagship-system" class="btn btn-secondary">
-          <span>查看旗艦 AI 系統</span>
+          <span>了解 AI 解決方案</span>
         </a>
-        <a href="#diagnostic" class="btn btn-secondary">
-          <span>📊 立即進行 AI 成熟度快測</span>
-          <span style="font-size: 13px;">(5 題/ 2 分鐘)</span>
-        </a>
-        <div class="hero-tertiary-wrap"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfGlE4m-Tgg2AXcIGRy90jNuroTnt8ZGwB8r0E35msJIPw_xA/viewform" target="_blank" class="hero-tertiary-link">📥 索取 Notion + Excel 工具包</a></div>
-        <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-top:10px;">點擊提交表單即表示您已詳閱並同意<a href="./privacy.html">《個人資料保護與隱私權政策告知書》</a></p>
+
       </div>
 
       <!-- 數據指標 -->
@@ -5239,40 +5297,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
-    mobileMenuToggle.addEventListener('click', function() {
-      this.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      if (navLinks.classList.contains('active')) {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '80px';
-        navLinks.style.left = '0';
-        navLinks.style.width = '100%';
-        navLinks.style.background = 'rgba(11, 11, 22, 0.95)';
-        navLinks.style.padding = '24px';
-        navLinks.style.borderBottom = '1px solid var(--glass-border)';
-      } else {
-        navLinks.style.display = 'none';
-      }
+    function closeNavigation(restoreFocus = false) {
+      navLinks.classList.remove('active');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      mobileMenuToggle.setAttribute('aria-label', '開啟導覽選單');
+      navLinks.querySelectorAll('details').forEach(item => item.open = false);
+      if (restoreFocus) mobileMenuToggle.focus();
+    }
+    mobileMenuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      mobileMenuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenuToggle.setAttribute('aria-label', open ? '關閉導覽選單' : '開啟導覽選單');
     });
-
-    // 監聽窗口大小調整，防止在拉大視窗時選單消失
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'row';
-        navLinks.style.position = 'static';
-        navLinks.style.width = 'auto';
-        navLinks.style.background = 'none';
-        navLinks.style.padding = '0';
-        navLinks.style.borderBottom = 'none';
-        mobileMenuToggle.classList.remove('active');
-        navLinks.classList.remove('active');
-      } else if (!navLinks.classList.contains('active')) {
-        navLinks.style.display = 'none';
-      }
+    navLinks.addEventListener('click', event => {
+      if (event.target.closest('a')) closeNavigation();
     });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeNavigation(window.innerWidth <= 1100);
+    });
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.header-nav')) closeNavigation();
+    });
+    window.matchMedia('(max-width: 1100px)').addEventListener('change', () => closeNavigation());
   </script>
   <!-- ─── 企業標竿案例數據庫 ─── -->
   <script src="./cases/cases_data.js"></script>

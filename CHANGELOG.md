@@ -2,6 +2,16 @@
 
 本文件記錄「2026 企業 AI 人才培育開源專案」教材重構、自動化校對與開源工程的變更歷史。
 
+## [2026-10-08] 首頁 EP07 與導覽改版
+
+- 頂欄收斂為 AI 不一樣、AI 解決方案、企業課程、顧問團隊、更多資源及洽詢 CTA；原入口保留於資源選單。
+- 品牌／選單／CTA 禁止換行；1100px 以下切換選單。支援展開狀態、Escape、點連結／外部關閉及跨斷點重設。
+- 首屏 A1 左定位右 EP07；手機標題後立即呈現播放器；保留舊短劇區與表單旁告知，更新首頁分享敘事。
+- 驗證：7 個尺寸無橫向溢出、影片在首屏；8 個 inline JS 語法檢查通過；瀏覽器 pageerror 0；EP07 點擊後 currentTime > 1、paused=false、readyState=4。未完整播放全片，未驗證所有集數。
+- npm run test 為既有未配置測試 stub，exit 1；本輪以實際 Chrome 自動化驗證補足，不宣稱 npm 測試通過。
+- Owner 已驗收並核准本輪 commit、push 與發布；僅包含首頁與本紀錄。全系列館與獨立集頁仍未實作。未動既有 dirty 或價格／課程／表單端點。
+- 可複跑證據：C:/Users/m1016/AppData/Local/hermes/cache/scratch/ai-different-site-plan-20261008/verify_home_nav.py；C:/Users/m1016/AppData/Local/hermes/cache/scratch/ai-different-site-plan-20261008/HOME-NAV-TEST-RESULTS.json。
+
 ---
 
 ## [2026-09-28] 跨單元案例數字對齊
