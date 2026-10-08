@@ -1,2 +1,16 @@
 title: "🚀 2026 企業級 AI 營運落地與人才培育開源框架"
 description: "Enterprise AI Talent Framework & Operating Model (v2026)。"
+# 內部工作文件與來源檔不發布（2026-08-11 EVT-193）
+# 目的：避免來源檔產生平行公開副本、避免客戶可識別資訊經 docs/scripts 路徑外洩
+# 注意：不可排除 systems/（站內共用 CSS）、assets/、curriculum/templates/（首頁示範連結）
+exclude:
+  - docs
+  - cases/markdown
+  - scripts
+  - records
+  - scratch
+  - open_source_planning
+  - incubator
+  - public_release
+  - marketing_drafts
+  - node_modules
