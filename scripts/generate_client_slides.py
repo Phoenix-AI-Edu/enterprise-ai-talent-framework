@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-🦅 鳳凰 AI - 恆達精密客製化簡報自動生成器 (Henda Slides Generator) ➔ 終極互動高保真重構版
+🦅 鳳凰 AI - 汽車扣件廠客製化簡報自動生成器 (Henda Slides Generator) ➔ 終極互動高保真重構版
 ----------------------------------------------------------------------------------
 作用：在本地 slides/henda/ 目錄下，全量生成符合 /huashu-design 規範的
       12 頁 Obsidian Midnight 奢華風格高保真 HTML 簡報，原生整合：
@@ -222,13 +222,13 @@ footer = """
 </html>
 """
 
-# Slide 01: Cover (極致奢華標題頁，專屬恆達與洪董事長)
+# Slide 01: Cover (極致奢華標題頁，專屬扣件廠與董事長)
 cover_html = """<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>恆達精密專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案</title>
+    <title>汽車扣件廠專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -357,18 +357,18 @@ cover_html = """<!DOCTYPE html>
         <div class="hero">
             <div class="client-tag animate-fade delay-1">HENDAR PRECISION FASTENERS</div>
             <h1 class="title animate-fade delay-2">
-                恆達精密扣件專屬<br>
+                汽車扣件廠扣件專屬<br>
                 <span>2026 鳳凰 AI</span> 企業級營運落地<br>
                 與人才培育課程方案
             </h1>
             <p class="subtitle animate-fade delay-3">
-                針對高雄岡山螺絲聚落「高噪、滿手油污、車規零容錯」極端產線客製。全面實施「無痛去技術化、客製情境化、國際出口合規與政策轉化」重構，協助貴公司建立剛性競爭力。
+                針對高雄南部產地螺絲聚落「高噪、滿手油污、車規零容錯」極端產線客製。全面實施「無痛去技術化、客製情境化、國際出口合規與政策轉化」重構，協助貴公司建立剛性競爭力。
             </p>
         </div>
         <div class="footer animate-fade delay-3">
             <div class="meta-group">
                 <span class="meta-label">Prepared For ｜ 致</span>
-                <span class="meta-value">洪建國 董事長暨總經理 閣下 <span>恆達精密扣件 (岡山螺絲大廠 / 數百人規模)</span></span>
+                <span class="meta-value">洪建國 董事長暨總經理 閣下 <span>汽車扣件廠扣件 (南部產地螺絲大廠 / 數百人規模)</span></span>
             </div>
             <div class="meta-group" style="padding-left: 60px; border-left: 1px solid rgba(255,255,255,0.08);">
                 <span class="meta-label">Presented By ｜ 由</span>
@@ -386,7 +386,7 @@ intro_body = """
         <!-- 左欄：大膽的核心承諾卡片 -->
         <div class="panel animate-fade delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 5px solid var(--primary-accent);">
             <div>
-                <h3 class="panel-title">恆達精密專屬 ｜ 實事求是的承諾</h3>
+                <h3 class="panel-title">汽車扣件廠專屬 ｜ 實事求是的承諾</h3>
                 <div style="font-size: 22px; color: #FFF; line-height: 1.75; display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
                     <p style="font-size: 28px; font-weight: 900; color: var(--primary-accent); line-height: 1.4;">
                         「我們不跟黑手師傅講虛無縹緲的 AI 理論，我們直接對齊產線保命的痛點！」
@@ -412,7 +412,7 @@ intro_body = """
                     <div style="display: flex; flex-direction: column; gap: 18px; margin-top: 15px;">
                         <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
                             <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">🛠️ 01. 現場落地性 ─ 解放雙手</strong>
-                            語音 AI 徹底解放雙手，岡山口音專用語意詞庫，85dB 高噪拾音（識別率 &ge; 92%）。
+                            語音 AI 徹底解放雙手，南部產地口音專用語意詞庫，85dB 高噪拾音（識別率 &ge; 92%）。
                         </div>
                         <div class="interactive-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 18px 24px; border-radius: 12px; font-size: 19px; line-height: 1.6; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#00F2FE'; this.style.boxShadow='0 0 15px rgba(0,242,254,0.2)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='none';">
                             <strong style="color: var(--secondary-accent); font-size: 21px; display: block; margin-bottom: 4px;">💰 02. 財務控本性 ─ 輕量 API</strong>
@@ -545,7 +545,7 @@ module2_1_body = """
             </div>
             
             <div class="bottom-alert">
-                <strong>💡 岡山國語與日式術語微調：</strong> 收錄「si-to-ma (檔塊)」、「ゲージ (Gauge)」等外來語，<strong>語意識別率 &ge; 92%</strong>！
+                <strong>💡 南部產地國語與日式術語微調：</strong> 收錄「si-to-ma (檔塊)」、「ゲージ (Gauge)」等外來語，<strong>語意識別率 &ge; 92%</strong>！
             </div>
         </div>
         
@@ -674,7 +674,7 @@ module2_2_body = """
             </div>
             
             <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
-                <strong>💡 岡山國語優勢：</strong> 無痛降噪與術語微調，消除了一線藍領移工與師傅對新設備的抗拒心理。
+                <strong>💡 南部產地國語優勢：</strong> 無痛降噪與術語微調，消除了一線藍領移工與師傅對新設備的抗拒心理。
             </div>
         </div>
     </div>
@@ -696,7 +696,7 @@ module2_2_body = """
             C: {
                 title: "場景 C ｜ 現場歷史障礙快速語音問答",
                 input: "「師傅問：『SUS304 不鏽鋼搓牙崩牙怎麼辦？』」",
-                rag: "檢索歷史排障報告 ➔ 提取 2025.10 岡山廠搓牙事故 ➔ 判定崩牙肇因。",
+                rag: "檢索歷史排障報告 ➔ 提取 2025.10 該廠搓牙事故 ➔ 判定崩牙肇因。",
                 output: "🔊 「師傅，根據三個月前紀錄，建議將滾牙輪轉速調降 5%，並改用極壓型二號成型油。」"
             }
         };
@@ -1128,7 +1128,7 @@ module7_body = """
         
         <!-- 下排：變革管理時間軸 (點擊交互更新內容) -->
         <div class="panel animate-fade delay-3" style="display: flex; flex-direction: column; justify-content: space-between; padding: 25px 35px;">
-            <h4 style="font-size: 22px; color: var(--secondary-accent); font-weight: 800;" id="timelineTitle">📅 恆達變革時間線 ─ 第一階段 ｜ 溝通期 (點擊切換階段)</h4>
+            <h4 style="font-size: 22px; color: var(--secondary-accent); font-weight: 800;" id="timelineTitle">📅 扣件廠變革時間線 ─ 第一階段 ｜ 溝通期 (點擊切換階段)</h4>
             
             <!-- 水平按鈕時間線 -->
             <div style="display: flex; justify-content: space-between; align-items: center; position: relative; margin-top: 10px;">
@@ -1157,28 +1157,28 @@ module7_body = """
     <script>
         const timelineData = {
             1: {
-                title: "📅 恆達變革時間線 ─ 第一階段 ｜ 溝通期",
+                title: "📅 扣件廠變革時間線 ─ 第一階段 ｜ 溝通期",
                 node1: "宣示不裁員、召集大會",
                 node2: "移工種子教練挑選",
                 node3: "首條冷鍛線試跑吐槽",
                 node4: "同儕激勵、發放獎金"
             },
             2: {
-                title: "📅 恆達變革時間線 ─ 第二階段 ｜ 培訓與四語部署",
+                title: "📅 扣件廠變革時間線 ─ 第二階段 ｜ 培訓與四語部署",
                 node1: "越南/泰國/印尼手冊印製",
                 node2: "🚀 15名移工種子教練上崗",
                 node3: "宿舍交誼廳微視頻輪播",
                 node4: "班長與教練對齊獎金機制"
             },
             3: {
-                title: "📅 恆達變革時間線 ─ 第三階段 ｜ 試跑與容錯調整",
+                title: "📅 扣件廠變革時間線 ─ 第三階段 ｜ 試跑與容錯調整",
                 node1: "允許出錯、鼓勵現場改動",
                 node2: "每週召開「槽點檢討大會」",
                 node3: "🚀 滾牙/打頭線試點修正",
-                node4: "AI 詞典岡山腔二次微調"
+                node4: "AI 詞典南部產地腔二次微調"
             },
             4: {
-                title: "📅 恆達變革時間線 ─ 第四階段 ｜ 內化與績效激勵",
+                title: "📅 扣件廠變革時間線 ─ 第四階段 ｜ 內化與績效激勵",
                 node1: "AI操作納入月度績效考核",
                 node2: "種子教練進度完成檢閱",
                 node3: "全廠冷鍛打頭線橫向鋪開",
@@ -1219,7 +1219,7 @@ roadmap_html = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鳳凰 AI 恆達專案升級與改進時程</title>
+    <title>鳳凰 AI 扣件廠專案升級與改進時程</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -1372,7 +1372,7 @@ roadmap_html = """<!DOCTYPE html>
     <div class="glow-radial"></div>
     <div class="slide-header">
         <div>
-            <div class="module-num">ROADMAP ｜ 恆達專案升級與改進時程</div>
+            <div class="module-num">ROADMAP ｜ 扣件廠專案升級與改進時程</div>
             <h2 class="slide-title">鳳凰 AI 顧問團隊誠信自我檢視與升級行動時程表 (v2026.Q2-Q3)</h2>
         </div>
         <div class="brand-watermark">PHOENIX AI CONSULTING</div>
@@ -1403,12 +1403,12 @@ roadmap_html = """<!DOCTYPE html>
                 </div>
             </div>
             <div class="bottom-alert" style="border-left-color: var(--primary-accent);">
-                <strong>💡 誠信承諾：</strong> 與恆達合作的精華成果，我們將於 Q3 前全量開源併入公版框架。
+                <strong>💡 誠信承諾：</strong> 與扣件廠合作的精華成果，我們將於 Q3 前全量開源併入公版框架。
             </div>
         </div>
         <div class="panel right animate-fade delay-2">
             <div>
-                <h3 class="panel-title purple">2. 鳳凰 AI 恆達專案升級行動時程表</h3>
+                <h3 class="panel-title purple">2. 鳳凰 AI 扣件廠專案升級行動時程表</h3>
                 <div class="gantt-box">
                     <div>
                         <div class="gantt-header">
@@ -1423,7 +1423,7 @@ roadmap_html = """<!DOCTYPE html>
                                 <div class="bar-container"><div class="gantt-bar t1">進行中 ｜ ACTIVE</div></div>
                             </div>
                             <div class="gantt-row">
-                                <div class="task-name">2. 恆達 C-Suite 方案 B 實戰工作坊啟動</div>
+                                <div class="task-name">2. 扣件廠 C-Suite 方案 B 實戰工作坊啟動</div>
                                 <div class="bar-container"><div class="gantt-bar t2">進行中</div></div>
                             </div>
                             <div class="gantt-row">
@@ -1457,7 +1457,7 @@ next_steps_html = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>恆達精密專案推進下一步行動指引</title>
+    <title>汽車扣件廠專案推進下一步行動指引</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -1580,7 +1580,7 @@ next_steps_html = """<!DOCTYPE html>
     <div class="slide-header">
         <div>
             <div class="module-num">NEXT STEPS ｜ 下一步專案推進指引</div>
-            <h2 class="slide-title">恆達精密專案推進下一步行動指引 (Next Steps)</h2>
+            <h2 class="slide-title">汽車扣件廠專案推進下一步行動指引 (Next Steps)</h2>
         </div>
         <div class="brand-watermark">PHOENIX AI CONSULTING</div>
     </div>
@@ -1590,7 +1590,7 @@ next_steps_html = """<!DOCTYPE html>
                 <span class="step-badge">ACTION 01</span>
                 <h3 class="step-title">正式啟動 ｜ 企業 AI 一頁式戰術畫布實戰工作坊</h3>
                 <p class="step-desc">
-                    帶領恆達董事長、廠長與核心幕僚，利用「4+1 戰術畫布」在 1 天內盤點並確立 <span class="highlight">20 大 AI 潛力落地場景</span>。<br><br>
+                    帶領扣件廠董事長、廠長與核心幕僚，利用「4+1 戰術畫布」在 1 天內盤點並確立 <span class="highlight">20 大 AI 潛力落地場景</span>。<br><br>
                     現場計算 Buy vs. Build vs. Rent 財務可行性，快速篩選出高回收的 <strong>Quick-Win 首發試點專案</strong>。
                 </p>
             </div>
@@ -1616,8 +1616,8 @@ next_steps_html = """<!DOCTYPE html>
                 <span class="step-badge">ACTION 03</span>
                 <h3 class="step-title">特惠折抵 ｜ 品牌加速夥伴專屬折抵機制</h3>
                 <p class="step-desc">
-                    本案適用恆達專屬的 <span class="highlight">「品牌加速夥伴特惠折抵機制」</span>。<br><br>
-                    工作坊順利完成後，若恆達精密決定委託我們進行後續的「90天 AI 落地變革管理陪跑輔導」，本工作坊之全部費用將可 <strong>100% 全額折抵</strong> 陪跑專案款項！
+                    本案適用扣件廠專屬的 <span class="highlight">「品牌加速夥伴特惠折抵機制」</span>。<br><br>
+                    工作坊順利完成後，若汽車扣件廠決定委託我們進行後續的「90天 AI 落地變革管理陪跑輔導」，本工作坊之全部費用將可 <strong>100% 全額折抵</strong> 陪跑專案款項！
                 </p>
             </div>
             <div class="step-footer-link">
@@ -1638,7 +1638,7 @@ index_html = """<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>恆達精密扣件專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案</title>
+<title>汽車扣件廠扣件專屬：2026 鳳凰 AI 企業級營運落地與人才培育課程方案</title>
 <script>
   window.DECK_MANIFEST = [
     { file: "01-cover.html",       label: "方案封面 (Cover)" },

@@ -2,14 +2,14 @@
 """
 🦅 鳳凰 AI - 簡報易讀性與對比度優化腳本 (Slides Visibility Enhancer)
 --------------------------------------------------------------
-作用：讀取 generate_henda_slides.py，大幅提升字體大小、對比度，消除所有暗灰色小字。
+作用：讀取 generate_client_slides.py，大幅提升字體大小、對比度，消除所有暗灰色小字。
       確保在 1920x1080 投影片觀看時，字體極其清晰亮麗、具有頂級商業大氣感。
 """
 
 import codecs
 import re
 
-file_path = "scripts/generate_henda_slides.py"
+file_path = "scripts/generate_client_slides.py"
 
 with codecs.open(file_path, "r", "utf-8") as f:
     content = f.read()
@@ -64,4 +64,4 @@ content = content.replace("padding: 24px;", "padding: 30px;")
 with codecs.open(file_path, "w", "utf-8") as f:
     f.write(content)
 
-print("🦅 generate_henda_slides.py 字體清晰度與對比度優化完成！")
+print("🦅 generate_client_slides.py 字體清晰度與對比度優化完成！")

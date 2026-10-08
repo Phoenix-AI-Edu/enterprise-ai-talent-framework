@@ -17,7 +17,7 @@ Agent 會自動在以下路徑尋找並讀取 `.env` 檔案：
 
 #### (A) 針對現有客戶建议書生成全渠道行銷內容
 ```bash
-# 生成 henda (恆達精密) 的所有渠道文案
+# 生成 henda (汽車扣件廠) 的所有渠道文案
 python scripts/marketing_agent.py --client henda --platforms all
 ```
 

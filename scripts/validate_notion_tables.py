@@ -125,13 +125,13 @@ def main():
     log_banner()
     
     cases = [
-        {"key": "okayama_fastener", "file": "scripts/proposal_okayama_fastener.md", "name": "PHX-001 PMC 岡山扣件廠 (振豐精密)"},
-        {"key": "okayama_forge", "file": "scripts/proposal_okayama_forge.md", "name": "PHX-021 冷鍛模具崩損岡山廠 (隆達精密)"},
-        {"key": "okayama_heat", "file": "scripts/proposal_okayama_heat.md", "name": "PHX-022 高強度熱處理離線廠 (宏達熱處理)"},
-        {"key": "okayama_cbam", "file": "scripts/proposal_okayama_cbam.md", "name": "PHX-023 航太扣件歐盟CBAM (吉翔航太)"},
+        {"key": "okayama_fastener", "file": "scripts/proposal_okayama_fastener.md", "name": "PHX-001 PMC 扣件廠 (扣件廠 A)"},
+        {"key": "okayama_forge", "file": "scripts/proposal_okayama_forge.md", "name": "PHX-021 冷鍛模具崩損該廠 (扣件廠 B)"},
+        {"key": "okayama_heat", "file": "scripts/proposal_okayama_heat.md", "name": "PHX-022 高強度熱處理離線廠 (熱處理廠 A)"},
+        {"key": "okayama_cbam", "file": "scripts/proposal_okayama_cbam.md", "name": "PHX-023 航太扣件歐盟CBAM (航太扣件廠)"},
         {"key": "okayama_filter", "file": "scripts/proposal_okayama_filter.md", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
         {"key": "okayama_electroplate", "file": "scripts/proposal_okayama_electroplate.md", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
-        {"key": "luzhu_coldheading", "file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 路竹冷鐓停機預警 (龍門冷鐓)"},
+        {"key": "luzhu_coldheading", "file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 南部產地冷鐓停機預警 (龍門冷鐓)"},
         {"key": "okayama_barcode", "file": "scripts/proposal_okayama_barcode.md", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
         {"key": "okayama_sbir", "file": "scripts/proposal_okayama_sbir.md", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}
     ]

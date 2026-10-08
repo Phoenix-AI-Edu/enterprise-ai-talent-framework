@@ -113,3 +113,6 @@ private-commercial/
 # Instructor handbooks are private. Do not republish.
 curriculum/**/instructor_guide.html
 scripts/encrypt_instructor_guides.py
+
+# 客戶去識別對照工具（含真實客戶名，禁止進公開 repo）
+fix_all.py

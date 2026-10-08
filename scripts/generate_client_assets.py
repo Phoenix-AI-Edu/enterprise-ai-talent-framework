@@ -226,13 +226,13 @@ def main():
         
     # 待處理的 11 個企業客戶
     clients = [
-        {"key": "dingsheng", "name": "鼎盛精密工業 (dingsheng)"},
-        {"key": "luzhu_coldheading", "name": "龍門冷鐓精密扣件 (luzhu_coldheading)"},
-        {"key": "mingchadao", "name": "明茶道 (mingchadao)"},
-        {"key": "okayama_fastener", "name": "振豐精密 (okayama_fastener)"},
-        {"key": "okayama_forge", "name": "隆達精密 (okayama_forge)"},
-        {"key": "okayama_heat", "name": "宏達熱處理 (okayama_heat)"},
-        {"key": "okayama_cbam", "name": "吉翔航太 (okayama_cbam)"},
+        {"key": "dingsheng", "name": "精密機械廠 A"},
+        {"key": "luzhu_coldheading", "name": "冷鐓扣件廠"},
+        {"key": "mingchadao", "name": "連鎖茶飲集團"},
+        {"key": "okayama_fastener", "name": "扣件廠 A"},
+        {"key": "okayama_forge", "name": "扣件廠 B"},
+        {"key": "okayama_heat", "name": "熱處理廠 A"},
+        {"key": "okayama_cbam", "name": "航太扣件廠"},
         {"key": "okayama_filter", "name": "聯發光學 (okayama_filter)"},
         {"key": "okayama_electroplate", "name": "某電鍍加工廠 (okayama_electroplate)"},
         {"key": "okayama_barcode", "name": "興達包裝 (okayama_barcode)"},

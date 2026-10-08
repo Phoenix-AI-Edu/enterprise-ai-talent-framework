@@ -2,14 +2,14 @@
 """
 🦅 鳳凰 AI - 手機旋轉智能提示遮罩添加器
 -------------------------------------------
-作用：讀取 generate_henda_slides.py，為 index.html 及所有投影片模板
+作用：讀取 generate_client_slides.py，為 index.html 及所有投影片模板
       原生注入基於 CSS Media Queries 的「手機直向轉橫向智能提示遮罩」，
       完美提升手機端的 C-Suite 觀看體驗。
 """
 
 import codecs
 
-file_path = "scripts/generate_henda_slides.py"
+file_path = "scripts/generate_client_slides.py"
 
 with codecs.open(file_path, "r", "utf-8") as f:
     content = f.read()
@@ -104,4 +104,4 @@ content = content.replace(
 with codecs.open(file_path, "w", "utf-8") as f:
     f.write(content)
 
-print("🦅 [Success] 智能手機旋轉遮罩已注入 generate_henda_slides.py 程式源碼！")
+print("🦅 [Success] 智能手機旋轉遮罩已注入 generate_client_slides.py 程式源碼！")

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-batch_init_okayama.py — 鳳凰 AI B2B 首期 Phase A (岡山精密製造集群) 批次去識別化與 Master Prompt 生成
+batch_init_fastener_cluster.py — 鳳凰 AI B2B 首期 Phase A (南部精密製造集群) 批次去識別化與 Master Prompt 生成
 ========================================================================
 This script batch-initializes the 9 Okayama/Luzhu precision manufacturing cases.
 It executes `phoenix_b2b_pipeline.py init` on each case, generating clean text 
@@ -27,13 +27,13 @@ def main():
     
     # 9 cases dictionary with client_key and raw_path
     cases = [
-        {"key": "okayama_fastener", "path": "scripts/raw_okayama_fastener.txt", "name": "PHX-001 PMC 岡山扣件廠 (振豐精密)"},
-        {"key": "okayama_forge", "path": "scripts/raw_okayama_forge.txt", "name": "PHX-021 冷鍛模具崩損岡山廠 (隆達精密)"},
-        {"key": "okayama_heat", "path": "scripts/raw_okayama_heat.txt", "name": "PHX-022 高強度熱處理離線廠 (宏達熱處理)"},
-        {"key": "okayama_cbam", "path": "scripts/raw_okayama_cbam.txt", "name": "PHX-023 航太扣件歐盟CBAM (吉翔航太)"},
+        {"key": "okayama_fastener", "path": "scripts/raw_okayama_fastener.txt", "name": "PHX-001 PMC 扣件廠 (扣件廠 A)"},
+        {"key": "okayama_forge", "path": "scripts/raw_okayama_forge.txt", "name": "PHX-021 冷鍛模具崩損該廠 (扣件廠 B)"},
+        {"key": "okayama_heat", "path": "scripts/raw_okayama_heat.txt", "name": "PHX-022 高強度熱處理離線廠 (熱處理廠 A)"},
+        {"key": "okayama_cbam", "path": "scripts/raw_okayama_cbam.txt", "name": "PHX-023 航太扣件歐盟CBAM (航太扣件廠)"},
         {"key": "okayama_filter", "path": "scripts/raw_okayama_filter.txt", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
         {"key": "okayama_electroplate", "path": "scripts/raw_okayama_electroplate.txt", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
-        {"key": "luzhu_coldheading", "path": "scripts/raw_luzhu_coldheading.txt", "name": "PHX-026 路竹冷鐓停機預警 (龍門冷鐓)"},
+        {"key": "luzhu_coldheading", "path": "scripts/raw_luzhu_coldheading.txt", "name": "PHX-026 南部產地冷鐓停機預警 (龍門冷鐓)"},
         {"key": "okayama_barcode", "path": "scripts/raw_okayama_barcode.txt", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
         {"key": "okayama_sbir", "path": "scripts/raw_okayama_sbir.txt", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}
     ]

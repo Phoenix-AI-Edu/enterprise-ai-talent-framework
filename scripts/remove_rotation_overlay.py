@@ -2,13 +2,13 @@
 """
 🦅 鳳凰 AI - 手機旋轉提示遮罩移除器
 -------------------------------------------
-作用：讀取 generate_henda_slides.py，移除所有的手機旋轉提示遮罩，
+作用：讀取 generate_client_slides.py，移除所有的手機旋轉提示遮罩，
       讓手機用戶可以直接自由觀看投影片，並配合原生的 fit() 自適應縮放機制。
 """
 
 import codecs
 
-file_path = "scripts/generate_henda_slides.py"
+file_path = "scripts/generate_client_slides.py"
 
 with codecs.open(file_path, "r", "utf-8") as f:
     content = f.read()
@@ -89,4 +89,4 @@ content = content.replace("<div id=\"mobile-rotate-overlay\">\n        <div styl
 with codecs.open(file_path, "w", "utf-8") as f:
     f.write(content)
 
-print("🦅 [Success] 手機旋轉提示遮罩已從 generate_henda_slides.py 中乾淨移除！")
+print("🦅 [Success] 手機旋轉提示遮罩已從 generate_client_slides.py 中乾淨移除！")

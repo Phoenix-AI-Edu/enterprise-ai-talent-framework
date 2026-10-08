@@ -87,13 +87,13 @@ def main():
     log_banner()
     
     cases = [
-        {"file": "scripts/proposal_okayama_fastener.md", "name": "PHX-001 PMC 岡山扣件廠 (振豐精密)"},
-        {"file": "scripts/proposal_okayama_forge.md", "name": "PHX-021 冷鍛模具崩損岡山廠 (隆達精密)"},
-        {"file": "scripts/proposal_okayama_heat.md", "name": "PHX-022 高強度熱處理離線廠 (宏達熱處理)"},
-        {"file": "scripts/proposal_okayama_cbam.md", "name": "PHX-023 航太扣件歐盟CBAM (吉翔航太)"},
+        {"file": "scripts/proposal_okayama_fastener.md", "name": "PHX-001 PMC 扣件廠 (扣件廠 A)"},
+        {"file": "scripts/proposal_okayama_forge.md", "name": "PHX-021 冷鍛模具崩損該廠 (扣件廠 B)"},
+        {"file": "scripts/proposal_okayama_heat.md", "name": "PHX-022 高強度熱處理離線廠 (熱處理廠 A)"},
+        {"file": "scripts/proposal_okayama_cbam.md", "name": "PHX-023 航太扣件歐盟CBAM (航太扣件廠)"},
         {"file": "scripts/proposal_okayama_filter.md", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
         {"file": "scripts/proposal_okayama_electroplate.md", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
-        {"file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 路竹冷鐓停機預警 (龍門冷鐓)"},
+        {"file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 南部產地冷鐓停機預警 (龍門冷鐓)"},
         {"file": "scripts/proposal_okayama_barcode.md", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
         {"file": "scripts/proposal_okayama_sbir.md", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}
     ]
@@ -126,10 +126,10 @@ def main():
                     
     # Export 4 CSV files
     db_names = {
-        1: "1_企業_AI_場景盤點資料庫_岡山九校聯播.csv",
-        2: "2_資料基礎與方案架構資料庫_岡山九校聯播.csv",
-        3: "3_試點驗證與阻力評估資料庫_岡山九校聯播.csv",
-        4: "4_營運_治理與組織變革資料庫_岡山九校聯播.csv"
+        1: "1_企業_AI_場景盤點資料庫_南部產地九校聯播.csv",
+        2: "2_資料基礎與方案架構資料庫_南部產地九校聯播.csv",
+        3: "3_試點驗證與阻力評估資料庫_南部產地九校聯播.csv",
+        4: "4_營運_治理與組織變革資料庫_南部產地九校聯播.csv"
     }
     
     output_dir = "scripts"
@@ -160,10 +160,10 @@ def main():
     print("      🎉 NOTION ONE-CLICK MERGE CSV FILES GENERATED SUCCESSFULLY!")
     print("="*80)
     print(" 檔案位置：專案根目錄 (已匯出成帶有 Excel 相容 BOM 的 UTF-8 格式 CSV)")
-    print(" 1. 1_企業_AI_場景盤點資料庫_岡山九校聯播.csv")
-    print(" 2. 2_資料基礎與方案架構資料庫_岡山九校聯播.csv")
-    print(" 3. 3_試點驗證與阻力評估資料庫_岡山九校聯播.csv")
-    print(" 4. 4_營運_治理與組織變革資料庫_岡山九校聯播.csv")
+    print(" 1. 1_企業_AI_場景盤點資料庫_南部產地九校聯播.csv")
+    print(" 2. 2_資料基礎與方案架構資料庫_南部產地九校聯播.csv")
+    print(" 3. 3_試點驗證與阻力評估資料庫_南部產地九校聯播.csv")
+    print(" 4. 4_營運_治理與組織變革資料庫_南部產地九校聯播.csv")
     print("-"*80)
     print(" 💡 接下來，請參考說明書的「Merge with CSV」步驟，將這些檔案一鍵匯入您的 Notion！")
     print("="*80 + "\n")
