@@ -116,3 +116,4 @@ scripts/encrypt_instructor_guides.py
 
 # 客戶去識別對照工具（含真實客戶名，禁止進公開 repo）
 fix_all.py
+fix_all2.py

@@ -34,7 +34,7 @@ def main():
         {"key": "okayama_filter", "path": "scripts/raw_okayama_filter.txt", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
         {"key": "okayama_electroplate", "path": "scripts/raw_okayama_electroplate.txt", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
         {"key": "luzhu_coldheading", "path": "scripts/raw_luzhu_coldheading.txt", "name": "PHX-026 南部產地冷鐓停機預警 (龍門冷鐓)"},
-        {"key": "okayama_barcode", "path": "scripts/raw_okayama_barcode.txt", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
+        {"key": "okayama_barcode", "path": "scripts/raw_okayama_barcode.txt", "name": "PHX-027 條碼防錯中高齡安心 (扣件包裝廠)"},
         {"key": "okayama_sbir", "path": "scripts/raw_okayama_sbir.txt", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}
     ]
     

@@ -94,7 +94,7 @@ def main():
         {"file": "scripts/proposal_okayama_filter.md", "name": "PHX-024 影像篩選缺陷誤報 (聯發光學)"},
         {"file": "scripts/proposal_okayama_electroplate.md", "name": "PHX-025 電鍍配方環保排污 (某電鍍加工廠)"},
         {"file": "scripts/proposal_luzhu_coldheading.md", "name": "PHX-026 南部產地冷鐓停機預警 (龍門冷鐓)"},
-        {"file": "scripts/proposal_okayama_barcode.md", "name": "PHX-027 條碼防錯中高齡安心 (興達包裝)"},
+        {"file": "scripts/proposal_okayama_barcode.md", "name": "PHX-027 條碼防錯中高齡安心 (扣件包裝廠)"},
         {"file": "scripts/proposal_okayama_sbir.md", "name": "PHX-033 製造智慧防護SBIR (龍圖機械)"}
     ]
     
